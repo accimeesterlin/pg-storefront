@@ -1,20 +1,21 @@
-import { ButtonHTMLAttributes, FC } from "react";
-import { SpaceProps } from "styled-system";
+// import { ButtonHTMLAttributes, FC } from "react";
+// import { SpaceProps } from "styled-system";
 import { colorOptions } from "../../interfaces";
 import StyledIcon from "./styles";
 
 export interface IconProps {
   size?: string;
-  children: string;
+  children?: string;
   transform?: string;
   color?: colorOptions;
   variant?: "small" | "medium" | "large";
   defaultcolor?: "currentColor" | "auto";
 }
 
-type ComponentProps = IconProps & SpaceProps & ButtonHTMLAttributes<IconProps>;
+// type ComponentProps = IconProps & SpaceProps & ButtonHTMLAttributes<IconProps>;
+// ex: FC<ComponentProps>
 
-const Icon: FC<ComponentProps> = ({ children, ...props }) => {
+const Icon: any = ({ children, ...props }) => {
   return (
     <StyledIcon
       src={`/assets/images/icons/${children}.svg`}
@@ -24,6 +25,6 @@ const Icon: FC<ComponentProps> = ({ children, ...props }) => {
   );
 };
 
-Icon.defaultProps = { variant: "medium", defaultcolor: "currentColor" };
+Icon.defaultProps = { variant: "medium", defaultcolor: "currentColor", children: "", size: "1em", transform: "",  color: "primary" };
 
 export default Icon;
