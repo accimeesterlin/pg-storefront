@@ -54,7 +54,14 @@ const PaymentForm: FC = () => {
             initialValues={initialValues}
             validationSchema={checkoutSchema}
           >
-            {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+            }) => (
               <form onSubmit={handleSubmit}>
                 <Box mb="1.5rem">
                   <Grid container horizontal_spacing={6} vertical_spacing={4}>
@@ -117,6 +124,48 @@ const PaymentForm: FC = () => {
               </form>
             )}
           </Formik>
+        )}
+
+        <Radio
+          mb="1.5rem"
+          color="secondary"
+          name="pgpay"
+          onChange={handlePaymentMethodChange}
+          checked={paymentMethod === "pgpay"}
+          label={
+            <Typography ml="6px" fontWeight="600" fontSize="18px">
+              Pay with PG Pay
+            </Typography>
+          }
+        />
+
+        <Divider mb="1.25rem" mx="-2rem" />
+
+        {paymentMethod === "pgpay" && (
+          <Button variant="contained" color="primary" type="submit" mb="20px">
+            Pay now
+          </Button>
+        )}
+
+        <Radio
+          mb="1.5rem"
+          color="secondary"
+          name="moncash"
+          onChange={handlePaymentMethodChange}
+          checked={paymentMethod === "moncash"}
+          label={
+            <Typography ml="6px" fontWeight="600" fontSize="18px">
+              Pay with Mon Cash
+            </Typography>
+          }
+        />
+
+        <Divider mb="1.25rem" mx="-2rem" />
+
+        {paymentMethod === "moncash" && (
+          <Button variant="contained" color="primary" type="submit" mb="20px">
+            Pay now
+          </Button>
         )}
 
         <Radio
