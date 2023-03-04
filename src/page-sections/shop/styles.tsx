@@ -3,9 +3,12 @@ import Card from "../../components/Card";
 import { colors } from "@utils/themeColors";
 import { convertHexToRGB } from "@utils/utils";
 
-export const ShopIntroWrapper = styled(Card)`
+type ShopWrapperProps = { coverImgUrl: string };
+
+
+export const ShopIntroWrapper = styled(Card)<ShopWrapperProps>`
   .cover-image {
-    background-image: url(/assets/images/banners/shop-cover.png);
+    background-image: url(${(props) => props.coverImgUrl || "/assets/images/banners/shop-cover.png"});
     background-size: cover;
     background-position: center;
   }
@@ -19,7 +22,6 @@ export const ShopIntroWrapper = styled(Card)`
   }
 `;
 
-type ShopWrapperProps = { coverImgUrl: string };
 
 export const ShopCard1Wrapper = styled(Card)<ShopWrapperProps>`
   .black-box {

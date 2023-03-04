@@ -31,7 +31,7 @@ const Section5: FC<Props> = ({ products, title }) => {
   return (
     <CategorySectionCreator title={title} seeMoreLink="#">
       <Wrapper>
-        <Carousel infinite={true} visibleSlides={visibleSlides} totalSlides={products.length}>
+        <Carousel infinite={true} visibleSlides={visibleSlides} totalSlides={products?.length}>
           {products.map((item) => (
             <ProductCard15
               id={item.id}

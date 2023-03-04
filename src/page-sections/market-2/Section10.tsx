@@ -64,7 +64,7 @@ const Section10: FC = () => {
       </FlexBox>
 
       <CarouselWrapper color="dark">
-        <Carousel totalSlides={products.length} visibleSlides={visibleSlides}>
+        <Carousel totalSlides={products?.length} visibleSlides={visibleSlides}>
           {products.map((product) => (
             <ProductCard19
               id={product.id}

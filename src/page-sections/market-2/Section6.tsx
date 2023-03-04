@@ -56,7 +56,7 @@ const Section6: FC<Props> = ({ data }) => {
         {/* CATEGORY BASED PRODUCTS CAROUSEL */}
         <Grid item md={9} xs={12}>
           <CarouselWrapper color="dark">
-            <Carousel totalSlides={data.products.length} visibleSlides={visibleSlides}>
+            <Carousel totalSlides={data.products?.length} visibleSlides={visibleSlides}>
               {data.products.map((product) => (
                 <ProductCard19
                   id={product.id}

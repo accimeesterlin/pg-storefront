@@ -25,7 +25,7 @@ const Section4: FC<Props> = ({ title, products }) => {
           step={3}
           showArrowOnHover={true}
           arrowButtonColor="inherit"
-          totalSlides={products.length}
+          totalSlides={products?.length}
           visibleSlides={visibleSlides}
         >
           {products.map((item) => (

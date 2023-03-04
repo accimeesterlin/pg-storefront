@@ -9,7 +9,7 @@ import GoogleAnalytics from "@component/GoogleAnalytics";
 import { AppProvider } from "@context/AppContext";
 // import { GlobalStyles } from "@utils/globalStyles";
 // import { theme } from "@utils/theme";
-import "../__server__";
+// import "../__server__";
 import theme from "../theme";
 import GlobalStyles from "theme/globalStyles";
 
@@ -34,10 +34,10 @@ const App = ({ Component, pageProps }: MyAppProps) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta property="og:url" content="https://bonik-react.vercel.app" />
+        <meta property="og:url" content="https://marketplace.pgecom.com" />
         {/* thumbnail And title for social media */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="React Next JS Ecommerce Template" />
+        <meta property="og:title" content="PGecom Market Place" />
         <meta
           property="og:description"
           content="Minimal, clean and Fast Next js ecommerce template. Build Super store, Grocery delivery app, Multivendor store and niche market"

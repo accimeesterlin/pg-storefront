@@ -31,7 +31,7 @@ const Section3: FC<Props> = ({ products, title }) => {
         <Carousel
           showArrowOnHover={true}
           arrowButtonColor="inherit"
-          totalSlides={products.length}
+          totalSlides={products?.length}
           visibleSlides={visibleSlides}
         >
           {products.map((item, ind) => (

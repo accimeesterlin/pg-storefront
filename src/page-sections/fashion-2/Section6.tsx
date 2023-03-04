@@ -29,7 +29,7 @@ const Section6: FC<Section6Props> = ({ products }) => {
       </H2>
 
       <CarouselWrapper>
-        <Carousel totalSlides={products.length} visibleSlides={visibleSlides}>
+        <Carousel totalSlides={products?.length} visibleSlides={visibleSlides}>
           {products.map((product) => (
             <ProductCard17
               id={product.id}

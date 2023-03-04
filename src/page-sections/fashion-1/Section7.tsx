@@ -15,7 +15,7 @@ type Props = { products: Product[] };
 // ==========================================================
 
 const Section7: FC<Props> = ({ products }) => {
-  const trendings = products.slice(1, products.length);
+  const trendings = products.slice(1, products?.length);
 
   return (
     <Box mb="3.75rem">

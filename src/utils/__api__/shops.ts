@@ -10,23 +10,21 @@ const api = axios.create({
 
 
 export const getShopList = async (): Promise<Shop[]> => {
-  const response = await axios.get("/api/shops");
-  return response.data;
-};
-
-export const getShops = async (): Promise<Shop[]> => {
-  const response = await api.get("/api/shop/all");
+  const response = await api.get("/api/user/shops");
   return response.data?.shops;
 };
 
+
 export const getSlugs = async (): Promise<{ params: { slug: string } }[]> => {
-  const response = await axios.get("/api/shops/slugs");
-  return response.data;
+  const shops = await getShopList();
+  const slugs = shops.map((item) => ({ params: { slug: item.slug } }));
+  return slugs;
 };
 
 export const getShopBySlug = async (slug: string): Promise<Shop> => {
-  const response = await axios.get("/api/shops/single", { params: { slug } });
+  const response = await api.get("/api/user/shops/single", { params: { slug } });
+
   return response.data;
 };
 
-export default { getShopList, getShops, getSlugs, getShopBySlug };
+export default { getShopList, getSlugs, getShopBySlug };

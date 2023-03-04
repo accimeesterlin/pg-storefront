@@ -30,7 +30,7 @@ const ShopDetails = ({ shop }: Props) => {
 
   return (
     <Fragment>
-      <ShopIntroCard />
+      <ShopIntroCard shop={shop}/>
 
       <Grid container spacing={6}>
         {/* SHOW IN LARGE DEVICE */}
@@ -54,7 +54,7 @@ const ShopDetails = ({ shop }: Props) => {
             </Sidenav>
           )}
 
-          <ProductCardList products={shop.products.slice(0, 9)} />
+          <ProductCardList products={shop?.products?.slice(0, 9)} />
         </Grid>
       </Grid>
     </Fragment>
@@ -74,6 +74,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const shop = await api.getShopBySlug(String(params.slug));
+
   return { props: { shop } };
 };
 

@@ -55,7 +55,7 @@ const FrequentlyBought: FC<Props> = ({ products }) => {
               imgUrl={item.thumbnail}
             />
 
-            {ind < products.length - 1 && (
+            {ind < products?.length - 1 && (
               <FlexBox justifyContent="center" alignItems="center">
                 <H2 color="text.muted" mx="0.5rem">
                   +
