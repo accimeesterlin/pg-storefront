@@ -5,7 +5,7 @@ interface Review {
   id: string;
   rating: number;
   customer: User;
-  comment: string;
+  text: string;
   product: Product;
   published?: boolean;
 }

@@ -32,6 +32,7 @@ const ProductDetails = (props: Props) => {
 
   const handleOptionClick = (opt) => () => setSelectedOption(opt);
 
+  console.log("product", product);
   // Show a loading state when the fallback is rendered
   if (router.isFallback) {
     return <h1>Loading...</h1>;
@@ -42,8 +43,10 @@ const ProductDetails = (props: Props) => {
       <ProductIntro
         id={product.id}
         price={product.price}
-        title={product.title}
+        title={product.name}
         images={product.images}
+        rating={product.rating}
+        shop={product.shop}
       />
 
       <FlexBox borderBottom="1px solid" borderColor="gray.400" mt="80px" mb="26px">
@@ -73,7 +76,7 @@ const ProductDetails = (props: Props) => {
 
       {/* DESCRIPTION AND REVIEW TAB DETAILS */}
       <Box mb="50px">
-        {selectedOption === "description" && <ProductDescription />}
+        {selectedOption === "description" && <ProductDescription description={product?.description} />}
         {selectedOption === "review" && <ProductReview />}
       </Box>
 
@@ -92,21 +95,48 @@ const ProductDetails = (props: Props) => {
 ProductDetails.layout = NavbarLayout;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await api.getSlugs();
+  let paths = [ { params: { slug: 'pgecom' } } ]
+
+  try {
+    paths = await api.getSlugs();
+  } catch (error) {
+    // No slugs available
+  }
+
 
   return {
-    paths: paths, //indicates that no page needs be created at build time
-    fallback: "blocking", //indicates the type of fallback
+    paths: paths, // indicates that no page needs be created at build time
+    fallback: "blocking", // indicates the type of fallback
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const shops = await api.getAvailableShop();
-  const relatedProducts = await api.getRelatedProducts();
-  const frequentlyBought = await api.getFrequentlyBought();
-  const product = await api.getProduct(params.slug as string);
+  let shops = [];
 
-  return { props: { frequentlyBought, relatedProducts, product, shops } };
+  try {
+    shops = await api.getAvailableShop();
+  } catch (error) {
+    // No shops available
+  }
+  
+  // const frequentlyBought = await api.getFrequentlyBought();
+  let product: Product = {};
+
+  try {
+    product = await api.getProduct(params.slug as string);
+  } catch (error) {
+    // No product found
+  }
+
+  let relatedProducts = [];
+
+  try {
+    relatedProducts = await api.getRelatedProducts(product?.id);
+  } catch (error) {
+    // No related products
+  }
+
+  return { props: { frequentlyBought: [], relatedProducts, product, shops } };
 };
 
 export default ProductDetails;

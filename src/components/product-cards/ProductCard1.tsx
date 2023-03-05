@@ -169,13 +169,13 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
           <Link href={`/product/${slug}`}>
             <a>
-              <Image
+              <img
                 alt={title}
                 width={100}
                 src={imgUrl}
                 height={100}
-                objectFit="cover"
-                layout="responsive"
+                // objectFit="cover"
+                // layout="responsive"
               />
             </a>
           </Link>

@@ -12,20 +12,25 @@ import { Button } from "@component/buttons";
 import { H1, H2, H3, H6, SemiSpan } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
 import { currency } from "@utils/utils";
+import Shop from "@models/shop.model";
 
 // ========================================
 type ProductIntroProps = {
   price: number;
+  rating: number;
+  shop: Shop
   title: string;
-  images: string[];
+  images: any[];
   id: string | number;
 };
 // ========================================
 
-const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
+const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id, shop }) => {
   const router = useRouter();
   const { state, dispatch } = useAppContext();
   const [selectedImage, setSelectedImage] = useState(0);
+
+  console.log("Shop: ", shop);
 
   const routerId = router.query.id as string;
   const cartItem = state.cart.find((item) => item.id === id || item.id === routerId);
@@ -35,7 +40,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, qty: amount, name: title, imgUrl: images[0], id: id || routerId },
+      payload: { price, qty: amount, name: title, imgUrl: images[0]?.url, id: id || routerId },
     });
   };
 
@@ -48,13 +53,13 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
               <Image
                 width={300}
                 height={300}
-                src={images[selectedImage]}
+                src={images?.length && images[selectedImage]?.url}
                 style={{ objectFit: "contain" }}
               />
             </FlexBox>
 
             <FlexBox overflow="auto">
-              {images.map((url, ind) => (
+              {images?.map(({ url }, ind) => (
                 <Box
                   key={ind}
                   size={70}
@@ -81,10 +86,10 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
         <Grid item md={6} xs={12} alignItems="center">
           <H1 mb="1rem">{title}</H1>
 
-          <FlexBox alignItems="center" mb="1rem">
+          {/* <FlexBox alignItems="center" mb="1rem">
             <SemiSpan>Brand:</SemiSpan>
             <H6 ml="8px">Ziaomi</H6>
-          </FlexBox>
+          </FlexBox> */}
 
           <FlexBox alignItems="center" mb="1rem">
             <SemiSpan>Rated:</SemiSpan>
@@ -145,7 +150,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
             <Link href="/shops/scarlett-beauty">
               <a>
                 <H6 lineHeight="1" ml="8px">
-                  Mobile Store
+                  {shop?.name}
                 </H6>
               </a>
             </Link>

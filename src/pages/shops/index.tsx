@@ -47,7 +47,6 @@ const ShopList = ({ shopList }: Props) => {
 ShopList.layout = NavbarLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  console.log('PID: ', process.pid);
   const shopList = await api.getShopList();
   return { props: { shopList: shopList } };
 };

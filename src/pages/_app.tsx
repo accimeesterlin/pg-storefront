@@ -37,12 +37,14 @@ const App = ({ Component, pageProps }: MyAppProps) => {
         <meta property="og:url" content="https://marketplace.pgecom.com" />
         {/* thumbnail And title for social media */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="PGecom Market Place" />
+        <meta property="og:title" content="Find everything you need in one convenient place at PGecom, your go-to destination for shopping with confidence." />
         <meta
           property="og:description"
-          content="Minimal, clean and Fast Next js ecommerce template. Build Super store, Grocery delivery app, Multivendor store and niche market"
+          content="Find everything you need in one convenient place at PGecom, your go-to destination for shopping with confidence."
         />
-        <meta property="og:image" content="/assets/images/landing/preview.png" />
+        {/* TODO: Add this to the head of your page */}
+        {/* <meta property="og:image" content="/assets/images/landing/preview.png" /> */}
+        <link rel="shortcut icon" href="pglogo.jpeg" type="image/x-icon" />
 
         {/* Google analytics */}
         <GoogleAnalytics />

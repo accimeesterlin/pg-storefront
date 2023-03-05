@@ -18,7 +18,7 @@ const AvailableShops: FC<Props> = ({ shops }) => {
       <H3 mb="1.5rem">Also Available at</H3>
 
       <Grid container spacing={8}>
-        {shops.map((item) => (
+        {shops?.map((item) => (
           <Grid item lg={2} md={4} sm={6} xs={12} key={item.name}>
             <Link href={`/shops/${item.slug}`}>
               <a>

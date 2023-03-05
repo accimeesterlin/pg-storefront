@@ -2,30 +2,40 @@ import axios from "axios";
 import Product from "@models/product.model";
 import Shop from "@models/shop.model";
 
+const API_URL = process.env.NEXT_PUBLIC_SELLER_BASE_URL;
+
+const api = axios.create({
+  baseURL: API_URL,
+});
+
 // get all product slug
 const getSlugs = async (): Promise<{ params: { slug: string } }[]> => {
-  const response = await axios.get("/api/products/slug-list");
-  return response.data;
+  const products = await getAvailableShop();
+
+  const uniqueProducts = products.map((item) => ({ params: { slug: item.slug } }));
+
+  console.log("Unique Products", uniqueProducts);
+  return uniqueProducts;
 };
 
 // get product based on slug
-const getProduct = async (slug: string): Promise<Product[]> => {
-  const response = await axios.get("/api/products/slug", { params: { slug } });
+const getProduct = async (slug: string): Promise<Product> => {
+  const response = await api.get("/api/user/product/slug", { params: { slug } });
   return response.data;
 };
 
 const getFrequentlyBought = async (): Promise<Product[]> => {
-  const response = await axios.get("/api/frequently-bought-products");
+  const response = await api.get("/api/user/product/frequently-bought-products");
   return response.data;
 };
 
-const getRelatedProducts = async (): Promise<Product[]> => {
-  const response = await axios.get("/api/related-products");
+const getRelatedProducts = async (productId: string): Promise<Product[]> => {
+  const response = await api.get(`/api/user/product/related-products?productId=${productId}`);
   return response.data;
 };
 
 const getAvailableShop = async (): Promise<Shop[]> => {
-  const response = await axios.get("/api/product/shops");
+  const response = await api.get("/api/user/product/shops");
   return response.data;
 };
 
