@@ -9,7 +9,6 @@ import GoogleAnalytics from "@component/GoogleAnalytics";
 import { AppProvider } from "@context/AppContext";
 // import { GlobalStyles } from "@utils/globalStyles";
 // import { theme } from "@utils/theme";
-// import "../__server__";
 import theme from "../theme";
 import GlobalStyles from "theme/globalStyles";
 

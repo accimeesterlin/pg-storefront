@@ -1,6 +1,6 @@
 import Mock from "./mock";
 
-import "./__db__/market-1";
+// import "./__db__/market-1";
 import "./__db__/market-2";
 
 import "./__db__/furniture";

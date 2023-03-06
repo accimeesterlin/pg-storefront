@@ -1,99 +1,125 @@
-import axios from "axios";
 import Shop from "@models/shop.model";
 import Brand from "@models/Brand.model";
 import Product from "@models/product.model";
 import Service from "@models/service.model";
 import Category from "@models/category.model";
 import MainCarouselItem from "@models/market-1.model";
+import * as db from "../../__server__/__db__/market-1/data";
+import shops from "../../__server__/__db__/shop/data";
 
 const getTopRatedProduct = async (): Promise<Product[]> => {
-  const response = await axios.get("/api/market-1/toprated-product");
-  return response.data;
+  const products = db.products.filter((item) => item.for.type === "top-ratings");
+  // const response = await axios.get("/api/market-1/toprated-product");
+  return products
 };
 
 const getTopRatedBrand = async () => {
-  const response = await axios.get("/api/market-1/toprated-brand");
-  return response.data;
+  const featureBrands = db.brands.filter((item) => item.for.type === "featured-brands");
+  // const response = await axios.get("/api/market-1/toprated-brand");
+  return featureBrands
 };
 
 const getNewArrivalList = async (): Promise<Product[]> => {
-  const response = await axios.get("/api/market-1/new-arrivals");
-  return response.data;
+  const products = db.products.filter((item) => item.for.type === "new-arrivals");
+  // const response = await axios.get("/api/market-1/new-arrivals");
+  return products
 };
 
 const getCarBrands = async (): Promise<Brand[]> => {
-  const response = await axios.get("/api/market-1/car-brand-list");
-  return response.data;
+  const carBrands = db.brands.filter((item) => item.for.type === "car-brands");
+  // const response = await axios.get("/api/market-1/car-brand-list");
+  return carBrands;
 };
 
 const getCarList = async (): Promise<Product[]> => {
-  const response = await axios.get("/api/market-1/car-list");
-  return response.data;
+  const products = db.products.filter((item) => item.for.type === "cars");
+  // const response = await axios.get("/api/market-1/car-list");
+  return products
 };
 
 const getMobileBrands = async (): Promise<Brand[]> => {
-  const response = await axios.get("/api/market-1/mobile-brand-list");
-  return response.data;
+  const mobileBrands = db.brands.filter((item) => item.for.type === "mobile-brands");
+  // const response = await axios.get("/api/market-1/mobile-brand-list");
+  return mobileBrands;
 };
 
 const getMobileShops = async (): Promise<Shop[]> => {
-  const response = await axios.get("/api/market-1/mobile-shop-list");
-  return response.data;
+  const imageNames = ["herman miller", "otobi", "hatil", "steelcase"];
+  const shopList = shops.slice(4, 8).map((item, i) => ({ ...item, thumbnail: imageNames[i] }));
+
+  // const response = await axios.get("/api/market-1/mobile-shop-list");
+  return shopList
 };
 
 const getMobileList = async (): Promise<Product[]> => {
-  const response = await axios.get("/api/market-1/mobile-list");
-  return response.data;
+  const products = db.products.filter((item) => item.for.type === "mobile-phones");
+  // const response = await axios.get("/api/market-1/mobile-list");
+  return products;
 };
 
 const getOpticsBrands = async (): Promise<Brand[]> => {
-  const response = await axios.get("/api/market-1/optics/watch-brands");
-  return response.data;
+  const opticsBrands = db.brands.filter((item) => item.for.type === "optics-brands");
+  // const response = await axios.get("/api/market-1/optics/watch-brands");
+  return opticsBrands;
 };
 
 const getOpticsShops = async (): Promise<Shop[]> => {
-  const response = await axios.get("/api/market-1/optics/watch-shops");
-  return response.data;
+  const imageNames = ["herman miller", "zeiss", "hatil", "steelcase"];
+  const shopList = shops.slice(0, 4).map((item, i) => ({ ...item, thumbnail: imageNames[i] }));
+
+  
+  // const response = await axios.get("/api/market-1/optics/watch-shops");
+  return shopList;
 };
 
 const getOpticsList = async (): Promise<Product[]> => {
-  const response = await axios.get("/api/market-1/optics-list");
-  return response.data;
+  const products = db.products.filter((item) => item.for.type === "optics");
+    
+  // const response = await axios.get("/api/market-1/optics-list");
+  return products;
 };
 
 const getCategories = async (): Promise<Category[]> => {
-  const response = await axios.get("/api/market-1/bottom-categories");
-  return response.data;
+  const categories = db.categories.filter((item) => item.for.type === "categories");
+    
+  // const response = await axios.get("/api/market-1/bottom-categories");
+  return categories;
 };
 
 const getMoreItems = async (): Promise<Product[]> => {
-  const response = await axios.get("/api/market-1/get-more-items");
-  return response.data;
+  const products = db.products.filter((item) => item.for.type === "more-products");
+   
+  // const response = await axios.get("/api/market-1/get-more-items");
+  return products;
 };
 
 const getServiceList = async (): Promise<Service[]> => {
-  const response = await axios.get("/api/market-1/get-service-list");
-  return response.data;
+  // const response = await axios.get("/api/market-1/get-service-list");
+  return db.serviceList;
 };
 
-const getMainCarousel = async (): Promise<[MainCarouselItem]> => {
-  const response = await axios.get("/api/market-1/main-carousel");
-  return response.data;
+const getMainCarousel = async (): Promise<MainCarouselItem[]> => {
+  // const response = await axios.get("/api/market-1/main-carousel");
+  return db.mainCarouselData;
 };
 
 const getFlashDeals = async (): Promise<Product[]> => {
-  const response = await axios.get("/api/market-1/flash-deals");
-  return response.data;
+  const products = db.products.filter((item) => item.for.type === "flash-deals");
+    
+  // const response = await axios.get("/api/market-1/flash-deals");
+  return products;
 };
 
 const getTopCategories = async (): Promise<Category[]> => {
-  const response = await axios.get("/api/market-1/top-categories");
-  return response.data;
+  const topCategories = db.categories.filter((item) => item.for.type === "top-categories");
+  // const response = await axios.get("/api/market-1/top-categories");
+  return topCategories;
 };
 
 const getBigDiscountList = async (): Promise<Product[]> => {
-  const response = await axios.get("/api/market-1/big-discounts");
-  return response.data;
+  const products = db.products.filter((item) => item.for.type === "big-discounts");
+  // const response = await axios.get("/api/market-1/big-discounts");
+  return products;
 };
 
 export default {

@@ -1,7 +1,7 @@
 interface Service {
-  id: string;
-  icon: string;
-  title: string;
+  id?: string;
+  icon?: string;
+  title?: string;
   description?: string;
 }
 
