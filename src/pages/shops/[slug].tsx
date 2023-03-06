@@ -73,7 +73,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const shop = await api.getShopBySlug(String(params.slug));
+  let shop = {};
+
+  try {
+    shop = await api.getShopBySlug(String(params.slug));
+  } catch (error) {
+    console.log(`Error: ${error.message}`);
+  }
 
   return { props: { shop } };
 };
