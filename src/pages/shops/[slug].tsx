@@ -64,7 +64,15 @@ const ShopDetails = ({ shop }: Props) => {
 ShopDetails.layout = NavbarLayout;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await api.getSlugs();
+  let paths = [
+    { params: { slug: "shop-1" } },
+  ];
+
+  try {
+    paths = await api.getSlugs();
+  } catch (error) {
+    // No need to do anything here
+  }
 
   return {
     paths: paths, //indicates that no page needs be created at build time
@@ -78,7 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     shop = await api.getShopBySlug(String(params.slug));
   } catch (error) {
-    console.log(`Error: ${error.message}`);
+    // No need to do anything here
   }
 
   return { props: { shop } };
