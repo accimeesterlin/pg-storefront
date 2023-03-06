@@ -47,7 +47,13 @@ const ShopList = ({ shopList }: Props) => {
 ShopList.layout = NavbarLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const shopList = await api.getShopList();
+  let shopList = [];
+
+  try {
+    shopList = await api.getShopList();
+  } catch (error) {
+    // No shops found
+  }
   return { props: { shopList: shopList } };
 };
 
