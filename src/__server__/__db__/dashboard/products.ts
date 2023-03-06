@@ -139,8 +139,8 @@ export const products = [
     comparePrice: 0,
     mainImageUrl: "/assets/images/products/beauty-cream.png",
     images: [
-      "/assets/images/products/beauty-cream.png",
-      "/assets/images/products/beauty-cream.png",
+      { url: "/assets/images/products/beauty-cream.png"},
+      { url: "/assets/images/products/beauty-cream.png"},
     ],
     categories: ["Beauty"],
     status: null,
@@ -289,8 +289,8 @@ export const products = [
     comparePrice: 0,
     mainImageUrl: "/assets/images/products/formal-shirt.png",
     images: [
-      "/assets/images/products/formal-shirt.png",
-      "/assets/images/products/formal-shirt.png",
+      { url: "/assets/images/products/formal-shirt.png"},
+      { url: "/assets/images/products/formal-shirt.png"},
     ],
     categories: ["Fashion"],
     status: null,
