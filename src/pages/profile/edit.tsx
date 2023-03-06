@@ -24,11 +24,11 @@ type Props = { user: User };
 
 const ProfileEditor = ({ user }: Props) => {
   const INITIAL_VALUES = {
-    first_name: user.name.firstName || "",
-    last_name: user.name.lastName || "",
+    first_name: user.firstName || "",
+    last_name: user.lastName || "",
     email: user.email || "",
     contact: user.phone || "",
-    birth_date: format(new Date(user.dateOfBirth), "yyyy-MM-dd") || "",
+    birth_date: `${format(new Date(user.dateOfBirth), "yyyy-MM-dd") || ""}`,
   };
 
   const VALIDATION_SCHEMA = yup.object().shape({
@@ -173,7 +173,13 @@ const ProfileEditor = ({ user }: Props) => {
 ProfileEditor.layout = DashboardLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const user = await api.getUser();
+  let user = {};
+
+  try {
+    user = await api.getUser();;
+  } catch (error) {
+    // No user found
+  }
   return { props: { user } };
 };
 

@@ -24,12 +24,12 @@ const Section4: FC<Props> = ({ products }) => {
             <ProductCard13
               id={item.id}
               slug={item.slug}
-              title={item.title}
+              title={item.name}
               price={item.price}
-              off={item.discount}
+              off={item.comparePrice}
               status={item.status}
               rating={item.rating}
-              imgUrl={item.thumbnail}
+              imgUrl={item.mainImageUrl}
               productColors={item.colors}
             />
           </Grid>

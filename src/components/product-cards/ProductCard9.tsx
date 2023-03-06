@@ -16,6 +16,7 @@ import { H5, SemiSpan } from "../Typography";
 import { calculateDiscount, currency, getTheme } from "@utils/utils";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { useAppContext } from "@context/AppContext";
+import Shop from "@models/shop.model";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -99,6 +100,7 @@ type ProductCard9Props = {
   price: number;
   imgUrl: string;
   rating: number;
+  shop?: Shop;
   images: string[];
   id: string | number;
   categories: string[];
@@ -116,6 +118,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
   rating,
   images,
   categories,
+  shop,
   ...props
 }) => {
   const [open, setOpen] = useState(false);
@@ -296,7 +299,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ id, images, price, title, slug }}
+        product={{ id, images, price, title, slug, shop }}
       />
     </Wrapper>
   );

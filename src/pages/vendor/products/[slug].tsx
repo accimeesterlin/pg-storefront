@@ -56,7 +56,7 @@ const ProductDetails = () => {
   }, [slug]);
 
   const initialValues = {
-    name: product?.title || "",
+    name: product?.name || "",
     price: product?.price || "",
     tags: "",
     stock: "",

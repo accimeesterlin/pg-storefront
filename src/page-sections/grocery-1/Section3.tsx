@@ -49,13 +49,13 @@ const Section3: FC<Props> = ({ title, products }) => {
               <ProductCard10
                 id={item.id}
                 slug={item.slug}
-                unit={item.unit}
-                title={item.title}
+                unit={item.inventory}
+                title={item.name}
                 price={item.price}
-                off={item.discount}
+                off={item.comparePrice}
                 rating={item.rating}
                 images={item.images}
-                imgUrl={item.thumbnail}
+                imgUrl={item.mainImageUrl}
               />
             </Box>
           ))}

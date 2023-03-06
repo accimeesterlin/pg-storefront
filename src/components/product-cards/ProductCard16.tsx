@@ -14,6 +14,7 @@ import { H3, Span } from "@component/Typography";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { useAppContext } from "@context/AppContext";
 import { calculateDiscount, currency } from "@utils/utils";
+import Shop from "@models/shop.model";
 
 // styled components
 const StyledBazaarCard = styled(Card)(({ theme }) => ({
@@ -121,6 +122,7 @@ type ProductCardProps = {
   price: number;
   imgUrl: string;
   rating?: number;
+  shop?: Shop;
   images: string[];
   id: string | number;
   hoverEffect?: boolean;
@@ -128,7 +130,7 @@ type ProductCardProps = {
 // =============================================================
 
 const ProductCard16: FC<ProductCardProps> = (props) => {
-  const { off, id, title, price, imgUrl, rating, hoverEffect, slug, images } = props;
+  const { off, id, title, price, imgUrl, rating, hoverEffect, slug, images, shop } = props;
 
   const { state, dispatch } = useAppContext();
   const [openModal, setOpenModal] = useState(false);
@@ -186,7 +188,7 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
       <ProductQuickView
         open={openModal}
         onClose={toggleDialog}
-        product={{ id, images, slug, price, title }}
+        product={{ id, images, slug, price, title, shop }}
       />
 
       <ContentWrapper>

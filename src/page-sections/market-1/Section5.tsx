@@ -15,12 +15,12 @@ const Section5: FC<Props> = ({ newArrivalsList }) => {
       <Card p="1rem">
         <Grid container spacing={6}>
           {newArrivalsList.map((item) => (
-            <Grid item lg={2} md={3} sm={4} xs={6} key={item.title}>
+            <Grid item lg={2} md={3} sm={4} xs={6} key={item.name}>
               <ProductCard2
                 slug={item.slug}
-                title={item.title}
+                title={item.name}
                 price={item.price}
-                imgUrl={item.thumbnail}
+                imgUrl={item.mainImageUrl}
               />
             </Grid>
           ))}

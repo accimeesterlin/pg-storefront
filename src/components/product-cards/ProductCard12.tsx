@@ -13,6 +13,7 @@ import ProductQuickView from "@component/products/ProductQuickView";
 import { theme } from "@utils/theme";
 import { useAppContext } from "@context/AppContext";
 import { calculateDiscount, currency } from "@utils/utils";
+import Shop from "@models/shop.model";
 
 // styled components
 const Wrapper = styled("div")`
@@ -105,12 +106,13 @@ type ProductCard12Props = {
   price: number;
   imgUrl: string;
   rating: number;
+  shop?: Shop;
   images: string[];
 };
 // =============================================================
 
 const ProductCard12: FC<ProductCard12Props> = (props) => {
-  const { off, title, price, imgUrl, rating, slug, id, images } = props;
+  const { off, title, price, imgUrl, rating, slug, id, images, shop } = props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -242,7 +244,7 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ id, images, slug, price, title }}
+        product={{ id, images, slug, price, title, shop }}
       />
     </Wrapper>
   );

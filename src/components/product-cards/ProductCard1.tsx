@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { FC, Fragment, useCallback, useState } from "react";
 import styled from "styled-components";
 import { useAppContext } from "@context/AppContext";
@@ -14,6 +14,7 @@ import { H3, SemiSpan } from "@component/Typography";
 import { calculateDiscount, currency, getTheme } from "@utils/utils";
 import { deviceSize } from "@utils/constants";
 import ProductQuickView from "@component/products/ProductQuickView";
+import Shop from "@models/shop.model";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -108,6 +109,7 @@ interface ProductCard1Props extends CardProps {
   price: number;
   imgUrl: string;
   rating: number;
+  shop?: Shop;
   images: string[];
   id?: string | number;
 }
@@ -122,6 +124,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
   imgUrl,
   images,
   rating = 4,
+  shop,
   ...props
 }) => {
   const [open, setOpen] = useState(false);
@@ -258,7 +261,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ images, title, price, id, slug }}
+        product={{ images, title, price, id, slug, shop }}
       />
     </>
   );

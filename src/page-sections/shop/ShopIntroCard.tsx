@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import Box from "@component/Box";
 import Rating from "@component/rating";
 import Avatar from "@component/avatar";

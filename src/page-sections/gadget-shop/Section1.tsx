@@ -37,10 +37,10 @@ const Section1: FC<Props> = ({ topPickList, mainCarousel }) => {
             {mainCarousel.map((item) => (
               <Card1
                 key={item.id}
-                title={item.title}
+                title={item.name}
                 price={item.price}
-                imgUrl={item.thumbnail}
-                discount={item.discount}
+                imgUrl={item.mainImageUrl}
+                discount={item.comparePrice}
               />
             ))}
           </Carousel>
@@ -61,10 +61,10 @@ const Section1: FC<Props> = ({ topPickList, mainCarousel }) => {
                   key={item.id}
                   slug={item.slug}
                   price={item.price}
-                  title={item.title}
-                  off={item.discount}
+                  title={item.name}
+                  off={item.comparePrice}
                   rating={item.rating}
-                  imgUrl={item.thumbnail}
+                  imgUrl={item.mainImageUrl}
                 />
               ))}
             </Carousel>
@@ -84,10 +84,10 @@ const Section1: FC<Props> = ({ topPickList, mainCarousel }) => {
                 key={item.id}
                 slug={item.slug}
                 price={item.price}
-                title={item.title}
-                off={item.discount}
+                title={item.name}
+                off={item.comparePrice}
                 rating={item.rating}
-                imgUrl={item.thumbnail}
+                imgUrl={item.mainImageUrl}
               />
             ))}
           </Carousel>

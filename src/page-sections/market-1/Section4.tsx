@@ -24,13 +24,13 @@ const Section4: FC<Props> = ({ topRatedBrands, topRatedList }) => {
             <Card p="1rem">
               <Grid container spacing={4}>
                 {topRatedList.map((item) => (
-                  <Grid item md={3} sm={6} xs={6} key={item.title}>
+                  <Grid item md={3} sm={6} xs={6} key={item.name}>
                     <Link href={`/product/search/${item.slug}`} passHref>
                       <a>
                         <ProductCard4
-                          title={item.title}
+                          title={item.name}
                           price={item.price}
-                          imgUrl={item.thumbnail}
+                          imgUrl={item.mainImageUrl}
                           rating={item.rating || 4}
                           reviewCount={item.reviews.length || 12}
                         />

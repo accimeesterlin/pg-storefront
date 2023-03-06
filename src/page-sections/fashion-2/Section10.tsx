@@ -40,9 +40,9 @@ const Block: FC<BlockProps> = ({ title, products }) => {
           rating={4}
           key={product.id}
           slug={product.slug}
-          title={product.title}
+          title={product.name}
           price={product.price}
-          image={product.thumbnail}
+          image={product.mainImageUrl}
         />
       ))}
     </Grid>

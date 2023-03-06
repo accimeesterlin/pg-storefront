@@ -48,7 +48,7 @@ const Profile = ({ user }: ProfileProps) => {
               <Box ml="12px" flex="1 1 0">
                 <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center">
                   <div>
-                    <H5 my="0px">{`${user.name.firstName} ${user.name.lastName}`}</H5>
+                    <H5 my="0px">{`${user.firstName} ${user.lastName}`}</H5>
 
                     <FlexBox alignItems="center">
                       <Typography fontSize="14px" color="text.hint">
@@ -101,7 +101,7 @@ const Profile = ({ user }: ProfileProps) => {
             First Name
           </Small>
 
-          <span>{user.name.firstName}</span>
+          <span>{user.firstName}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -109,7 +109,7 @@ const Profile = ({ user }: ProfileProps) => {
             Last Name
           </Small>
 
-          <span>{user.name.lastName}</span>
+          <span>{user.lastName}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -143,7 +143,13 @@ const Profile = ({ user }: ProfileProps) => {
 Profile.layout = DashboardLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const user = await api.getUser();
+  let user = {};
+
+  try {
+    user = await api.getUser();;
+  } catch (error) {
+    // No user found
+  }
   return { props: { user } };
 };
 

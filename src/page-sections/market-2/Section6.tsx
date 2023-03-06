@@ -62,10 +62,10 @@ const Section6: FC<Props> = ({ data }) => {
                   id={product.id}
                   key={product.id}
                   slug={product.slug}
-                  name={product.title}
+                  name={product.name}
                   price={product.price}
                   images={product.images}
-                  img={product.thumbnail}
+                  img={product.mainImageUrl}
                   reviews={product.reviews.length || 14}
                 />
               ))}
