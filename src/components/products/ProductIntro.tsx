@@ -18,19 +18,18 @@ import Shop from "@models/shop.model";
 type ProductIntroProps = {
   price: number;
   rating: number;
+  mainImageUrl?: string;
   shop: Shop
-  title: string;
+  name: string;
   images: any[];
   id: string | number;
 };
 // ========================================
 
-const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id, shop }) => {
+const ProductIntro: FC<ProductIntroProps> = ({ images, name, price, id, shop, mainImageUrl }) => {
   const router = useRouter();
   const { state, dispatch } = useAppContext();
   const [selectedImage, setSelectedImage] = useState(0);
-
-  console.log("Shop: ", shop);
 
   const routerId = router.query.id as string;
   const cartItem = state.cart.find((item) => item.id === id || item.id === routerId);
@@ -40,8 +39,9 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id, shop })
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, qty: amount, name: title, mainImageUrl: images[0]?.url, id: id || routerId },
+      payload: { price, qty: amount, name: name, mainImageUrl: images[0]?.url, id: id || routerId },
     });
+    
   };
 
   return (
@@ -53,7 +53,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id, shop })
               <Image
                 width={300}
                 height={300}
-                src={images?.length && images[selectedImage]?.url}
+                src={images?.length > 0 ? images[selectedImage]?.url : mainImageUrl}
                 style={{ objectFit: "contain" }}
               />
             </FlexBox>
@@ -84,7 +84,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id, shop })
         </Grid>
 
         <Grid item md={6} xs={12} alignItems="center">
-          <H1 mb="1rem">{title}</H1>
+          <H1 mb="1rem">{name}</H1>
 
           {/* <FlexBox alignItems="center" mb="1rem">
             <SemiSpan>Brand:</SemiSpan>

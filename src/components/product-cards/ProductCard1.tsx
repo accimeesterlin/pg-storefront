@@ -110,7 +110,7 @@ interface ProductCard1Props extends CardProps {
   mainImageUrl: string;
   rating: number;
   shop?: Shop;
-  images: string[];
+  images: any[];
   id?: string | number;
 }
 // =======================================================================

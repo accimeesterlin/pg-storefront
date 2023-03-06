@@ -17,7 +17,7 @@ interface Product {
   size?: string[];
   status?: string;
   colors?: string[];
-  images?: string[];
+  images?: any[];
   categories?: any[];
   reviews?: Review[];
 }

@@ -2,6 +2,9 @@ import axios from "axios";
 import Product from "@models/product.model";
 import Shop from "@models/shop.model";
 
+import { uniqueProudcts } from "../../__server__/__db__/products/data";
+
+
 const API_URL = process.env.NEXT_PUBLIC_SELLER_BASE_URL;
 
 const api = axios.create({
@@ -24,6 +27,11 @@ const getProduct = async (slug: string): Promise<Product> => {
   return response.data;
 };
 
+const getDemoProduct = async (slug: string): Promise<Product> => {
+  const product = uniqueProudcts?.find((item) => item.slug === slug);
+  return product;
+};
+
 const getFrequentlyBought = async (): Promise<Product[]> => {
   const response = await api.get("/api/user/product/frequently-bought-products");
   return response.data;
@@ -39,4 +47,4 @@ const getAvailableShop = async (): Promise<Shop[]> => {
   return response.data;
 };
 
-export default { getSlugs, getProduct, getFrequentlyBought, getRelatedProducts, getAvailableShop };
+export default { getSlugs, getProduct, getFrequentlyBought, getRelatedProducts, getAvailableShop, getDemoProduct };

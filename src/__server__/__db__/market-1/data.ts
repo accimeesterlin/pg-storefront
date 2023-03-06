@@ -2897,8 +2897,12 @@ export const products = [
     comparePrice: 10,
     mainImageUrl: "/assets/images/products/Bikes/21.TarzT3.png",
     images: [
-      "/assets/images/products/Bikes/21.TarzT3.png",
-      "/assets/images/products/Bikes/21.TarzT3.png",
+      {
+        url: "/assets/images/products/Bikes/21.TarzT3.png"
+      },
+     {
+      url:  "/assets/images/products/Bikes/21.TarzT3.png"
+     },
     ],
     categories: ["bikes"],
     status: null,
@@ -2950,8 +2954,12 @@ export const products = [
     comparePrice: 10,
     mainImageUrl: "/assets/images/products/Bikes/22.YamahaR15Black.png",
     images: [
-      "/assets/images/products/Bikes/22.YamahaR15Black.png",
-      "/assets/images/products/Bikes/22.YamahaR15Black.png",
+      {
+        url: "/assets/images/products/Bikes/22.YamahaR15Black.png"
+      },
+      {
+        url: "/assets/images/products/Bikes/22.YamahaR15Black.png"
+      },
     ],
     categories: ["bikes"],
     status: null,

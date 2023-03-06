@@ -176,8 +176,12 @@ export const products = [
     comparePrice: 8,
     mainImageUrl: "/assets/images/Gift Shop/pngwing.com (3).png",
     images: [
-      "/assets/images/Gift Shop/pngwing.com (3).png",
-      "/assets/images/Gift Shop/pngwing.com (3).png",
+      {
+        url: "/assets/images/Gift Shop/pngwing.com (3).png"
+      },
+      {
+        url: "/assets/images/Gift Shop/pngwing.com (3).png"
+      },
     ],
     categories: ["giftshop"],
     status: null,
@@ -229,7 +233,11 @@ export const products = [
     colors: [],
     comparePrice: 11,
     mainImageUrl: "/assets/images/Gift Shop/Product 5.png",
-    images: ["/assets/images/Gift Shop/Product 5.png", "/assets/images/Gift Shop/Product 5.png"],
+    images: [{
+      url: "/assets/images/Gift Shop/Product 5.png"
+    }, {
+      url: "/assets/images/Gift Shop/Product 5.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -280,7 +288,11 @@ export const products = [
     colors: [],
     comparePrice: 13,
     mainImageUrl: "/assets/images/Gift Shop/Product 3.png",
-    images: ["/assets/images/Gift Shop/Product 3.png", "/assets/images/Gift Shop/Product 3.png"],
+    images: [{
+      url: "/assets/images/Gift Shop/Product 3.png"
+    }, {
+      url: "/assets/images/Gift Shop/Product 3.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -331,7 +343,9 @@ export const products = [
     colors: [],
     comparePrice: 11,
     mainImageUrl: "/assets/images/Gift Shop/Product 6.png",
-    images: ["/assets/images/Gift Shop/Product 6.png", "/assets/images/Gift Shop/Product 6.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 6.png" }, {
+      url: "/assets/images/Gift Shop/Product 6.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -382,7 +396,11 @@ export const products = [
     colors: [],
     comparePrice: 12,
     mainImageUrl: "/assets/images/Gift Shop/Gift box 2.png",
-    images: ["/assets/images/Gift Shop/Gift box 2.png", "/assets/images/Gift Shop/Gift box 2.png"],
+    images: [{
+      url: "/assets/images/Gift Shop/Gift box 2.png"
+    }, {
+      url: "/assets/images/Gift Shop/Gift box 2.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -433,7 +451,9 @@ export const products = [
     colors: [],
     comparePrice: 8,
     mainImageUrl: "/assets/images/Gift Shop/Product 6.png",
-    images: ["/assets/images/Gift Shop/Product 6.png", "/assets/images/Gift Shop/Product 6.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 6.png" }, {
+      url: "/assets/images/Gift Shop/Product 6.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -486,7 +506,7 @@ export const products = [
     colors: [],
     comparePrice: 9,
     mainImageUrl: "/assets/images/Gift Shop/Product 7.png",
-    images: ["/assets/images/Gift Shop/Product 7.png", "/assets/images/Gift Shop/Product 7.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 7.png" }, { url: "/assets/images/Gift Shop/Product 7.png" }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -537,7 +557,7 @@ export const products = [
     colors: [],
     comparePrice: 17,
     mainImageUrl: "/assets/images/Gift Shop/Product 4.png",
-    images: ["/assets/images/Gift Shop/Product 4.png", "/assets/images/Gift Shop/Product 4.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 4.png" }, { url: "/assets/images/Gift Shop/Product 4.png" }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -588,7 +608,7 @@ export const products = [
     colors: [],
     comparePrice: 9,
     mainImageUrl: "/assets/images/Gift Shop/Gift Box.png",
-    images: ["/assets/images/Gift Shop/Gift Box.png", "/assets/images/Gift Shop/Gift Box.png"],
+    images: [{ url: "/assets/images/Gift Shop/Gift Box.png", }, { url: "/assets/images/Gift Shop/Gift Box.png" }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -639,7 +659,7 @@ export const products = [
     colors: [],
     comparePrice: 12,
     mainImageUrl: "/assets/images/Gift Shop/Product 5.png",
-    images: ["/assets/images/Gift Shop/Product 5.png", "/assets/images/Gift Shop/Product 5.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 5.png" }, {url:  "/assets/images/Gift Shop/Product 5.png"}],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -690,7 +710,7 @@ export const products = [
     colors: [],
     comparePrice: 18,
     mainImageUrl: "/assets/images/Gift Shop/Product 3.png",
-    images: ["/assets/images/Gift Shop/Product 3.png", "/assets/images/Gift Shop/Product 3.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 3.png" }, { url: "/assets/images/Gift Shop/Product 3.png" }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -741,7 +761,9 @@ export const products = [
     colors: [],
     comparePrice: 8,
     mainImageUrl: "/assets/images/Gift Shop/Product 6.png",
-    images: ["/assets/images/Gift Shop/Product 6.png", "/assets/images/Gift Shop/Product 6.png"],
+    images: [{
+      url: "/assets/images/Gift Shop/Product 6.png"
+    }, ],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -794,7 +816,7 @@ export const products = [
     colors: [],
     comparePrice: 9,
     mainImageUrl: "/assets/images/Gift Shop/Product 7.png",
-    images: ["/assets/images/Gift Shop/Product 7.png", "/assets/images/Gift Shop/Product 7.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 7.png" }, { url: "/assets/images/Gift Shop/Product 7.png" }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -845,7 +867,7 @@ export const products = [
     colors: [],
     comparePrice: 17,
     mainImageUrl: "/assets/images/Gift Shop/Product 4.png",
-    images: ["/assets/images/Gift Shop/Product 4.png", "/assets/images/Gift Shop/Product 4.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 4.png" }, { url: "/assets/images/Gift Shop/Product 4.png" }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -896,7 +918,7 @@ export const products = [
     colors: [],
     comparePrice: 9,
     mainImageUrl: "/assets/images/Gift Shop/Gift Box.png",
-    images: ["/assets/images/Gift Shop/Gift Box.png", "/assets/images/Gift Shop/Gift Box.png"],
+    images: [{ url: "/assets/images/Gift Shop/Gift Box.png", }, { url: "/assets/images/Gift Shop/Gift Box.png" }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -947,7 +969,7 @@ export const products = [
     colors: [],
     comparePrice: 12,
     mainImageUrl: "/assets/images/Gift Shop/Product 5.png",
-    images: ["/assets/images/Gift Shop/Product 5.png", "/assets/images/Gift Shop/Product 5.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 5.png" }, {url:  "/assets/images/Gift Shop/Product 5.png"}],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -998,7 +1020,7 @@ export const products = [
     colors: [],
     comparePrice: 18,
     mainImageUrl: "/assets/images/Gift Shop/Product 3.png",
-    images: ["/assets/images/Gift Shop/Product 3.png", "/assets/images/Gift Shop/Product 3.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 3.png" }, { url: "/assets/images/Gift Shop/Product 3.png" }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -1049,7 +1071,9 @@ export const products = [
     colors: [],
     comparePrice: 8,
     mainImageUrl: "/assets/images/Gift Shop/Product 6.png",
-    images: ["/assets/images/Gift Shop/Product 6.png", "/assets/images/Gift Shop/Product 6.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 6.png" }, {
+      url: "/assets/images/Gift Shop/Product 6.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -1100,7 +1124,11 @@ export const products = [
     colors: [],
     comparePrice: 18,
     mainImageUrl: "/assets/images/Gift Shop/Gift box 2.png",
-    images: ["/assets/images/Gift Shop/Gift box 2.png", "/assets/images/Gift Shop/Gift box 2.png"],
+    images: [{
+      ur: "/assets/images/Gift Shop/Gift box 2.png"
+    }, {
+      url: "/assets/images/Gift Shop/Gift box 2.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -1152,8 +1180,12 @@ export const products = [
     comparePrice: 8,
     mainImageUrl: "/assets/images/Gift Shop/pngwing.com (3).png",
     images: [
-      "/assets/images/Gift Shop/pngwing.com (3).png",
-      "/assets/images/Gift Shop/pngwing.com (3).png",
+      {
+        url: "/assets/images/Gift Shop/Gift box 2.png"
+      },
+      {
+        url: "/assets/images/Gift Shop/pngwing.com (3).png"
+      },
     ],
     categories: ["giftshop"],
     status: null,
@@ -1205,7 +1237,11 @@ export const products = [
     colors: [],
     comparePrice: 11,
     mainImageUrl: "/assets/images/Gift Shop/Product 5.png",
-    images: ["/assets/images/Gift Shop/Product 5.png", "/assets/images/Gift Shop/Product 5.png"],
+    images: [{
+      url: "/assets/images/Gift Shop/Product 5.png"
+    }, {
+      url: "/assets/images/Gift Shop/Product 5.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -1256,7 +1292,11 @@ export const products = [
     colors: [],
     comparePrice: 13,
     mainImageUrl: "/assets/images/Gift Shop/Product 3.png",
-    images: ["/assets/images/Gift Shop/Product 3.png", "/assets/images/Gift Shop/Product 3.png"],
+    images: [{
+      url: "/assets/images/Gift Shop/Product 3.png"
+    }, {
+      url: "/assets/images/Gift Shop/Product 3.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -1307,7 +1347,9 @@ export const products = [
     colors: [],
     comparePrice: 11,
     mainImageUrl: "/assets/images/Gift Shop/Product 6.png",
-    images: ["/assets/images/Gift Shop/Product 6.png", "/assets/images/Gift Shop/Product 6.png"],
+    images: [{ url: "/assets/images/Gift Shop/Product 6.png" }, {
+      url: "/assets/images/Gift Shop/Product 6.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],
@@ -1358,7 +1400,11 @@ export const products = [
     colors: [],
     comparePrice: 12,
     mainImageUrl: "/assets/images/Gift Shop/Gift box 2.png",
-    images: ["/assets/images/Gift Shop/Gift box 2.png", "/assets/images/Gift Shop/Gift box 2.png"],
+    images: [{
+      url: "/assets/images/Gift Shop/Gift box 2.png"
+    }, {
+      url: "/assets/images/Gift Shop/Gift box 2.png"
+    }],
     categories: ["giftshop"],
     status: null,
     reviews: [],

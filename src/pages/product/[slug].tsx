@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
+import { isEmpty } from 'lodash';
 import Box from "@component/Box";
 import FlexBox from "@component/FlexBox";
 import { H5 } from "@component/Typography";
@@ -14,6 +15,7 @@ import ProductDescription from "@component/products/ProductDescription";
 import api from "@utils/__api__/products";
 import Shop from "@models/shop.model";
 import Product from "@models/product.model";
+
 
 // ===============================================================
 type Props = {
@@ -32,7 +34,6 @@ const ProductDetails = (props: Props) => {
 
   const handleOptionClick = (opt) => () => setSelectedOption(opt);
 
-  console.log("product", product);
   // Show a loading state when the fallback is rendered
   if (router.isFallback) {
     return <h1>Loading...</h1>;
@@ -41,12 +42,13 @@ const ProductDetails = (props: Props) => {
   return (
     <Fragment>
       <ProductIntro
-        id={product.id}
-        price={product.price}
-        title={product.name}
-        images={product.images}
-        rating={product.rating}
-        shop={product.shop}
+        id={product?.id}
+        price={product?.price}
+        name={product?.name}
+        images={product?.images}
+        mainImageUrl={product?.mainImageUrl}
+        rating={product?.rating}
+        shop={product?.shop}
       />
 
       <FlexBox borderBottom="1px solid" borderColor="gray.400" mt="80px" mb="26px">
@@ -124,11 +126,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   try {
     product = await api.getProduct(params.slug as string);
+
+    if (isEmpty(product)) {
+      product = await api.getDemoProduct(params.slug as string) || {};
+    }
   } catch (error) {
     // No product found
+    product = await api.getDemoProduct(params.slug as string) || {};
   }
 
   let relatedProducts = [];
+  console.log("Product", product);
 
   try {
     relatedProducts = await api.getRelatedProducts(product?.id);
