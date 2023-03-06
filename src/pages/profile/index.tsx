@@ -43,12 +43,12 @@ const Profile = ({ user }: ProfileProps) => {
         <Grid container spacing={6}>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <FlexBox as={Card} p="14px 32px" height="100%" alignItems="center">
-              <Avatar src={user.avatar} size={64} />
+              <Avatar src={user?.avatar} size={64} />
 
               <Box ml="12px" flex="1 1 0">
                 <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center">
                   <div>
-                    <H5 my="0px">{`${user.firstName} ${user.lastName}`}</H5>
+                    <H5 my="0px">{`${user?.firstName} ${user?.lastName}`}</H5>
 
                     <FlexBox alignItems="center">
                       <Typography fontSize="14px" color="text.hint">
@@ -71,8 +71,8 @@ const Profile = ({ user }: ProfileProps) => {
 
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Grid container spacing={4}>
-              {infoList.map((item) => (
-                <Grid item lg={3} sm={6} xs={6} key={item.subtitle}>
+              {infoList?.map((item) => (
+                <Grid item lg={3} sm={6} xs={6} key={item?.subtitle}>
                   <FlexBox
                     as={Card}
                     height="100%"
@@ -81,11 +81,11 @@ const Profile = ({ user }: ProfileProps) => {
                     flexDirection="column"
                   >
                     <H3 color="primary.main" my="0px" fontWeight="600">
-                      {item.title}
+                      {item?.title}
                     </H3>
 
                     <Small color="text.muted" textAlign="center">
-                      {item.subtitle}
+                      {item?.subtitle}
                     </Small>
                   </FlexBox>
                 </Grid>
@@ -101,7 +101,7 @@ const Profile = ({ user }: ProfileProps) => {
             First Name
           </Small>
 
-          <span>{user.firstName}</span>
+          <span>{user?.firstName}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -109,7 +109,7 @@ const Profile = ({ user }: ProfileProps) => {
             Last Name
           </Small>
 
-          <span>{user.lastName}</span>
+          <span>{user?.lastName}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -117,7 +117,7 @@ const Profile = ({ user }: ProfileProps) => {
             Email
           </Small>
 
-          <span>{user.email}</span>
+          <span>{user?.email}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -125,7 +125,7 @@ const Profile = ({ user }: ProfileProps) => {
             Phone
           </Small>
 
-          <span>{user.phone}</span>
+          <span>{user?.phone}</span>
         </FlexBox>
 
         <FlexBox flexDirection="column" p="0.5rem">
@@ -133,7 +133,7 @@ const Profile = ({ user }: ProfileProps) => {
             Birth date
           </Small>
 
-          <span className="pre">{format(new Date(user.dateOfBirth), "dd MMM, yyyy")}</span>
+          <span className="pre">{format(user?.dateOfBirth ? new Date(user?.dateOfBirth) : new Date(), "dd MMM, yyyy")}</span>
         </FlexBox>
       </TableRow>
     </Fragment>

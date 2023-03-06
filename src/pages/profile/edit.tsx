@@ -24,11 +24,11 @@ type Props = { user: User };
 
 const ProfileEditor = ({ user }: Props) => {
   const INITIAL_VALUES = {
-    first_name: user.firstName || "",
-    last_name: user.lastName || "",
-    email: user.email || "",
-    contact: user.phone || "",
-    birth_date: `${format(new Date(user.dateOfBirth), "yyyy-MM-dd") || ""}`,
+    first_name: user?.firstName || "",
+    last_name: user?.lastName || "",
+    email: user?.email || "",
+    contact: user?.phone || "",
+    birth_date: `${format(user?.dateOfBirth ? new Date(user?.dateOfBirth) : new Date(), "yyyy-MM-dd") || ""}`,
   };
 
   const VALIDATION_SCHEMA = yup.object().shape({
