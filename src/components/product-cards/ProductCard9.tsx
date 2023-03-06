@@ -96,7 +96,7 @@ const Wrapper = styled(Card)`
 type ProductCard9Props = {
   off?: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
   mainImageUrl: string;
   rating: number;
@@ -112,7 +112,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
   id,
   off,
   slug,
-  title,
+  name,
   price,
   mainImageUrl,
   rating,
@@ -130,7 +130,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: name },
     });
   };
 
@@ -158,7 +158,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
               eye-alt
             </Icon>
 
-            <Image src={mainImageUrl} alt={title} width="100%" borderRadius="0.5rem" />
+            <Image src={mainImageUrl} alt={name} width="100%" borderRadius="0.5rem" />
           </Box>
         </Grid>
 
@@ -177,7 +177,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
             <Link href={`/product/${slug}`}>
               <a>
                 <H5 fontWeight="600" my="0.5rem">
-                  {title}
+                  {name}
                 </H5>
               </a>
             </Link>
@@ -299,7 +299,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ id, images, price, title, slug, shop }}
+        product={{ id, images, price, name, slug, shop }}
       />
     </Wrapper>
   );

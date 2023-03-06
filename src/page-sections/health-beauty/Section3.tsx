@@ -46,7 +46,7 @@ const Section3: FC<Props> = ({ title, products }) => {
               <ProductCard16
                 id={item.id}
                 slug={item.slug}
-                title={item.name}
+                name={item.name}
                 price={item.price}
                 off={item.comparePrice}
                 rating={item.rating}

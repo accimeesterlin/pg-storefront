@@ -34,7 +34,7 @@ const Section4: FC<Props> = ({ title, products }) => {
                 id={item.id}
                 slug={item.slug}
                 unit={item.inventory}
-                title={item.name}
+                name={item.name}
                 price={item.price}
                 off={item.comparePrice}
                 rating={item.rating}

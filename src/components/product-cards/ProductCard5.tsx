@@ -5,16 +5,16 @@ import HoverBox from "@component/HoverBox";
 import { H4 } from "@component/Typography";
 
 // ====================================================================
-type ProductCard5Props = { mainImageUrl: string; title: string };
+type ProductCard5Props = { mainImageUrl: string; name: string };
 // ====================================================================
 
-const ProductCard5: FC<ProductCard5Props> = ({ mainImageUrl, title }) => {
+const ProductCard5: FC<ProductCard5Props> = ({ mainImageUrl, name }) => {
   return (
     <Box>
       <HoverBox borderRadius={5} mb="0.5rem">
         <NextImage
           width={260}
-          alt={title}
+          alt={name}
           src={mainImageUrl}
           height={175}
           objectFit="cover"
@@ -23,7 +23,7 @@ const ProductCard5: FC<ProductCard5Props> = ({ mainImageUrl, title }) => {
       </HoverBox>
 
       <H4 fontSize="14px" fontWeight="600">
-        {title}
+        {name}
       </H4>
     </Box>
   );

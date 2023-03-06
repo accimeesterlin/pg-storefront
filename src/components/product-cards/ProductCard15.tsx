@@ -63,7 +63,7 @@ const ItemController = styled(FlexBox)({
 
 const ContentWrapper = styled(Box)({
   padding: "1rem",
-  "& .title, & .categories": {
+  "& .name, & .categories": {
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
@@ -87,7 +87,7 @@ const StyledChip = styled(Chip)({
 type Props = {
   off: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
   mainImageUrl: string;
   rating?: number;
@@ -98,7 +98,7 @@ type Props = {
 // ============================================================
 
 const ProductCard15: FC<Props> = (props) => {
-  const { off, id, title, price, mainImageUrl, rating, slug, images, shop } = props;
+  const { off, id, name, price, mainImageUrl, rating, slug, images, shop } = props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -114,7 +114,7 @@ const ProductCard15: FC<Props> = (props) => {
       slug,
       price,
       mainImageUrl,
-      name: title,
+      name: name,
       qty: (cartItem?.qty || 0) + 1,
     };
 
@@ -156,7 +156,7 @@ const ProductCard15: FC<Props> = (props) => {
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ id, slug, images, price, title, shop }}
+        product={{ id, slug, images, price, name, shop }}
       />
 
       <ContentWrapper>
@@ -176,14 +176,14 @@ const ProductCard15: FC<Props> = (props) => {
           <a>
             <H3
               my="6px"
-              title={title}
+              name={name}
               fontSize="15px"
               fontWeight="600"
-              className="title"
+              className="name"
               textAlign="center"
               color="text.secondary"
             >
-              {title}
+              {name}
             </H3>
           </a>
         </Link>

@@ -6,13 +6,13 @@ import HoverBox from "@component/HoverBox";
 
 // ===========================================================================
 type ProductCard6Props = {
-  title: string;
+  name: string;
   mainImageUrl: string;
   subtitle: string;
 };
 // ===========================================================================
 
-const ProductCard6: FC<ProductCard6Props> = ({ title, subtitle, mainImageUrl }) => {
+const ProductCard6: FC<ProductCard6Props> = ({ name, subtitle, mainImageUrl }) => {
   return (
     <Card position="relative">
       <Chip
@@ -26,7 +26,7 @@ const ProductCard6: FC<ProductCard6Props> = ({ title, subtitle, mainImageUrl }) 
         bg="secondary.main"
         position="absolute"
       >
-        {title}
+        {name}
       </Chip>
 
       <Chip

@@ -18,7 +18,7 @@ const Section5: FC<Props> = ({ newArrivalsList }) => {
             <Grid item lg={2} md={3} sm={4} xs={6} key={item.name}>
               <ProductCard2
                 slug={item.slug}
-                title={item.name}
+                name={item.name}
                 price={item.price}
                 mainImageUrl={item.mainImageUrl}
               />

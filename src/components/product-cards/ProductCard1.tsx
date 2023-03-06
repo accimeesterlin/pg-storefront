@@ -105,7 +105,7 @@ const Wrapper = styled(Card)`
 interface ProductCard1Props extends CardProps {
   off?: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
   mainImageUrl: string;
   rating: number;
@@ -119,7 +119,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
   id,
   off,
   slug,
-  title,
+  name,
   price,
   mainImageUrl,
   images,
@@ -136,7 +136,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { id, slug, price, mainImageUrl: mainImageUrl, name: title, qty: amount },
+      payload: { id, slug, price, mainImageUrl: mainImageUrl, name, qty: amount },
     });
   };
 
@@ -173,7 +173,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
           <Link href={`/product/${slug}`}>
             <a>
               <img
-                alt={title}
+                alt={name}
                 width={100}
                 src={mainImageUrl}
                 height={100}
@@ -191,14 +191,14 @@ const ProductCard1: FC<ProductCard1Props> = ({
                 <a>
                   <H3
                     mb="10px"
-                    title={title}
+                    title={name}
                     fontSize="14px"
                     textAlign="left"
                     fontWeight="600"
                     className="title"
                     color="text.secondary"
                   >
-                    {title}
+                    {name}
                   </H3>
                 </a>
               </Link>
@@ -261,7 +261,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ images, title, price, id, slug, shop }}
+        product={{ images, name, price, id, slug, shop }}
       />
     </>
   );

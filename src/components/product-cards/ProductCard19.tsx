@@ -145,7 +145,7 @@ const ProductCard19: FC<ProductCard19Props> = (props) => {
       <ProductQuickView
         open={openDialog}
         onClose={toggleDialog}
-        product={{ id, images, price, slug, title: name, shop }}
+        product={{ id, images, price, slug, name, shop }}
       />
     </Fragment>
   );

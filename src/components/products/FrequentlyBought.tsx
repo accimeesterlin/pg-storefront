@@ -50,7 +50,7 @@ const FrequentlyBought: FC<Props> = ({ products }) => {
               id={item.id}
               slug={item.slug}
               price={item.price}
-              title={item.name}
+              name={item.name}
               off={item.comparePrice}
               mainImageUrl={item.mainImageUrl}
             />

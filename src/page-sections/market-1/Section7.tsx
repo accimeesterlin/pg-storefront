@@ -121,7 +121,7 @@ const Section7: FC<Props> = ({ shops, brands, title, productList }) => {
                   hoverEffect
                   id={item.id}
                   slug={item.slug}
-                  title={item.name}
+                  name={item.name}
                   price={item.price}
                   off={item.comparePrice}
                   rating={item.rating}

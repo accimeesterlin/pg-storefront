@@ -40,7 +40,7 @@ const Block: FC<BlockProps> = ({ title, products }) => {
           rating={4}
           key={product.id}
           slug={product.slug}
-          title={product.name}
+          name={product.name}
           price={product.price}
           image={product.mainImageUrl}
         />

@@ -60,7 +60,7 @@ const Wrapper = styled(Card)`
   .details {
     padding: 1rem;
 
-    .title,
+    .name,
     .categories {
       overflow: hidden;
       white-space: nowrap;
@@ -104,7 +104,7 @@ type ProductCard10Props = {
   off: number;
   slug: string;
   unit: string;
-  title: string;
+  name: string;
   price: number;
   mainImageUrl: string;
   rating: number;
@@ -115,7 +115,7 @@ type ProductCard10Props = {
 // ======================================================================
 
 const ProductCard10: FC<ProductCard10Props> = (props) => {
-  const { id, off, unit, slug, title, price, mainImageUrl, images, shop } = props;
+  const { id, off, unit, slug, name, price, mainImageUrl, images, shop } = props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -126,7 +126,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: name },
     });
   };
 
@@ -160,7 +160,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
 
         <Link href={`/product/${slug}`}>
           <a>
-            <NextImage src={mainImageUrl} width={100} height={100} layout="responsive" alt={title} />
+            <NextImage src={mainImageUrl} width={100} height={100} layout="responsive" alt={name} />
           </a>
         </Link>
       </div>
@@ -172,14 +172,14 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
               <a>
                 <H3
                   mb="6px"
-                  title={title}
+                  name={name}
                   fontSize="14px"
                   textAlign="left"
                   fontWeight="600"
-                  className="title"
+                  className="name"
                   color="text.secondary"
                 >
-                  {title}
+                  {name}
                 </H3>
               </a>
             </Link>
@@ -241,7 +241,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ id, images, slug, price, title, shop }}
+        product={{ id, images, slug, price, name, shop }}
       />
     </Wrapper>
   );

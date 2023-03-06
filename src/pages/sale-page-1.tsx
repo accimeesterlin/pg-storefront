@@ -111,7 +111,7 @@ const SalePage1 = ({ products, meta }: Props) => {
               id={item.id}
               slug={item.slug}
               price={item.price}
-              title={item.name}
+              name={item.name}
               off={item.comparePrice}
               images={item.images}
               mainImageUrl={item.mainImageUrl}

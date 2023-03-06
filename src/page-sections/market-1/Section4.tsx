@@ -28,7 +28,7 @@ const Section4: FC<Props> = ({ topRatedBrands, topRatedList }) => {
                     <Link href={`/product/search/${item.slug}`} passHref>
                       <a>
                         <ProductCard4
-                          title={item.name}
+                          name={item.name}
                           price={item.price}
                           mainImageUrl={item.mainImageUrl}
                           rating={item.rating || 4}
@@ -51,7 +51,7 @@ const Section4: FC<Props> = ({ topRatedBrands, topRatedList }) => {
                   <Grid item sm={6} xs={12} key={item.id}>
                     <Link href={`/product/search/${item.slug}`} passHref>
                       <a>
-                        <ProductCard5 title={item.name} mainImageUrl={item.image} />
+                        <ProductCard5 name={item.name} mainImageUrl={item.image} />
                       </a>
                     </Link>
                   </Grid>

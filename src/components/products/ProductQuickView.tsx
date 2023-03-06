@@ -12,7 +12,7 @@ type Props = {
   onClose: () => void;
   product: {
     slug: string;
-    title: string;
+    name: string;
     price: number;
     images: string[];
     id: string | number;
@@ -29,7 +29,7 @@ const ProductQuickView: FC<Props> = (props) => {
       <Card p="1rem" position="relative" maxWidth="800px" width="100%">
         <ProductIntro
           id={product.id}
-          title={product.title}
+          name={product.name}
           rating={4}
           shop={product.shop}
           price={product.price}

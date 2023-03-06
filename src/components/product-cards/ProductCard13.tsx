@@ -107,7 +107,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 interface Props {
   off: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
   mainImageUrl: string;
   status: string;
@@ -118,7 +118,7 @@ interface Props {
 // =====================================================================
 
 const ProductCard13: FC<Props> = (props) => {
-  const { off, status, id, title, price, mainImageUrl, rating, productColors, slug } = props;
+  const { off, status, id, name, price, mainImageUrl, rating, productColors, slug } = props;
 
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.slug === slug);
@@ -126,7 +126,7 @@ const ProductCard13: FC<Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name },
     });
   };
 
@@ -180,13 +180,13 @@ const ProductCard13: FC<Props> = (props) => {
               <a>
                 <H3
                   mb={1}
-                  title={title}
+                  title={name}
                   fontSize="24px"
                   fontWeight="700"
                   className="title"
                   color="text.secondary"
                 >
-                  {title}
+                  {name}
                 </H3>
               </a>
             </Link>

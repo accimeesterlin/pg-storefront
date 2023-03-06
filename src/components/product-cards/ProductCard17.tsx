@@ -64,7 +64,7 @@ const QuickViewButton = styled(Button)({
 // ==============================================================
 type ProductCard17Props = {
   slug: string;
-  title: string;
+  name: string;
   price: number;
   mainImageUrl: string;
   rating?: number;
@@ -78,7 +78,7 @@ type ProductCard17Props = {
 // ==============================================================
 
 const ProductCard17: FC<ProductCard17Props> = (props) => {
-  const { id, title, price, mainImageUrl, category, reviews, slug, images, shop } = props;
+  const { id, name, price, mainImageUrl, category, reviews, slug, images, shop } = props;
 
   const { state, dispatch } = useAppContext();
   const [openDialog, setOpenDialog] = useState(false);
@@ -96,7 +96,7 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
       slug,
       price,
       mainImageUrl,
-      name: title,
+      name: name,
       qty: (cartItem?.qty || 0) + 1,
     };
 
@@ -141,12 +141,12 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
       <ProductQuickView
         open={openDialog}
         onClose={toggleDialog}
-        product={{ id, images, slug, price, title, shop }}
+        product={{ id, images, slug, price, name, shop }}
       />
 
       <Box p={1} textAlign="center">
         <Small color="gray.500">{category}</Small>
-        <Paragraph fontWeight="bold">{title}</Paragraph>
+        <Paragraph fontWeight="bold">{name}</Paragraph>
         <H4 fontWeight={700} py={0.5}>
           {currency(price)}
         </H4>

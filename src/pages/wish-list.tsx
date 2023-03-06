@@ -28,7 +28,7 @@ const WishList = () => {
               id={item.id}
               slug={item.slug}
               price={item.price}
-              title={item.title}
+              name={item.title}
               off={item.comparePrice}
               images={item.images}
               mainImageUrl={item.mainImageUrl}

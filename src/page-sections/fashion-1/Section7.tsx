@@ -26,7 +26,7 @@ const Section7: FC<Props> = ({ products }) => {
           <ProductCard1
             id={products[0].name}
             slug={products[0].slug}
-            title={products[0].name}
+            name={products[0].name}
             price={products[0].price}
             off={products[0].comparePrice}
             rating={products[0].rating}
@@ -43,7 +43,7 @@ const Section7: FC<Props> = ({ products }) => {
                   id={item.id}
                   off={ind * 10}
                   slug={item.slug}
-                  title={item.name}
+                  name={item.name}
                   price={item.price}
                   rating={item.rating}
                   images={item.images}

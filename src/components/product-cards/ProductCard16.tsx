@@ -95,7 +95,7 @@ const StyledChip = styled(Chip)(({ theme }) => ({
 
 const ContentWrapper = styled(Box)({
   padding: "1rem",
-  "& .title, & .categories": {
+  "& .name, & .categories": {
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
@@ -118,7 +118,7 @@ const ButtonBox = styled(FlexBox)(({ theme }) => ({
 type ProductCardProps = {
   off: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
   mainImageUrl: string;
   rating?: number;
@@ -130,7 +130,7 @@ type ProductCardProps = {
 // =============================================================
 
 const ProductCard16: FC<ProductCardProps> = (props) => {
-  const { off, id, title, price, mainImageUrl, rating, hoverEffect, slug, images, shop } = props;
+  const { off, id, name, price, mainImageUrl, rating, hoverEffect, slug, images, shop } = props;
 
   const { state, dispatch } = useAppContext();
   const [openModal, setOpenModal] = useState(false);
@@ -142,7 +142,7 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: name },
     });
   };
 
@@ -155,7 +155,7 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
           <Link href={`/product/${slug}`}>
             <a>
               <LazyImage
-                alt={title}
+                alt={name}
                 src={mainImageUrl}
                 width={190}
                 height={190}
@@ -188,7 +188,7 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
       <ProductQuickView
         open={openModal}
         onClose={toggleDialog}
-        product={{ id, images, slug, price, title, shop }}
+        product={{ id, images, slug, price, name, shop }}
       />
 
       <ContentWrapper>
@@ -197,13 +197,13 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
             <a>
               <H3
                 mb={1}
-                title={title}
+                name={name}
                 fontSize="14px"
                 fontWeight="600"
-                className="title"
+                className="name"
                 color="text.secondary"
               >
-                {title}
+                {name}
               </H3>
             </a>
           </Link>

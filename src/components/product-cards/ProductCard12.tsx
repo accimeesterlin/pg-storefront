@@ -90,7 +90,7 @@ const ItemController = styled(FlexBox)({
 
 const ContentWrapper = styled(Box)({
   padding: "1rem",
-  "& .title, & .categories": {
+  "& .name, & .categories": {
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
@@ -102,7 +102,7 @@ type ProductCard12Props = {
   id: string;
   off?: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
   mainImageUrl: string;
   rating: number;
@@ -112,7 +112,7 @@ type ProductCard12Props = {
 // =============================================================
 
 const ProductCard12: FC<ProductCard12Props> = (props) => {
-  const { off, title, price, mainImageUrl, rating, slug, id, images, shop } = props;
+  const { off, name, price, mainImageUrl, rating, slug, id, images, shop } = props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -124,7 +124,7 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: name },
     });
   };
 
@@ -151,7 +151,7 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
           <Link href={`/product/${slug}`}>
             <a>
               <LazyImage
-                alt={title}
+                alt={name}
                 width={190}
                 height={190}
                 src={mainImageUrl}
@@ -210,13 +210,13 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
           <a>
             <H3
               mb={1}
-              title={title}
+              name={name}
               fontSize="14px"
               fontWeight="600"
-              className="title"
+              className="name"
               color="text.secondary"
             >
-              {title}
+              {name}
             </H3>
           </a>
         </Link>
@@ -244,7 +244,7 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ id, images, slug, price, title, shop }}
+        product={{ id, images, slug, price, name, shop }}
       />
     </Wrapper>
   );

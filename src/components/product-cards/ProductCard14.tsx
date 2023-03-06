@@ -19,14 +19,14 @@ const ImgBox = styled(Box)({
 
 // ===================================================
 type Props = {
-  title: string;
+  name: string;
   mainImageUrl: string;
   available: string;
 };
 // ===================================================
 
 const ProductCard14: FC<Props> = (props) => {
-  const { mainImageUrl, title, available } = props;
+  const { mainImageUrl, name, available } = props;
 
   return (
     <StyledCard>
@@ -35,7 +35,7 @@ const ProductCard14: FC<Props> = (props) => {
       </ImgBox>
 
       <H6 fontSize={15} mt="8px" mb="2px">
-        {title}
+        {name}
       </H6>
 
       <Paragraph color="gray.600">{available}</Paragraph>

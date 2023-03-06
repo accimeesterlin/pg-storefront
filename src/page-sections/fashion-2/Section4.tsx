@@ -34,7 +34,7 @@ const Section4: FC<Section4Props> = ({ products }) => {
               id={product.id}
               key={product.id}
               slug={product.slug}
-              title={product.name}
+              name={product.name}
               price={product.price}
               images={product.images}
               mainImageUrl={product.mainImageUrl}

@@ -8,22 +8,22 @@ import { currency } from "@utils/utils";
 // ========================================================
 type ProductCard2Props = {
   slug: string;
-  title: string;
+  name: string;
   price: number;
   mainImageUrl: string;
 };
 // ========================================================
 
-const ProductCard2: FC<ProductCard2Props> = ({ mainImageUrl, title, price, slug }) => {
+const ProductCard2: FC<ProductCard2Props> = ({ mainImageUrl, name, price, slug }) => {
   return (
     <Link href={`/product/${slug}`}>
       <a>
         <HoverBox borderRadius={8} mb="0.5rem">
-          <NextImage src={mainImageUrl} width={100} height={100} layout="responsive" alt={title} />
+          <NextImage src={mainImageUrl} width={100} height={100} layout="responsive" alt={name} />
         </HoverBox>
 
         <H4 fontWeight="600" fontSize="14px" mb="0.25rem">
-          {title}
+          {name}
         </H4>
 
         <H4 fontWeight="600" fontSize="14px" color="primary.main">

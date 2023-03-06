@@ -21,7 +21,7 @@ const Section5: FC<Props> = ({ products }) => {
             <ProductCard2
               slug={item.slug}
               price={item.price}
-              title={item.name}
+              name={item.name}
               mainImageUrl={item.mainImageUrl}
             />
           </Box>
