@@ -44,7 +44,7 @@ const Section3: FC<Props> = ({ products, title }) => {
                 off={item.comparePrice}
                 status={item.status}
                 rating={item.rating}
-                imgUrl={item.mainImageUrl}
+                mainImageUrl={item.mainImageUrl}
                 productColors={item.colors}
               />
             </Box>

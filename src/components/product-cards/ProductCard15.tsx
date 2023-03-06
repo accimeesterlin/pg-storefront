@@ -89,7 +89,7 @@ type Props = {
   slug: string;
   title: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating?: number;
   shop?: Shop;
   images: string[];
@@ -98,7 +98,7 @@ type Props = {
 // ============================================================
 
 const ProductCard15: FC<Props> = (props) => {
-  const { off, id, title, price, imgUrl, rating, slug, images, shop } = props;
+  const { off, id, title, price, mainImageUrl, rating, slug, images, shop } = props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -113,7 +113,7 @@ const ProductCard15: FC<Props> = (props) => {
       id,
       slug,
       price,
-      imgUrl,
+      mainImageUrl,
       name: title,
       qty: (cartItem?.qty || 0) + 1,
     };
@@ -129,7 +129,7 @@ const ProductCard15: FC<Props> = (props) => {
         <Link href={`/product/${slug}`}>
           <a>
             <LazyImage
-              src={imgUrl}
+              src={mainImageUrl}
               width={100}
               height={100}
               layout="responsive"

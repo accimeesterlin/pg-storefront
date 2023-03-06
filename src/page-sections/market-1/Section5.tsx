@@ -20,7 +20,7 @@ const Section5: FC<Props> = ({ newArrivalsList }) => {
                 slug={item.slug}
                 title={item.name}
                 price={item.price}
-                imgUrl={item.mainImageUrl}
+                mainImageUrl={item.mainImageUrl}
               />
             </Grid>
           ))}

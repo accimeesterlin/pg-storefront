@@ -20,18 +20,18 @@ const ImgBox = styled(Box)({
 // ===================================================
 type Props = {
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   available: string;
 };
 // ===================================================
 
 const ProductCard14: FC<Props> = (props) => {
-  const { imgUrl, title, available } = props;
+  const { mainImageUrl, title, available } = props;
 
   return (
     <StyledCard>
       <ImgBox>
-        <LazyImage src={imgUrl} width={100} height={100} layout="responsive" objectFit="contain" />
+        <LazyImage src={mainImageUrl} width={100} height={100} layout="responsive" objectFit="contain" />
       </ImgBox>
 
       <H6 fontSize={15} mt="8px" mb="2px">

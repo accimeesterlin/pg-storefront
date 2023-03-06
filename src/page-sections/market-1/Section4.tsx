@@ -30,7 +30,7 @@ const Section4: FC<Props> = ({ topRatedBrands, topRatedList }) => {
                         <ProductCard4
                           title={item.name}
                           price={item.price}
-                          imgUrl={item.mainImageUrl}
+                          mainImageUrl={item.mainImageUrl}
                           rating={item.rating || 4}
                           reviewCount={item.reviews.length || 12}
                         />
@@ -51,7 +51,7 @@ const Section4: FC<Props> = ({ topRatedBrands, topRatedList }) => {
                   <Grid item sm={6} xs={12} key={item.id}>
                     <Link href={`/product/search/${item.slug}`} passHref>
                       <a>
-                        <ProductCard5 title={item.name} imgUrl={item.image} />
+                        <ProductCard5 title={item.name} mainImageUrl={item.image} />
                       </a>
                     </Link>
                   </Grid>

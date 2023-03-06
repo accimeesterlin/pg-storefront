@@ -14,10 +14,10 @@ type ShopCard1Props = {
   name: string;
   phone: string;
   rating: number;
-  imgUrl: string;
+  mainImageUrl: string;
   address: string;
   shopUrl: string;
-  coverImgUrl: string;
+  covermainImageUrl: string;
 };
 // =====================================================
 
@@ -25,13 +25,13 @@ const ShopCard1: FC<ShopCard1Props> = ({
   name,
   phone,
   rating,
-  imgUrl,
+  mainImageUrl,
   address,
   shopUrl,
-  coverImgUrl,
+  covermainImageUrl,
 }) => {
   return (
-    <ShopCard1Wrapper overflow="hidden" coverImgUrl={coverImgUrl}>
+    <ShopCard1Wrapper overflow="hidden" covermainImageUrl={covermainImageUrl}>
       <Box className="black-box" p="17px 30px 56px">
         <H3 fontWeight="600" mb="8px">
           {name}
@@ -63,7 +63,7 @@ const ShopCard1: FC<ShopCard1Props> = ({
       </Box>
 
       <FlexBox pl="30px" pr="18px" justifyContent="space-between">
-        <Avatar src={imgUrl} size={64} mt="-32px" border="4px solid" borderColor="gray.100" />
+        <Avatar src={mainImageUrl} size={64} mt="-32px" border="4px solid" borderColor="gray.100" />
         <Link href={shopUrl}>
           <a>
             <IconButton size="small" my="0.25rem">

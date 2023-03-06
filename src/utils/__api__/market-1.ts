@@ -45,7 +45,7 @@ const getMobileBrands = async (): Promise<Brand[]> => {
 
 const getMobileShops = async (): Promise<Shop[]> => {
   const imageNames = ["herman miller", "otobi", "hatil", "steelcase"];
-  const shopList = shops.slice(4, 8).map((item, i) => ({ ...item, thumbnail: imageNames[i] }));
+  const shopList = shops.slice(4, 8).map((item, i) => ({ ...item, mainImageUrl: imageNames[i] }));
 
   // const response = await axios.get("/api/market-1/mobile-shop-list");
   return shopList
@@ -65,7 +65,7 @@ const getOpticsBrands = async (): Promise<Brand[]> => {
 
 const getOpticsShops = async (): Promise<Shop[]> => {
   const imageNames = ["herman miller", "zeiss", "hatil", "steelcase"];
-  const shopList = shops.slice(0, 4).map((item, i) => ({ ...item, thumbnail: imageNames[i] }));
+  const shopList = shops.slice(0, 4).map((item, i) => ({ ...item, mainImageUrl: imageNames[i] }));
 
   
   // const response = await axios.get("/api/market-1/optics/watch-shops");

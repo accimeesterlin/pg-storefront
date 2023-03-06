@@ -88,7 +88,7 @@ const ProductCard19: FC<ProductCard19Props> = (props) => {
       slug,
       name,
       price,
-      imgUrl: img,
+      mainImageUrl: img,
       qty: (cartItem?.qty || 0) + 1,
     };
 

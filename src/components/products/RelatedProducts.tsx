@@ -25,7 +25,7 @@ const RelatedProducts: FC<Props> = ({ products }) => {
               title={item.name}
               off={item.comparePrice}
               images={item.images}
-              imgUrl={item.mainImageUrl}
+              mainImageUrl={item.mainImageUrl}
               rating={item.rating || 4}
             />
           </Grid>

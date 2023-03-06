@@ -8,7 +8,7 @@ import { H2, SemiSpan, Small } from "@component/Typography";
 import { deviceSize } from "utils/constants";
 
 // styled component
-type CardProps = { imgUrl?: string };
+type CardProps = { mainImageUrl?: string };
 const StyledCard = styled(Card)<CardProps>`
   padding: 62px 78px;
   background: linear-gradient(
@@ -17,7 +17,7 @@ const StyledCard = styled(Card)<CardProps>`
       rgba(255, 255, 255, 1),
       rgba(255, 255, 255, 0)
     ),
-    url(${(props) => props.imgUrl});
+    url(${(props) => props.mainImageUrl});
   background-size: cover;
 
   @media only screen and (max-width: ${deviceSize.sm}px) {
@@ -28,7 +28,7 @@ const StyledCard = styled(Card)<CardProps>`
 const Section6: FC = () => {
   return (
     <Container>
-      <StyledCard imgUrl="/assets/images/products/bg-gradient.png" mb="3.75rem" hoverEffect>
+      <StyledCard mainImageUrl="/assets/images/products/bg-gradient.png" mb="3.75rem" hoverEffect>
         <Box maxWidth="390px">
           <H2 mb="0.5rem">Build Your Own Youtube Studio Save Upto 70%</H2>
           <SemiSpan color="text.muted" display="block" mb="1.5rem">

@@ -203,10 +203,10 @@ const OrderDetails = ({ order }: Props) => {
 
             <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
               <Typography fontSize="14px" color="text.hint">
-                Discount:
+                comparePrice:
               </Typography>
 
-              <H6 my="0px">-${order.discount}</H6>
+              <H6 my="0px">-${order.comparePrice}</H6>
             </FlexBox>
 
             <Divider mb="0.5rem" />

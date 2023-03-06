@@ -37,7 +37,7 @@ const TicketDetails = ({ ticket }: Props) => {
 
       {ticket.conversation.map((item, ind) => (
         <FlexBox mb="30px" key={ind}>
-          <Avatar src={item.imgUrl} mr="1rem" />
+          <Avatar src={item.mainImageUrl} mr="1rem" />
           <Box>
             <H5 fontWeight="600" mt="0px" mb="0px">
               {item.name}

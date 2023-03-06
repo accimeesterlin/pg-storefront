@@ -65,7 +65,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/7.DenimClassicBlueJeans.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/7.DenimClassicBlueJeans.png",
     images: [
       "/assets/images/products/Fashion/Clothes/7.DenimClassicBlueJeans.png",
       "/assets/images/products/Fashion/Clothes/7.DenimClassicBlueJeans.png",
@@ -119,7 +119,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/16.DoubleWoolOvercoat.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/16.DoubleWoolOvercoat.png",
     images: [
       "/assets/images/products/Fashion/Clothes/16.DoubleWoolOvercoat.png",
       "/assets/images/products/Fashion/Clothes/16.DoubleWoolOvercoat.png",
@@ -173,7 +173,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/8.RoyalBlackSuitPant.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/8.RoyalBlackSuitPant.png",
     images: [
       "/assets/images/products/Fashion/Clothes/8.RoyalBlackSuitPant.png",
       "/assets/images/products/Fashion/Clothes/8.RoyalBlackSuitPant.png",
@@ -227,7 +227,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/14.BlueTrousers.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/14.BlueTrousers.png",
     images: [
       "/assets/images/products/Fashion/Clothes/14.BlueTrousers.png",
       "/assets/images/products/Fashion/Clothes/14.BlueTrousers.png",
@@ -281,7 +281,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
     images: [
       "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
       "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
@@ -335,7 +335,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
     images: [
       "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
       "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
@@ -389,7 +389,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
     images: [
       "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
       "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
@@ -443,7 +443,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/7.DenimClassicBlueJeans.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/7.DenimClassicBlueJeans.png",
     images: [
       "/assets/images/products/Fashion/Clothes/7.DenimClassicBlueJeans.png",
       "/assets/images/products/Fashion/Clothes/7.DenimClassicBlueJeans.png",
@@ -499,7 +499,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/1.SilverHighNeckSweater.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/1.SilverHighNeckSweater.png",
     images: [
       "/assets/images/products/Fashion/Clothes/1.SilverHighNeckSweater.png",
       "/assets/images/products/Fashion/Clothes/1.SilverHighNeckSweater.png",
@@ -553,7 +553,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png",
     images: [
       "/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png",
       "/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png",
@@ -607,7 +607,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/4.DenimBlueJeans.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/4.DenimBlueJeans.png",
     images: [
       "/assets/images/products/Fashion/Clothes/4.DenimBlueJeans.png",
       "/assets/images/products/Fashion/Clothes/4.DenimBlueJeans.png",
@@ -661,7 +661,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/19.BlackWhiteSweater.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/19.BlackWhiteSweater.png",
     images: [
       "/assets/images/products/Fashion/Clothes/19.BlackWhiteSweater.png",
       "/assets/images/products/Fashion/Clothes/19.BlackWhiteSweater.png",
@@ -715,7 +715,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
     images: [
       "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
       "/assets/images/products/Fashion/Clothes/20.GrayOvercoatWomen.png",
@@ -769,7 +769,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
+    mainImageUrl: "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
     images: [
       "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
       "/assets/images/products/Fashion/Clothes/24.OliveCasualSweater.png",
@@ -823,7 +823,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Shoes/1.Nike Red.png",
+    mainImageUrl: "/assets/images/products/Fashion/Shoes/1.Nike Red.png",
     images: [
       "/assets/images/products/Fashion/Shoes/1.Nike Red.png",
       "/assets/images/products/Fashion/Shoes/1.Nike Red.png",
@@ -877,7 +877,7 @@ export const products = [
     size: null,
     colors: [],
     comparePrice: 0,
-    thumbnail: "/assets/images/products/Fashion/Shoes/21.NorthStarBlue.png",
+    mainImageUrl: "/assets/images/products/Fashion/Shoes/21.NorthStarBlue.png",
     images: [
       "/assets/images/products/Fashion/Shoes/21.NorthStarBlue.png",
       "/assets/images/products/Fashion/Shoes/21.NorthStarBlue.png",
@@ -928,7 +928,7 @@ export const blogs = [
     name: "Repellendus accusamus occaecati.",
     description:
       "Saepe praesentium saepe iste minus totam excepturi expedita. Illum deserunt suscipit rerum officiis consequatur dicta odio. Necessitatibus perferendis aspernatur eum. Saepe voluptatum beatae. Hic veritatis libero nisi excepturi omnis explicabo et.",
-    thumbnail: "/assets/images/blogs/post-1.jpg",
+    mainImageUrl: "/assets/images/blogs/post-1.jpg",
     shop: {
       id: "c2a4ed2d-6708-4c1e-aa36-eddfd0496ce7",
       slug: "constant-shoppers",
@@ -982,7 +982,7 @@ export const blogs = [
     name: "Libero facere quaerat molestiae.",
     description:
       "Vel laboriosam maiores molestias voluptatem. Facere dolores praesentium natus exercitationem dolore. Eos esse velit expedita ratione corporis sed quae. Odit minima libero sint. Placeat illo veritatis vitae sint laborum officia fugit. Dignissimos illo neque animi vero soluta earum velit beatae.",
-    thumbnail: "/assets/images/blogs/post-2.jpg",
+    mainImageUrl: "/assets/images/blogs/post-2.jpg",
     shop: {
       id: "c2a4ed2d-6708-4c1e-aa36-eddfd0496ce7",
       slug: "constant-shoppers",
@@ -1036,7 +1036,7 @@ export const blogs = [
     name: "Provident voluptate beatae nesciunt velit ducimus corrupti magnam ratione cupiditate.",
     description:
       "Perspiciatis quos excepturi. Harum neque id voluptates corrupti natus enim dolore nesciunt. Placeat occaecati dolores quae aliquam quaerat rem accusantium. Qui iusto delectus consectetur deserunt debitis.",
-    thumbnail: "/assets/images/blogs/post-3.jpg",
+    mainImageUrl: "/assets/images/blogs/post-3.jpg",
     shop: {
       id: "3864a9a4-529b-4464-9271-6187450e7b95",
       slug: "scarlett-beauty",
@@ -1090,7 +1090,7 @@ export const blogs = [
     name: "Sed nulla ea cumque minima rem corrupti eligendi illo.",
     description:
       "Libero repudiandae hic in enim cupiditate adipisci quasi. Dolore perferendis amet voluptate ut. Deserunt quod nobis est fugiat deleniti. Eaque dolorum maiores iste non consectetur deserunt. Voluptatem distinctio impedit.",
-    thumbnail: "/assets/images/blogs/post-4.jpg",
+    mainImageUrl: "/assets/images/blogs/post-4.jpg",
     shop: {
       id: "778ce3a0-096b-402e-823f-cbc56e138238",
       slug: "coveted-clicks",
@@ -1144,7 +1144,7 @@ export const blogs = [
     name: "Quidem quos aspernatur quos recusandae unde iure.",
     description:
       "Id omnis fugit dolorem atque suscipit quasi dolores perspiciatis. Illo aut quisquam magni fuga earum atque a ducimus veritatis. Ducimus architecto laborum soluta facilis ea optio consectetur. Harum aliquid atque a incidunt ea sed a suscipit. Iusto expedita nulla quisquam vitae pariatur.",
-    thumbnail: "/assets/images/blogs/post-5.jpg",
+    mainImageUrl: "/assets/images/blogs/post-5.jpg",
     shop: {
       id: "0e5c950e-0158-4368-bc77-2a589b85264e",
       slug: "anytime-buys",
@@ -1198,7 +1198,7 @@ export const blogs = [
     name: "Pariatur recusandae sapiente adipisci velit.",
     description:
       "Dignissimos tempore et. Ex perferendis hic ratione. Occaecati voluptatibus expedita harum voluptatibus occaecati qui unde quae harum. Molestias quisquam quaerat. Molestiae odit libero debitis quisquam iste expedita recusandae odit. Expedita soluta totam harum pariatur.",
-    thumbnail: "/assets/images/blogs/post-6.jpg",
+    mainImageUrl: "/assets/images/blogs/post-6.jpg",
     shop: {
       id: "778ce3a0-096b-402e-823f-cbc56e138238",
       slug: "coveted-clicks",

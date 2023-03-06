@@ -115,7 +115,7 @@ const Section1: FC<Props> = ({ carouselData }) => {
                     priority
                     width={100}
                     height={100}
-                    src={item.imgUrl}
+                    src={item.mainImageUrl}
                     layout="responsive"
                     objectFit="contain"
                   />

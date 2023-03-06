@@ -79,7 +79,7 @@ const Section6: FC<Props> = ({ carList, carBrands }) => {
                   off={item.comparePrice}
                   rating={item.rating}
                   images={item.images}
-                  imgUrl={item.mainImageUrl}
+                  mainImageUrl={item.mainImageUrl}
                 />
               </Grid>
             ))}

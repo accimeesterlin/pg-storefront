@@ -31,7 +31,7 @@ const Section4: FC<Props> = ({ products }) => {
                 slug={item.slug}
                 price={item.price}
                 title={item.name}
-                imgUrl={item.mainImageUrl}
+                mainImageUrl={item.mainImageUrl}
               />
             </Box>
           ))}

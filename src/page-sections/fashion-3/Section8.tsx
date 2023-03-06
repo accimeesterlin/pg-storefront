@@ -62,7 +62,7 @@ const Section8: FC<Props> = ({ blogs }) => {
         {blogs.map((item) => (
           <Grid item md={2} sm={4} xs={6} key={item.id}>
             <ImageWrapper>
-              <Image alt="post" width={100} height={100} layout="responsive" src={item.thumbnail} />
+              <Image alt="post" width={100} height={100} layout="responsive" src={item.mainImageUrl} />
               <StyledIcon>instagram</StyledIcon>
             </ImageWrapper>
           </Grid>

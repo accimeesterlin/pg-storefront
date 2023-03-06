@@ -61,8 +61,8 @@ export const renderProductCount = (
  * @returns - RETURN NEW PRICE
  */
 
-export function calculateDiscount(price: number, discount: number) {
-  const afterDiscount = Number((price - price * (discount / 100)).toFixed(2));
+export function calculateDiscount(price: number, comparePrice: number) {
+  const afterDiscount = Number((price - price * (comparePrice / 100)).toFixed(2));
   return currency(afterDiscount);
 }
 

@@ -40,7 +40,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id, shop })
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, qty: amount, name: title, imgUrl: images[0]?.url, id: id || routerId },
+      payload: { price, qty: amount, name: title, mainImageUrl: images[0]?.url, id: id || routerId },
     });
   };
 

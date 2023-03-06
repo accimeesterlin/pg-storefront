@@ -7,12 +7,12 @@ import HoverBox from "@component/HoverBox";
 // ===========================================================================
 type ProductCard6Props = {
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   subtitle: string;
 };
 // ===========================================================================
 
-const ProductCard6: FC<ProductCard6Props> = ({ title, subtitle, imgUrl }) => {
+const ProductCard6: FC<ProductCard6Props> = ({ title, subtitle, mainImageUrl }) => {
   return (
     <Card position="relative">
       <Chip
@@ -44,7 +44,7 @@ const ProductCard6: FC<ProductCard6Props> = ({ title, subtitle, imgUrl }) => {
       </Chip>
 
       <HoverBox position="relative" height="120px" borderRadius={8}>
-        <NextImage src={imgUrl} layout="fill" objectFit="cover" />
+        <NextImage src={mainImageUrl} layout="fill" objectFit="cover" />
       </HoverBox>
     </Card>
   );

@@ -102,7 +102,7 @@ const Section5: FC<Props> = ({ list }) => {
                     <Link href="/">
                       <a>
                         <Card position="relative">
-                          <Image src={item.imgUrl} width="100%" />
+                          <Image src={item.mainImageUrl} width="100%" />
 
                           <Box
                             p="6px 12px"

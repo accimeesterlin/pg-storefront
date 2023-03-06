@@ -60,7 +60,7 @@ const Section6: FC<Props> = ({ cardList }) => {
                     </Link>
                   </Box>
 
-                  <img src={item.imgUrl} alt="" />
+                  <img src={item.mainImageUrl} alt="" />
                 </FlexBox>
               </Card>
             </Box>

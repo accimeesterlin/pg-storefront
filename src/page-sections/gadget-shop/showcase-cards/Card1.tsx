@@ -11,12 +11,12 @@ import { currency } from "@utils/utils";
 type Props = {
   title: string;
   price: number;
-  imgUrl: string;
-  discount: number;
+  mainImageUrl: string;
+  comparePrice: number;
 };
 // ==========================================================
 
-const Card1: FC<Props> = ({ title, price, discount, imgUrl }) => {
+const Card1: FC<Props> = ({ title, price, comparePrice, mainImageUrl }) => {
   return (
     <Card boxShadow="none" height="100%" borderRadius={4}>
       <Box maxWidth="320px" pt="70px" mx="auto">
@@ -25,7 +25,7 @@ const Card1: FC<Props> = ({ title, price, discount, imgUrl }) => {
         </H2>
 
         <SemiSpan display="block" textAlign="center" mb="1.5rem">
-          Starting at {currency(price, 0)} & save upto {discount}%
+          Starting at {currency(price, 0)} & save upto {comparePrice}%
         </SemiSpan>
 
         <Link href="/">
@@ -45,7 +45,7 @@ const Card1: FC<Props> = ({ title, price, discount, imgUrl }) => {
         </Link>
       </Box>
 
-      <Image width="100%" src={imgUrl} alt="shoes" />
+      <Image width="100%" src={mainImageUrl} alt="shoes" />
     </Card>
   );
 };

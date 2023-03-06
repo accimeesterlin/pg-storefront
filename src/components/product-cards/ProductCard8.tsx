@@ -14,19 +14,19 @@ type ProductCard8Props = {
   slug: string;
   price: number;
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   [key: string]: unknown;
 };
 // ==============================================================
 
-const ProductCard8: FC<ProductCard8Props> = ({ id, price, title, off, slug, imgUrl, ...props }) => {
+const ProductCard8: FC<ProductCard8Props> = ({ id, price, title, off, slug, mainImageUrl, ...props }) => {
   return (
     <Card p="1rem" {...props}>
       <Link href={`/product/${slug}`}>
         <a>
           <HoverBox mb="0.75rem" borderRadius={8} overflow="hidden">
             <NextImage
-              src={imgUrl || "/assets/images/products/Rectangle 116.png"}
+              src={mainImageUrl || "/assets/images/products/Rectangle 116.png"}
               width={500}
               height={500}
               layout="responsive"

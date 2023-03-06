@@ -2,9 +2,9 @@ import Product from "./product.model";
 
 export interface MainCarouselItem {
   title?: string;
-  imgUrl?: string;
+  mainImageUrl?: string;
   category?: string;
-  discount?: number;
+  comparePrice?: number;
   buttonLink?: string;
   buttonText?: string;
   description?: string;

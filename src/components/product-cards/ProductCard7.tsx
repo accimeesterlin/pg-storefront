@@ -49,19 +49,19 @@ interface ProductCard7Props extends SpaceProps {
   name: string;
   slug: string;
   price: number;
-  imgUrl?: string;
+  mainImageUrl?: string;
   id: string | number;
 }
 // =====================================================================
 
 const ProductCard7: FC<ProductCard7Props> = (props) => {
-  const { id, name, qty, price, imgUrl, slug, ...others } = props;
+  const { id, name, qty, price, mainImageUrl, slug, ...others } = props;
 
   const { dispatch } = useAppContext();
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { qty: amount, name, price, imgUrl, id },
+      payload: { qty: amount, name, price, mainImageUrl, id },
     });
   };
 
@@ -71,7 +71,7 @@ const ProductCard7: FC<ProductCard7Props> = (props) => {
         size={140}
         alt={name}
         display="block"
-        src={imgUrl || "/assets/images/products/iphone-xi.png"}
+        src={mainImageUrl || "/assets/images/products/iphone-xi.png"}
       />
 
       <FlexBox

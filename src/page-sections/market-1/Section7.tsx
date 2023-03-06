@@ -93,7 +93,7 @@ const Section7: FC<Props> = ({ shops, brands, title, productList }) => {
                   width={20}
                   alt=""
                   src={
-                    type === "shops" ? `/assets/images/shops/${brand.thumbnail}.png` : brand.image
+                    type === "shops" ? `/assets/images/shops/${brand.mainImageUrl}.png` : brand.image
                   }
                 />
                 <span className="product-category-title">{brand.name}</span>
@@ -126,7 +126,7 @@ const Section7: FC<Props> = ({ shops, brands, title, productList }) => {
                   off={item.comparePrice}
                   rating={item.rating}
                   images={item.images}
-                  imgUrl={item.mainImageUrl}
+                  mainImageUrl={item.mainImageUrl}
                 />
               </Grid>
             ))}

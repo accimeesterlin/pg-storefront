@@ -32,7 +32,7 @@ const SalePage2 = ({ products, meta }: Props) => {
               title={item.name}
               off={item.comparePrice}
               images={item.images}
-              imgUrl={item.mainImageUrl}
+              mainImageUrl={item.mainImageUrl}
               rating={item.rating || 4}
             />
           </Grid>

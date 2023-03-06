@@ -81,7 +81,7 @@ const Section1: FC<Props> = ({ id, carouselData }) => {
         totalSlides={carouselData.length}
         dotColor={theme.colors.primary.main}
       >
-        {carouselData.map(({ id, imgUrl, title }) => (
+        {carouselData.map(({ id, mainImageUrl, title }) => (
           <StyledGrid container key={id}>
             <GridItemOne item md={6} xs={12}>
               <Box py={6}>
@@ -91,7 +91,7 @@ const Section1: FC<Props> = ({ id, carouselData }) => {
             </GridItemOne>
 
             <GridItemTwo item md={6} xs={12}>
-              <LazyImage priority width={570} height={360} src={imgUrl} />
+              <LazyImage priority width={570} height={360} src={mainImageUrl} />
             </GridItemTwo>
           </StyledGrid>
         ))}

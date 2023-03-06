@@ -36,7 +36,7 @@ const Section4: FC<Props> = ({ categoryList }) => {
         {categoryList.map((item) => (
           <Link href="#" key={item.id}>
             <a>
-              <ProductCard14 title={item.name} imgUrl={item.image} available={item.description} />
+              <ProductCard14 title={item.name} mainImageUrl={item.image} available={item.description} />
             </a>
           </Link>
         ))}

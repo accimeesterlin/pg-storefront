@@ -3,7 +3,7 @@ interface Blog {
   slug?: string;
   title?: string;
   createdAt?: string;
-  thumbnail?: string;
+  mainImageUrl?: string;
   comments?: number;
   description?: string;
 }

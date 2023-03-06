@@ -30,7 +30,7 @@ const Section1: FC<Props> = ({ carouselData }) => {
               <CarouselCard1
                 key={index}
                 title={item.title}
-                image={item.imgUrl}
+                image={item.mainImageUrl}
                 buttonText={item.buttonText}
                 description={item.description}
               />

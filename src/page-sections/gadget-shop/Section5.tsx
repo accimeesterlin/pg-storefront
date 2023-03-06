@@ -22,7 +22,7 @@ const Section5: FC<Props> = ({ products }) => {
               slug={item.slug}
               price={item.price}
               title={item.name}
-              imgUrl={item.mainImageUrl}
+              mainImageUrl={item.mainImageUrl}
             />
           </Box>
         ))}
@@ -36,55 +36,55 @@ const Section5: FC<Props> = ({ products }) => {
 //     price: 150,
 //     title: "Sunglass",
 //     productUrl: "/product/c1",
-//     imgUrl: "/assets/images/products/imagegoggles.png",
+//     mainImageUrl: "/assets/images/products/imagegoggles.png",
 //   },
 //   {
 //     price: 250,
 //     title: "Makeup",
 //     productUrl: "/product/c12",
-//     imgUrl: "/assets/images/products/lipstick (2).png",
+//     mainImageUrl: "/assets/images/products/lipstick (2).png",
 //   },
 //   {
 //     price: 350,
 //     title: "Smart Watch",
 //     productUrl: "/product/c14",
-//     imgUrl: "/assets/images/products/bgwatch.png",
+//     mainImageUrl: "/assets/images/products/bgwatch.png",
 //   },
 //   {
 //     price: 15,
 //     title: "Lipstick",
 //     productUrl: "/product/c156",
-//     imgUrl: "/assets/images/products/lipstick (1).png",
+//     mainImageUrl: "/assets/images/products/lipstick (1).png",
 //   },
 //   {
 //     price: 55,
 //     title: "Green plant",
 //     productUrl: "/product/c145",
-//     imgUrl: "/assets/images/products/lipstick (4).png",
+//     mainImageUrl: "/assets/images/products/lipstick (4).png",
 //   },
 //   {
 //     price: 535,
 //     title: "Bonsai tree",
 //     productUrl: "/product/c176",
-//     imgUrl: "/assets/images/products/lipstick (3).png",
+//     mainImageUrl: "/assets/images/products/lipstick (3).png",
 //   },
 //   {
 //     price: 150,
 //     title: "Sunglass",
 //     productUrl: "/product/c1sg",
-//     imgUrl: "/assets/images/products/imagegoggles.png",
+//     mainImageUrl: "/assets/images/products/imagegoggles.png",
 //   },
 //   {
 //     price: 250,
 //     title: "Makeup",
 //     productUrl: "/product/c123",
-//     imgUrl: "/assets/images/products/lipstick (2).png",
+//     mainImageUrl: "/assets/images/products/lipstick (2).png",
 //   },
 //   {
 //     price: 350,
 //     title: "Smart Watch",
 //     productUrl: "/product/c1r23",
-//     imgUrl: "/assets/images/products/bgwatch.png",
+//     mainImageUrl: "/assets/images/products/bgwatch.png",
 //   },
 // ];
 

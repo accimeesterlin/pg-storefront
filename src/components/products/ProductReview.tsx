@@ -108,7 +108,7 @@ const ProductReview: FC = () => {
 const commentList = [
   {
     name: "Jannie Schumm",
-    imgUrl: "/assets/images/faces/7.png",
+    mainImageUrl: "/assets/images/faces/7.png",
     rating: 4.7,
     date: "2021-02-14",
     comment:
@@ -116,7 +116,7 @@ const commentList = [
   },
   {
     name: "Joe Kenan",
-    imgUrl: "/assets/images/faces/6.png",
+    mainImageUrl: "/assets/images/faces/6.png",
     rating: 4.7,
     date: "2019-08-10",
     comment:
@@ -124,7 +124,7 @@ const commentList = [
   },
   {
     name: "Jenifer Tulio",
-    imgUrl: "/assets/images/faces/8.png",
+    mainImageUrl: "/assets/images/faces/8.png",
     rating: 4.7,
     date: "2021-02-05",
     comment:

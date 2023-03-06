@@ -98,7 +98,7 @@ type ProductCard9Props = {
   slug: string;
   title: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating: number;
   shop?: Shop;
   images: string[];
@@ -114,7 +114,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
   slug,
   title,
   price,
-  imgUrl,
+  mainImageUrl,
   rating,
   images,
   categories,
@@ -130,7 +130,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, imgUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: title },
     });
   };
 
@@ -158,7 +158,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
               eye-alt
             </Icon>
 
-            <Image src={imgUrl} alt={title} width="100%" borderRadius="0.5rem" />
+            <Image src={mainImageUrl} alt={title} width="100%" borderRadius="0.5rem" />
           </Box>
         </Grid>
 

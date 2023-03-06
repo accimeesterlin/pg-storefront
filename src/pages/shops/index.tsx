@@ -28,8 +28,8 @@ const ShopList = ({ shopList }: Props) => {
               phone={item.phone}
               address={item.address}
               rating={item.rating || 5}
-              imgUrl={item.profilePicture}
-              coverImgUrl={item.coverPicture}
+              mainImageUrl={item.profilePicture}
+              covermainImageUrl={item.coverPicture}
               shopUrl={`/shops/${item.slug}`}
             />
           </Grid>

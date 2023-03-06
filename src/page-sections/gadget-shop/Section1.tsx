@@ -39,8 +39,8 @@ const Section1: FC<Props> = ({ topPickList, mainCarousel }) => {
                 key={item.id}
                 title={item.name}
                 price={item.price}
-                imgUrl={item.mainImageUrl}
-                discount={item.comparePrice}
+                mainImageUrl={item.mainImageUrl}
+                comparePrice={item.comparePrice}
               />
             ))}
           </Carousel>
@@ -64,7 +64,7 @@ const Section1: FC<Props> = ({ topPickList, mainCarousel }) => {
                   title={item.name}
                   off={item.comparePrice}
                   rating={item.rating}
-                  imgUrl={item.mainImageUrl}
+                  mainImageUrl={item.mainImageUrl}
                 />
               ))}
             </Carousel>
@@ -87,7 +87,7 @@ const Section1: FC<Props> = ({ topPickList, mainCarousel }) => {
                 title={item.name}
                 off={item.comparePrice}
                 rating={item.rating}
-                imgUrl={item.mainImageUrl}
+                mainImageUrl={item.mainImageUrl}
               />
             ))}
           </Carousel>

@@ -106,7 +106,7 @@ type ProductCard10Props = {
   unit: string;
   title: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating: number;
   shop?: Shop;
   images: string[];
@@ -115,7 +115,7 @@ type ProductCard10Props = {
 // ======================================================================
 
 const ProductCard10: FC<ProductCard10Props> = (props) => {
-  const { id, off, unit, slug, title, price, imgUrl, images, shop } = props;
+  const { id, off, unit, slug, title, price, mainImageUrl, images, shop } = props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -126,7 +126,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, imgUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: title },
     });
   };
 
@@ -160,7 +160,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
 
         <Link href={`/product/${slug}`}>
           <a>
-            <NextImage src={imgUrl} width={100} height={100} layout="responsive" alt={title} />
+            <NextImage src={mainImageUrl} width={100} height={100} layout="responsive" alt={title} />
           </a>
         </Link>
       </div>

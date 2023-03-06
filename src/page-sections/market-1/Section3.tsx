@@ -28,7 +28,7 @@ const Section3: FC<Props> = ({ categoryList }) => {
           <Link href={`/product/search/${item.slug}`} key={ind}>
             <a>
               <Card p="1rem">
-                <ProductCard6 title={item.name} subtitle={item.description} imgUrl={item.image} />
+                <ProductCard6 title={item.name} subtitle={item.description} mainImageUrl={item.image} />
               </Card>
             </a>
           </Link>

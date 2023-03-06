@@ -66,7 +66,7 @@ type ProductCard17Props = {
   slug: string;
   title: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating?: number;
   shop?: Shop;
   reviews: number;
@@ -78,7 +78,7 @@ type ProductCard17Props = {
 // ==============================================================
 
 const ProductCard17: FC<ProductCard17Props> = (props) => {
-  const { id, title, price, imgUrl, category, reviews, slug, images, shop } = props;
+  const { id, title, price, mainImageUrl, category, reviews, slug, images, shop } = props;
 
   const { state, dispatch } = useAppContext();
   const [openDialog, setOpenDialog] = useState(false);
@@ -95,7 +95,7 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
       id,
       slug,
       price,
-      imgUrl,
+      mainImageUrl,
       name: title,
       qty: (cartItem?.qty || 0) + 1,
     };
@@ -111,7 +111,7 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
             <Image
               width={300}
               height={300}
-              src={imgUrl}
+              src={mainImageUrl}
               alt="category"
               objectFit="cover"
               layout="responsive"

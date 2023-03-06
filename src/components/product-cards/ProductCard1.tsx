@@ -107,7 +107,7 @@ interface ProductCard1Props extends CardProps {
   slug: string;
   title: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating: number;
   shop?: Shop;
   images: string[];
@@ -121,7 +121,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
   slug,
   title,
   price,
-  imgUrl,
+  mainImageUrl,
   images,
   rating = 4,
   shop,
@@ -136,7 +136,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { id, slug, price, imgUrl, name: title, qty: amount },
+      payload: { id, slug, price, mainImageUrl: mainImageUrl, name: title, qty: amount },
     });
   };
 
@@ -175,7 +175,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
               <img
                 alt={title}
                 width={100}
-                src={imgUrl}
+                src={mainImageUrl}
                 height={100}
                 // objectFit="cover"
                 // layout="responsive"

@@ -12,18 +12,18 @@ type ProductCard4Props = {
   title: string;
   price: number;
   rating: number;
-  imgUrl: string;
+  mainImageUrl: string;
   reviewCount: number;
 };
 // =======================================================
 
 const ProductCard4: FC<ProductCard4Props> = (props) => {
-  const { imgUrl, rating, title, price, reviewCount } = props;
+  const { mainImageUrl, rating, title, price, reviewCount } = props;
 
   return (
     <Box>
       <HoverBox mb="1rem" mx="auto" borderRadius={8}>
-        <NextImage src={imgUrl} width={100} height={100} layout="responsive" alt={title} />
+        <NextImage src={mainImageUrl} width={100} height={100} layout="responsive" alt={title} />
       </HoverBox>
 
       <FlexBox justifyContent="center" alignItems="center" mb="0.25rem">

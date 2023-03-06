@@ -104,7 +104,7 @@ type ProductCard12Props = {
   slug: string;
   title: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating: number;
   shop?: Shop;
   images: string[];
@@ -112,7 +112,7 @@ type ProductCard12Props = {
 // =============================================================
 
 const ProductCard12: FC<ProductCard12Props> = (props) => {
-  const { off, title, price, imgUrl, rating, slug, id, images, shop } = props;
+  const { off, title, price, mainImageUrl, rating, slug, id, images, shop } = props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -124,7 +124,7 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, imgUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: title },
     });
   };
 
@@ -154,7 +154,7 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
                 alt={title}
                 width={190}
                 height={190}
-                src={imgUrl}
+                src={mainImageUrl}
                 layout="responsive"
                 objectFit="contain"
               />

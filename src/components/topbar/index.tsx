@@ -54,7 +54,7 @@ const Topbar: FC = () => {
             direction="right"
             handler={
               <FlexBox className="dropdown-handler" alignItems="center" height="40px" mr="1.25rem">
-                <Image src={language.imgUrl} alt={language.title} />
+                <Image src={language.mainImageUrl} alt={language.title} />
                 <Small fontWeight="600">{language.title}</Small>
                 <Icon size="1rem">chevron-down</Icon>
               </FlexBox>
@@ -62,7 +62,7 @@ const Topbar: FC = () => {
           >
             {languageList.map((item) => (
               <MenuItem key={item.title} onClick={handleLanguageClick(item)}>
-                <Image src={item.imgUrl} borderRadius="2px" mr="0.5rem" alt={item.title} />
+                <Image src={item.mainImageUrl} borderRadius="2px" mr="0.5rem" alt={item.title} />
                 <Small fontWeight="600">{item.title}</Small>
               </MenuItem>
             ))}
@@ -72,7 +72,7 @@ const Topbar: FC = () => {
             direction="right"
             handler={
               <FlexBox className="dropdown-handler" alignItems="center" height="40px">
-                <Image src={currency.imgUrl} alt={currency.title} />
+                <Image src={currency.mainImageUrl} alt={currency.title} />
                 <Small fontWeight="600">{currency.title}</Small>
                 <Icon size="1rem">chevron-down</Icon>
               </FlexBox>
@@ -80,7 +80,7 @@ const Topbar: FC = () => {
           >
             {currencyList.map((item) => (
               <MenuItem key={item.title} onClick={handleCurrencyClick(item)}>
-                <Image src={item.imgUrl} borderRadius="2px" mr="0.5rem" alt={item.title} />
+                <Image src={item.mainImageUrl} borderRadius="2px" mr="0.5rem" alt={item.title} />
                 <Small fontWeight="600">{item.title}</Small>
               </MenuItem>
             ))}
@@ -92,16 +92,16 @@ const Topbar: FC = () => {
 };
 
 const languageList = [
-  { title: "EN", imgUrl: "/assets/images/flags/usa.png" },
-  { title: "BN", imgUrl: "/assets/images/flags/bd.png" },
-  { title: "HN", imgUrl: "/assets/images/flags/in.png" },
+  { title: "EN", mainImageUrl: "/assets/images/flags/usa.png" },
+  { title: "BN", mainImageUrl: "/assets/images/flags/bd.png" },
+  { title: "HN", mainImageUrl: "/assets/images/flags/in.png" },
 ];
 
 const currencyList = [
-  { title: "USD", imgUrl: "/assets/images/flags/usa.png" },
-  { title: "EUR", imgUrl: "/assets/images/flags/uk.png" },
-  { title: "BDT", imgUrl: "/assets/images/flags/bd.png" },
-  { title: "INR", imgUrl: "/assets/images/flags/in.png" },
+  { title: "USD", mainImageUrl: "/assets/images/flags/usa.png" },
+  { title: "EUR", mainImageUrl: "/assets/images/flags/uk.png" },
+  { title: "BDT", mainImageUrl: "/assets/images/flags/bd.png" },
+  { title: "INR", mainImageUrl: "/assets/images/flags/in.png" },
 ];
 
 export default Topbar;

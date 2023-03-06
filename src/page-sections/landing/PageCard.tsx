@@ -42,13 +42,13 @@ const StatusChip = styled(Box)({
 // ============================================
 type PageCardProps = {
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   badge?: boolean;
   previewUrl: string;
 };
 // ============================================
 
-const PageCard: FC<PageCardProps> = ({ imgUrl, previewUrl, title, badge }) => {
+const PageCard: FC<PageCardProps> = ({ mainImageUrl, previewUrl, title, badge }) => {
   return (
     <Fragment>
       <Wrapper
@@ -62,7 +62,7 @@ const PageCard: FC<PageCardProps> = ({ imgUrl, previewUrl, title, badge }) => {
       >
         <Card boxShadow="large">
           <NextImage
-            src={imgUrl}
+            src={mainImageUrl}
             width={470}
             height={400}
             objectFit="cover"

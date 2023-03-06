@@ -24,7 +24,7 @@ const ProductCard9List: FC<Props> = ({ products }) => {
           rating={item.rating}
           images={item.images}
           shop={item.shop}
-          imgUrl={item.mainImageUrl}
+          mainImageUrl={item.mainImageUrl}
           categories={item.categories}
         />
       ))}

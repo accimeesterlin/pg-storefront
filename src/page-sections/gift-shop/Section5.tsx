@@ -42,7 +42,7 @@ const Section5: FC<Props> = ({ products, title }) => {
               off={item.comparePrice}
               rating={item.rating}
               images={item.images}
-              imgUrl={item.mainImageUrl}
+              mainImageUrl={item.mainImageUrl}
             />
           ))}
         </Carousel>

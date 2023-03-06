@@ -1,6 +1,6 @@
 interface MainCarouselItem {
   title?: string;
-  imgUrl?: string;
+  mainImageUrl?: string;
   buttonLik?: string;
   buttonText?: string;
   description?: string;

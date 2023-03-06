@@ -29,7 +29,7 @@ const Section4: FC<Props> = ({ products }) => {
               off={item.comparePrice}
               status={item.status}
               rating={item.rating}
-              imgUrl={item.mainImageUrl}
+              mainImageUrl={item.mainImageUrl}
               productColors={item.colors}
             />
           </Grid>

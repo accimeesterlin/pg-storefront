@@ -65,7 +65,7 @@ const Section4: FC = () => {
                   <NextImage
                     width={60}
                     height={60}
-                    src={item.imgUrl}
+                    src={item.mainImageUrl}
                     objectFit="contain"
                     objectPosition="center"
                   />
@@ -85,35 +85,35 @@ const Section4: FC = () => {
 
 const list = [
   {
-    imgUrl: "/assets/images/logos/react.png",
+    mainImageUrl: "/assets/images/logos/react.png",
     title: "React.Js",
   },
   {
-    imgUrl: "/assets/images/logos/next-js.png",
+    mainImageUrl: "/assets/images/logos/next-js.png",
     title: "Next.Js",
   },
   {
-    imgUrl: "/assets/images/logos/typescript.png",
+    mainImageUrl: "/assets/images/logos/typescript.png",
     title: "Typescript",
   },
   {
-    imgUrl: "/assets/images/logos/styled-component.png",
+    mainImageUrl: "/assets/images/logos/styled-component.png",
     title: "Styled Component",
   },
   {
-    imgUrl: "/assets/images/logos/styled-system.png",
+    mainImageUrl: "/assets/images/logos/styled-system.png",
     title: "Styled System",
   },
   {
-    imgUrl: "/assets/images/logos/carousel.png",
+    mainImageUrl: "/assets/images/logos/carousel.png",
     title: "Pure React Carousel",
   },
   {
-    imgUrl: "/assets/images/logos/chart-js.png",
+    mainImageUrl: "/assets/images/logos/chart-js.png",
     title: "Chart.Js",
   },
   {
-    imgUrl: "/assets/images/logos/formik.png",
+    mainImageUrl: "/assets/images/logos/formik.png",
     title: "Formik",
   },
 ];

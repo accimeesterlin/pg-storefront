@@ -36,7 +36,7 @@ const Cart = () => {
               slug={item.slug}
               name={item.name}
               price={item.price}
-              imgUrl={item.imgUrl}
+              mainImageUrl={item.mainImageUrl}
             />
           ))}
         </Grid>

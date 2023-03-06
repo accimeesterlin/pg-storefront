@@ -109,7 +109,7 @@ interface Props {
   slug: string;
   title: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   status: string;
   rating?: number;
   id: string | number;
@@ -118,7 +118,7 @@ interface Props {
 // =====================================================================
 
 const ProductCard13: FC<Props> = (props) => {
-  const { off, status, id, title, price, imgUrl, rating, productColors, slug } = props;
+  const { off, status, id, title, price, mainImageUrl, rating, productColors, slug } = props;
 
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.slug === slug);
@@ -126,7 +126,7 @@ const ProductCard13: FC<Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, imgUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: title },
     });
   };
 
@@ -164,7 +164,7 @@ const ProductCard13: FC<Props> = (props) => {
             <LazyImage
               width={100}
               height={100}
-              src={imgUrl}
+              src={mainImageUrl}
               id="productImg"
               layout="responsive"
               objectFit="contain"

@@ -40,13 +40,13 @@ type ProductCard11Props = {
   off?: number;
   title: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating: number;
 };
 // ===================================================
 
 const ProductCard11: FC<ProductCard11Props> = (props) => {
-  const { title, imgUrl, price, rating, slug, off = 0 } = props;
+  const { title, mainImageUrl, price, rating, slug, off = 0 } = props;
 
   return (
     <Link href={`/product/${slug}`}>
@@ -54,7 +54,7 @@ const ProductCard11: FC<ProductCard11Props> = (props) => {
         <StyledProductCard>
           <Box mb="1rem" className="image-holder">
             <NextImage
-              src={imgUrl}
+              src={mainImageUrl}
               width={100}
               height={100}
               objectFit="cover"

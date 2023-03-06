@@ -38,7 +38,7 @@ const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
   ];
   
   return (
-    <ShopIntroWrapper mb="32px" pb="20px" overflow="hidden" coverImgUrl={shop?.coverPicture}>
+    <ShopIntroWrapper mb="32px" pb="20px" overflow="hidden" covermainImageUrl={shop?.coverPicture}>
       <Box className="cover-image" height="202px" />
 
       <FlexBox mt="-64px" px="30px" flexWrap="wrap">

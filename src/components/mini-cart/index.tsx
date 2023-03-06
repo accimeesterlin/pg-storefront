@@ -95,7 +95,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
                     size={76}
                     mx="1rem"
                     alt={item.name}
-                    src={item.imgUrl || "/assets/images/products/iphone-x.png"}
+                    src={item.mainImageUrl || "/assets/images/products/iphone-x.png"}
                   />
                 </a>
               </Link>

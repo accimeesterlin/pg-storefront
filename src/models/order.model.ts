@@ -13,7 +13,7 @@ interface Order {
   tax?: number;
   items?: Item[];
   createdAt?: string;
-  discount?: number;
+  comparePrice?: number;
   deliveredAt?: string;
   totalPrice?: number;
   isDelivered?: boolean;

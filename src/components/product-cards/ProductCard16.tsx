@@ -120,7 +120,7 @@ type ProductCardProps = {
   slug: string;
   title: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating?: number;
   shop?: Shop;
   images: string[];
@@ -130,7 +130,7 @@ type ProductCardProps = {
 // =============================================================
 
 const ProductCard16: FC<ProductCardProps> = (props) => {
-  const { off, id, title, price, imgUrl, rating, hoverEffect, slug, images, shop } = props;
+  const { off, id, title, price, mainImageUrl, rating, hoverEffect, slug, images, shop } = props;
 
   const { state, dispatch } = useAppContext();
   const [openModal, setOpenModal] = useState(false);
@@ -142,7 +142,7 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, imgUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: title },
     });
   };
 
@@ -156,7 +156,7 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
             <a>
               <LazyImage
                 alt={title}
-                src={imgUrl}
+                src={mainImageUrl}
                 width={190}
                 height={190}
                 layout="responsive"

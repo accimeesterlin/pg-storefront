@@ -25,7 +25,7 @@ const Section11: FC<Props> = ({ moreItems }) => {
               off={item.comparePrice}
               rating={item.rating}
               images={item.images}
-              imgUrl={item.mainImageUrl}
+              mainImageUrl={item.mainImageUrl}
             />
           </Grid>
         ))}

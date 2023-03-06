@@ -29,9 +29,9 @@ const WishList = () => {
               slug={item.slug}
               price={item.price}
               title={item.title}
-              off={item.discount}
+              off={item.comparePrice}
               images={item.images}
-              imgUrl={item.thumbnail}
+              mainImageUrl={item.mainImageUrl}
               rating={item.rating || 4}
             />
           </Grid>

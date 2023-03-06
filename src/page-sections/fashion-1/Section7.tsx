@@ -31,7 +31,7 @@ const Section7: FC<Props> = ({ products }) => {
             off={products[0].comparePrice}
             rating={products[0].rating}
             images={products[0].images}
-            imgUrl={products[0].mainImageUrl}
+            mainImageUrl={products[0].mainImageUrl}
           />
         </GridOne>
 
@@ -47,7 +47,7 @@ const Section7: FC<Props> = ({ products }) => {
                   price={item.price}
                   rating={item.rating}
                   images={item.images}
-                  imgUrl={item.mainImageUrl}
+                  mainImageUrl={item.mainImageUrl}
                 />
               </Grid>
             ))}

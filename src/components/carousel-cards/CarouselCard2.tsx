@@ -37,7 +37,7 @@ type CarouselCard2Props = {
   title: string;
   bgImage?: string;
   category: string;
-  discount: number;
+  comparePrice: number;
   mode?: "dark" | "light";
 };
 // ===============================================================
@@ -46,7 +46,7 @@ const CarouselCard2: FC<CarouselCard2Props> = ({
   title,
   bgImage,
   category,
-  discount,
+  comparePrice,
   mode = "dark",
 }) => {
   return (
@@ -61,7 +61,7 @@ const CarouselCard2: FC<CarouselCard2Props> = ({
         </H1>
 
         <H4 fontSize={30} lineHeight={1} mt=".75rem" textTransform="uppercase">
-          SALE UP TO <Span color="primary.main">{discount}% OFF</Span>
+          SALE UP TO <Span color="primary.main">{comparePrice}% OFF</Span>
         </H4>
 
         <Paragraph fontSize={18} mb="2rem">
