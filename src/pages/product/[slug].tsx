@@ -136,8 +136,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   let relatedProducts = [];
-  console.log("Product", product);
-
   try {
     relatedProducts = await api.getRelatedProducts(product?.id);
   } catch (error) {

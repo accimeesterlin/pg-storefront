@@ -53,13 +53,13 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, name, price, id, shop, ma
               <Image
                 width={300}
                 height={300}
-                src={images?.length > 0 ? images[selectedImage]?.url : mainImageUrl}
+                src={images?.length >= 0 ? images[selectedImage]?.url : mainImageUrl}
                 style={{ objectFit: "contain" }}
               />
             </FlexBox>
 
             <FlexBox overflow="auto">
-              {images?.map(({ url }, ind) => (
+              {images?.map((image, ind) => (
                 <Box
                   key={ind}
                   size={70}
@@ -72,11 +72,11 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, name, price, id, shop, ma
                   alignItems="center"
                   justifyContent="center"
                   ml={ind === 0 && "auto"}
-                  mr={ind === images.length - 1 ? "auto" : "10px"}
+                  mr={ind === images?.length - 1 ? "auto" : "10px"}
                   borderColor={selectedImage === ind ? "primary.main" : "gray.400"}
                   onClick={handleImageClick(ind)}
                 >
-                  <Avatar src={url} borderRadius="10px" size={40} />
+                  <Avatar src={image?.url} borderRadius="10px" size={40} />
                 </Box>
               ))}
             </FlexBox>

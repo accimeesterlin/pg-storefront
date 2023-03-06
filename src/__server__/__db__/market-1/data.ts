@@ -834,7 +834,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/imagegoggles.png",
     images: [
       { url: "/assets/images/products/imagegoggles.png" },
-      { ur: "/assets/images/products/imagegoggles.png" },
+      { url: "/assets/images/products/imagegoggles.png" },
     ],
     categories: [],
     status: null,
@@ -887,7 +887,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/lipstick (2).png",
     images: [
       { url: "/assets/images/products/lipstick (2).png" },
-      { ur: "/assets/images/products/lipstick (2).png" },
+      { url: "/assets/images/products/lipstick (2).png" },
     ],
     categories: [],
     status: null,
@@ -990,7 +990,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/lipstick (1).png",
     images: [
       { url: "/assets/images/products/lipstick (1).png" },
-      { ur: "/assets/images/products/lipstick (1).png" },
+      { url: "/assets/images/products/lipstick (1).png" },
     ],
     categories: [],
     status: null,
@@ -1043,7 +1043,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/lipstick (4).png",
     images: [
       { url: "/assets/images/products/lipstick (4).png" },
-      { ur: "/assets/images/products/lipstick (4).png" },
+      { url: "/assets/images/products/lipstick (4).png" },
     ],
     categories: [],
     status: null,
@@ -1096,7 +1096,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/lipstick (3).png",
     images: [
       { url: "/assets/images/products/lipstick (3).png" },
-      { ur: "/assets/images/products/lipstick (3).png" },
+      { url: "/assets/images/products/lipstick (3).png" },
     ],
     categories: [],
     status: null,
@@ -1149,7 +1149,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/7.beatsw3.png",
     images: [
       { url: "/assets/images/products/Electronics/7.beatsw3.png" },
-      { ur: "/assets/images/products/Electronics/7.beatsw3.png" },
+      { url: "/assets/images/products/Electronics/7.beatsw3.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -1202,7 +1202,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/9.SonyTV1080p.png",
     images: [
       { url: "/assets/images/products/Electronics/9.SonyTV1080p.png" },
-      { ur: "/assets/images/products/Electronics/9.SonyTV1080p.png" },
+      { url: "/assets/images/products/Electronics/9.SonyTV1080p.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -1255,7 +1255,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/10.SonyPS4.png",
     images: [
       { url: "/assets/images/products/Electronics/10.SonyPS4.png" },
-      { ur: "/assets/images/products/Electronics/10.SonyPS4.png" },
+      { url: "/assets/images/products/Electronics/10.SonyPS4.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -1308,7 +1308,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/11.Netgear2020.png",
     images: [
       { url: "/assets/images/products/Electronics/11.Netgear2020.png" },
-      { ur: "/assets/images/products/Electronics/11.Netgear2020.png" },
+      { url: "/assets/images/products/Electronics/11.Netgear2020.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -1361,7 +1361,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/12.SonyBGB.png",
     images: [
       { url: "/assets/images/products/Electronics/12.SonyBGB.png" },
-      { ur: "/assets/images/products/Electronics/12.SonyBGB.png" },
+      { url: "/assets/images/products/Electronics/12.SonyBGB.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -1414,7 +1414,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/13.LGProducts.png",
     images: [
       { url: "/assets/images/products/Electronics/13.LGProducts.png" },
-      { ur: "/assets/images/products/Electronics/13.LGProducts.png" },
+      { url: "/assets/images/products/Electronics/13.LGProducts.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -1467,7 +1467,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/14.Panasonic2019.png",
     images: [
       { url: "/assets/images/products/Electronics/14.Panasonic2019.png" },
-      { ur: "/assets/images/products/Electronics/14.Panasonic2019.png" },
+      { url: "/assets/images/products/Electronics/14.Panasonic2019.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -1520,7 +1520,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/15.DuneHD.png",
     images: [
       { url: "/assets/images/products/Electronics/15.DuneHD.png" },
-      { ur: "/assets/images/products/Electronics/15.DuneHD.png" },
+      { url: "/assets/images/products/Electronics/15.DuneHD.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -1573,7 +1573,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/16.SonyCCTV.png",
     images: [
       { url: "/assets/images/products/Electronics/16.SonyCCTV.png" },
-      { ur: "/assets/images/products/Electronics/16.SonyCCTV.png" },
+      { url: "/assets/images/products/Electronics/16.SonyCCTV.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -1626,7 +1626,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Automotive/1.Ford2019.png",
     images: [
       { url: "/assets/images/products/Automotive/1.Ford2019.png" },
-      { ur: "/assets/images/products/Automotive/1.Ford2019.png" },
+      { url: "/assets/images/products/Automotive/1.Ford2019.png" },
     ],
     categories: ["automotive"],
     status: null,
@@ -1679,7 +1679,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Automotive/2.Audi2017.png",
     images: [
       { url: "/assets/images/products/Automotive/2.Audi2017.png" },
-      { ur: "/assets/images/products/Automotive/2.Audi2017.png" },
+      { url: "/assets/images/products/Automotive/2.Audi2017.png" },
     ],
     categories: ["automotive"],
     status: null,
@@ -1732,7 +1732,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Automotive/3.Tesla2015.png",
     images: [
       { url: "/assets/images/products/Automotive/3.Tesla2015.png" },
-      { ur: "/assets/images/products/Automotive/3.Tesla2015.png" },
+      { url: "/assets/images/products/Automotive/3.Tesla2015.png" },
     ],
     categories: ["automotive"],
     status: null,
@@ -1785,7 +1785,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Automotive/4.Porsche2018.png",
     images: [
       { url: "/assets/images/products/Automotive/4.Porsche2018.png" },
-      { ur: "/assets/images/products/Automotive/4.Porsche2018.png" },
+      { url: "/assets/images/products/Automotive/4.Porsche2018.png" },
     ],
     categories: ["automotive"],
     status: null,
@@ -1838,7 +1838,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Automotive/5.Ford2018.png",
     images: [
       { url: "/assets/images/products/Automotive/5.Ford2018.png" },
-      { ur: "/assets/images/products/Automotive/5.Ford2018.png" },
+      { url: "/assets/images/products/Automotive/5.Ford2018.png" },
     ],
     categories: ["automotive"],
     status: null,
@@ -1891,7 +1891,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Automotive/6.Ford2020.png",
     images: [
       { url: "/assets/images/products/Automotive/6.Ford2020.png" },
-      { ur: "/assets/images/products/Automotive/6.Ford2020.png" },
+      { url: "/assets/images/products/Automotive/6.Ford2020.png" },
     ],
     categories: ["automotive"],
     status: null,
@@ -1944,7 +1944,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/29.AppleEarphones.png",
     images: [
       { url: "/assets/images/products/Electronics/29.AppleEarphones.png" },
-      { ur: "/assets/images/products/Electronics/29.AppleEarphones.png" },
+      { url: "/assets/images/products/Electronics/29.AppleEarphones.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -1997,7 +1997,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/30.Nokiaandroidone.png",
     images: [
       { url: "/assets/images/products/Electronics/30.Nokiaandroidone.png" },
-      { ur: "/assets/images/products/Electronics/30.Nokiaandroidone.png" },
+      { url: "/assets/images/products/Electronics/30.Nokiaandroidone.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -2050,7 +2050,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/31.Symphonlights.png",
     images: [
       { url: "/assets/images/products/Electronics/31.Symphonlights.png" },
-      { ur: "/assets/images/products/Electronics/31.Symphonlights.png" },
+      { url: "/assets/images/products/Electronics/31.Symphonlights.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -2103,7 +2103,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/32.iphone7.png",
     images: [
       { url: "/assets/images/products/Electronics/32.iphone7.png" },
-      { ur: "/assets/images/products/Electronics/32.iphone7.png" },
+      { url: "/assets/images/products/Electronics/32.iphone7.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -2156,7 +2156,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/33.beatswirelessearphones.png",
     images: [
       { url: "/assets/images/products/Electronics/33.beatswirelessearphones.png" },
-      { ur: "/assets/images/products/Electronics/33.beatswirelessearphones.png" },
+      { url: "/assets/images/products/Electronics/33.beatswirelessearphones.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -2209,7 +2209,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/34.HTC2018.png",
     images: [
       { url: "/assets/images/products/Electronics/34.HTC2018.png" },
-      { ur: "/assets/images/products/Electronics/34.HTC2018.png" },
+      { url: "/assets/images/products/Electronics/34.HTC2018.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -2262,7 +2262,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/35.beatsbluetoothearpohones.png",
     images: [
       { url: "/assets/images/products/Electronics/35.beatsbluetoothearpohones.png" },
-      { ur: "/assets/images/products/Electronics/35.beatsbluetoothearpohones.png" },
+      { url: "/assets/images/products/Electronics/35.beatsbluetoothearpohones.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -2315,7 +2315,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/36.sbsWirelessEarphones.png",
     images: [
       { url: "/assets/images/products/Electronics/36.sbsWirelessEarphones.png" },
-      { ur: "/assets/images/products/Electronics/36.sbsWirelessEarphones.png" },
+      { url: "/assets/images/products/Electronics/36.sbsWirelessEarphones.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -2368,7 +2368,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Fashion/Accessories/1.SilverCap.png",
     images: [
       { url: "/assets/images/products/Fashion/Accessories/1.SilverCap.png" },
-      { ur: "/assets/images/products/Fashion/Accessories/1.SilverCap.png" },
+      { url: "/assets/images/products/Fashion/Accessories/1.SilverCap.png" },
     ],
     categories: ["fashion"],
     status: null,
@@ -2421,7 +2421,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Fashion/Accessories/7.PoliceGrayEyeglasses.png",
     images: [
       { url: "/assets/images/products/Fashion/Accessories/7.PoliceGrayEyeglasses.png" },
-      { ur: "/assets/images/products/Fashion/Accessories/7.PoliceGrayEyeglasses.png" },
+      { url: "/assets/images/products/Fashion/Accessories/7.PoliceGrayEyeglasses.png" },
     ],
     categories: ["fashion"],
     status: null,
@@ -2474,7 +2474,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Fashion/Accessories/8.RayBanMattBlack.png",
     images: [
       { url: "/assets/images/products/Fashion/Accessories/8.RayBanMattBlack.png" },
-      { ur: "/assets/images/products/Fashion/Accessories/8.RayBanMattBlack.png" },
+      { url: "/assets/images/products/Fashion/Accessories/8.RayBanMattBlack.png" },
     ],
     categories: ["fashion"],
     status: null,
@@ -2527,7 +2527,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Fashion/Accessories/9.RayBanBlack.png",
     images: [
       { url: "/assets/images/products/Fashion/Accessories/9.RayBanBlack.png" },
-      { ur: "/assets/images/products/Fashion/Accessories/9.RayBanBlack.png" },
+      { url: "/assets/images/products/Fashion/Accessories/9.RayBanBlack.png" },
     ],
     categories: ["fashion"],
     status: null,
@@ -2580,7 +2580,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Fashion/Accessories/10.RayBanOcean.png",
     images: [
       { url: "/assets/images/products/Fashion/Accessories/10.RayBanOcean.png" },
-      { ur: "/assets/images/products/Fashion/Accessories/10.RayBanOcean.png" },
+      { url: "/assets/images/products/Fashion/Accessories/10.RayBanOcean.png" },
     ],
     categories: ["fashion"],
     status: null,
@@ -2633,7 +2633,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Fashion/Accessories/11.SunglassesCollection.png",
     images: [
       { url: "/assets/images/products/Fashion/Accessories/11.SunglassesCollection.png" },
-      { ur: "/assets/images/products/Fashion/Accessories/11.SunglassesCollection.png" },
+      { url: "/assets/images/products/Fashion/Accessories/11.SunglassesCollection.png" },
     ],
     categories: ["fashion"],
     status: null,
@@ -2686,7 +2686,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Fashion/Accessories/12.Xiaomimiband2.png",
     images: [
       { url: "/assets/images/products/Fashion/Accessories/12.Xiaomimiband2.png" },
-      { ur: "/assets/images/products/Fashion/Accessories/12.Xiaomimiband2.png" },
+      { url: "/assets/images/products/Fashion/Accessories/12.Xiaomimiband2.png" },
     ],
     categories: ["fashion"],
     status: null,
@@ -2739,7 +2739,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Fashion/Accessories/13.FossilWatchBrown.png",
     images: [
       { url: "/assets/images/products/Fashion/Accessories/13.FossilWatchBrown.png" },
-      { ur: "/assets/images/products/Fashion/Accessories/13.FossilWatchBrown.png" },
+      { url: "/assets/images/products/Fashion/Accessories/13.FossilWatchBrown.png" },
     ],
     categories: ["fashion"],
     status: null,
@@ -2792,7 +2792,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Fashion/Accessories/14.MVMTMWatchBlack.png",
     images: [
       { url: "/assets/images/products/Fashion/Accessories/14.MVMTMWatchBlack.png" },
-      { ur: "/assets/images/products/Fashion/Accessories/14.MVMTMWatchBlack.png" },
+      { url: "/assets/images/products/Fashion/Accessories/14.MVMTMWatchBlack.png" },
     ],
     categories: ["fashion"],
     status: null,
@@ -2845,7 +2845,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Fashion/Accessories/15.BarihoWatchBlack.png",
     images: [
       { url: "/assets/images/products/Fashion/Accessories/15.BarihoWatchBlack.png" },
-      { ur: "/assets/images/products/Fashion/Accessories/15.BarihoWatchBlack.png" },
+      { url: "/assets/images/products/Fashion/Accessories/15.BarihoWatchBlack.png" },
     ],
     categories: ["fashion"],
     status: null,
@@ -3008,7 +3008,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Bikes/23.YamahaR15Blue.png",
     images: [
       { url: "/assets/images/products/Bikes/23.YamahaR15Blue.png" },
-      { ur: "/assets/images/products/Bikes/23.YamahaR15Blue.png" },
+      { url: "/assets/images/products/Bikes/23.YamahaR15Blue.png" },
     ],
     categories: ["bikes"],
     status: null,
@@ -3061,7 +3061,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Bikes/24.Revel2020.png",
     images: [
       { url: "/assets/images/products/Bikes/24.Revel2020.png" },
-      { ur: "/assets/images/products/Bikes/24.Revel2020.png" },
+      { url: "/assets/images/products/Bikes/24.Revel2020.png" },
     ],
     categories: ["bikes"],
     status: null,
@@ -3114,7 +3114,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Bikes/25.JacksonTB1.png",
     images: [
       { url: "/assets/images/products/Bikes/25.JacksonTB1.png" },
-      { ur: "/assets/images/products/Bikes/25.JacksonTB1.png" },
+      { url: "/assets/images/products/Bikes/25.JacksonTB1.png" },
     ],
     categories: ["bikes"],
     status: null,
@@ -3167,7 +3167,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/1.Siri2020.png",
     images: [
       { url: "/assets/images/products/Electronics/1.Siri2020.png" },
-      { ur: "/assets/images/products/Electronics/1.Siri2020.png" },
+      { url: "/assets/images/products/Electronics/1.Siri2020.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -3220,7 +3220,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/2.COSOR1.png",
     images: [
       { url: "/assets/images/products/Electronics/2.COSOR1.png" },
-      { ur: "/assets/images/products/Electronics/2.COSOR1.png" },
+      { url: "/assets/images/products/Electronics/2.COSOR1.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -3273,7 +3273,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/3.PanasonicCharge.png",
     images: [
       { url: "/assets/images/products/Electronics/3.PanasonicCharge.png" },
-      { ur: "/assets/images/products/Electronics/3.PanasonicCharge.png" },
+      { url: "/assets/images/products/Electronics/3.PanasonicCharge.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -3326,7 +3326,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/3.PanasonicCharge.png",
     images: [
       { url: "/assets/images/products/Electronics/3.PanasonicCharge.png" },
-      { ur: "/assets/images/products/Electronics/3.PanasonicCharge.png" },
+      { url: "/assets/images/products/Electronics/3.PanasonicCharge.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -3379,7 +3379,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/4.LumixDSLR.png",
     images: [
       { url: "/assets/images/products/Electronics/4.LumixDSLR.png" },
-      { ur: "/assets/images/products/Electronics/4.LumixDSLR.png" },
+      { url: "/assets/images/products/Electronics/4.LumixDSLR.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -3432,7 +3432,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/5.AtechCam1080p.png",
     images: [
       { url: "/assets/images/products/Electronics/5.AtechCam1080p.png" },
-      { ur: "/assets/images/products/Electronics/5.AtechCam1080p.png" },
+      { url: "/assets/images/products/Electronics/5.AtechCam1080p.png" },
     ],
     categories: ["electronics"],
     status: null,
@@ -3485,7 +3485,7 @@ export const products = [
     mainImageUrl: "/assets/images/products/Electronics/6.Sonya9.png",
     images: [
       { url: "/assets/images/products/Electronics/6.Sonya9.png" },
-      { ur: "/assets/images/products/Electronics/6.Sonya9.png" },
+      { url: "/assets/images/products/Electronics/6.Sonya9.png" },
     ],
     categories: ["electronics"],
     status: null,

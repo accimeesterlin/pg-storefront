@@ -127,7 +127,7 @@ export const products = [
     comparePrice: 9,
     mainImageUrl: "/assets/images/Groceries Shop/MiniPeppers.png",
     images: [
-      { ur: "/assets/images/Groceries Shop/MiniPeppers.png" },
+      { url: "/assets/images/Groceries Shop/MiniPeppers.png" },
       { url: "/assets/images/Groceries Shop/MiniPeppers.png" },
     ],
     categories: [],
@@ -181,7 +181,7 @@ export const products = [
     comparePrice: 6,
     mainImageUrl: "/assets/images/Groceries Shop/strawberry.png",
     images: [
-      { ur: "/assets/images/Groceries Shop/strawberry.png" },
+      { url: "/assets/images/Groceries Shop/strawberry.png" },
       { url: "/assets/images/Groceries Shop/strawberry.png" },
     ],
     categories: [],
@@ -286,7 +286,7 @@ export const products = [
     comparePrice: 11,
     mainImageUrl: "/assets/images/Groceries Shop/Orange.png",
     images: [
-      { ur: "/assets/images/Groceries Shop/Orange.png" },
+      { url: "/assets/images/Groceries Shop/Orange.png" },
       { url: "/assets/images/Groceries Shop/Orange.png" },
     ],
     categories: [],
@@ -391,7 +391,7 @@ export const products = [
     comparePrice: 7,
     mainImageUrl: "/assets/images/Groceries Shop/Red apple.png",
     images: [
-      { ur: "/assets/images/Groceries Shop/Red apple.png" },
+      { url: "/assets/images/Groceries Shop/Red apple.png" },
       { url: "/assets/images/Groceries Shop/Red apple.png" },
     ],
     categories: [],
@@ -496,7 +496,7 @@ export const products = [
     comparePrice: 12,
     mainImageUrl: "/assets/images/Groceries Shop/Offer Card.png",
     images: [
-      { ur: "/assets/images/Groceries Shop/Offer Card.png" },
+      { url: "/assets/images/Groceries Shop/Offer Card.png" },
       { url: "/assets/images/Groceries Shop/Offer Card.png" },
     ],
     categories: [],
@@ -602,7 +602,7 @@ export const products = [
     comparePrice: 9,
     mainImageUrl: "/assets/images/Groceries Shop/MiniPeppers.png",
     images: [
-      { ur: "/assets/images/Groceries Shop/MiniPeppers.png" },
+      { url: "/assets/images/Groceries Shop/MiniPeppers.png" },
       { url: "/assets/images/Groceries Shop/MiniPeppers.png" },
     ],
     categories: [],
@@ -656,7 +656,7 @@ export const products = [
     comparePrice: 6,
     mainImageUrl: "/assets/images/Groceries Shop/strawberry.png",
     images: [
-      { ur: "/assets/images/Groceries Shop/strawberry.png" },
+      { url: "/assets/images/Groceries Shop/strawberry.png" },
       { url: "/assets/images/Groceries Shop/strawberry.png" },
     ],
     categories: [],
@@ -761,7 +761,7 @@ export const products = [
     comparePrice: 11,
     mainImageUrl: "/assets/images/Groceries Shop/Orange.png",
     images: [
-      { ur: "/assets/images/Groceries Shop/Orange.png" },
+      { url: "/assets/images/Groceries Shop/Orange.png" },
       { url: "/assets/images/Groceries Shop/Orange.png" },
     ],
     categories: [],

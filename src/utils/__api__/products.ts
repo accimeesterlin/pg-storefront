@@ -17,7 +17,6 @@ const getSlugs = async (): Promise<{ params: { slug: string } }[]> => {
 
   const uniqueProducts = products.map((item) => ({ params: { slug: item.slug } }));
 
-  console.log("Unique Products", uniqueProducts);
   return uniqueProducts;
 };
 

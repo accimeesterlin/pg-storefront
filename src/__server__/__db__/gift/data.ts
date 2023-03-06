@@ -1125,7 +1125,7 @@ export const products = [
     comparePrice: 18,
     mainImageUrl: "/assets/images/Gift Shop/Gift box 2.png",
     images: [{
-      ur: "/assets/images/Gift Shop/Gift box 2.png"
+      url: "/assets/images/Gift Shop/Gift box 2.png"
     }, {
       url: "/assets/images/Gift Shop/Gift box 2.png"
     }],

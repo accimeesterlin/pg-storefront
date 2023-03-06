@@ -21,8 +21,6 @@ const Section2: FC<Props> = ({ products }) => {
     else setVisibleSlides(4);
   }, [width]);
 
-  console.log("Products: ", products);
-
   return (
     <CategorySectionCreator iconName="light" title="Flash Deals" seeMoreLink="#">
       <Box mt="-0.25rem" mb="-0.25rem">
