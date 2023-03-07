@@ -11,6 +11,8 @@ const api = axios.create({
 
 export const getShopList = async (): Promise<Shop[]> => {
   const response = await api.get("/api/user/shops");
+
+  console.log("Shops: ", response?.data);
   return response.data?.shops;
 };
 
