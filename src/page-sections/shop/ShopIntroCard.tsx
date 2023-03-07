@@ -16,7 +16,7 @@ type ShopIntroCardProps = {
 
 const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
 
-  const links = shop?.socialLinks;
+  const links = shop?.socialMedialLinks;
   
   const socialLinks = [
     {
@@ -36,6 +36,9 @@ const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
       url: links?.instagram,
     },
   ];
+
+  console.log("Social Links: ", socialLinks);
+  console.log("Shop: ", shop);
   
   return (
     <ShopIntroWrapper mb="32px" pb="20px" overflow="hidden" covermainImageUrl={shop?.coverPicture}>
