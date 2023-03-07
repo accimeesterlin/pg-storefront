@@ -37,9 +37,6 @@ const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
     },
   ];
 
-  console.log("Social Links: ", socialLinks);
-  console.log("Shop: ", shop);
-  
   return (
     <ShopIntroWrapper mb="32px" pb="20px" overflow="hidden" covermainImageUrl={shop?.coverPicture}>
       <Box className="cover-image" height="202px" />

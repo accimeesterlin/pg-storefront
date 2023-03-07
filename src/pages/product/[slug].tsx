@@ -83,13 +83,13 @@ const ProductDetails = (props: Props) => {
       </Box>
 
       {/* FREQUENTLY BOUGHT TOGETHER PRODUCTS */}
-      {frequentlyBought && <FrequentlyBought products={frequentlyBought} />}
+      {frequentlyBought?.length > 0 && <FrequentlyBought products={frequentlyBought} />}
 
       {/* AVAILABLE SHOPS */}
       {shops && <AvailableShops shops={shops} />}
 
       {/* RELATED PRODUCTS */}
-      {relatedProducts && <RelatedProducts products={relatedProducts} />}
+      {relatedProducts?.length > 0 && <RelatedProducts products={relatedProducts} />}
     </Fragment>
   );
 };

@@ -16,8 +16,6 @@ type MiniCartProps = { toggleSidenav?: () => void };
 const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
   const { state, dispatch } = useAppContext();
 
-  console.log("State: ", state);
-
   const handleCartAmountChange = (amount: number, product: any) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
