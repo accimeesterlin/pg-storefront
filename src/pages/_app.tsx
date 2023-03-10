@@ -33,17 +33,17 @@ const App = ({ Component, pageProps }: MyAppProps) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta property="og:url" content="https://marketplace.pgecom.com" />
+        <meta property="og:url" content="https://marketplace.nourish.com" />
         {/* thumbnail And title for social media */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Find everything you need in one convenient place at PGecom, your go-to destination for shopping with confidence." />
+        <meta property="og:title" content="Find everything you need in one convenient place at Nourish, your go-to destination for shopping with confidence." />
         <meta
           property="og:description"
-          content="Find everything you need in one convenient place at PGecom, your go-to destination for shopping with confidence."
+          content="Find everything you need in one convenient place at Nourish, your go-to destination for shopping with confidence."
         />
         {/* TODO: Add this to the head of your page */}
         {/* <meta property="og:image" content="/assets/images/landing/preview.png" /> */}
-        <link rel="shortcut icon" href="pglogo.jpeg" type="image/x-icon" />
+        <link rel="shortcut icon" href="nourish.png" type="image/x-icon" />
 
         {/* Google analytics */}
         <GoogleAnalytics />

@@ -11,7 +11,7 @@ import StyledAppLayout from "./AppLayoutStyle";
 type Props = { title?: string; navbar?: ReactElement; children: ReactNode };
 // ===============================================================================
 
-const AppLayout: FC<Props> = ({ navbar, children, title = "MarketPlace - PGecom" }) => (
+const AppLayout: FC<Props> = ({ navbar, children, title = "MarketPlace - Nourish" }) => (
   <StyledAppLayout>
     <Head>
       <title>{title}</title>

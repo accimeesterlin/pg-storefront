@@ -54,7 +54,7 @@ const Footer2: FC = () => {
       <Wrapper>
         <Link href="/">
           <a>
-            <Image mb="1.5rem" src="/assets/images/pglogo.jpeg" alt="logo" width="50px"/>
+            <Image mb="1.5rem" src="/assets/images/nourish.png" alt="logo" width="50px"/>
           </a>
         </Link>
 

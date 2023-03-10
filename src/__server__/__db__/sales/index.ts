@@ -1,7 +1,7 @@
 // FOLLOWING CODES ARE MOCK SERVER IMPLEMENTATION
 // YOU NEED TO BUILD YOUR OWN SERVER
 // IF YOU NEED HELP ABOUT SERVER SIDE IMPLEMENTATION
-// CONTACT US AT info@pgecom.com
+// CONTACT US AT info@nourish.com
 import Mock from "../../mock";
 import { categories, categoriesTwo } from "./data";
 

@@ -27,7 +27,7 @@ const Topbar: FC = () => {
       <Container display="flex" justifyContent="space-between" alignItems="center" height="100%">
         <FlexBox className="topbar-left">
           <div className="logo">
-            <img src="/assets/images/pglogo.jpeg" alt="logo" width="50px" />
+            <img src="/assets/images/nourish.png" alt="logo" width="50px" />
           </div>
 
           <FlexBox alignItems="center">
@@ -37,7 +37,7 @@ const Topbar: FC = () => {
 
           <FlexBox alignItems="center" ml="20px">
             <Icon size="14px">mail</Icon>
-            <span>info@pgecom.com</span>
+            <span>info@nourish.com</span>
           </FlexBox>
         </FlexBox>
 

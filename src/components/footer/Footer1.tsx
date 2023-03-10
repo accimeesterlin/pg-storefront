@@ -34,7 +34,7 @@ const Footer1: FC = () => {
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <Link href="/">
                   <a>
-                    <Image alt="logo" mb="1.25rem" src="/assets/images/pglogo.jpeg" width="50px" />
+                    <Image alt="logo" mb="1.25rem" src="/assets/images/nourish.png" width="50px" />
                   </a>
                 </Link>
 
@@ -85,7 +85,7 @@ const Footer1: FC = () => {
                 </Typography>
 
                 <Typography py="0.3rem" color="gray.500">
-                  Email: info@pgecom.com
+                  Email: info@nourish.com
                 </Typography>
 
                 <Typography py="0.3rem" mb="1rem" color="gray.500">
