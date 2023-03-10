@@ -7,19 +7,19 @@ import Box from "@component/Box";
 import Radio from "@component/radio";
 import Grid from "@component/grid/Grid";
 import { Card1 } from "@component/Card1";
-import FlexBox from "@component/FlexBox";
+// import FlexBox from "@component/FlexBox";
 import Divider from "@component/Divider";
 import { Button } from "@component/buttons";
 import TextField from "@component/text-field";
 import Typography from "@component/Typography";
-import useWindowSize from "@hook/useWindowSize";
+// import useWindowSize from "@hook/useWindowSize";
 
 const PaymentForm: FC = () => {
   const router = useRouter();
-  const width = useWindowSize();
+  // const width = useWindowSize();
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
 
-  const isMobile = width < 769;
+  // const isMobile = width < 769;
 
   const handleFormSubmit = async (values) => {
     console.log(values);
