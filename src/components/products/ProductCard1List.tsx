@@ -19,9 +19,9 @@ const ProductCard1List: FC<Props> = ({ products }) => {
             <ProductCard1
               id={item.id}
               slug={item.slug}
-              price={item.price}
+              price={Number(item.price)}
               name={item.name}
-              off={item.comparePrice}
+              off={Number(item.comparePrice)}
               images={item.images}
               mainImageUrl={`${item.mainImageUrl}`}
               rating={item.rating || 4}
@@ -31,7 +31,7 @@ const ProductCard1List: FC<Props> = ({ products }) => {
       </Grid>
 
       <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center" mt="32px">
-        <SemiSpan>Showing 1-9 of 1.3k Products</SemiSpan>
+        <SemiSpan>Showing 1-4 of {products?.length} Products</SemiSpan>
         <Pagination pageCount={products?.length} />
       </FlexBox>
     </div>

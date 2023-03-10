@@ -11,7 +11,11 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import Card, { CardProps } from "@component/Card";
 import { H3, SemiSpan } from "@component/Typography";
-import { calculateDiscount, currency, getTheme } from "@utils/utils";
+import {
+  calculateRemainingPercentage,
+  currency,
+  getTheme,
+} from "@utils/utils";
 import { deviceSize } from "@utils/constants";
 import ProductQuickView from "@component/products/ProductQuickView";
 import Shop from "@models/shop.model";
@@ -136,15 +140,24 @@ const ProductCard1: FC<ProductCard1Props> = ({
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { id, slug, price, mainImageUrl: mainImageUrl, name, qty: amount },
+      payload: {
+        id,
+        slug,
+        price: off,
+        mainImageUrl: mainImageUrl,
+        name,
+        qty: amount,
+      },
     });
   };
+
+  const isSame = off === price;
 
   return (
     <>
       <Wrapper {...props}>
         <div className="image-holder">
-          {!!off && (
+          {!isSame && (
             <Chip
               top="10px"
               left="10px"
@@ -156,12 +169,17 @@ const ProductCard1: FC<ProductCard1Props> = ({
               color="primary.text"
               zIndex={1}
             >
-              {off}% off
+              {calculateRemainingPercentage(off, price)}% off
             </Chip>
           )}
 
           <FlexBox className="extra-icons">
-            <Icon color="secondary" variant="small" mb="0.5rem" onClick={toggleDialog}>
+            <Icon
+              color="secondary"
+              variant="small"
+              mb="0.5rem"
+              onClick={toggleDialog}
+            >
               eye-alt
             </Icon>
 
@@ -207,10 +225,10 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
               <FlexBox alignItems="center" mt="10px">
                 <SemiSpan pr="0.5rem" fontWeight="600" color="primary.main">
-                  {calculateDiscount(price, off)}
+                  {currency(off)}
                 </SemiSpan>
 
-                {!!off && (
+                {!isSame && (
                   <SemiSpan color="text.muted" fontWeight="600">
                     <del>{currency(price)}</del>
                   </SemiSpan>

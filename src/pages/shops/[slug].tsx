@@ -85,6 +85,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   try {
     shop = await api.getShopBySlug(String(params.slug));
+    console.log("Shop", shop);
   } catch (error) {
     // No need to do anything here
   }
