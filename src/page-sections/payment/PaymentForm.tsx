@@ -33,22 +33,7 @@ const PaymentForm: FC = () => {
   return (
     <Fragment>
       <Card1 mb="2rem">
-        <Radio
-          mb="1.5rem"
-          color="secondary"
-          name="credit-card"
-          onChange={handlePaymentMethodChange}
-          checked={paymentMethod === "credit-card"}
-          label={
-            <Typography ml="6px" fontWeight="600" fontSize="18px">
-              Pay with credit card
-            </Typography>
-          }
-        />
-
-        <Divider mb="1.25rem" mx="-2rem" />
-
-        {paymentMethod === "credit-card" && (
+        {paymentMethod === "crypto" && (
           <Formik
             onSubmit={handleFormSubmit}
             initialValues={initialValues}
@@ -129,89 +114,16 @@ const PaymentForm: FC = () => {
         <Radio
           mb="1.5rem"
           color="secondary"
-          name="pgpay"
+          name="crypto"
           onChange={handlePaymentMethodChange}
-          checked={paymentMethod === "pgpay"}
+          checked={paymentMethod === "crypto"}
           label={
             <Typography ml="6px" fontWeight="600" fontSize="18px">
-              Pay with PG Pay
+              Pay with Crypto
             </Typography>
           }
         />
 
-        <Divider mb="1.25rem" mx="-2rem" />
-
-        {paymentMethod === "pgpay" && (
-          <Button variant="contained" color="primary" type="submit" mb="20px">
-            Pay now
-          </Button>
-        )}
-
-        <Radio
-          mb="1.5rem"
-          color="secondary"
-          name="moncash"
-          onChange={handlePaymentMethodChange}
-          checked={paymentMethod === "moncash"}
-          label={
-            <Typography ml="6px" fontWeight="600" fontSize="18px">
-              Pay with Mon Cash
-            </Typography>
-          }
-        />
-
-        <Divider mb="1.25rem" mx="-2rem" />
-
-        {paymentMethod === "moncash" && (
-          <Button variant="contained" color="primary" type="submit" mb="20px">
-            Pay now
-          </Button>
-        )}
-
-        <Radio
-          mb="1.5rem"
-          name="paypal"
-          color="secondary"
-          onChange={handlePaymentMethodChange}
-          checked={paymentMethod === "paypal"}
-          label={
-            <Typography ml="6px" fontWeight="600" fontSize="18px">
-              Pay with Paypal
-            </Typography>
-          }
-        />
-        <Divider mb="1.5rem" mx="-2rem" />
-
-        {paymentMethod === "paypal" && (
-          <Fragment>
-            <FlexBox alignItems="flex-end" mb="30px">
-              <TextField
-                fullwidth
-                name="email"
-                type="email"
-                label="Paypal Email"
-                mr={isMobile ? "1rem" : "30px"}
-              />
-              <Button variant="outlined" color="primary" type="button">
-                Submit
-              </Button>
-            </FlexBox>
-
-            <Divider mb="1.5rem" mx="-2rem" />
-          </Fragment>
-        )}
-
-        <Radio
-          name="cod"
-          color="secondary"
-          checked={paymentMethod === "cod"}
-          onChange={handlePaymentMethodChange}
-          label={
-            <Typography ml="6px" fontWeight="600" fontSize="18px">
-              Cash On Delivery
-            </Typography>
-          }
-        />
       </Card1>
 
       <Grid container spacing={7}>

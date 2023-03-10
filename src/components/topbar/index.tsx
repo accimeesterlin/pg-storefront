@@ -43,7 +43,7 @@ const Topbar: FC = () => {
 
         <FlexBox className="topbar-right" alignItems="center">
           <NavLink className="link" href="/">
-            Theme FAQ"s
+            FAQ"s
           </NavLink>
 
           <NavLink className="link" href="/">
