@@ -1,18 +1,25 @@
+
 import { FC, useState } from "react";
+import { Auth } from "aws-amplify";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import * as yup from "yup";
+import { toast } from 'react-toastify';
 import { useFormik } from "formik";
-import Box from "../Box";
+// import Box from "../Box";
 import Icon from "../icon/Icon";
-import Divider from "../Divider";
+// import Divider from "../Divider";
 import FlexBox from "../FlexBox";
 import CheckBox from "../CheckBox";
 import TextField from "../text-field";
 import { Button, IconButton } from "../buttons";
-import { H3, H5, H6, SemiSpan, Small, Span } from "../Typography";
+import { H3, H5, H6, SemiSpan} from "../Typography";
+// import { H3, H5, H6, SemiSpan, Small, Span } from "../Typography";
 import { StyledSessionCard } from "./styles";
 
 const Signup: FC = () => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -20,7 +27,34 @@ const Signup: FC = () => {
   };
 
   const handleFormSubmit = async (values) => {
-    console.log(values);
+   try {
+   
+    setIsLoading(true);
+    const email = values.email;
+    const password = values.password;
+  
+    const payload = {
+      username: email,
+      password,
+      attributes: {
+        email: values.email,
+        "custom:firstName": values.firstName,
+        "custom:lastName": values.lastName,
+      },
+    }
+
+
+    await Auth.signUp(payload);
+    await Auth.signIn(email, password);
+    setIsLoading(false);
+    toast.success("Account created successfully");
+    router.push("/profile");
+
+   } catch (error) {
+    const errorMessage = error?.message;
+    toast.error(errorMessage);
+    setIsLoading(false);
+   }
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
@@ -28,7 +62,7 @@ const Signup: FC = () => {
     onSubmit: handleFormSubmit,
     validationSchema: formSchema,
   });
-
+  
   return (
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large">
       <form className="content" onSubmit={handleSubmit}>
@@ -42,14 +76,25 @@ const Signup: FC = () => {
 
         <TextField
           fullwidth
-          name="name"
+          name="firstName"
           mb="0.75rem"
-          label="Full Name"
+          label="First Name"
           onBlur={handleBlur}
           onChange={handleChange}
-          value={values.name || ""}
-          placeholder="Ralph Adwards"
-          errorText={touched.name && errors.name}
+          value={values.firstName || ""}
+          placeholder="Ralph"
+          errorText={touched.firstName && errors.firstName}
+        />
+        <TextField
+          fullwidth
+          name="lastName"
+          mb="0.75rem"
+          label="Last Name"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={values.lastName || ""}
+          placeholder="Adwards"
+          errorText={touched.lastName && errors.lastName}
         />
 
         <TextField
@@ -136,10 +181,10 @@ const Signup: FC = () => {
           }
         />
 
-        <Button mb="1.65rem" variant="contained" color="primary" type="submit" fullwidth>
+        <Button loading={isLoading} mb="1.65rem" variant="contained" color="primary" type="submit" fullwidth>
           Create Account
         </Button>
-
+{/* 
         <Box mb="1rem">
           <Divider width="200px" mx="auto" />
           <FlexBox justifyContent="center" mt="-14px">
@@ -179,7 +224,7 @@ const Signup: FC = () => {
             google-1
           </Icon>
           <Small fontWeight="600">Continue with Google</Small>
-        </FlexBox>
+        </FlexBox> */}
       </form>
 
       <FlexBox justifyContent="center" bg="gray.200" py="19px">
@@ -197,7 +242,8 @@ const Signup: FC = () => {
 };
 
 const initialValues = {
-  name: "",
+  firstName: "",
+  lastname: "",
   email: "",
   password: "",
   re_password: "",
@@ -205,7 +251,8 @@ const initialValues = {
 };
 
 const formSchema = yup.object().shape({
-  name: yup.string().required("${path} is required"),
+  firstName: yup.string().required("${path} is required"),
+  lastName: yup.string().required("${path} is required"),
   email: yup.string().email("invalid email").required("${path} is required"),
   password: yup.string().required("${path} is required"),
   re_password: yup
@@ -219,7 +266,7 @@ const formSchema = yup.object().shape({
       "You have to agree with our Terms and Conditions!",
       (value) => value === true
     )
-    .required("You have to agree with our Terms and Conditions!"),
+    .required("You have to agree with our Terms and Conditions!")
 });
 
 export default Signup;

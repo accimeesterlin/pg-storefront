@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pgstorefront-dev-142115-authRole",
+      "UnauthRoleArn": "arn:aws:iam::768071653236:role/amplify-pgstorefront-dev-142115-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::768071653236:role/amplify-pgstorefront-dev-142115-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-pgstorefront-dev-142115-deployment",
+      "UnauthRoleName": "amplify-pgstorefront-dev-142115-unauthRole",
+      "StackName": "amplify-pgstorefront-dev-142115",
+      "StackId": "arn:aws:cloudformation:us-east-1:768071653236:stack/amplify-pgstorefront-dev-142115/0b5d1540-c05b-11ed-83bf-121a174b4a23",
+      "AmplifyAppId": "d2vup7wbh5c1sv"
+    }
+  }
+}

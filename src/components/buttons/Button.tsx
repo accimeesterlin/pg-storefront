@@ -1,6 +1,6 @@
 import systemCss from "@styled-system/css";
 import { colorOptions } from "interfaces";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import {
   BackgroundProps,
   border,
@@ -19,11 +19,21 @@ import {
 interface ButtonProps {
   fullwidth?: boolean;
   color?: colorOptions;
+  loading?: boolean;
+  children?: any;
   variant?: "text" | "outlined" | "contained";
   size?: "small" | "medium" | "large" | "none";
+  mb?: string;
+  type?: "button" | "submit" | "reset";
+  borderRadius?: string;
+  padding?: string;
+  disabled?: boolean;
+  borderColor?: string;
+  onClick?: () => void;
+  m?: string;
 }
 
-const Button = styled.button<
+const ButtonEl = styled.button<
   ColorProps & BackgroundProps & BorderProps & SpaceProps & ButtonProps & LayoutProps
 >(
   ({ color, fullwidth }) =>
@@ -125,6 +135,40 @@ const Button = styled.button<
   compose(color, layout, space, border, shadow)
 );
 
+const spin = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const Spinner = styled.span`
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.8);
+  animation: ${spin} 1s ease-in-out infinite;
+  margin-right: 8px;
+`;
+
+
+function Button({ loading, ...props }: ButtonProps) {
+
+  if (props?.size === "none") {
+    return <ButtonEl {...props} />
+  }
+
+  return (
+    <ButtonEl {...props}>
+      {loading ? <Spinner /> : null}
+      {loading ? 'Submitting...' : 'Submit'}
+    </ButtonEl>
+  )
+};
+
+
 Button.defaultProps = { size: "small", borderRadius: 5 };
+
 
 export default Button;

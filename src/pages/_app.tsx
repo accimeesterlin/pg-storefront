@@ -4,20 +4,40 @@ import { NextPage } from "next";
 import Router from "next/router";
 import { AppProps } from "next/app";
 import NProgress from "nprogress";
+import Amplify, { Auth } from "aws-amplify";
 import { ThemeProvider } from "styled-components";
 import GoogleAnalytics from "@component/GoogleAnalytics";
 import { AppProvider } from "@context/AppContext";
 // import { GlobalStyles } from "@utils/globalStyles";
 // import { theme } from "@utils/theme";
+import { ToastContainer } from 'react-toastify';
 import theme from "../theme";
 import GlobalStyles from "theme/globalStyles";
 
+import 'react-toastify/dist/ReactToastify.css';
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 NProgress.configure({ showSpinner: false });
+
+const region = process.env.NEXT_PUBLIC_AWS_REGION || "us-east-1";
+const awsconfig = {
+  aws_project_region: region,
+  Auth: {
+    identityPoolId: process.env.NEXT_PUBLIC_IDENTITY_POOL_ID,
+    region,
+    userPoolId: process.env.NEXT_PUBLIC_USER_POOL_ID,
+    userPoolWebClientId: process.env.NEXT_PUBLIC_USER_POOL_WEB_CLIENT_ID,
+  },
+  API: {
+    graphql_endpoint: process.env.NEXT_PUBLIC_AWS_APPSYNC_GRAPHQL_ENDPOINT,
+    graphql_headers: async () => ({}),
+  },
+};
+
+Auth.configure(awsconfig);
 
 // ============================================================
 interface MyAppProps extends AppProps {
@@ -55,6 +75,7 @@ const App = ({ Component, pageProps }: MyAppProps) => {
 
           <Layout>
             <Component {...pageProps} />
+            <ToastContainer />
           </Layout>
         </ThemeProvider>
       </AppProvider>
