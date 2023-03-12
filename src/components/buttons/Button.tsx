@@ -29,6 +29,8 @@ interface ButtonProps {
   padding?: string;
   disabled?: boolean;
   borderColor?: string;
+  bg?: string;
+  px?: string;
   onClick?: () => void;
   m?: string;
 }
@@ -162,7 +164,7 @@ function Button({ loading, ...props }: ButtonProps) {
   return (
     <ButtonEl {...props}>
       {loading ? <Spinner /> : null}
-      {loading ? 'Submitting...' : 'Submit'}
+      {loading ? 'Submitting...' : props?.children || 'Submit'}
     </ButtonEl>
   )
 };

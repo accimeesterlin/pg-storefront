@@ -1,6 +1,5 @@
 import { FC, useCallback, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { toast } from 'react-toastify';
 import { useFormik } from "formik";
 import { Auth } from "aws-amplify";
@@ -14,11 +13,11 @@ import { Button, IconButton } from "@component/buttons";
 import { H3, H5, H6, SemiSpan} from "@component/Typography";
 // import { H3, H5, H6, SemiSpan, Small, Span } from "@component/Typography";
 import { StyledSessionCard } from "./styles";
+import { getAccessToken, setUserToken } from "@utils/__api__/users";
 
 const Login: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const router = useRouter();
 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
@@ -30,12 +29,14 @@ const Login: FC = () => {
     const email = values.email;
     const password = values.password;
     
-    const currentUser = await Auth.signIn(email, password);
+    await Auth.signIn(email, password);
+
+    const token = await getAccessToken();
+    await setUserToken(token);
    
-    console.log("currentUser: ", currentUser);
     setIsLoading(false);
     toast.success("Login successfully");
-    router?.push("/profile");
+    window.location.href = "/profile";
    } catch (error) {
     const errorMessage = error?.message;
     toast.error(errorMessage);

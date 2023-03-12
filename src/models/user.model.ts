@@ -4,10 +4,11 @@ interface User {
   phone?: string;
   avatar?: string;
   password?: string;
+  lastName?: string;
+  firstName?: string;
   dateOfBirth?: string;
   verified?: boolean;
-  firstName?: string;
-  lastName?: string;
+  apiKeySecret?: string;
 }
 
 export default User;

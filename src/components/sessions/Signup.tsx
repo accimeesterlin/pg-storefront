@@ -2,7 +2,7 @@
 import { FC, useState } from "react";
 import { Auth } from "aws-amplify";
 import Link from "next/link";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import * as yup from "yup";
 import { toast } from 'react-toastify';
 import { useFormik } from "formik";
@@ -16,9 +16,9 @@ import { Button, IconButton } from "../buttons";
 import { H3, H5, H6, SemiSpan} from "../Typography";
 // import { H3, H5, H6, SemiSpan, Small, Span } from "../Typography";
 import { StyledSessionCard } from "./styles";
+import { getAccessToken, setUserToken } from "@utils/__api__/users";
 
 const Signup: FC = () => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
@@ -46,9 +46,11 @@ const Signup: FC = () => {
 
     await Auth.signUp(payload);
     await Auth.signIn(email, password);
+    const token = await getAccessToken();
+    await setUserToken(token);
     setIsLoading(false);
     toast.success("Account created successfully");
-    router.push("/profile");
+    window.location.href = "/profile";
 
    } catch (error) {
     const errorMessage = error?.message;

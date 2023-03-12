@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as yup from "yup";
+import { toast } from 'react-toastify';
 import { Formik } from "formik";
 import Select from "@component/Select";
 import Grid from "@component/grid/Grid";
@@ -13,12 +14,22 @@ import TextField from "@component/text-field";
 import Typography from "@component/Typography";
 
 const CheckoutForm: FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [sameAsShipping, setSameAsShipping] = useState(false);
 
   const handleFormSubmit = async (values) => {
-    console.log(values);
-    router.push("/payment");
+    try {
+      setIsLoading(true);
+      console.log(values);
+    // router.push("/payment");
+    setIsLoading(false);
+    } catch (error) {
+      // TODO: handle error
+      const errorMessage = error?.message;
+    toast.error(errorMessage);
+    setIsLoading(false);
+    }
   };
 
   const handleCheckboxChange =
@@ -250,7 +261,7 @@ const CheckoutForm: FC = () => {
             </Grid>
 
             <Grid item sm={6} xs={12}>
-              <Button variant="contained" color="primary" type="submit" fullwidth>
+              <Button loading={isLoading} variant="contained" color="primary" type="submit" fullwidth>
                 Proceed to Payment
               </Button>
             </Grid>

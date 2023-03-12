@@ -4,6 +4,8 @@ import User from "models/user.model";
 
 import { users } from "../../__server__/__db__/users/data";
 
+
+
 export const getAccessToken = async () => {
   try {
     const session = await Auth.currentSession();
@@ -14,20 +16,27 @@ export const getAccessToken = async () => {
   }
 };
 
-const API_URL = process.env.NEXT_PUBLIC_SELLER_BASE_URL;
-
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: process.env.WEBSITE_ORIGIN,
+  withCredentials: true,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     'Authorization': 'Bearer ' + getAccessToken()
   },
 });
+
 
 export const getUser = async (): Promise<User[]> => {
   // const response = await axios.get("/api/user-list/1");
   return users;
 };
+
+
+export const getMe = async (): Promise<User> => {
+  const response = await api.get("/api/user/me");
+  return response?.data;
+};
+
 
 export const getUserIds = async (): Promise<{ params: { id: string } }[]> => {
   // const response = await axios.get("/api/user-list/id-list");
@@ -36,12 +45,17 @@ export const getUserIds = async (): Promise<{ params: { id: string } }[]> => {
   return idList;
 };
 
-export const getUserToken = async (payload): Promise<any> => {
-  const response = await api.post("/api/token/issue", payload);
+export const setUserToken = async (token): Promise<any> => {
+  const response = await api.post("/api/token/issue", { token });
     
   return response?.data;
 };
 
 
+export const getUserSession = async (): Promise<any> => {
+  const response = await api.get("/api/token/session");
+    
+  return response?.data;
+};
 
-export default { getUser, getUserIds, getUserToken };
+export default { getUser, getUserIds, setUserToken, getAccessToken, getMe };
