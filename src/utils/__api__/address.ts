@@ -3,6 +3,10 @@ import Address from "models/address.model";
 
 import { addressList } from "../../__server__/__db__/address/data";
 
+const api = axios.create({
+  baseURL: process.env.WEBSITE_ORIGIN,
+});
+
 const getAddressList = async (): Promise<Address[]> => {
   const response = await axios.get("/api/user/address");
   return response?.data;
@@ -16,7 +20,7 @@ const getIds = async (): Promise<{ params: { id: string } }[]> => {
 };
 
 const getAddress = async (id: string): Promise<Address> => {
-  const response = await axios.get(`/api/user/address/${id}`);
+  const response = await api.get(`/api/user/address/${id}`);
   return response?.data;
 };
 

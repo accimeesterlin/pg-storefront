@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { toast } from "react-toastify";
@@ -16,32 +16,16 @@ type AddressFormProps = { address?: Address };
 
 const AddressForm: FC<AddressFormProps> = ({ address }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [initialValues, setInitialValues] = useState({
-    name: address?.title || "",
+
+  const INITIAL_VALUES = {
+    name: address?.name || "",
     phone: address?.phone || "",
     city: address?.city || "",
     street: address?.street || "",
     country: address?.country || "",
     state: address?.state || "",
     zip: address?.zip || "",
-  });
-
-  useEffect(() => {
-    console.log("Address: ", address);
-    if (address) {
-      setInitialValues({
-      name: address?.name || "",
-      phone: address?.phone || "",
-      city: address?.city || "",
-      street: address?.street || "",
-      country: address?.country || "",
-      state: address?.state || "",
-      zip: address?.zip || "",
-    });
-    }
-  }, [address]);
-
-  console.log("Initial Values: ", initialValues);
+  };
 
   const VALIDATION_SCHEMA = yup.object().shape({
     name: yup.string().required("required"),
@@ -58,7 +42,10 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
       setIsLoading(true);
       console.log(values);
 
-      await api.createAddress(values);
+      await api.createAddress({
+        ...values,
+        id: address?.id || null,
+      });
 
       setIsLoading(false);
       toast.success("Address created successfully");
@@ -72,7 +59,7 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
   return (
     <Formik
       onSubmit={handleFormSubmit}
-      initialValues={initialValues}
+      initialValues={INITIAL_VALUES}
       validationSchema={VALIDATION_SCHEMA}
     >
       {({
@@ -92,7 +79,7 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
                   name="name"
                   label="Name"
                   onBlur={handleBlur}
-                  value={values.name}
+                  value={values.name || address?.name}
                   onChange={handleChange}
                   errorText={touched.name && errors.name}
                 />
@@ -104,7 +91,7 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
                   label="Phone"
                   name="phone"
                   onBlur={handleBlur}
-                  value={values.phone}
+                  value={values.phone || address?.phone}
                   onChange={handleChange}
                   errorText={touched.phone && errors.phone}
                 />
@@ -116,7 +103,7 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
                   name="street"
                   label="Street"
                   onBlur={handleBlur}
-                  value={values.street}
+                  value={values.street || address?.street}
                   onChange={handleChange}
                   errorText={touched.street && errors.street}
                 />
@@ -128,7 +115,7 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
                   name="city"
                   label="City"
                   onBlur={handleBlur}
-                  value={values.city}
+                  value={values.city || address?.city}
                   onChange={handleChange}
                   errorText={touched.city && errors.city}
                 />
@@ -140,7 +127,7 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
                   name="country"
                   label="Country"
                   onBlur={handleBlur}
-                  value={values.country}
+                  value={values.country || address?.country}
                   onChange={handleChange}
                   errorText={touched.country && errors.country}
                 />
@@ -152,7 +139,7 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
                   name="state"
                   label="State"
                   onBlur={handleBlur}
-                  value={values.state}
+                  value={values.state || address?.state}
                   onChange={handleChange}
                   errorText={touched.state && errors.state}
                 />
@@ -163,7 +150,7 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
                   name="zip"
                   label="Zip"
                   onBlur={handleBlur}
-                  value={values.zip}
+                  value={values.zip || address?.zip}
                   onChange={handleChange}
                   errorText={touched.zip && errors.zip}
                 />

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import Router from "next/router";
 import Link from "next/link";
 import Icon from "@component/icon/Icon";
@@ -23,8 +23,6 @@ const AddressList = () => {
   const handleNavigate = () => Router.push("/address/create");
   
   const addressList = state?.user?.addresses;
-
-  console.log("Main Address", addressList);
 
   useEffect(() => {
     handleAddressList();  
