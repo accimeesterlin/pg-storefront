@@ -1,3 +1,4 @@
+import Address from "@models/address.model";
 import User from "@models/user.model";
 import { createContext, FC, ReactNode, useContext, useMemo, useReducer } from "react";
 
@@ -15,8 +16,9 @@ export type CartItem = {
 
 type CartActionType = { type: "CHANGE_CART_AMOUNT"; payload: CartItem };
 type UserActionType = { type: "SET_USER"; payload: User };
+type AddressActionType = { type: "SET_ADDRESS"; payload: Address[] };
 type LayoutActionType = { type: "TOGGLE_HEADER"; payload: boolean };
-type ActionType = CartActionType | LayoutActionType | UserActionType;
+type ActionType = CartActionType | LayoutActionType | UserActionType | AddressActionType;
 
 // =================================================================================
 
@@ -70,6 +72,15 @@ const reducer = (state: InitialState, action: ActionType) => {
         user: {
         ...state.user,
         ...action.payload,
+      }
+    };
+
+    case "SET_ADDRESS":
+      return {
+        ...state,
+        user: {
+        ...state.user,
+        addresses: action.payload,
       }
     };
 

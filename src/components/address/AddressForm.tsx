@@ -1,44 +1,88 @@
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import * as yup from "yup";
 import { Formik } from "formik";
+import { toast } from "react-toastify";
 import Box from "@component/Box";
 import Grid from "@component/grid/Grid";
 import { Button } from "@component/buttons";
 import TextField from "@component/text-field";
 import Address from "@models/address.model";
 
+import api from "@utils/__api__/address";
+
 // ===========================================================
 type AddressFormProps = { address?: Address };
 // ===========================================================
 
 const AddressForm: FC<AddressFormProps> = ({ address }) => {
-  const INITIAL_VALUES = {
+  const [isLoading, setIsLoading] = useState(false);
+  const [initialValues, setInitialValues] = useState({
     name: address?.title || "",
-    contact: address?.phone || "",
+    phone: address?.phone || "",
     city: address?.city || "",
     street: address?.street || "",
     country: address?.country || "",
-  };
+    state: address?.state || "",
+    zip: address?.zip || "",
+  });
+
+  useEffect(() => {
+    console.log("Address: ", address);
+    if (address) {
+      setInitialValues({
+      name: address?.name || "",
+      phone: address?.phone || "",
+      city: address?.city || "",
+      street: address?.street || "",
+      country: address?.country || "",
+      state: address?.state || "",
+      zip: address?.zip || "",
+    });
+    }
+  }, [address]);
+
+  console.log("Initial Values: ", initialValues);
 
   const VALIDATION_SCHEMA = yup.object().shape({
     name: yup.string().required("required"),
     street: yup.string().required("required"),
     city: yup.string().required("required"),
     country: yup.string().required("required"),
-    contact: yup.string().required("required"),
+    phone: yup.string().required("required"),
+    state: yup.string().required("required"),
+    zip: yup.string().required("required"),
   });
 
   const handleFormSubmit = async (values) => {
-    console.log(values);
+    try {
+      setIsLoading(true);
+      console.log(values);
+
+      await api.createAddress(values);
+
+      setIsLoading(false);
+      toast.success("Address created successfully");
+    } catch (error) {
+      const errorMessage = error?.response?.data.message;
+      toast.error(errorMessage);
+      setIsLoading(false);
+    }
   };
 
   return (
     <Formik
       onSubmit={handleFormSubmit}
-      initialValues={INITIAL_VALUES}
+      initialValues={initialValues}
       validationSchema={VALIDATION_SCHEMA}
     >
-      {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+      }) => (
         <form onSubmit={handleSubmit}>
           <Box mb="30px">
             <Grid container horizontal_spacing={6} vertical_spacing={4}>
@@ -58,11 +102,11 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
                 <TextField
                   fullwidth
                   label="Phone"
-                  name="contact"
+                  name="phone"
                   onBlur={handleBlur}
-                  value={values.contact}
+                  value={values.phone}
                   onChange={handleChange}
-                  errorText={touched.contact && errors.contact}
+                  errorText={touched.phone && errors.phone}
                 />
               </Grid>
 
@@ -101,10 +145,38 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
                   errorText={touched.country && errors.country}
                 />
               </Grid>
+
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullwidth
+                  name="state"
+                  label="State"
+                  onBlur={handleBlur}
+                  value={values.state}
+                  onChange={handleChange}
+                  errorText={touched.state && errors.state}
+                />
+              </Grid>
+              <Grid item md={6} xs={12}>
+                <TextField
+                  fullwidth
+                  name="zip"
+                  label="Zip"
+                  onBlur={handleBlur}
+                  value={values.zip}
+                  onChange={handleChange}
+                  errorText={touched.zip && errors.zip}
+                />
+              </Grid>
             </Grid>
           </Box>
 
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            loading={isLoading}
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
             Save Changes
           </Button>
         </form>

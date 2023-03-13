@@ -4,8 +4,6 @@ import User from "models/user.model";
 
 import { users } from "../../__server__/__db__/users/data";
 
-
-
 export const getAccessToken = async () => {
   try {
     const session = await Auth.currentSession();

@@ -25,21 +25,71 @@ interface ButtonProps {
   size?: "small" | "medium" | "large" | "none";
   mb?: string;
   type?: "button" | "submit" | "reset";
-  borderRadius?: string;
+  borderRadius?: any;
+  borderTopRightRadius?: any;
+  borderTopLeftRadius?: any;
+  borderBottomRightRadius?: any;
+  borderBottomLeftRadius?: any;
+  borderLeft?: string;
+  borderRight?: string;
+  borderTop?: string;
   p?: string;
+  className?: string;
+  width?: string;
   height?: string;
   padding?: string;
+  overflow?: string;
   disabled?: boolean;
   borderColor?: string;
   bg?: string;
   as?: any;
   px?: string;
-  onClick?: () => void;
-  m?: string;
+  style?: any;
+  onClick?: any;
+  m?: any;
+  mr?: any;
+  ml?: any;
+  mt?: any;
+  mx?: any;
+  minWidth?: string;
+  maxWidth?: string;
+  minHeight?: string;
+  maxHeight?: string;
+  boxShadow?: string;
+  borderRightColor?: string;
+  borderLeftColor?: string;
+  borderBottomColor?: string;
+  borderTopColor?: string;
+  borderRightWidth?: string;
+  borderLeftWidth?: string;
+  borderBottomWidth?: string;
+  borderTopWidth?: string;
+  borderRightStyle?: string;
+  borderLeftStyle?: string;
+  borderBottomStyle?: string;
+  borderTopStyle?: string;
+  borderStyle?: string;
+  borderWidth?: string;
+  borderX?: string;
+  borderY?: string;
+  border?: string;
+  borderXColor?: string;
+  borderYColor?: string;
+  borderXWidth?: string;
+  borderYWidth?: string;
+  borderXStyle?: string;
+  borderYStyle?: string;
+  borderXRadius?: string;
+  borderYRadius?: string;
+  borderImage?: string;
+  borderImageSource?: string;
+  borderImageSlice?: string;
+  borderImageWidth?: string;
+  my?: any;
 }
 
 const ButtonEl = styled.button<
-  ColorProps & BackgroundProps & BorderProps & SpaceProps & ButtonProps & LayoutProps
+  any & ColorProps & BackgroundProps & BorderProps & SpaceProps & ButtonProps & LayoutProps & any
 >(
   ({ color, fullwidth }) =>
     systemCss({

@@ -8,6 +8,10 @@ interface Address {
   phone?: string;
   street?: string;
   country?: string;
+  zip?: string;
+  state?: string;
+  name?: string;
+  userID?: string;
 }
 
 export default Address;

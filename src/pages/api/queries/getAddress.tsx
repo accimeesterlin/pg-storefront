@@ -34,4 +34,18 @@ const getAddressByUserId = async (userID: string) => {
   return items;
 };
 
-export { getAddressById, getAddressByUserId };
+const getAddressByStreet = async (street: string) => {
+  const params = {
+    TableName: addressTable,
+    IndexName: "byStreet",
+    KeyConditionExpression: "#street = :street",
+    ExpressionAttributeNames: { "#street": "street" },
+    ExpressionAttributeValues: { ":street": street },
+  };
+
+  const items = await fetchData(params, "getAddressByUserId");
+
+  return items;
+};
+
+export { getAddressById, getAddressByUserId, getAddressByStreet };

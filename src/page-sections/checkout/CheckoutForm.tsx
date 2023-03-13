@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import * as yup from "yup";
 import { toast } from 'react-toastify';
 import { Formik } from "formik";
@@ -15,7 +14,6 @@ import Typography from "@component/Typography";
 
 const CheckoutForm: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
   const [sameAsShipping, setSameAsShipping] = useState(false);
 
   const handleFormSubmit = async (values) => {

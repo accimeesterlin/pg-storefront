@@ -1,11 +1,11 @@
-// import axios from "axios";
+import axios from "axios";
 import Address from "models/address.model";
 
 import { addressList } from "../../__server__/__db__/address/data";
 
 const getAddressList = async (): Promise<Address[]> => {
-  // const response = await axios.get("/api/address/user");
-  return addressList;
+  const response = await axios.get("/api/user/address");
+  return response?.data;
 };
 
 const getIds = async (): Promise<{ params: { id: string } }[]> => {
@@ -16,10 +16,13 @@ const getIds = async (): Promise<{ params: { id: string } }[]> => {
 };
 
 const getAddress = async (id: string): Promise<Address> => {
-  const address = addressList.find((item) => item.id === id);
-      
-  // const response = await axios.get("/api/address/user/1", { params: { id } });
-  return address;
+  const response = await axios.get(`/api/user/address/${id}`);
+  return response?.data;
 };
 
-export default { getAddressList, getIds, getAddress };
+const createAddress = async (payload: any): Promise<Address> => {
+  const response = await axios.post("/api/user/address", payload);
+  return response?.data;
+};
+
+export default { getAddressList, getIds, getAddress, createAddress };
