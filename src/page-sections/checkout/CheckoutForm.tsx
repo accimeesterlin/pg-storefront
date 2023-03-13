@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import Link from "next/link";
 import * as yup from "yup";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { Formik } from "formik";
 import Select from "@component/Select";
 import Grid from "@component/grid/Grid";
@@ -11,22 +11,53 @@ import countryList from "@data/countryList";
 import { Button } from "@component/buttons";
 import TextField from "@component/text-field";
 import Typography from "@component/Typography";
+import Address from "@models/address.model";
+import { useAppContext } from "@context/AppContext";
 
-const CheckoutForm: FC = () => {
+type CheckoutFormProps = {
+  address: Address;
+};
+
+const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
+  const { state } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [sameAsShipping, setSameAsShipping] = useState(false);
+
+  const user = state?.user;
+
+  const email = user?.email || "";
+
+  const initialValues = {
+    shipping_name: address?.name || "",
+    shipping_email: email,
+    shipping_contact: address?.phone,
+    shipping_company: "",
+    shipping_zip: address?.zip || "",
+    shipping_country: address?.country || "",
+    shipping_address1: address?.street || "",
+    shipping_address2: "",
+
+    billing_name: address?.name || "",
+    billing_email: email,
+    billing_contact: address?.phone || "",
+    billing_company: "",
+    billing_zip: address?.zip || "",
+    billing_country: address?.country || "",
+    billing_address1: address?.street || "",
+    billing_address2: "",
+  };
 
   const handleFormSubmit = async (values) => {
     try {
       setIsLoading(true);
       console.log(values);
-    // router.push("/payment");
-    setIsLoading(false);
+      // router.push("/payment");
+      setIsLoading(false);
     } catch (error) {
       // TODO: handle error
       const errorMessage = error?.message;
-    toast.error(errorMessage);
-    setIsLoading(false);
+      toast.error(errorMessage);
+      setIsLoading(false);
     }
   };
 
@@ -41,10 +72,19 @@ const CheckoutForm: FC = () => {
   return (
     <Formik
       initialValues={initialValues}
+      enableReinitialize
       validationSchema={checkoutSchema}
       onSubmit={handleFormSubmit}
     >
-      {({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue }) => (
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        setFieldValue,
+      }) => (
         <form onSubmit={handleSubmit}>
           <Card1 mb="2rem">
             <Typography fontWeight="600" mb="1rem">
@@ -72,7 +112,9 @@ const CheckoutForm: FC = () => {
                   onChange={handleChange}
                   name="shipping_contact"
                   value={values.shipping_contact}
-                  errorText={touched.shipping_contact && errors.shipping_contact}
+                  errorText={
+                    touched.shipping_contact && errors.shipping_contact
+                  }
                 />
 
                 <TextField
@@ -94,7 +136,9 @@ const CheckoutForm: FC = () => {
                   onChange={handleChange}
                   name="shipping_address1"
                   value={values.shipping_address1}
-                  errorText={touched.shipping_address1 && errors.shipping_address1}
+                  errorText={
+                    touched.shipping_address1 && errors.shipping_address1
+                  }
                 />
               </Grid>
 
@@ -119,7 +163,9 @@ const CheckoutForm: FC = () => {
                   onChange={handleChange}
                   name="shipping_company"
                   value={values.shipping_company}
-                  errorText={touched.shipping_company && errors.shipping_company}
+                  errorText={
+                    touched.shipping_company && errors.shipping_company
+                  }
                 />
 
                 <Select
@@ -127,8 +173,12 @@ const CheckoutForm: FC = () => {
                   label="Country"
                   options={countryList}
                   value={values.shipping_country || "US"}
-                  errorText={touched.shipping_country && errors.shipping_country}
-                  onChange={(country) => setFieldValue("shipping_country", country)}
+                  errorText={
+                    touched.shipping_country && errors.shipping_country
+                  }
+                  onChange={(country) =>
+                    setFieldValue("shipping_country", country)
+                  }
                 />
 
                 <TextField
@@ -138,7 +188,9 @@ const CheckoutForm: FC = () => {
                   onChange={handleChange}
                   name="shipping_address2"
                   value={values.shipping_address2}
-                  errorText={touched.shipping_address2 && errors.shipping_address2}
+                  errorText={
+                    touched.shipping_address2 && errors.shipping_address2
+                  }
                 />
               </Grid>
             </Grid>
@@ -178,7 +230,9 @@ const CheckoutForm: FC = () => {
                     name="billing_contact"
                     onChange={handleChange}
                     value={values.billing_contact}
-                    errorText={touched.billing_contact && errors.billing_contact}
+                    errorText={
+                      touched.billing_contact && errors.billing_contact
+                    }
                   />
 
                   <TextField
@@ -200,7 +254,9 @@ const CheckoutForm: FC = () => {
                     onChange={handleChange}
                     name="billing_address1"
                     value={values.billing_address1}
-                    errorText={touched.billing_address1 && errors.billing_address1}
+                    errorText={
+                      touched.billing_address1 && errors.billing_address1
+                    }
                   />
                 </Grid>
 
@@ -225,14 +281,18 @@ const CheckoutForm: FC = () => {
                     name="billing_company"
                     onChange={handleChange}
                     value={values.billing_company}
-                    errorText={touched.billing_company && errors.billing_company}
+                    errorText={
+                      touched.billing_company && errors.billing_company
+                    }
                   />
 
                   <Select
                     mb="1rem"
                     label="Country"
                     options={countryList}
-                    errorText={touched.billing_country && errors.billing_country}
+                    errorText={
+                      touched.billing_country && errors.billing_country
+                    }
                   />
 
                   <TextField
@@ -242,7 +302,9 @@ const CheckoutForm: FC = () => {
                     name="billing_address2"
                     onChange={handleChange}
                     value={values.billing_address2}
-                    errorText={touched.billing_address2 && errors.billing_address2}
+                    errorText={
+                      touched.billing_address2 && errors.billing_address2
+                    }
                   />
                 </Grid>
               </Grid>
@@ -252,14 +314,25 @@ const CheckoutForm: FC = () => {
           <Grid container spacing={7}>
             <Grid item sm={6} xs={12}>
               <Link href="/cart">
-                <Button variant="outlined" color="primary" type="button" fullwidth>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  type="button"
+                  fullwidth
+                >
                   Back to Cart
                 </Button>
               </Link>
             </Grid>
 
             <Grid item sm={6} xs={12}>
-              <Button loading={isLoading} variant="contained" color="primary" type="submit" fullwidth>
+              <Button
+                loading={isLoading}
+                variant="contained"
+                color="primary"
+                type="submit"
+                fullwidth
+              >
                 Proceed to Payment
               </Button>
             </Grid>
@@ -270,39 +343,19 @@ const CheckoutForm: FC = () => {
   );
 };
 
-const initialValues = {
-  shipping_name: "",
-  shipping_email: "",
-  shipping_contact: "",
-  shipping_company: "",
-  shipping_zip: "",
-  shipping_country: "",
-  shipping_address1: "",
-  shipping_address2: "",
-
-  billing_name: "",
-  billing_email: "",
-  billing_contact: "",
-  billing_company: "",
-  billing_zip: "",
-  billing_country: "",
-  billing_address1: "",
-  billing_address2: "",
-};
-
 const checkoutSchema = yup.object().shape({
-  // shipping_name: yup.string().required("required"),
-  // shipping_email: yup.string().email("invalid email").required("required"),
-  // shipping_contact: yup.string().required("required"),
-  // shipping_zip: yup.string().required("required"),
-  // shipping_country: yup.object().required("required"),
-  // shipping_address1: yup.string().required("required"),
-  // billing_name: yup.string().required("required"),
-  // billing_email: yup.string().required("required"),
-  // billing_contact: yup.string().required("required"),
-  // billing_zip: yup.string().required("required"),
-  // billing_country: yup.string().required("required"),
-  // billing_address1: yup.string().required("required"),
+  shipping_name: yup.string().required("required"),
+  shipping_email: yup.string().email("invalid email").required("required"),
+  shipping_contact: yup.string().required("required"),
+  shipping_zip: yup.string().required("required"),
+  shipping_country: yup.object().required("required"),
+  shipping_address1: yup.string().required("required"),
+  billing_name: yup.string().required("required"),
+  billing_email: yup.string().required("required"),
+  billing_contact: yup.string().required("required"),
+  billing_zip: yup.string().required("required"),
+  billing_country: yup.string().required("required"),
+  billing_address1: yup.string().required("required"),
 });
 
 export default CheckoutForm;

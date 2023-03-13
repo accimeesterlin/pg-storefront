@@ -21,10 +21,13 @@ const getAddressById = async (id: string) => {
 };
 
 const getAddressByUserId = async (userID: string) => {
+
+  console.log("UserID: ", userID);
   const params = {
     TableName: addressTable,
     IndexName: "byUser",
     KeyConditionExpression: "#userID = :userID",
+    ScanIndexForward: false,
     ExpressionAttributeNames: { "#userID": "userID" },
     ExpressionAttributeValues: { ":userID": userID },
   };
@@ -38,6 +41,7 @@ const getAddressByStreet = async (street: string) => {
   const params = {
     TableName: addressTable,
     IndexName: "byStreet",
+    ScanIndexForward: false,
     KeyConditionExpression: "#street = :street",
     ExpressionAttributeNames: { "#street": "street" },
     ExpressionAttributeValues: { ":street": street },

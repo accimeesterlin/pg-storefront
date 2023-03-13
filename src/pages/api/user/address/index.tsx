@@ -3,7 +3,11 @@ import nc from "next-connect";
 import Joi from "joi";
 import isEmpty from "lodash.isempty";
 import { v4 as uuidv4 } from "uuid";
-import { getAddressById, getAddressByStreet, getAddressByUserId } from "../../queries/getAddress";
+import {
+  getAddressById,
+  getAddressByStreet,
+  getAddressByUserId,
+} from "../../queries/getAddress";
 import { authenticationMiddleware } from "../../token/verify";
 import { updateAddress } from "../../mutation/address";
 
@@ -12,6 +16,12 @@ const getHandler = async (req, res) => {
     const user: User = req?.tokenData?.user;
 
     const userID = user?.id;
+
+    if (!userID) {
+      return res.status(400).json({
+        message: "User ID is required",
+      });
+    }
 
     const addresses = await getAddressByUserId(userID);
     return res.json(addresses);
@@ -50,7 +60,6 @@ const createHandler = async (req, res) => {
     let address = payload;
 
     try {
-
       if (payload?.id) {
         address = await getAddressById(payload?.id);
       } else {
