@@ -147,6 +147,7 @@ const ProfileEditor = () => {
         <Formik
           onSubmit={handleFormSubmit}
           initialValues={INITIAL_VALUES}
+          enableReinitialize
           validationSchema={VALIDATION_SCHEMA}
         >
           {({
