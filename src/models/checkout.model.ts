@@ -2,7 +2,7 @@ import Address from "./address.model";
 
 interface Checkout {
     address?: Address;
-    payment?: any;
+    paymentMethod?: string;
     billingAddress?: Address;
 
 }

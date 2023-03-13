@@ -30,7 +30,7 @@ const CheckoutNavLayout: FC<Props> = ({ children }) => {
         router.push("/payment");
         break;
       case 3:
-        router.push("/orders");
+        router.push("/review");
         break;
       default:
         break;
@@ -47,6 +47,10 @@ const CheckoutNavLayout: FC<Props> = ({ children }) => {
         break;
       case "/payment":
         setSelectedStep(3);
+        break;
+
+      case "/review":
+        setSelectedStep(4);
         break;
       default:
         break;
@@ -79,7 +83,7 @@ const stepperList = [
   { title: "Cart", disabled: false },
   { title: "Details", disabled: false },
   { title: "Payment", disabled: false },
-  { title: "Review", disabled: true },
+  { title: "Review", disabled: false },
 ];
 
 export default CheckoutNavLayout;

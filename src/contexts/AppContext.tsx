@@ -17,10 +17,11 @@ export type CartItem = {
 
 type CartActionType = { type: "CHANGE_CART_AMOUNT"; payload: CartItem };
 type UserActionType = { type: "SET_USER"; payload: User };
+type PaymentMethodActionType = { type: "SET_PAYMENT_METHOD"; payload: string };
 type CheckoutActionType = { type: "SET_CHECKOUT"; payload: Checkout };
 type AddressActionType = { type: "SET_ADDRESS"; payload: Address[] };
 type LayoutActionType = { type: "TOGGLE_HEADER"; payload: boolean };
-type ActionType = CartActionType | LayoutActionType | UserActionType | AddressActionType | CheckoutActionType;
+type ActionType = CartActionType | LayoutActionType | UserActionType | AddressActionType | CheckoutActionType | PaymentMethodActionType;
 
 // =================================================================================
 
@@ -57,7 +58,7 @@ const INITIAL_STATE = {
   user: {},
   checkout: {
     address: {},
-    payment: {},
+    paymentMethod: "",
     billingAddress: {},
   }
 };
@@ -85,6 +86,16 @@ const reducer = (state: InitialState, action: ActionType) => {
         ...action.payload,
       }
     };
+
+    case "SET_PAYMENT_METHOD":
+      return {
+        ...state,
+        checkout: {
+        ...state.checkout,
+        paymentMethod: action.payload,
+      }
+    };
+
 
     case "SET_ADDRESS":
       return {

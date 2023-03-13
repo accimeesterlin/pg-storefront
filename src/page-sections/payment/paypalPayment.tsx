@@ -16,8 +16,6 @@ const PaypalPayment: FC<PaypalPaymentProps> = ({
   paymentMethod,
   setPaymentMethod,
 }) => {
-  //   const router = useRouter();
-
   const width = useWindowSize();
   const isMobile = width < 769;
 

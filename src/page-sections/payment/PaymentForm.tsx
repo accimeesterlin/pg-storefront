@@ -1,6 +1,6 @@
 import { FC, Fragment, useState } from "react";
 import Link from "next/link";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Grid from "@component/grid/Grid";
 import { Card1 } from "@component/Card1";
 import { Button } from "@component/buttons";
@@ -10,16 +10,28 @@ import PGPayPayment from "./PGPayForm";
 import MonCashPayment from "./monCashPayment";
 import PaypalPayment from "./paypalPayment";
 import CashOnDeliveryPayment from "./CashOnDeliveryForm";
+import { useAppContext } from "@context/AppContext";
 
 const PaymentForm: FC = () => {
-  // const router = useRouter();
+  const { dispatch } = useAppContext();
+  const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
 
 
-  // const handleFormSubmit = async (values) => {
-  //   console.log(values);
-  //   router.push("/payment");
-  // };
+  const handleFormSubmit = async (values) => {
+    try {
+      console.log(values);
+      dispatch({
+        type: "SET_PAYMENT_METHOD",
+        payload: paymentMethod
+      });
+
+
+    router.push("/review");
+    } catch (error) {
+      // console.log(error);
+    }
+  };
 
   // const handlePaymentMethodChange = ({ target: { name } }) => {
   //   setPaymentMethod(name);
@@ -47,11 +59,9 @@ const PaymentForm: FC = () => {
         </Grid>
 
         <Grid item sm={6} xs={12}>
-          <Link href="/orders">
-            <Button variant="contained" color="primary" type="submit" fullwidth>
+            <Button variant="contained" color="primary" type="submit" fullwidth onClick={handleFormSubmit}>
               Review
             </Button>
-          </Link>
         </Grid>
       </Grid>
     </Fragment>
