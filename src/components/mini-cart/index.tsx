@@ -9,7 +9,7 @@ import { Button } from "@component/buttons";
 import Typography, { H5, Paragraph, Tiny } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
 import { StyledMiniCart } from "./styles";
-import { currency } from "@utils/utils";
+import { currency, getTotalPrice } from "@utils/utils";
 
 type MiniCartProps = { toggleSidenav?: () => void };
 
@@ -21,10 +21,6 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
       type: "CHANGE_CART_AMOUNT",
       payload: { ...product, qty: amount },
     });
-  };
-
-  const getTotalPrice = () => {
-    return state.cart.reduce((accumulator, item) => accumulator + item.price * item.qty, 0) || 0;
   };
 
   return (
@@ -139,7 +135,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
               m="1rem 1rem 0.75rem"
               onClick={toggleSidenav}
             >
-              <Typography fontWeight={600}>Checkout Now ({currency(getTotalPrice())})</Typography>
+              <Typography fontWeight={600}>Checkout Now ({currency(getTotalPrice(state.cart))})</Typography>
             </Button>
           </Link>
 

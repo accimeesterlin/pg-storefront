@@ -1,3 +1,5 @@
+import { useAppContext } from "@context/AppContext";
+import { currency, getTotalPrice } from "@utils/utils";
 import { FC } from "react";
 import { Card1 } from "../../components/Card1";
 import Divider from "../../components/Divider";
@@ -5,6 +7,11 @@ import FlexBox from "../../components/FlexBox";
 import Typography from "../../components/Typography";
 
 const CheckoutSummary: FC = () => {
+  const { state } = useAppContext();
+
+  const totalPrice = getTotalPrice(state.cart);
+  const totalPriceCurrency = currency(totalPrice);
+
   return (
     <Card1>
       <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
@@ -12,7 +19,7 @@ const CheckoutSummary: FC = () => {
 
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
-            $2610.
+            {totalPriceCurrency}.
           </Typography>
           <Typography fontWeight="600" fontSize="14px" lineHeight="1">
             00
@@ -35,7 +42,7 @@ const CheckoutSummary: FC = () => {
 
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
-            $40.
+            $0.
           </Typography>
           <Typography fontWeight="600" fontSize="14px" lineHeight="1">
             00
@@ -55,7 +62,7 @@ const CheckoutSummary: FC = () => {
       <Divider mb="1rem" />
 
       <Typography fontSize="25px" fontWeight="600" lineHeight="1" textAlign="right">
-        $2610.00
+        ${totalPriceCurrency}
       </Typography>
     </Card1>
   );

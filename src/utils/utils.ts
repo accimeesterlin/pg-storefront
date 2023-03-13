@@ -124,3 +124,7 @@ export function getPreviousPath() {
 
   return prevPath;
 }
+
+export const getTotalPrice = (cart: any[]) => {
+  return cart.reduce((accumulator, item) => accumulator + item.price * item.qty, 0) || 0;
+};
