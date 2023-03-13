@@ -1,0 +1,143 @@
+import { db } from "../utils/authUtils";
+import { fetchData } from "../utils/queryUtils";
+
+const { ORDER_TABLE } = process.env;
+
+const orderTable = ORDER_TABLE;
+
+const getOrderById = async (id: string) => {
+  try {
+    const params = {
+      TableName: orderTable,
+      Key: {
+        id,
+      },
+    };
+    const user = await db.get(params).promise();
+    return user.Item;
+  } catch (error) {
+    throw new Error(`Error getting order: ${error?.message}`);
+  }
+};
+
+const getOrderBySender = async (sender: string) => {
+  const params = {
+    TableName: orderTable,
+    IndexName: "bySender",
+    KeyConditionExpression: "#sender = :sender",
+    ExpressionAttributeNames: { "#sender": "sender" },
+    ExpressionAttributeValues: { ":sender": sender },
+  };
+
+  const items = await fetchData(params, "getOrderBySender");
+
+  return items;
+};
+
+const getOrders = async () => {
+  const params = {
+    TableName: orderTable,
+    Limit: 50,
+  };
+
+  const items = await fetchData(params, "getUserList");
+
+  return items;
+};
+
+
+const getOrderByPhone = async (phone: string) => {
+  const params = {
+    TableName: orderTable,
+    IndexName: "byPhone",
+    KeyConditionExpression: "#phone = :phone",
+    ExpressionAttributeNames: { "#phone": "phone" },
+    ExpressionAttributeValues: { ":phone": phone },
+  };
+
+  const items = await fetchData(params, "getOrderByPhone");
+
+  return items;
+};
+
+const getOrderByShopId = async (shopId: string) => {
+  const params = {
+    TableName: orderTable,
+    IndexName: "byShopId",
+    KeyConditionExpression: "#shopId = :shopId",
+    ExpressionAttributeNames: { "#shopId": "shopId" },
+    ExpressionAttributeValues: { ":shopId": shopId },
+  };
+
+  const items = await fetchData(params, "getOrderByShopId");
+
+  return items;
+};
+
+const getOrderByCustomerId = async (customerId: string) => {
+  const params = {
+    TableName: orderTable,
+    IndexName: "byCustomerID",
+    KeyConditionExpression: "#customerId = :customerId",
+    ExpressionAttributeNames: { "#customerId": "customerId" },
+    ExpressionAttributeValues: { ":customerId": customerId },
+  };
+
+  const items = await fetchData(params, "getOrderByCustomerId");
+
+  return items;
+};
+
+const getOrderByStatus = async (status: string) => {
+  const params = {
+    TableName: orderTable,
+    IndexName: "byStatus",
+    KeyConditionExpression: "#status = :status",
+    ExpressionAttributeNames: { "#status": "status" },
+    ExpressionAttributeValues: { ":status": status },
+  };
+
+  const items = await fetchData(params, "getOrderByStatus");
+
+  return items;
+};
+
+const getOrderByPlatform = async (platform: string) => {
+  const params = {
+    TableName: orderTable,
+    IndexName: "byPlatform",
+    KeyConditionExpression: "#platform = :platform",
+    ExpressionAttributeNames: { "#platform": "platform" },
+    ExpressionAttributeValues: { ":platform": platform },
+  };
+
+  const items = await fetchData(params, "getOrderByPlatform");
+
+  return items;
+};
+
+const getOrderByUserId = async (userID: string) => {
+  const params = {
+    TableName: orderTable,
+    IndexName: "byUser",
+    KeyConditionExpression: "#userID = :userID",
+    ExpressionAttributeNames: { "#userID": "userID" },
+    ExpressionAttributeValues: { ":userID": userID },
+  };
+
+  const items = await fetchData(params, "getOrderByPlatform");
+
+  return items;
+};
+
+export {
+  getOrderBySender,
+  getOrderByPhone,
+  getOrderById,
+  getOrders,
+  getOrderByShopId,
+  getOrderByCustomerId,
+  getOrderByStatus,
+  getOrderByPlatform,
+  getOrderByUserId,
+};

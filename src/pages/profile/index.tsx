@@ -29,6 +29,9 @@ const Profile = () => {
 
   const user = state?.user;
 
+  const firstName = user?.firstName || "";
+  const lastName = user?.lastName || "";
+
   const handleUserProfile = async () => {
     try {
       const data = await api.getMe();
@@ -45,7 +48,7 @@ const Profile = () => {
   );
 
   const infoList = [
-    { title: "16", subtitle: "All Orders" },
+    { title: `${user?.orders?.length}`, subtitle: "All Orders" },
     { title: "02", subtitle: "Awaiting Payments" },
     { title: "00", subtitle: "Awaiting Shipment" },
     { title: "01", subtitle: "Awaiting Delivery" },
@@ -72,7 +75,7 @@ const Profile = () => {
                   alignItems="center"
                 >
                   <div>
-                    <H5 my="0px">{`${user?.firstName} ${user?.lastName}`}</H5>
+                    <H5 my="0px">{`${firstName} ${lastName}`}</H5>
 
                     <FlexBox alignItems="center">
                       <Typography fontSize="14px" color="text.hint">
@@ -80,7 +83,7 @@ const Profile = () => {
                       </Typography>
 
                       <Typography ml="4px" fontSize="14px" color="primary.main">
-                        $500
+                        ${user?.balance?.amount}
                       </Typography>
                     </FlexBox>
                   </div>
@@ -124,23 +127,23 @@ const Profile = () => {
       </Box>
 
       <TableRow p="0.75rem 1.5rem">
-        {user?.firstName && (
+        {firstName && (
           <FlexBox flexDirection="column" p="0.5rem">
             <Small color="text.muted" mb="4px" textAlign="left">
               First Name
             </Small>
 
-            <span>{user?.firstName}</span>
+            <span>{firstName}</span>
           </FlexBox>
         )}
 
-        {user?.lastName && (
+        {lastName && (
           <FlexBox flexDirection="column" p="0.5rem">
             <Small color="text.muted" mb="4px" textAlign="left">
               Last Name
             </Small>
 
-            <span>{user?.lastName}</span>
+            <span>{lastName}</span>
           </FlexBox>
         )}
 
@@ -162,7 +165,7 @@ const Profile = () => {
           </FlexBox>
         )}
 
-        {user?.dateOfBirth && (
+        {user?.birthDay && (
           <FlexBox flexDirection="column" p="0.5rem">
             <Small color="text.muted" mb="4px">
               Birth date
@@ -170,7 +173,7 @@ const Profile = () => {
 
             <span className="pre">
               {format(
-                user?.dateOfBirth ? new Date(user?.dateOfBirth) : new Date(),
+                user?.birthDay ? new Date(user?.birthDay) : new Date(),
                 "dd MMM, yyyy"
               )}
             </span>

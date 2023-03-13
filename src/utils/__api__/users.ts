@@ -12,7 +12,7 @@ export const getAccessToken = async () => {
     const accessToken = session.getAccessToken().getJwtToken();
     return accessToken;
   } catch (error) {
-    console.log('Error getting access token:', error);
+    // console.log('Error getting access token:', error);
   }
 };
 
@@ -37,6 +37,19 @@ export const getMe = async (): Promise<User> => {
   return response?.data;
 };
 
+export const updateMe = async (payload): Promise<User> => {
+  const response = await api({
+    method: "PUT",
+    url: "/api/user/me",
+    data: payload,
+
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return response?.data;
+};
+
 
 export const getUserIds = async (): Promise<{ params: { id: string } }[]> => {
   // const response = await axios.get("/api/user-list/id-list");
@@ -58,4 +71,4 @@ export const getUserSession = async (): Promise<any> => {
   return response?.data;
 };
 
-export default { getUser, getUserIds, setUserToken, getAccessToken, getMe };
+export default { getUser, getUserIds, setUserToken, getAccessToken, getMe, updateMe, getUserSession };

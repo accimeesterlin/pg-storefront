@@ -26,10 +26,13 @@ interface ButtonProps {
   mb?: string;
   type?: "button" | "submit" | "reset";
   borderRadius?: string;
+  p?: string;
+  height?: string;
   padding?: string;
   disabled?: boolean;
   borderColor?: string;
   bg?: string;
+  as?: any;
   px?: string;
   onClick?: () => void;
   m?: string;

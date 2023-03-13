@@ -1,3 +1,7 @@
+import Balance from "./balance.model";
+import Order from "./order.model";
+import Address from "./address.model";
+
 interface User {
   id?: string;
   email?: string;
@@ -6,9 +10,13 @@ interface User {
   password?: string;
   lastName?: string;
   firstName?: string;
-  dateOfBirth?: string;
+  profileImageUrl?: string;
+  birthDay?: string;
   verified?: boolean;
   apiKeySecret?: string;
+  balance?: Balance
+  orders?: Order[];
+  addresses?: Address[];
 }
 
 export default User;

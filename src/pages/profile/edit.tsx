@@ -1,8 +1,8 @@
-import { Fragment } from "react";
-import { GetStaticProps } from "next";
+import { Fragment, useEffect, useState } from "react";
 import Router from "next/router";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import Box from "@component/Box";
 import Hidden from "@component/hidden";
 import Avatar from "@component/avatar";
@@ -15,35 +15,86 @@ import TextField from "@component/text-field";
 import DashboardLayout from "@component/layout/customer-dashboard";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import api from "@utils/__api__/users";
-import User from "@models/user.model";
+// import User from "@models/user.model";
 import { format } from "date-fns";
+import { useAppContext } from "@context/AppContext";
 
 // ===========================================================
-type Props = { user: User };
+// type Props = { user: User };
 // ===========================================================
 
-const ProfileEditor = ({ user }: Props) => {
+const ProfileEditor = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [files, setFiles] = useState(null);
+  const [imageSrc, setImageSrc] = useState(null);
+
+  const { dispatch, state } = useAppContext();
+
+  useEffect(() => {
+    handleUserProfile();
+  }, []);
+
+  const handleUserProfile = async () => {
+    try {
+      const data = await api.getMe();
+      dispatch({ type: "SET_USER", payload: data });
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+  const user = state?.user;
+
   const INITIAL_VALUES = {
-    first_name: user?.firstName || "",
-    last_name: user?.lastName || "",
+    firstName: user?.firstName || "",
+    lastName: user?.lastName || "",
     email: user?.email || "",
-    contact: user?.phone || "",
-    birth_date: `${format(user?.dateOfBirth ? new Date(user?.dateOfBirth) : new Date(), "yyyy-MM-dd") || ""}`,
+    phone: user?.phone || "",
+    birthDay: `${
+      format(
+        user?.birthDay ? new Date(user?.birthDay) : new Date("1994-01-01"),
+        "yyyy-MM-dd"
+      ) || ""
+    }`,
   };
 
   const VALIDATION_SCHEMA = yup.object().shape({
-    first_name: yup.string().required("required"),
-    last_name: yup.string().required("required"),
+    firstName: yup.string().required("required"),
+    lastName: yup.string().required("required"),
     email: yup.string().email("invalid email").required("required"),
-    contact: yup.string().required("required"),
-    birth_date: yup.date().required("invalid date"),
+    phone: yup.string().required("required"),
+    birthDay: yup.date().required("invalid date"),
   });
 
   const handleFormSubmit = async (values: typeof INITIAL_VALUES) => {
-    console.log(values);
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+
+      formData.append("firstName", values.firstName);
+      formData.append("lastName", values.lastName);
+      formData.append("phone", values.phone);
+      formData.append("birthDay", values.birthDay);
+
+      formData.append("file", files);
+
+      await api.updateMe(formData);
+      toast.success("Profile updated successfully");
+
+      setIsLoading(false);
+    } catch (error) {
+      const errorMessage = error?.message;
+      toast.error(errorMessage);
+      setIsLoading(false);
+    }
   };
 
   const handleGoBack = () => Router.push("/profile");
+
+  const handleFileChange = (event: any) => {
+    const file = event.target.files[0];
+    setFiles(file);
+    setImageSrc(URL.createObjectURL(file));
+  };
 
   const HEADER_LINK = (
     <Button color="primary" bg="primary.light" px="2rem" onClick={handleGoBack}>
@@ -51,13 +102,20 @@ const ProfileEditor = ({ user }: Props) => {
     </Button>
   );
 
+  const avatar =
+    imageSrc || user?.profileImageUrl || "/assets/images/faces/ralph.png";
+
   return (
     <Fragment>
-      <DashboardPageHeader iconName="user_filled" title="Edit Profile" button={HEADER_LINK} />
+      <DashboardPageHeader
+        iconName="user_filled"
+        title="Edit Profile"
+        button={HEADER_LINK}
+      />
 
       <Card1>
         <FlexBox alignItems="flex-end" mb="22px">
-          <Avatar src="/assets/images/faces/ralph.png" size={64} />
+          <Avatar src={avatar} size={64} />
 
           <Box ml="-20px" zIndex={1}>
             <label htmlFor="profile-image">
@@ -81,7 +139,7 @@ const ProfileEditor = ({ user }: Props) => {
               accept="image/*"
               className="hidden"
               id="profile-image"
-              onChange={(e) => console.log(e.target.files)}
+              onChange={handleFileChange}
             />
           </Hidden>
         </FlexBox>
@@ -91,31 +149,38 @@ const ProfileEditor = ({ user }: Props) => {
           initialValues={INITIAL_VALUES}
           validationSchema={VALIDATION_SCHEMA}
         >
-          {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
+          {({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+          }) => (
             <form onSubmit={handleSubmit}>
               <Box mb="30px">
                 <Grid container horizontal_spacing={6} vertical_spacing={4}>
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullwidth
-                      name="first_name"
+                      name="firstName"
                       label="First Name"
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.first_name}
-                      errorText={touched.first_name && errors.first_name}
+                      value={values?.firstName || user?.firstName}
+                      errorText={touched.firstName && errors.firstName}
                     />
                   </Grid>
 
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullwidth
-                      name="last_name"
+                      name="lastName"
                       label="Last Name"
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.last_name}
-                      errorText={touched.last_name && errors.last_name}
+                      value={values?.lastName || user?.lastName}
+                      errorText={touched.lastName && errors.lastName}
                     />
                   </Grid>
 
@@ -125,9 +190,9 @@ const ProfileEditor = ({ user }: Props) => {
                       name="email"
                       type="email"
                       label="Email"
+                      disabled
                       onBlur={handleBlur}
-                      value={values.email}
-                      onChange={handleChange}
+                      value={values?.email || user?.email}
                       errorText={touched.email && errors.email}
                     />
                   </Grid>
@@ -136,11 +201,11 @@ const ProfileEditor = ({ user }: Props) => {
                     <TextField
                       fullwidth
                       label="Phone"
-                      name="contact"
+                      name="phone"
                       onBlur={handleBlur}
-                      value={values.contact}
+                      value={values?.phone || user?.phone}
                       onChange={handleChange}
-                      errorText={touched.contact && errors.contact}
+                      errorText={touched.phone && errors.phone}
                     />
                   </Grid>
 
@@ -148,18 +213,23 @@ const ProfileEditor = ({ user }: Props) => {
                     <TextField
                       fullwidth
                       type="date"
-                      name="birth_date"
+                      name="birthDay"
                       label="Birth Date"
                       onBlur={handleBlur}
                       onChange={handleChange}
-                      value={values.birth_date}
-                      errorText={touched.birth_date && errors.birth_date}
+                      value={values?.birthDay || user?.birthDay}
+                      errorText={touched.birthDay && errors.birthDay}
                     />
                   </Grid>
                 </Grid>
               </Box>
 
-              <Button type="submit" variant="contained" color="primary">
+              <Button
+                loading={isLoading}
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
                 Save Changes
               </Button>
             </form>
@@ -171,16 +241,5 @@ const ProfileEditor = ({ user }: Props) => {
 };
 
 ProfileEditor.layout = DashboardLayout;
-
-export const getStaticProps: GetStaticProps = async () => {
-  let user = {};
-
-  try {
-    user = await api.getUser();;
-  } catch (error) {
-    // No user found
-  }
-  return { props: { user } };
-};
 
 export default ProfileEditor;
