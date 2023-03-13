@@ -36,7 +36,13 @@ const AddressDetails = ({ address }: Props) => {
 AddressDetails.layout = DashboardLayout;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await api.getIds();
+  let paths = [];
+
+  try {
+    paths = await api.getIds();
+  } catch (error) {
+    // No paths found
+  }
 
   return {
     paths: paths, //indicates that no page needs be created at build time
@@ -45,7 +51,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const address = await api.getAddress(String(params.id));
+  let address = {} as Address;
+
+  try {
+    address = await api.getAddress(String(params.id));
+  } catch (error) {
+    // No address found
+  }
   return { props: { address } };
 };
 
