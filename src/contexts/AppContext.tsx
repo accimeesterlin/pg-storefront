@@ -1,9 +1,10 @@
 import Address from "@models/address.model";
+import Checkout from "@models/checkout.model";
 import User from "@models/user.model";
 import { createContext, FC, ReactNode, useContext, useMemo, useReducer } from "react";
 
 // =================================================================================
-type InitialState = { cart: CartItem[]; isHeaderFixed: boolean, user: User };
+type InitialState = { cart: CartItem[]; isHeaderFixed: boolean, user: User, checkout: Checkout};
 
 export type CartItem = {
   qty: number;
@@ -16,9 +17,10 @@ export type CartItem = {
 
 type CartActionType = { type: "CHANGE_CART_AMOUNT"; payload: CartItem };
 type UserActionType = { type: "SET_USER"; payload: User };
+type CheckoutActionType = { type: "SET_CHECKOUT"; payload: Checkout };
 type AddressActionType = { type: "SET_ADDRESS"; payload: Address[] };
 type LayoutActionType = { type: "TOGGLE_HEADER"; payload: boolean };
-type ActionType = CartActionType | LayoutActionType | UserActionType | AddressActionType;
+type ActionType = CartActionType | LayoutActionType | UserActionType | AddressActionType | CheckoutActionType;
 
 // =================================================================================
 
@@ -49,7 +51,16 @@ const INITIAL_CART = [
   },
 ];
 
-const INITIAL_STATE = { cart: INITIAL_CART, isHeaderFixed: false, user: {} };
+const INITIAL_STATE = {
+  cart: INITIAL_CART,
+  isHeaderFixed: false,
+  user: {},
+  checkout: {
+    address: {},
+    payment: {},
+    billingAddress: {},
+  }
+};
 
 interface ContextProps {
   state: InitialState;
@@ -81,6 +92,15 @@ const reducer = (state: InitialState, action: ActionType) => {
         user: {
         ...state.user,
         addresses: action.payload,
+      }
+    };
+
+    case "SET_CHECKOUT":
+      return {
+        ...state,
+        checkout: {
+        ...state.checkout,
+        ...action.payload,
       }
     };
 

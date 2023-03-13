@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import { Formik } from "formik";
@@ -19,7 +20,8 @@ type CheckoutFormProps = {
 };
 
 const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
-  const { state } = useAppContext();
+  const router = useRouter();
+  const { state, dispatch } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [sameAsShipping, setSameAsShipping] = useState(false);
 
@@ -51,10 +53,31 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
     try {
       setIsLoading(true);
       console.log(values);
-      // router.push("/payment");
+      const checkoutPayload = {
+        address: {
+          name: values.shipping_name,
+          phone: values.shipping_contact,
+          company: values.shipping_company,
+          zip: values.shipping_zip,
+          country: values.shipping_country?.value,
+          street: values.shipping_address1,
+          apartment: values.shipping_address2,
+        },
+        billingAddress: {
+          name: values.billing_name,
+          phone: values.billing_contact,
+          company: values.billing_company,
+          zip: values.billing_zip,
+          country: values.billing_country,
+          street: values.billing_address1,
+          apartment: values.billing_address2,
+        },
+      };
+      
+      dispatch({ type: "SET_CHECKOUT", payload: checkoutPayload });
+      router.push("/payment");
       setIsLoading(false);
     } catch (error) {
-      // TODO: handle error
       const errorMessage = error?.message;
       toast.error(errorMessage);
       setIsLoading(false);

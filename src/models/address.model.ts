@@ -7,6 +7,8 @@ interface Address {
   title?: string;
   phone?: string;
   street?: string;
+  company?: string;
+  apartment?: string;
   country?: string;
   zip?: string;
   state?: string;
