@@ -6,6 +6,7 @@ import AppLayout from "./AppLayout";
 import Navbar from "../navbar/Navbar";
 import Grid from "@component/grid/Grid";
 import Container from "@component/Container";
+import ProtectedRoute from "@component/auth/protected";
 
 // ======================================================
 type Props = { children: ReactNode };
@@ -53,22 +54,24 @@ const CheckoutNavLayout: FC<Props> = ({ children }) => {
   }, [pathname]);
 
   return (
-    <AppLayout navbar={<Navbar />}>
-      <Container my="2rem">
-        <Box mb="14px">
-          <Grid container spacing={6}>
-            <Grid item lg={8} md={8} xs={12}>
-              <Stepper
-                stepperList={stepperList}
-                selectedStep={selectedStep}
-                onChange={handleStepChange}
-              />
+    <ProtectedRoute>
+      <AppLayout navbar={<Navbar />}>
+        <Container my="2rem">
+          <Box mb="14px">
+            <Grid container spacing={6}>
+              <Grid item lg={8} md={8} xs={12}>
+                <Stepper
+                  stepperList={stepperList}
+                  selectedStep={selectedStep}
+                  onChange={handleStepChange}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
-        {children}
-      </Container>
-    </AppLayout>
+          </Box>
+          {children}
+        </Container>
+      </AppLayout>
+    </ProtectedRoute>
   );
 };
 

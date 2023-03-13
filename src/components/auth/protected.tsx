@@ -34,8 +34,6 @@ const ProtectedRoute = ({ children, isSidebar }: IProtectedProps) => {
     try {
       const user: any = await getUserSession()
 
-      console.log("User: ", user);      
-
       const isActive = user?.isActive;
       const isBanned = user?.isBanned;
       const isLocked = user?.isLocked;

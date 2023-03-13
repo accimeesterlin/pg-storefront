@@ -1,10 +1,10 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import Head from "next/head";
 import { NextPage } from "next";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { AppProps } from "next/app";
 import NProgress from "nprogress";
-import Amplify, { Auth } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { ThemeProvider } from "styled-components";
 import GoogleAnalytics from "@component/GoogleAnalytics";
 import { AppProvider } from "@context/AppContext";
@@ -15,6 +15,7 @@ import theme from "../theme";
 import GlobalStyles from "theme/globalStyles";
 
 import 'react-toastify/dist/ReactToastify.css';
+import { storePathValues } from "@utils/utils";
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -46,7 +47,11 @@ interface MyAppProps extends AppProps {
 // ============================================================
 
 const App = ({ Component, pageProps }: MyAppProps) => {
+  const router = useRouter();;
   let Layout = Component.layout || Fragment;
+  const lastVisitedUrl = router?.asPath || "/profile"
+
+  useEffect(storePathValues, [lastVisitedUrl]);
 
   return (
     <Fragment>

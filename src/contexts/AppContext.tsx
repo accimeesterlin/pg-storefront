@@ -1,7 +1,8 @@
+import User from "@models/user.model";
 import { createContext, FC, ReactNode, useContext, useMemo, useReducer } from "react";
 
 // =================================================================================
-type InitialState = { cart: CartItem[]; isHeaderFixed: boolean };
+type InitialState = { cart: CartItem[]; isHeaderFixed: boolean, user: User };
 
 export type CartItem = {
   qty: number;
@@ -13,8 +14,9 @@ export type CartItem = {
 };
 
 type CartActionType = { type: "CHANGE_CART_AMOUNT"; payload: CartItem };
+type UserActionType = { type: "SET_USER"; payload: User };
 type LayoutActionType = { type: "TOGGLE_HEADER"; payload: boolean };
-type ActionType = CartActionType | LayoutActionType;
+type ActionType = CartActionType | LayoutActionType | UserActionType;
 
 // =================================================================================
 
@@ -45,7 +47,7 @@ const INITIAL_CART = [
   },
 ];
 
-const INITIAL_STATE = { cart: INITIAL_CART, isHeaderFixed: false };
+const INITIAL_STATE = { cart: INITIAL_CART, isHeaderFixed: false, user: {} };
 
 interface ContextProps {
   state: InitialState;
@@ -61,6 +63,15 @@ const reducer = (state: InitialState, action: ActionType) => {
   switch (action.type) {
     case "TOGGLE_HEADER":
       return { ...state, isHeaderFixed: action.payload };
+
+    case "SET_USER":
+      return {
+        ...state,
+        user: {
+        ...state.user,
+        ...action.payload,
+      }
+    };
 
     case "CHANGE_CART_AMOUNT":
       let cartList = state.cart;

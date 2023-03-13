@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useState, useEffect } from "react";
 import Link from "next/link";
 import { toast } from 'react-toastify';
 import { useFormik } from "formik";
@@ -14,10 +14,19 @@ import { H3, H5, H6, SemiSpan} from "@component/Typography";
 // import { H3, H5, H6, SemiSpan, Small, Span } from "@component/Typography";
 import { StyledSessionCard } from "./styles";
 import { getAccessToken, setUserToken } from "@utils/__api__/users";
+import { getPreviousPath } from "@utils/utils";
 
 const Login: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [previousPath, setPreviousPath] = useState("/profile");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+
+  useEffect(() => {
+    // Get the URL of the previous page
+    const previousPage = getPreviousPath();
+    setPreviousPath(previousPage);
+
+  }, []);
 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
@@ -36,7 +45,7 @@ const Login: FC = () => {
    
     setIsLoading(false);
     toast.success("Login successfully");
-    window.location.href = "/profile";
+    window.location.href = previousPath;
    } catch (error) {
     const errorMessage = error?.message;
     toast.error(errorMessage);

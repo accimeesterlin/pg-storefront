@@ -101,3 +101,29 @@ export function currency(price: number, fraction: number = 2) {
 
   return formatCurrency.format(price);
 }
+
+
+export function storePathValues() {
+  const storage = globalThis?.sessionStorage;
+
+  if (!storage) return;
+  // Set the previous path as the value of the current path.
+  const prevPath = storage.getItem("currentPath");
+  const pathName = globalThis.location.pathname;
+  if (pathName !== prevPath) {
+    storage.setItem("prevPath", prevPath);
+    // Set the current path value by looking at the browser's location object.
+    storage.setItem("currentPath", pathName);
+  }
+}
+
+
+export function getPreviousPath() {
+  const storage = globalThis?.sessionStorage;
+
+  if (!storage) return;
+  // Set the previous path as the value of the current path.
+  const prevPath = storage.getItem("prevPath");
+
+  return prevPath;
+}
