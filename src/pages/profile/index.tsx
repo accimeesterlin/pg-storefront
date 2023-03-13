@@ -66,7 +66,7 @@ const Profile = () => {
         <Grid container spacing={6}>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <FlexBox as={Card} p="14px 32px" height="100%" alignItems="center">
-              <Avatar src={user?.avatar} size={64} />
+              <Avatar src={user?.profileImageUrl} size={64} />
 
               <Box ml="12px" flex="1 1 0">
                 <FlexBox
