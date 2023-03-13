@@ -38,7 +38,6 @@ const Checkout = () => {
     }
   };
 
-  console.log("Current address: ", address);
   return (
     <Grid container flexWrap="wrap-reverse" spacing={6}>
       <Grid item lg={8} md={8} xs={12}>

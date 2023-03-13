@@ -25,7 +25,6 @@ const AddressDetails = ({ address }: Props) => {
   return (
     <Fragment>
       <DashboardPageHeader iconName="pin_filled" title="Edit Address" button={HEADER_LINK} />
-
       <Card1>
         <AddressForm address={address} />
       </Card1>

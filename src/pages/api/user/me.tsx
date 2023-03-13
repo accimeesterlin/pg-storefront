@@ -81,6 +81,7 @@ export const payloadSchema = Joi.object({
   lastName: Joi.string().allow(null, ""),
   phone: Joi.string().allow(null, ""),
   birthDay: Joi.string().allow(null, ""),
+  file: Joi.string().allow(null, ""),
 });
 
 const updateHandler = async (req, res) => {
@@ -91,7 +92,7 @@ const updateHandler = async (req, res) => {
     const userID = user?.id;
     const file: MulterS3File = req?.file;
 
-    const profileImageUrl = file?.location;
+    const profileImageUrl = file?.location || user?.profileImageUrl;
     const userPayload = {
       ...user,
       ...payload,
