@@ -54,7 +54,6 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
   const handleFormSubmit = async (values) => {
     try {
       setIsLoading(true);
-      console.log(values);
       const checkoutPayload = {
         address: {
           name: values.shipping_name,

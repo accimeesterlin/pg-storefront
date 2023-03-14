@@ -59,7 +59,6 @@ const ProtectedRoute = ({ children, isSidebar }: IProtectedProps) => {
 
       return user;
     } catch (userDetailError) {
-      console.log("Errror: ", userDetailError);
       return router?.push("/login");
     }
   };

@@ -22,7 +22,6 @@ const getAddressById = async (id: string) => {
 
 const getAddressByUserId = async (userID: string) => {
 
-  console.log("UserID: ", userID);
   const params = {
     TableName: addressTable,
     IndexName: "byUser",

@@ -18,9 +18,8 @@ const PaymentForm: FC = () => {
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
 
 
-  const handleFormSubmit = async (values) => {
+  const handleFormSubmit = async () => {
     try {
-      console.log(values);
       dispatch({
         type: "SET_PAYMENT_METHOD",
         payload: paymentMethod

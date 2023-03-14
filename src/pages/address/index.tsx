@@ -32,7 +32,6 @@ const AddressList = () => {
     try {
       const data = await api.getAddressList();
       dispatch({ type: "SET_ADDRESS", payload: data });
-      console.log("Address List: ", data);
     } catch (error) {
       console.log("Error: ", error);
     }

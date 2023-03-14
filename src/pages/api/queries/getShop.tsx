@@ -71,7 +71,6 @@ export const getTotalShopCount = async () => {
     const result = await db.scan(params).promise();
     return result.Count;
   } catch (error) {
-    console.log("Total shop count error", error);
     return null;
   }
 };

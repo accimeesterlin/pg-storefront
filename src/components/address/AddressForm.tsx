@@ -40,7 +40,6 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
   const handleFormSubmit = async (values) => {
     try {
       setIsLoading(true);
-      console.log(values);
 
       await api.createAddress({
         ...values,

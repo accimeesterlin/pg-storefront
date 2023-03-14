@@ -26,7 +26,6 @@ export const verifyCognitoToken = async (token) => {
     const payload = await verifier.verify(token);
     return payload;
   } catch (error) {
-    // console.log("Token not valid!");
     throw new Error(error?.message || "Token not valid!");
   }
 };

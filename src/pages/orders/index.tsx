@@ -18,7 +18,6 @@ import { useAppContext } from "@context/AppContext";
 const OrderList = () => {
   const { state, dispatch } = useAppContext();
 
-  console.log("Orders: ", state);
   const orderList = state?.user.orders;
 
   useEffect(() => {

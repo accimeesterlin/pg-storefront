@@ -21,7 +21,6 @@ const CheckoutForm2: FC = () => {
   const [hasVoucher, setHasVoucher] = useState(false);
 
   const handleFormSubmit = async (values) => {
-    console.log(values);
     router.push("/payment");
   };
 

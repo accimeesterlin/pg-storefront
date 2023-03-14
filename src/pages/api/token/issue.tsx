@@ -25,7 +25,6 @@ const handler = async (req, res) => {
 
     return res.json(cognitoTokenResult);
   } catch (error) {
-    // console.log("Payload: ", req?.body);
     return res.status(500).json({
       message: error?.message || "Issue generating the token",
       status: error?.status || 500,

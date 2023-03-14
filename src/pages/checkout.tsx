@@ -14,7 +14,6 @@ const Checkout = () => {
   const { dispatch, state } = useAppContext();
   const [address, setAddress] = useState({});
 
-  console.log("Checkout: ", state);
   useEffect(() => {
     handleAddress();
     getUserProfile();

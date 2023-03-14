@@ -10,7 +10,7 @@ import { authenticationMiddleware } from "../../../token/verify";
 import { currency, getTotalPrice } from "@utils/utils";
 import { createOrder } from "pages/api/mutation/order";
 
-const baseUrl = "http://localhost:3002";
+const baseUrl = process.env.TOP_UP_BASE_URL;
 // const baseUrl = "https://sandbox.pgecom.com";
 const baseOriginUrl = process.env.WEBSITE_ORIGIN;
 const pgMerchantID = process.env.PLATFORM_MERCHANT_ID;

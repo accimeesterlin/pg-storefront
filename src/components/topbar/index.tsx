@@ -19,7 +19,6 @@ const Topbar: FC = () => {
 
   useEffect(() => {
     // get language from browser
-    // console.log(navigator.language);
   }, []);
 
   return (
