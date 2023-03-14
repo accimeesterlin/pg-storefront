@@ -21,7 +21,7 @@ import { currency } from "@utils/utils";
 type OrderStatus = "packaging" | "shipping" | "delivering" | "complete";
 
 // =============================================================
-type Props = { order: Order };
+// type Props = { order: Order };
 // =============================================================
 
 const initialOrder = {
@@ -263,20 +263,22 @@ const OrderDetails = () => {
                 Shipping fee:
               </Typography>
 
-              <H6 my="0px">$10</H6>
+              <H6 my="0px">$0</H6>
             </FlexBox>
 
-            <FlexBox
-              justifyContent="space-between"
-              alignItems="center"
-              mb="0.5rem"
-            >
-              <Typography fontSize="14px" color="text.hint">
-                comparePrice:
-              </Typography>
+            {order?.comparePrice && (
+              <FlexBox
+                justifyContent="space-between"
+                alignItems="center"
+                mb="0.5rem"
+              >
+                <Typography fontSize="14px" color="text.hint">
+                  comparePrice:
+                </Typography>
 
-              <H6 my="0px">-${order.comparePrice}</H6>
-            </FlexBox>
+                <H6 my="0px">-${order.comparePrice}</H6>
+              </FlexBox>
+            )}
 
             <Divider mb="0.5rem" />
 

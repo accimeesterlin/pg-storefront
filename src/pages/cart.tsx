@@ -28,6 +28,9 @@ const Cart = () => {
             <ProductCard7
               mb="1.5rem"
               id={item.id}
+              shop={{
+                id: item.shopId,
+              }}
               key={item.id}
               qty={item.qty}
               slug={item.slug}
