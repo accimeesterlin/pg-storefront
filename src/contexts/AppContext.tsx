@@ -12,6 +12,7 @@ export type CartItem = {
   slug?: string;
   price: number;
   mainImageUrl?: string;
+  shopId?: string;
   id: string | number;
 };
 

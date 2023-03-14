@@ -146,6 +146,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
         price: off,
         mainImageUrl: mainImageUrl,
         name,
+        shopId: shop?.id,
         qty: amount,
       },
     });

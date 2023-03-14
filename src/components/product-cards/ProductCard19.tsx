@@ -89,6 +89,7 @@ const ProductCard19: FC<ProductCard19Props> = (props) => {
       name,
       price,
       mainImageUrl: img,
+      shopId: shop?.id,
       qty: (cartItem?.qty || 0) + 1,
     };
 

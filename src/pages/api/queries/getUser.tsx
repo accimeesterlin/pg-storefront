@@ -5,7 +5,7 @@ const { USER_TABLE } = process.env;
 
 const userTable = USER_TABLE;
 
-const getUser = async (id: string) => {
+const getUserById = async (id: string) => {
   try {
     const params = {
       TableName: userTable,
@@ -59,4 +59,4 @@ const getUserByPhone = async (phone: string) => {
   return items;
 };
 
-export { getUser, getUserByEmail, getUserList, getUserByPhone };
+export { getUserById, getUserByEmail, getUserList, getUserByPhone };

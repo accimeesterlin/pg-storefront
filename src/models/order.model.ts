@@ -1,24 +1,29 @@
-import User from "./user.model";
-
-type Item = {
-  product_img?: string;
-  product_name?: string;
-  product_price?: number;
-  product_quantity?: number;
-};
 
 interface Order {
-  user?: User;
   id?: string;
-  tax?: number;
-  items?: Item[];
+  description?: string;
+  orderId?: string;
+  sender?: string;
+  status?: string;
+  paymentStatus?: string;
+  transactionType?: string;
+  amount?: number;
+  customerId?: string;
+  quantity?: number;
+  userID?: string;
+  receiver?: string;
+  platform?: string;
+  operatorId?: string;
+  redirectUrl?: string;
+  shopId?: string;
+  products?: string[];
+  shippingRate?: number;
+  paymentId?: string;
+  channel?: string;
+  totalPrice?: string;
+  paymentMethod?: string;
+  updatedAt?: string;
   createdAt?: string;
-  comparePrice?: number;
-  deliveredAt?: string;
-  totalPrice?: number;
-  isDelivered?: boolean;
-  shippingAddress?: string;
-  status?: string | "Pending" | "Processing" | "Delivered" | "Cancelled";
 }
 
 export default Order;

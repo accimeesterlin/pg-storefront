@@ -55,6 +55,7 @@ const ProductIntro: FC<ProductIntroProps> = ({
         qty: amount,
         name: name,
         mainImageUrl: images[0]?.url,
+        shopId: shop?.id,
         id: id || routerId,
       },
     });

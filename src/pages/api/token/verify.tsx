@@ -1,6 +1,6 @@
 import isEmpty from "lodash.isempty";
 import { verifyCognitoToken } from "../utils/authUtils";
-import { getUser } from "../queries/getUser";
+import { getUserById } from "../queries/getUser";
 
 const log = console?.log;
 log("PID", process.pid);
@@ -36,7 +36,7 @@ export const verifyToken = async (req: {
     cognitoResult = await verifyCognitoToken(token);
     userID = cognitoResult?.sub || cognitoResult?.username;
 
-    const currentUser = await getUser(userID);
+    const currentUser = await getUserById(userID);
 
     const { isLocked, isBanned } = currentUser;
 

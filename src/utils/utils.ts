@@ -128,3 +128,22 @@ export function getPreviousPath() {
 export const getTotalPrice = (cart: any[]) => {
   return cart.reduce((accumulator, item) => accumulator + item.price * item.qty, 0) || 0;
 };
+
+export function getTotalQuantity(arr) {
+  let total = 0;
+  for (let i = 0; i < arr.length; i++) {
+    total += arr[i].qty;
+  }
+  return total;
+}
+
+export function groupByShopId(arr) {
+  const result = {};
+  arr.forEach(item => {
+    if (!result[item.shopId]) {
+      result[item.shopId] = [];
+    }
+    result[item.shopId].push(item);
+  });
+  return result;
+}

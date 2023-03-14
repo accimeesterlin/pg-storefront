@@ -1,10 +1,12 @@
-import { FC, Fragment } from "react";
+import { FC, Fragment , useState} from "react";
 import Link from "next/link";
 import NextImage from "next/image";
 // import Icon from "@component/icon/Icon";
 import { Card1 } from "@component/Card1";
 import Divider from "@component/Divider";
+import { toast } from "react-toastify";
 import FlexBox from "@component/FlexBox";
+import api from "@utils/__api__/pgpay";
 import Avatar from "@component/avatar";
 import { Button } from "@component/buttons";
 import Typography, { H5, Paragraph, Tiny } from "@component/Typography";
@@ -39,10 +41,39 @@ const PaymentReview = () => {
   );
 };
 
-type MiniCartProps = { toggleSidenav?: () => void };
 
-const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
+const MiniCart: FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { state } = useAppContext();
+
+  console.log("State: ", state);
+
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+
+      const pgPayLoad = {
+        amount: getTotalPrice(state.cart),
+        userID: state?.user?.email,
+        phone: state?.user?.phone,
+      }
+
+      const data = await api.createPGPayToken(pgPayLoad);
+
+      console.log("Data: ", data);
+
+      if (data?.redirectUrl) {
+        // Redirect user to PG Pay
+      }
+
+      // TODO:
+      setIsLoading(false);
+    } catch (error) {
+      const errorMessage = error?.message;
+      toast.error(errorMessage);
+      setIsLoading(false);
+    }
+  }
 
   return (
     <>
@@ -126,9 +157,10 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
         <Fragment>
           <Button
             width="248px"
+            loading={isLoading}
             color="primary"
             variant="contained"
-            onClick={toggleSidenav}
+            onClick={handleSubmit}
           >
             <Typography fontWeight={600}>
               Pay Now ({currency(getTotalPrice(state.cart))})
@@ -141,6 +173,6 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
 };
 
 PaymentReview.layout = CheckoutNavLayout;
-MiniCart.defaultProps = { toggleSidenav: () => {} };
+MiniCart.defaultProps = { handleSubmit: () => {} };
 
 export default PaymentReview;

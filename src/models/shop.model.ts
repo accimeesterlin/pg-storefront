@@ -1,18 +1,20 @@
 import Product from "./product.model";
 
 interface Shop {
-  id: string;
-  slug: string;
-  user: any;
-  email: string;
-  name: string;
-  phone: string;
-  address: string;
+  id?: string;
+  slug?: string;
+  user?: any;
+  email?: string;
+  name?: string;
+  merchantId?: string;
+  phone?: string;
+  walletAddress?: string;
+  address?: string;
   rating?: number;
-  verified: boolean;
+  verified?: boolean;
   products?: Product[];
-  coverPicture: string;
-  profilePicture: string;
+  coverPicture?: string;
+  profilePicture?: string;
   socialMedialLinks?: { facebook?: string; youtube?: string; twitter?: string; instagram?: string };
 }
 

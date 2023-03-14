@@ -124,7 +124,7 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: name },
+      payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop?.id },
     });
   };
 

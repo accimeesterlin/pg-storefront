@@ -1,6 +1,6 @@
 import nc from "next-connect";
 import { getShopByMerchantId } from "../queries/getShop";
-import { getUser } from "../queries/getUser";
+import { getUserById } from "../queries/getUser";
 import { verifyCognitoToken } from "../utils/authUtils";
 import Shop from '@models/shop.model';
 
@@ -10,7 +10,7 @@ const handler = async (req, res) => {
     const cognitoTokenResult = await verifyCognitoToken(token);
     const userID = cognitoTokenResult?.sub || cognitoTokenResult?.username;
 
-    const currentUser: any = await getUser(userID);
+    const currentUser: any = await getUserById(userID);
 
     let shops: Shop[];
 
