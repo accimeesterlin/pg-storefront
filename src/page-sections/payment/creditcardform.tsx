@@ -21,7 +21,7 @@ const CreditCardForm: FC<CreditCardFormProps> = ({
 }) => {
   const router = useRouter();
 
-  const handleFormSubmit = async (values) => {
+  const handleFormSubmit = async () => {
     router.push("/payment");
   };
 
