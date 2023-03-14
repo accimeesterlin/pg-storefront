@@ -1,3 +1,4 @@
+import Product from "./product.model";
 
 interface Order {
   id?: string;
@@ -16,11 +17,15 @@ interface Order {
   operatorId?: string;
   redirectUrl?: string;
   shopId?: string;
-  products?: string[];
+  products?: Product[];
   shippingRate?: number;
   paymentId?: string;
   channel?: string;
-  totalPrice?: string;
+  comparePrice?: number;
+  shippingAddress?: string;
+  totalPrice?: number;
+  isDelivered?: boolean;
+  deliveredAt?: string;
   paymentMethod?: string;
   updatedAt?: string;
   createdAt?: string;

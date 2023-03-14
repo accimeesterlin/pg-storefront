@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Grid from "@component/grid/Grid";
+import isEmpty from 'lodash.isempty';
 import CheckoutForm from "@sections/checkout/CheckoutForm";
 import CheckoutSummary from "@sections/checkout/CheckoutSummary";
 import CheckoutNavLayout from "@component/layout/CheckoutNavLayout";
@@ -10,15 +11,22 @@ import User from "@models/user.model";
 import { useAppContext } from "@context/AppContext";
 
 const Checkout = () => {
-  const { dispatch } = useAppContext();
+  const { dispatch, state } = useAppContext();
   const [address, setAddress] = useState({});
+
+  console.log("Checkout: ", state);
   useEffect(() => {
     handleAddress();
     getUserProfile();
-  }, []);
+  }, [state.checkout]);
 
   const handleAddress = async () => {
     try {
+      if (!isEmpty(state.checkout?.address)) {
+        setAddress(state.checkout?.address);
+        return;
+      }
+
       const addresses: Address[] = await api.getAddressList();
 
       if (addresses?.length > 0) {

@@ -121,13 +121,31 @@ const getOrderByUserId = async (userID: string) => {
     TableName: orderTable,
     IndexName: "byUser",
     KeyConditionExpression: "#userID = :userID",
-    ExpressionAttributeNames: { "#userID": "userID" },
-    ExpressionAttributeValues: { ":userID": userID },
+    ScanIndexForward: false,
+    ExpressionAttributeNames: { "#userID": "userID", "#transactionType": "transactionType" },
+    ExpressionAttributeValues: { ":userID": userID, ":transactionType": "sales" },
+    FilterExpression: "#transactionType = :transactionType",
   };
 
   const items = await fetchData(params, "getOrderByPlatform");
 
   return items;
+};
+
+const getOrderByOrderId = async (orderId: string) => {
+  const params = {
+    TableName: orderTable,
+    IndexName: "byOrderId",
+    KeyConditionExpression: "#orderId = :orderId",
+    ScanIndexForward: false,
+    ExpressionAttributeNames: { "#orderId": "orderId", "#transactionType": "transactionType" },
+    ExpressionAttributeValues: { ":orderId": orderId, ":transactionType": "sales" },
+    FilterExpression: "#transactionType = :transactionType",
+  };
+
+  const items = await fetchData(params, "getOrderByPlatform");
+
+  return items[0];
 };
 
 export {
@@ -140,4 +158,5 @@ export {
   getOrderByStatus,
   getOrderByPlatform,
   getOrderByUserId,
+  getOrderByOrderId
 };

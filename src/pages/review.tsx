@@ -1,7 +1,8 @@
-import { FC, Fragment , useState} from "react";
+import { FC, Fragment , useState, useEffect } from "react";
 import Link from "next/link";
 import NextImage from "next/image";
 // import Icon from "@component/icon/Icon";
+import { useRouter } from 'next/router';
 import { Card1 } from "@component/Card1";
 import Divider from "@component/Divider";
 import { toast } from "react-toastify";
@@ -18,8 +19,20 @@ import Grid from "@component/grid/Grid";
 // import { StyledMiniCart } from "@component/mini-cart/styles";
 
 const PaymentReview = () => {
+  const router = useRouter();
   const { state } = useAppContext();
   const paymentMethod = state?.checkout?.paymentMethod;
+
+  useEffect(() => {
+    navigateBackToCheckout();
+  }, [paymentMethod]);
+
+  const navigateBackToCheckout = () => {
+    if (!paymentMethod) {
+      return router?.push("/payment");
+    }
+  }
+
 
   return (
     <Grid container flexWrap="wrap-reverse" spacing={6}>
@@ -43,6 +56,7 @@ const PaymentReview = () => {
 
 
 const MiniCart: FC = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useAppContext();
 
@@ -53,10 +67,9 @@ const MiniCart: FC = () => {
       setIsLoading(true);
 
       const pgPayLoad = {
-        amount: getTotalPrice(state.cart),
-        userID: state?.user?.email,
-        phone: state?.user?.phone,
-      }
+        cart: state?.cart,
+        checkout: state?.checkout
+      };
 
       const data = await api.createPGPayToken(pgPayLoad);
 
@@ -64,10 +77,11 @@ const MiniCart: FC = () => {
 
       if (data?.redirectUrl) {
         // Redirect user to PG Pay
+        router?.push(data?.redirectUrl);
       }
 
       // TODO:
-      setIsLoading(false);
+      // setIsLoading(false);
     } catch (error) {
       const errorMessage = error?.message;
       toast.error(errorMessage);

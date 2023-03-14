@@ -1,5 +1,4 @@
-import { Fragment } from "react";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { Fragment, useEffect, useState } from "react";
 import Router from "next/router";
 import { format } from "date-fns";
 import Box from "@component/Box";
@@ -25,11 +24,59 @@ type OrderStatus = "packaging" | "shipping" | "delivering" | "complete";
 type Props = { order: Order };
 // =============================================================
 
-const OrderDetails = ({ order }: Props) => {
+const initialOrder = {
+  id: "",
+  description: "",
+  orderId: "",
+  sender: "",
+  status: "",
+  paymentStatus: "",
+  transactionType: "",
+  amount: 0,
+  customerId: "",
+  quantity: 0,
+  userID: "",
+  products: [],
+  receiver: "",
+  platform: "",
+  operatorId: "",
+  redirectUrl: "",
+  shopId: "",
+  shippingRate: 0,
+  paymentId: "",
+  shippingAddress: "",
+  channel: "",
+  totalPrice: 0,
+  comparePrice: 0,
+  isDelivered: false,
+  deliveredAt: "",
+  paymentMethod: "",
+  updatedAt: `${new Date()}`,
+  createdAt: `${new Date()}`,
+};
+
+const OrderDetails = () => {
+  const [order, setOrder] = useState<Order>(initialOrder);
   const width = useWindowSize();
   const orderStatus: OrderStatus = "shipping";
   const stepIconList = ["package-box", "truck-1", "delivery"];
   const orderStatusList = ["packaging", "shipping", "delivering", "complete"];
+
+  const id = Router?.query?.id;
+
+  useEffect(() => {
+    handleOrder();
+  }, [id]);
+
+  const handleOrder = async () => {
+    try {
+      const userOrder: Order = await api.getOrder(String(id));
+
+      setOrder(userOrder);
+    } catch (error) {
+      // No order found
+    }
+  };
 
   const breakpoint = 350;
   const statusIndex = orderStatusList.indexOf(orderStatus);
@@ -44,7 +91,11 @@ const OrderDetails = ({ order }: Props) => {
 
   return (
     <Fragment>
-      <DashboardPageHeader title="Order Details" iconName="bag_filled" button={HEADER_LINK} />
+      <DashboardPageHeader
+        title="Order Details"
+        iconName="bag_filled"
+        button={HEADER_LINK}
+      />
 
       <Card p="2rem 1.5rem" mb="30px">
         <FlexBox
@@ -137,15 +188,21 @@ const OrderDetails = ({ order }: Props) => {
         </TableRow>
 
         <Box py="0.5rem">
-          {order.items.map((item, ind) => (
-            <FlexBox px="1rem" py="0.5rem" flexWrap="wrap" alignItems="center" key={ind}>
+          {order.products.map((item, ind) => (
+            <FlexBox
+              px="1rem"
+              py="0.5rem"
+              flexWrap="wrap"
+              alignItems="center"
+              key={ind}
+            >
               <FlexBox flex="2 2 260px" m="6px" alignItems="center">
-                <Avatar src={item.product_img} size={64} />
+                <Avatar src={item.mainImageUrl} size={64} />
 
                 <Box ml="20px">
-                  <H6 my="0px">{item.product_name}</H6>
+                  <H6 my="0px">{item.name}</H6>
                   <Typography fontSize="14px" color="text.muted">
-                    {currency(item.product_price)} x {item.product_quantity}
+                    {currency(item.price)} x {item.inventory}
                   </Typography>
                 </Box>
               </FlexBox>
@@ -185,7 +242,11 @@ const OrderDetails = ({ order }: Props) => {
               Total Summary
             </H5>
 
-            <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
+            <FlexBox
+              justifyContent="space-between"
+              alignItems="center"
+              mb="0.5rem"
+            >
               <Typography fontSize="14px" color="text.hint">
                 Subtotal:
               </Typography>
@@ -193,7 +254,11 @@ const OrderDetails = ({ order }: Props) => {
               <H6 my="0px">{currency(order.totalPrice)}</H6>
             </FlexBox>
 
-            <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
+            <FlexBox
+              justifyContent="space-between"
+              alignItems="center"
+              mb="0.5rem"
+            >
               <Typography fontSize="14px" color="text.hint">
                 Shipping fee:
               </Typography>
@@ -201,7 +266,11 @@ const OrderDetails = ({ order }: Props) => {
               <H6 my="0px">$10</H6>
             </FlexBox>
 
-            <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
+            <FlexBox
+              justifyContent="space-between"
+              alignItems="center"
+              mb="0.5rem"
+            >
               <Typography fontSize="14px" color="text.hint">
                 comparePrice:
               </Typography>
@@ -211,7 +280,11 @@ const OrderDetails = ({ order }: Props) => {
 
             <Divider mb="0.5rem" />
 
-            <FlexBox justifyContent="space-between" alignItems="center" mb="1rem">
+            <FlexBox
+              justifyContent="space-between"
+              alignItems="center"
+              mb="1rem"
+            >
               <H6 my="0px">Total</H6>
               <H6 my="0px">{currency(order.totalPrice)}</H6>
             </FlexBox>
@@ -225,19 +298,5 @@ const OrderDetails = ({ order }: Props) => {
 };
 
 OrderDetails.layout = DashboardLayout;
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await api.getIds();
-
-  return {
-    paths: paths, //indicates that no page needs be created at build time
-    fallback: "blocking", //indicates the type of fallback
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const order = await api.getOrder(String(params.id));
-  return { props: { order } };
-};
 
 export default OrderDetails;

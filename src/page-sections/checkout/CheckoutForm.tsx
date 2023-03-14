@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import Link from "next/link";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import { Formik } from "formik";
@@ -35,6 +35,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
     shipping_contact: address?.phone,
     shipping_company: "",
     shipping_zip: address?.zip || "",
+    shipping_city: address?.city || "",
     shipping_country: address?.country || "",
     shipping_address1: address?.street || "",
     shipping_address2: "",
@@ -44,6 +45,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
     billing_contact: address?.phone || "",
     billing_company: "",
     billing_zip: address?.zip || "",
+    billing_city: address?.city || "",
     billing_country: address?.country || "",
     billing_address1: address?.street || "",
     billing_address2: "",
@@ -61,6 +63,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
           zip: values.shipping_zip,
           country: values.shipping_country?.value,
           street: values.shipping_address1,
+          city: values.shipping_city,
           apartment: values.shipping_address2,
         },
         billingAddress: {
@@ -70,10 +73,11 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
           zip: values.billing_zip,
           country: values.billing_country,
           street: values.billing_address1,
+          city: values.billing_city,
           apartment: values.billing_address2,
         },
       };
-      
+
       dispatch({ type: "SET_CHECKOUT", payload: checkoutPayload });
       router.push("/payment");
       setIsLoading(false);
@@ -141,18 +145,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                 />
 
                 <TextField
-                  fullwidth
                   mb="1rem"
-                  type="number"
-                  label="Zip Code"
-                  onBlur={handleBlur}
-                  name="shipping_zip"
-                  onChange={handleChange}
-                  value={values.shipping_zip}
-                  errorText={touched.shipping_zip && errors.shipping_zip}
-                />
-
-                <TextField
                   fullwidth
                   label="Address 1"
                   onBlur={handleBlur}
@@ -162,6 +155,30 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                   errorText={
                     touched.shipping_address1 && errors.shipping_address1
                   }
+                />
+
+                <TextField
+                  fullwidth
+                  mb="1rem"
+                  type="text"
+                  label="City"
+                  onBlur={handleBlur}
+                  name="shipping_city"
+                  onChange={handleChange}
+                  value={values.shipping_city}
+                  errorText={touched.shipping_city && errors.shipping_city}
+                />
+
+                <TextField
+                  fullwidth
+                  mb="1rem"
+                  type="number"
+                  label="Zip Code"
+                  onBlur={handleBlur}
+                  name="shipping_zip"
+                  onChange={handleChange}
+                  value={values.shipping_zip}
+                  errorText={touched.shipping_zip && errors.shipping_zip}
                 />
               </Grid>
 
@@ -259,18 +276,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                   />
 
                   <TextField
-                    fullwidth
                     mb="1rem"
-                    type="number"
-                    label="Zip Code"
-                    name="billing_zip"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.billing_zip}
-                    errorText={touched.billing_zip && errors.billing_zip}
-                  />
-
-                  <TextField
                     fullwidth
                     label="Address 1"
                     onBlur={handleBlur}
@@ -280,6 +286,30 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                     errorText={
                       touched.billing_address1 && errors.billing_address1
                     }
+                  />
+
+                  <TextField
+                    fullwidth
+                    mb="1rem"
+                    type="text"
+                    label="City"
+                    name="billing_city"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.billing_city}
+                    errorText={touched.billing_city && errors.billing_city}
+                  />
+
+                  <TextField
+                    fullwidth
+                    mb="1rem"
+                    type="number"
+                    label="Zip Code"
+                    name="billing_zip"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.billing_zip}
+                    errorText={touched.billing_zip && errors.billing_zip}
                   />
                 </Grid>
 
@@ -371,12 +401,14 @@ const checkoutSchema = yup.object().shape({
   shipping_email: yup.string().email("invalid email").required("required"),
   shipping_contact: yup.string().required("required"),
   shipping_zip: yup.string().required("required"),
+  shipping_city: yup.string().required("required"),
   shipping_country: yup.object().required("required"),
   shipping_address1: yup.string().required("required"),
   billing_name: yup.string().required("required"),
   billing_email: yup.string().required("required"),
   billing_contact: yup.string().required("required"),
   billing_zip: yup.string().required("required"),
+  billing_city: yup.string().required("required"),
   billing_country: yup.string().required("required"),
   billing_address1: yup.string().required("required"),
 });

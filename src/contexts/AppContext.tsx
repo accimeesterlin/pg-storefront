@@ -1,10 +1,23 @@
 import Address from "@models/address.model";
 import Checkout from "@models/checkout.model";
+import Order from "@models/order.model";
 import User from "@models/user.model";
-import { createContext, FC, ReactNode, useContext, useMemo, useReducer } from "react";
+import {
+  createContext,
+  FC,
+  ReactNode,
+  useContext,
+  useMemo,
+  useReducer,
+} from "react";
 
 // =================================================================================
-type InitialState = { cart: CartItem[]; isHeaderFixed: boolean, user: User, checkout: Checkout};
+type InitialState = {
+  cart: CartItem[];
+  isHeaderFixed: boolean;
+  user: User;
+  checkout: Checkout;
+};
 
 export type CartItem = {
   qty: number;
@@ -18,50 +31,35 @@ export type CartItem = {
 
 type CartActionType = { type: "CHANGE_CART_AMOUNT"; payload: CartItem };
 type UserActionType = { type: "SET_USER"; payload: User };
+type OrderActionType = { type: "SET_ORDER_LIST"; payload: Order[] };
 type PaymentMethodActionType = { type: "SET_PAYMENT_METHOD"; payload: string };
 type CheckoutActionType = { type: "SET_CHECKOUT"; payload: Checkout };
 type AddressActionType = { type: "SET_ADDRESS"; payload: Address[] };
 type LayoutActionType = { type: "TOGGLE_HEADER"; payload: boolean };
-type ActionType = CartActionType | LayoutActionType | UserActionType | AddressActionType | CheckoutActionType | PaymentMethodActionType;
+type ActionType =
+  | CartActionType
+  | LayoutActionType
+  | UserActionType
+  | AddressActionType
+  | CheckoutActionType
+  | OrderActionType
+  | PaymentMethodActionType;
 
 // =================================================================================
 
-const INITIAL_CART = [
-  {
-    qty: 1,
-    price: 210,
-    slug: "silver-high-neck-sweater",
-    name: "Silver High Neck Sweater",
-    id: "6e8f151b-277b-4465-97b6-547f6a72e5c9",
-    mainImageUrl: "/assets/images/products/Fashion/Clothes/1.SilverHighNeckSweater.png",
-  },
-  {
-    qty: 1,
-    price: 110,
-    slug: "yellow-casual-sweater",
-    name: "Yellow Casual Sweater",
-    id: "76d14d65-21d0-4b41-8ee1-eef4c2232793",
-    mainImageUrl: "/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png",
-  },
-  {
-    qty: 1,
-    price: 140,
-    slug: "denim-blue-jeans",
-    name: "Denim Blue Jeans",
-    id: "0fffb188-98d8-47f7-8189-254f06cad488",
-    mainImageUrl: "/assets/images/products/Fashion/Clothes/4.DenimBlueJeans.png",
-  },
-];
+const INITIAL_CART = [];
 
 const INITIAL_STATE = {
   cart: INITIAL_CART,
   isHeaderFixed: false,
-  user: {},
+  user: {
+    orders: [],
+  },
   checkout: {
     address: {},
     paymentMethod: "",
     billingAddress: {},
-  }
+  },
 };
 
 interface ContextProps {
@@ -83,38 +81,46 @@ const reducer = (state: InitialState, action: ActionType) => {
       return {
         ...state,
         user: {
-        ...state.user,
-        ...action.payload,
-      }
-    };
+          ...state.user,
+          ...action.payload,
+        },
+      };
 
     case "SET_PAYMENT_METHOD":
       return {
         ...state,
         checkout: {
-        ...state.checkout,
-        paymentMethod: action.payload,
-      }
-    };
-
+          ...state.checkout,
+          paymentMethod: action.payload,
+        },
+      };
 
     case "SET_ADDRESS":
       return {
         ...state,
         user: {
-        ...state.user,
-        addresses: action.payload,
-      }
-    };
+          ...state.user,
+          addresses: action.payload,
+        },
+      };
+
+    case "SET_ORDER_LIST":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          orders: action.payload,
+        },
+      };
 
     case "SET_CHECKOUT":
       return {
         ...state,
         checkout: {
-        ...state.checkout,
-        ...action.payload,
-      }
-    };
+          ...state.checkout,
+          ...action.payload,
+        },
+      };
 
     case "CHANGE_CART_AMOUNT":
       let cartList = state.cart;
@@ -150,7 +156,9 @@ type AppProviderProps = { children: ReactNode };
 export const AppProvider: FC<AppProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
-  return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
+  );
 };
 
 export const useAppContext = () => useContext<ContextProps>(AppContext);

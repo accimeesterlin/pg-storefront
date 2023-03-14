@@ -1,18 +1,13 @@
 import axios from 'axios';
 
-const baseUrl = "https://devtopup.pgecom.com/api"
-
-const api = axios.create({
-  baseURL: baseUrl
-});
 
 
 
 
 export const createPGPayToken = async (payload): Promise<any> => {
-  const response = await api({
-    method: "PUT",
-    url: "/pgpay/token",
+  const response = await axios({
+    method: "POST",
+    url: "/api/user/payment/pgpay/createsession",
     data: payload,
   });
   return response?.data;

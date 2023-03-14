@@ -45,7 +45,7 @@ const DashboardNavigation = () => {
   const { pathname } = useRouter();
   const { state } = useAppContext();
 
-  const orderCount = state?.user?.orders?.length || 0;
+  const orderCount = state?.user.orders?.length || 0;
   const addressCount = state?.user?.addresses?.length || 0;
 
   // TODO: add the following count

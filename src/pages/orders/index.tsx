@@ -1,5 +1,4 @@
-import { Fragment } from "react";
-import { GetStaticProps } from "next";
+import { Fragment, useEffect } from "react";
 import Hidden from "@component/hidden";
 import FlexBox from "@component/FlexBox";
 import TableRow from "@component/TableRow";
@@ -10,12 +9,34 @@ import DashboardPageHeader from "@component/layout/DashboardPageHeader";
 import CustomerDashboardLayout from "@component/layout/customer-dashboard";
 import api from "@utils/__api__/orders";
 import Order from "@models/order.model";
+import { useAppContext } from "@context/AppContext";
 
 // ====================================================
-type OrderListProps = { orderList: Order[] };
+// type OrderListProps = { orderList: Order[] };
 // ====================================================
 
-const OrderList = ({ orderList }: OrderListProps) => {
+const OrderList = () => {
+  const { state, dispatch } = useAppContext();
+
+  console.log("Orders: ", state);
+  const orderList = state?.user.orders;
+
+  useEffect(() => {
+    handleOrderList();
+  }, []);
+
+  const handleOrderList = async () => {
+    try {
+
+      const orders: Order[] = await api.getOrders();
+
+      dispatch({ type: "SET_ORDER_LIST", payload: orders });
+    } catch (error) {
+      // No order found
+    }
+  };
+
+
   return (
     <Fragment>
       <DashboardPageHeader title="My Orders" iconName="bag_filled" />
@@ -42,14 +63,14 @@ const OrderList = ({ orderList }: OrderListProps) => {
         </TableRow>
       </Hidden>
 
-      {orderList.map((item) => (
+      {orderList?.map((item) => (
         <OrderRow order={item} key={item.id} />
       ))}
 
       <FlexBox justifyContent="center" mt="2.5rem">
         <Pagination
           onChange={(data) => console.log(data)}
-          pageCount={Math.ceil(orderList.length / 10)}
+          pageCount={Math.ceil(orderList?.length / 10)}
         />
       </FlexBox>
     </Fragment>
@@ -58,9 +79,5 @@ const OrderList = ({ orderList }: OrderListProps) => {
 
 OrderList.layout = CustomerDashboardLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const orderList = await api.getOrders();
-  return { props: { orderList } };
-};
 
 export default OrderList;

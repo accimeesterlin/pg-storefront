@@ -1,10 +1,11 @@
+import axios from "axios";
 import Order from "@models/order.model";
 
 import { orders } from "../../__server__/__db__/orders/data";
 
 const getOrders = async (): Promise<Order[]> => {
-  // const response = await axios.get("/api/users/orders");
-  return orders;
+  const response = await axios.get("/api/user/order");
+  return response?.data;
 };
 
 const getIds = async (): Promise<{ params: { id: string } }[]> => {
@@ -14,9 +15,8 @@ const getIds = async (): Promise<{ params: { id: string } }[]> => {
 };
 
 const getOrder = async (id: string): Promise<Order> => {
-  // const response = await axios.get("/api/users/order", { params: { id } });
-  const order = orders.find((item) => item.id === id);
-  return order;
+  const response = await axios.get(`/api/user/order/${id}`, { params: { id } });
+  return response?.data;;
 };
 
 export default { getOrders, getOrder, getIds };

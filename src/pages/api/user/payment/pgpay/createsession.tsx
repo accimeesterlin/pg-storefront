@@ -13,6 +13,7 @@ import { createOrder } from "pages/api/mutation/order";
 const baseUrl = "http://localhost:3002";
 // const baseUrl = "https://sandbox.pgecom.com";
 const baseOriginUrl = process.env.WEBSITE_ORIGIN;
+const pgMerchantID = process.env.PLATFORM_MERCHANT_ID;
 
 const getHandler = async (req, res) => {
   try {
@@ -48,12 +49,12 @@ export const payloadSchema = Joi.object({
   cart: Joi.array().items(
     Joi.object({
       name: Joi.string().required(),
-      shopId: Joi.string().required(),
+      shopId: Joi.string().default(pgMerchantID),
       id: Joi.string().required(), // productId
       mainImageUrl: Joi.string().required(),
       price: Joi.number().required(),
       qty: Joi.number().required(),
-      slug: Joi.string().required(),
+      slug: Joi.string().allow(null, ""),
     })
   ),
   checkout: Joi.object({
@@ -62,7 +63,7 @@ export const payloadSchema = Joi.object({
       company: Joi.string().required(),
       street: Joi.string().required(),
       apartment: Joi.string().allow(null, ""),
-      city: Joi.string().required(),
+      city: Joi.string().allow(null, ""), // TODO: make this required
       country: Joi.string().required(),
       phone: Joi.string().required(),
       state: Joi.string().allow(null, ""),
@@ -89,7 +90,6 @@ const updateHandler = async (req, res) => {
     const user: User = req?.tokenData?.user;
 
     const customerId = user?.id;
-    const pgMerchantID = "5f56dfa3-a415-4818-8275-44fc63ece3fd";
 
     const orderId = uuidv4();
     const amount = getTotalPrice(payload?.cart);

@@ -54,7 +54,7 @@ const ShopDetails = ({ shop }: Props) => {
             </Sidenav>
           )}
 
-          <ProductCardList products={shop?.products?.slice(0, 9)} />
+          <ProductCardList products={shop?.products?.slice(0, 9)} shop={shop} />
         </Grid>
       </Grid>
     </Fragment>
