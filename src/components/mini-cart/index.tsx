@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { FC, Fragment, useEffect } from "react";
 import Link from "next/link";
 import NextImage from "next/image";
 import Icon from "@component/icon/Icon";
@@ -22,9 +22,14 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
       type: "CHANGE_CART_AMOUNT",
       payload: { ...product, qty: amount },
     });
-
-    saveCartState(state.cart);
   };
+  
+  useEffect(() => {
+    if (state.cart) {
+      saveCartState(state.cart);
+    }
+  }, [state.cart]);
+
 
   return (
     <StyledMiniCart>
