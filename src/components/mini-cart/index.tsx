@@ -9,18 +9,21 @@ import { Button } from "@component/buttons";
 import Typography, { H5, Paragraph, Tiny } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
 import { StyledMiniCart } from "./styles";
-import { currency, getTotalPrice } from "@utils/utils";
+import { createLocalStorage, currency, getTotalPrice } from "@utils/utils";
 
 type MiniCartProps = { toggleSidenav?: () => void };
 
 const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const { state, dispatch } = useAppContext();
-
   const handleCartAmountChange = (amount: number, product: any) => () => {
+    
     dispatch({
       type: "CHANGE_CART_AMOUNT",
       payload: { ...product, qty: amount },
     });
+
+    saveCartState(state.cart);
   };
 
   return (

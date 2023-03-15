@@ -11,7 +11,7 @@ import { IconButton } from "@component/buttons";
 import { H4, Paragraph, Small } from "@component/Typography";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { theme } from "@utils/theme";
-import { currency } from "@utils/utils";
+import { createLocalStorage, currency } from "@utils/utils";
 import { useAppContext } from "@context/AppContext";
 import Shop from "@models/shop.model";
 
@@ -67,6 +67,7 @@ type ProductCard19Props = {
 // ==============================================================
 
 const ProductCard19: FC<ProductCard19Props> = (props) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const { img, name, price, reviews, id, slug, images, shop } = props;
 
   const { state, dispatch } = useAppContext();
@@ -94,6 +95,8 @@ const ProductCard19: FC<ProductCard19Props> = (props) => {
     };
 
     dispatch({ type: "CHANGE_CART_AMOUNT", payload });
+
+    saveCartState(state.cart);
   };
 
   return (

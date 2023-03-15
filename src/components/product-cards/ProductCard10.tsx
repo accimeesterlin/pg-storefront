@@ -12,7 +12,7 @@ import { H3, SemiSpan } from "../Typography";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { deviceSize } from "@utils/constants";
 import { useAppContext } from "@context/AppContext";
-import { calculateDiscount, currency, getTheme } from "@utils/utils";
+import { calculateDiscount, createLocalStorage, currency, getTheme } from "@utils/utils";
 import Shop from "@models/shop.model";
 
 // styled component
@@ -115,6 +115,7 @@ type ProductCard10Props = {
 // ======================================================================
 
 const ProductCard10: FC<ProductCard10Props> = (props) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const { id, off, unit, slug, name, price, mainImageUrl, images, shop } = props;
 
   const [open, setOpen] = useState(false);
@@ -128,6 +129,8 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
       type: "CHANGE_CART_AMOUNT",
       payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop?.id },
     });
+
+    saveCartState(state.cart);
   };
 
   return (

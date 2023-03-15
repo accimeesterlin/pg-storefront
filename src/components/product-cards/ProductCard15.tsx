@@ -9,7 +9,7 @@ import FlexBox from "@component/FlexBox";
 import LazyImage from "@component/LazyImage";
 import { H3, Paragraph, Span } from "@component/Typography";
 import { theme } from "@utils/theme";
-import { calculateDiscount, currency } from "@utils/utils";
+import { calculateDiscount, createLocalStorage, currency } from "@utils/utils";
 import { useAppContext } from "@context/AppContext";
 import ProductQuickView from "@component/products/ProductQuickView";
 import Shop from "@models/shop.model";
@@ -98,6 +98,7 @@ type Props = {
 // ============================================================
 
 const ProductCard15: FC<Props> = (props) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const { off, id, name, price, mainImageUrl, rating, slug, images, shop } = props;
 
   const [open, setOpen] = useState(false);
@@ -120,6 +121,8 @@ const ProductCard15: FC<Props> = (props) => {
     };
 
     dispatch({ type: "CHANGE_CART_AMOUNT", payload });
+
+    saveCartState(state.cart);
   };
 
   return (

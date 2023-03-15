@@ -11,7 +11,7 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import { H1, H2, H3, H6, SemiSpan } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
-import { currency } from "@utils/utils";
+import { createLocalStorage, currency } from "@utils/utils";
 import Shop from "@models/shop.model";
 
 // ========================================
@@ -34,11 +34,12 @@ const ProductIntro: FC<ProductIntroProps> = ({
   shop,
   mainImageUrl,
 }) => {
+  const [saveCartState] = createLocalStorage("cartState");
+  const [isPGPayLoading, setIsPGPayLoading] = useState(false);
+  const [isMonCashLoading, setIsMonCashLoading] = useState(false);
   const router = useRouter();
   const { state, dispatch } = useAppContext();
   const [selectedImage, setSelectedImage] = useState(0);
-
-  // TODO: Handle PG Pay and Mon Cash Payment for the customer order
 
   const routerId = router.query.id as string;
   const cartItem = state.cart.find(
@@ -59,7 +60,27 @@ const ProductIntro: FC<ProductIntroProps> = ({
         id: id || routerId,
       },
     });
+
+    saveCartState(state.cart);
   };
+
+  const handlePGPay = () => {
+    setIsPGPayLoading(true);
+    dispatch({
+      type: "SET_PAYMENT_METHOD",
+      payload: "pgpay",
+    })
+    router?.push("/checkout")
+  }
+
+  const handleMonCash = () => {
+    setIsMonCashLoading(true);
+    dispatch({
+      type: "SET_PAYMENT_METHOD",
+      payload: "moncash",
+    })
+    router?.push("/checkout")
+  }
 
   return (
     <Box overflow="hidden">
@@ -179,10 +200,25 @@ const ProductIntro: FC<ProductIntroProps> = ({
             </Link>
           </FlexBox>
           <FlexBox alignItems="center">
-            <Button p="9px" size="small" color="primary" variant="contained">
+            <Button
+              p="9px"
+              size="small"
+              color="primary"
+              loading={isPGPayLoading}
+              variant="contained"
+              onClick={handlePGPay}
+            >
               Pay now with PG Pay
             </Button>
-            <Button p="9px" ml="10px" size="small" color="primary" variant="outlined">
+            <Button
+              p="9px"
+              ml="10px"
+              size="small"
+              loading={isMonCashLoading}
+              color="primary"
+              variant="outlined"
+              onClick={handleMonCash}
+            >
               Pay now with Mon Cash
             </Button>
           </FlexBox>

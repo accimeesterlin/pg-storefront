@@ -10,7 +10,7 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import Typography from "@component/Typography";
 import { IconButton } from "@component/buttons";
-import { currency, getTheme } from "@utils/utils";
+import { createLocalStorage, currency, getTheme } from "@utils/utils";
 import Shop from "@models/shop.model";
 
 // styled component
@@ -57,14 +57,17 @@ interface ProductCard7Props extends SpaceProps {
 // =====================================================================
 
 const ProductCard7: FC<ProductCard7Props> = (props) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const { id, name, qty, price, mainImageUrl, slug, shop, ...others } = props;
 
-  const { dispatch } = useAppContext();
+  const { dispatch, state } = useAppContext();
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
       payload: { qty: amount, name, price, mainImageUrl, id, shopId: shop.id },
     });
+
+    saveCartState(state.cart);
   };
 
   return (

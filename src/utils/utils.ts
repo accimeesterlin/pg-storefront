@@ -63,7 +63,7 @@ export const renderProductCount = (
 
 export function calculateDiscount(price: number, comparePrice: number) {
   const afterDiscount = Number((price - price * (comparePrice / 100)).toFixed(2));
-  
+
   return currency(afterDiscount);
 }
 
@@ -147,3 +147,30 @@ export function groupByShopId(arr) {
   });
   return result;
 }
+
+
+export const createLocalStorage = (key) => {
+  const saveData = (data) => {
+    try {
+      const serializedData = JSON.stringify(data);
+      localStorage.setItem(key, serializedData);
+    } catch (error) {
+      console.error(`Error saving ${key} to local storage:`, error);
+    }
+  };
+
+  const getData = () => {
+    try {
+      const serializedData = localStorage.getItem(key);
+      if (serializedData === null) {
+        return undefined;
+      }
+      return JSON.parse(serializedData);
+    } catch (error) {
+      console.error(`Error retrieving ${key} from local storage:`, error);
+      return undefined;
+    }
+  };
+
+  return [saveData, getData];
+};

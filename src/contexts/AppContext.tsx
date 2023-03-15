@@ -29,6 +29,11 @@ export type CartItem = {
   id: string | number;
 };
 
+export type ICart = CartItem[];
+
+
+
+type LoadCartActionType = { type: "LOAD_CART"; payload: ICart };
 type CartActionType = { type: "CHANGE_CART_AMOUNT"; payload: CartItem };
 type UserActionType = { type: "SET_USER"; payload: User };
 type OrderActionType = { type: "SET_ORDER_LIST"; payload: Order[] };
@@ -43,6 +48,7 @@ type ActionType =
   | AddressActionType
   | CheckoutActionType
   | OrderActionType
+  | LoadCartActionType
   | PaymentMethodActionType;
 
 // =================================================================================
@@ -120,6 +126,12 @@ const reducer = (state: InitialState, action: ActionType) => {
           ...state.checkout,
           ...action.payload,
         },
+      };
+
+    case "LOAD_CART":
+      return {
+        ...state,
+        cart: action.payload,
       };
 
     case "CHANGE_CART_AMOUNT":

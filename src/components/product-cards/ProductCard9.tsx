@@ -13,7 +13,7 @@ import FlexBox from "../FlexBox";
 import NavLink from "../nav-link";
 import { Button } from "../buttons";
 import { H5, SemiSpan } from "../Typography";
-import { calculateDiscount, currency, getTheme } from "@utils/utils";
+import { calculateDiscount, createLocalStorage, currency, getTheme } from "@utils/utils";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { useAppContext } from "@context/AppContext";
 import Shop from "@models/shop.model";
@@ -121,6 +121,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
   shop,
   ...props
 }) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.id === id);
@@ -132,6 +133,8 @@ const ProductCard9: FC<ProductCard9Props> = ({
       type: "CHANGE_CART_AMOUNT",
       payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop?.id },
     });
+
+    saveCartState(state.cart);
   };
 
   return (

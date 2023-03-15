@@ -60,7 +60,7 @@ export const payloadSchema = Joi.object({
   checkout: Joi.object({
     address: Joi.object({
       name: Joi.string().required(),
-      company: Joi.string().required(),
+      company: Joi.string().allow(null, ""),
       street: Joi.string().required(),
       apartment: Joi.string().allow(null, ""),
       city: Joi.string().allow(null, ""), // TODO: make this required

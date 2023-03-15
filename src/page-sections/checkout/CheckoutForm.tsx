@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as yup from "yup";
@@ -12,48 +12,62 @@ import countryList from "@data/countryList";
 import { Button } from "@component/buttons";
 import TextField from "@component/text-field";
 import Typography from "@component/Typography";
-import Address from "@models/address.model";
 import { useAppContext } from "@context/AppContext";
+import { createLocalStorage } from "@utils/utils";
 
-type CheckoutFormProps = {
-  address: Address;
-};
-
-const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
+const CheckoutForm: FC = () => {
   const router = useRouter();
   const { state, dispatch } = useAppContext();
+  const [saveCheckoutToLocalStorage, getCheckoutFromLocalStorage] = createLocalStorage("checkoutData");
   const [isLoading, setIsLoading] = useState(false);
-  const [sameAsShipping, setSameAsShipping] = useState(false);
+  const [sameAsShipping, setSameAsShipping] = useState(true);
 
   const user = state?.user;
+  const address = state?.checkout?.address;
 
   const email = user?.email || "";
+  
+  useEffect(() => {
+    const savedCheckoutData: any = getCheckoutFromLocalStorage("checkoutData");
+    if (savedCheckoutData) {
+      dispatch({
+        type: "SET_CHECKOUT",
+        payload: savedCheckoutData,
+      });
+    }
+  }, []);
+
+  const defaultCountry = {
+    label: "United States",
+    value: "US",
+  }
 
   const initialValues = {
     shipping_name: address?.name || "",
     shipping_email: email,
     shipping_contact: address?.phone,
-    shipping_company: "",
+    shipping_company: address?.company || "",
     shipping_zip: address?.zip || "",
     shipping_city: address?.city || "",
-    shipping_country: address?.country || "",
+    shipping_country: { label: address?.country, value: address?.country } || defaultCountry,
     shipping_address1: address?.street || "",
-    shipping_address2: "",
+    shipping_address2: address?.apartment || "",
 
     billing_name: address?.name || "",
     billing_email: email,
     billing_contact: address?.phone || "",
-    billing_company: "",
+    billing_company: address?.company || "",
     billing_zip: address?.zip || "",
     billing_city: address?.city || "",
     billing_country: address?.country || "",
     billing_address1: address?.street || "",
-    billing_address2: "",
+    billing_address2: address?.apartment || "",
   };
 
   const handleFormSubmit = async (values) => {
     try {
       setIsLoading(true);
+
       const checkoutPayload = {
         address: {
           name: values.shipping_name,
@@ -77,6 +91,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
         },
       };
 
+      saveCheckoutToLocalStorage(checkoutPayload);
       dispatch({ type: "SET_CHECKOUT", payload: checkoutPayload });
       router.push("/payment");
       setIsLoading(false);
@@ -130,6 +145,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                   errorText={touched.shipping_name && errors.shipping_name}
                 />
 
+
                 <TextField
                   fullwidth
                   mb="1rem"
@@ -142,6 +158,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                     touched.shipping_contact && errors.shipping_contact
                   }
                 />
+
 
                 <TextField
                   mb="1rem"
@@ -156,6 +173,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                   }
                 />
 
+
                 <TextField
                   fullwidth
                   mb="1rem"
@@ -168,6 +186,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                   errorText={touched.shipping_city && errors.shipping_city}
                 />
 
+
                 <TextField
                   fullwidth
                   mb="1rem"
@@ -179,6 +198,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                   value={values.shipping_zip}
                   errorText={touched.shipping_zip && errors.shipping_zip}
                 />
+
               </Grid>
 
               <Grid item sm={6} xs={12}>
@@ -194,6 +214,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                   errorText={touched.shipping_email && errors.shipping_email}
                 />
 
+
                 <TextField
                   fullwidth
                   mb="1rem"
@@ -207,6 +228,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                   }
                 />
 
+
                 <Select
                   mb="1rem"
                   label="Country"
@@ -215,8 +237,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
                   errorText={
                     touched.shipping_country && errors.shipping_country
                   }
-                  onChange={(country) =>
-                    setFieldValue("shipping_country", country)
+                  onChange={(country) => setFieldValue("shipping_country", country)
                   }
                 />
 
@@ -244,6 +265,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ address }) => {
               color="secondary"
               label="Same as shipping address"
               mb={sameAsShipping ? "" : "1rem"}
+              checked={sameAsShipping}
               onChange={handleCheckboxChange(values, setFieldValue)}
             />
 
