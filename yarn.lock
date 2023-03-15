@@ -3607,6 +3607,10 @@ node-fetch@^2.6.1:
   dependencies:
     whatwg-url "^5.0.0"
 
+"nodejs-moncash-sdk@github:Trellisweb/moncash-sdk-nodejs":
+  version "1.0.0"
+  resolved "https://codeload.github.com/Trellisweb/moncash-sdk-nodejs/tar.gz/832386ab46534a8f9bb0f9db30a23064c19bcb13"
+
 nprogress@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"

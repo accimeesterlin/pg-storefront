@@ -3,11 +3,12 @@ import Link from "next/link";
 import NextImage from "next/image";
 // import Icon from "@component/icon/Icon";
 import { useRouter } from "next/router";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { Card1 } from "@component/Card1";
 import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
 import api from "@utils/__api__/pgpay";
+import { createMonCashSession } from "@utils/__api__/moncash";
 import Avatar from "@component/avatar";
 import { Button } from "@component/buttons";
 import Typography, { H5, Paragraph, Tiny } from "@component/Typography";
@@ -58,20 +59,32 @@ const MiniCart: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useAppContext();
 
+  const paymentMethod = state?.checkout?.paymentMethod;
+
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
 
-      const pgPayLoad = {
+      const checkoutPayload = {
         cart: state?.cart,
         checkout: state?.checkout,
       };
 
-      const data = await api.createPGPayPayment(pgPayLoad);
+      if (paymentMethod === "pgpay") {
+        const data = await api.createPGPayPayment(checkoutPayload);
 
-      if (data?.order?.id) {
-        // Redirect to order page
-        router?.push(`/orders/${data?.order?.id}`);
+        if (data?.order?.id) {
+          // Redirect to order page
+          router?.push(`/orders/${data?.order?.id}`);
+        }
+      } else if (paymentMethod === "moncash") {
+        const data = await createMonCashSession(checkoutPayload);
+
+        if (data?.moncashRedirectUrl) {
+          // Redirect to order page
+          router?.push(data?.moncashRedirectUrl);
+        }
+        return;
       }
 
       toast.success("Order placed successfully");
@@ -81,10 +94,7 @@ const MiniCart: FC = () => {
         type: "PURCHASE_COMPLETE",
       });
 
-      clearLocalStorageKeys([
-        "cartState",
-        "checkoutState",
-      ]);
+      clearLocalStorageKeys(["cartState", "checkoutState"]);
 
       // TODO:
       // setIsLoading(false);
