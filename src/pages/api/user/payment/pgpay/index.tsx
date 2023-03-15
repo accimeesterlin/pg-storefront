@@ -2,17 +2,16 @@ import User from "@models/user.model";
 import nc from "next-connect";
 import Joi from "joi";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
 import { getAddressByUserId } from "../../../queries/getAddress";
 import { getBalanceById } from "../../../queries/getBalance";
 import { getOrderByUserId } from "../../../queries/getOrder";
 import { authenticationMiddleware } from "../../../token/verify";
-import { currency, getTotalPrice } from "@utils/utils";
+import { currency, getTotalPrice, groupByShopId } from "@utils/utils";
 import { createOrder } from "pages/api/mutation/order";
+import { getShopById } from "pages/api/queries/getShop";
+import { decreaseBalance, increaseBalance } from "pages/api/mutation/balance";
+import Shop from "@models/shop.model";
 
-const baseUrl = process.env.TOP_UP_BASE_URL;
-// const baseUrl = "https://sandbox.pgecom.com";
-const baseOriginUrl = process.env.WEBSITE_ORIGIN;
 const pgMerchantID = process.env.PLATFORM_MERCHANT_ID;
 
 const getHandler = async (req, res) => {
@@ -92,7 +91,9 @@ const updateHandler = async (req, res) => {
     const customerId = user?.id;
 
     const orderId = uuidv4();
-    const amount = getTotalPrice(payload?.cart);
+
+    const products = payload?.cart || [];
+    const amount = getTotalPrice(products);
 
     const orderPayload = {
       id: orderId,
@@ -100,41 +101,106 @@ const updateHandler = async (req, res) => {
       customerId,
       sender: user?.email,
       platform: "marketplace",
-      status: "pending",
-      paymentStatus: "pending",
-      products: payload?.cart, // []
+      status: "completed",
+      paymentStatus: "paid",
+      shippingStatus: "pending",
+      products, // []
       channel: "web",
+      shippingAddress: payload?.checkout?.address,
       amount,
       paymentId: orderId,
       shippingRate: 0,
       totalPrice: amount,
       paymentMethod: "pgpay",
-      quantity: payload?.cart?.reduce((acc, item) => acc + item?.qty, 0),
+      quantity: products?.reduce((acc, item) => acc + item?.qty, 0),
       userID: user?.id,
       transactionType: "sales",
     };
 
-    await createOrder(orderPayload)
-
-    const pgPayload = {
-      userID: pgMerchantID,
-      orderId,
+    await decreaseBalance({
+      userID: customerId,
+      id: customerId,
       amount,
-      phone: user?.phone,
-      transactionType: "sales",
-      description: `You bought ${payload?.cart?.length} items on PGecom Marketplace for a total of ${currency(amount)}`,
-      redirectUrl: `${baseOriginUrl}/api/user/payment/pgpay/verify`,
-    };
-    const response = await axios({
-      method: "post",
-      url: `${baseUrl}/api/pgpay/token`,
-      data: pgPayload,
     });
 
-    const data = response?.data;
-    return res.json(data);
+    const order: any = await createOrder(orderPayload);
+
+    // Process the payment here
+    const firstName = user?.firstName;
+    const lastName = user?.lastName;
+
+    let name = `${firstName} ${lastName}`;
+
+    if (!firstName || !lastName) {
+      name = user?.fullName || user?.email || "Customer";
+    }
+
+    const productsByShopId = groupByShopId(products);
+
+    // Handle multiple shop orders
+    const shopOrders = await Promise.all(
+      Object.keys(productsByShopId).map(async (shopId) => {
+        const products = productsByShopId[shopId];
+        // TODO: Calculate Platform Fees
+        const totalPrice = getTotalPrice(products);
+
+        const shopOwner: Shop = await getShopById(shopId);
+        const merchantId = shopOwner?.merchantId;
+
+        const balancePayload = {
+          userID: merchantId,
+          id: merchantId,
+          amount: totalPrice,
+        };
+
+        const balance = await increaseBalance(balancePayload);
+
+        const newBalance = balance?.amount;
+        const description = `${name} bought ${
+          products?.length
+        } products for a total of ${currency(
+          totalPrice
+        )}. Your updated balance is ${currency(newBalance)}`;
+
+        const orderPayload = {
+          id: uuidv4(),
+          shopId,
+          orderId,
+          customerId,
+          products,
+          totalPrice,
+          description,
+          amount: totalPrice,
+          status: "completed",
+          paymentStatus: "paid",
+          paymentMethod: "pgpay",
+          channel: order?.channel,
+          paymentId: order?.paymentId,
+          platform: order?.platform,
+          transactionType: "sales",
+          userID: merchantId,
+        };
+        await createOrder(orderPayload);
+
+        return orderPayload;
+      })
+    );
+
+    // Order is paid, update order status
+    const shopOrderPayload = {
+      ...orderPayload,
+      paymentStatus: "paid",
+    };
+    await createOrder(orderPayload);
+
+    return res.json({
+      shopOrders,
+      customer: {},
+      order: shopOrderPayload,
+    });
   } catch (error) {
-    const errorMessage = error?.data?.message || error?.message || "Internal server error";
+    const errorMessage =
+      error?.data?.message || error?.message || "Internal server error";
     res.status(500).json({
       message: errorMessage,
     });

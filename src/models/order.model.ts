@@ -1,3 +1,4 @@
+import Address from "./address.model";
 import Product from "./product.model";
 
 interface Order {
@@ -22,7 +23,7 @@ interface Order {
   paymentId?: string;
   channel?: string;
   comparePrice?: number;
-  shippingAddress?: string;
+  shippingAddress?: Address;
   totalPrice?: number;
   isDelivered?: boolean;
   deliveredAt?: string;

@@ -62,7 +62,7 @@ const CheckoutSummary: FC = () => {
       <Divider mb="1rem" />
 
       <Typography fontSize="25px" fontWeight="600" lineHeight="1" textAlign="right">
-        ${totalPriceCurrency}
+        {totalPriceCurrency}
       </Typography>
     </Card1>
   );

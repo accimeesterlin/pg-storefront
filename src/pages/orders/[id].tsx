@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
+import isEmpty from "lodash.isempty";
 import Router from "next/router";
 import { format } from "date-fns";
 import Box from "@component/Box";
@@ -44,7 +45,7 @@ const initialOrder = {
   shopId: "",
   shippingRate: 0,
   paymentId: "",
-  shippingAddress: "",
+  shippingAddress: {},
   channel: "",
   totalPrice: 0,
   comparePrice: 0,
@@ -88,6 +89,20 @@ const OrderDetails = () => {
       Order List
     </Button>
   );
+
+  if (isEmpty(order)) {
+    return (
+      <Typography
+        p="0.5rem 1rem"
+        bg="primary.light"
+        textAlign="center"
+        borderRadius="300px"
+        color="primary.main"
+      >
+        No order found
+      </Typography>
+    );
+  }
 
   return (
     <Fragment>
@@ -161,7 +176,9 @@ const OrderDetails = () => {
               Order ID:
             </Typography>
 
-            <Typography fontSize="14px">#{order.id.substring(0, 8)}</Typography>
+            <Typography fontSize="14px">
+              #{order?.id?.substring(0, 8)}
+            </Typography>
           </FlexBox>
 
           <FlexBox className="pre" m="6px" alignItems="center">
@@ -230,8 +247,21 @@ const OrderDetails = () => {
               Shipping Address
             </H5>
 
-            <Paragraph fontSize="14px" my="0px">
-              {order.shippingAddress}
+            <Paragraph fontSize="14px" my="0px" mb="1rem">
+              {order.shippingAddress?.street}
+            </Paragraph>
+            <Paragraph fontSize="14px" my="0px" mb="1rem">
+              {order.shippingAddress?.apartment}
+            </Paragraph>
+            <Paragraph fontSize="14px" my="0px" mb="1rem">
+              {order.shippingAddress?.city}
+            </Paragraph>
+            <Paragraph fontSize="14px" my="0px" mb="1rem">
+              {order.shippingAddress?.state}
+            </Paragraph>
+
+            <Paragraph fontSize="14px" my="0px" mb="1rem">
+              {order.shippingAddress?.country}
             </Paragraph>
           </Card>
         </Grid>
@@ -291,7 +321,11 @@ const OrderDetails = () => {
               <H6 my="0px">{currency(order.totalPrice)}</H6>
             </FlexBox>
 
-            <Typography fontSize="14px">Paid by Credit/Debit Card</Typography>
+            {order?.paymentMethod && (
+              <Typography fontSize="14px">
+                Paid by {order?.paymentMethod}
+              </Typography>
+            )}
           </Card>
         </Grid>
       </Grid>

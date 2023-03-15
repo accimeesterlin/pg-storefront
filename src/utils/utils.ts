@@ -174,3 +174,7 @@ export const createLocalStorage = (key) => {
 
   return [saveData, getData];
 };
+
+export function clearLocalStorageKeys(keys: string[]) {
+  keys.forEach((key) => localStorage.removeItem(key));
+}

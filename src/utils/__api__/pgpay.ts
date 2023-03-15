@@ -1,17 +1,14 @@
 import axios from 'axios';
 
 
-
-
-
-export const createPGPayToken = async (payload): Promise<any> => {
+export const createPGPayPayment = async (payload): Promise<any> => {
   const response = await axios({
     method: "POST",
-    url: "/api/user/payment/pgpay/createsession",
+    url: "/api/user/payment/pgpay",
     data: payload,
   });
   return response?.data;
 };
 
 
-export default { createPGPayToken };
+export default { createPGPayPayment };

@@ -33,6 +33,7 @@ export type ICart = CartItem[];
 
 
 
+type PurchaseCartActionType = { type: "PURCHASE_COMPLETE" };
 type LoadCartActionType = { type: "LOAD_CART"; payload: ICart };
 type CartActionType = { type: "CHANGE_CART_AMOUNT"; payload: CartItem };
 type UserActionType = { type: "SET_USER"; payload: User };
@@ -48,6 +49,7 @@ type ActionType =
   | AddressActionType
   | CheckoutActionType
   | OrderActionType
+  | PurchaseCartActionType
   | LoadCartActionType
   | PaymentMethodActionType;
 
@@ -107,6 +109,17 @@ const reducer = (state: InitialState, action: ActionType) => {
         user: {
           ...state.user,
           addresses: action.payload,
+        },
+      };
+
+    case "PURCHASE_COMPLETE":
+      return {
+        ...state,
+        cart: [],
+        checkout: {
+          ...state.checkout,
+          address: {},
+          billingAddress: {},
         },
       };
 

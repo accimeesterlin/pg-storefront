@@ -3,16 +3,16 @@ import Link from "next/link";
 import NextImage from "next/image";
 // import Icon from "@component/icon/Icon";
 import { useRouter } from "next/router";
+import { toast } from 'react-toastify';
 import { Card1 } from "@component/Card1";
 import Divider from "@component/Divider";
-import { toast } from "react-toastify";
 import FlexBox from "@component/FlexBox";
 import api from "@utils/__api__/pgpay";
 import Avatar from "@component/avatar";
 import { Button } from "@component/buttons";
 import Typography, { H5, Paragraph, Tiny } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
-import { currency, getTotalPrice } from "@utils/utils";
+import { clearLocalStorageKeys, currency, getTotalPrice } from "@utils/utils";
 import CheckoutNavLayout from "@component/layout/CheckoutNavLayout";
 
 import Grid from "@component/grid/Grid";
@@ -56,7 +56,7 @@ const PaymentReview = () => {
 const MiniCart: FC = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
 
   const handleSubmit = async () => {
     try {
@@ -67,14 +67,24 @@ const MiniCart: FC = () => {
         checkout: state?.checkout,
       };
 
-      const data = await api.createPGPayToken(pgPayLoad);
+      const data = await api.createPGPayPayment(pgPayLoad);
 
-      console.log("Data: ", data);
-
-      if (data?.redirectUrl) {
-        // Redirect user to PG Pay
-        router?.push(data?.redirectUrl);
+      if (data?.order?.id) {
+        // Redirect to order page
+        router?.push(`/orders/${data?.order?.id}`);
       }
+
+      toast.success("Order placed successfully");
+
+      // Reset the cart and checkout state
+      dispatch({
+        type: "PURCHASE_COMPLETE",
+      });
+
+      clearLocalStorageKeys([
+        "cartState",
+        "checkoutState",
+      ]);
 
       // TODO:
       // setIsLoading(false);
