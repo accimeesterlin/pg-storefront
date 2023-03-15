@@ -45,7 +45,7 @@ const Section1: FC = () => {
           </Paragraph>
 
           <FlexBox justifyContent="center" m="-0.5rem">
-            <a href="https://1.envato.market/oeNbNe">
+            <a href="/">
               <Button variant="contained" color="primary" m="0.5rem">
                 Purchase Now
               </Button>

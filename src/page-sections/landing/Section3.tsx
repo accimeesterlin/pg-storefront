@@ -59,7 +59,7 @@ const Section3: FC = () => {
           ))}
         </Grid>
 
-        <a href="https://1.envato.market/oeNbNe">
+        <a href="/">
           <Button variant="contained" color="primary" minWidth="125px" mx="auto" mt="2.25rem">
             Purchase Now
           </Button>

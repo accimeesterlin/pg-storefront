@@ -55,7 +55,7 @@ const Section5: FC = () => {
               Can be used in a single end product which end users <b>are not charged</b> for.
             </Paragraph>
 
-            <a href="https://1.envato.market/oeNbNe">
+            <a href="/">
               <Button variant="outlined" color="secondary" mx="auto">
                 Purchase Now
               </Button>
@@ -86,7 +86,7 @@ const Section5: FC = () => {
               Can be used in a single end product which end users <b>are not charged</b> for.
             </Paragraph>
 
-            <a href="https://1.envato.market/oeNbNe">
+            <a href="/">
               <Button variant="outlined" color="dark" mx="auto">
                 Purchase Now
               </Button>

@@ -30,19 +30,19 @@ const Topbar: FC = () => {
           </div>
 
           <FlexBox alignItems="center">
-            <Icon size="14px">phone-call</Icon>
-            <span>+88012 3456 7894</span>
+            <Icon size="14px" color="gray">phone-call</Icon>
+            <span>+1 404 999 7045</span>
           </FlexBox>
 
           <FlexBox alignItems="center" ml="20px">
-            <Icon size="14px">mail</Icon>
+            <Icon size="14px" color="gray">mail</Icon>
             <span>info@pgecom.com</span>
           </FlexBox>
         </FlexBox>
 
         <FlexBox className="topbar-right" alignItems="center">
           <NavLink className="link" href="/">
-            Theme FAQ"s
+            FAQ"s
           </NavLink>
 
           <NavLink className="link" href="/">

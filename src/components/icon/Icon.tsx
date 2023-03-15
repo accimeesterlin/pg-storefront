@@ -9,7 +9,7 @@ export interface IconProps {
   transform?: string;
   color?: colorOptions;
   variant?: "small" | "medium" | "large";
-  defaultcolor?: "currentColor" | "auto";
+  defaultcolor?: "currentColor" | "auto" | "white";
 }
 
 // type ComponentProps = IconProps & SpaceProps & ButtonHTMLAttributes<IconProps>;

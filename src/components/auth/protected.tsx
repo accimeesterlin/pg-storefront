@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Hub } from "aws-amplify";
 import { useRouter } from "next/router";
 import { getUserSession } from "@utils/__api__/users";
+import LoadingSkeleton from "@component/skeleton/homePageSkeleton";
 
 type IProtectedProps = {
   children?: any;
@@ -64,7 +65,7 @@ const ProtectedRoute = ({ children, isSidebar }: IProtectedProps) => {
   };
 
   if (!isAuthorized) {
-    return null;
+    return <LoadingSkeleton />
   }
 
   return isSidebar && children;
