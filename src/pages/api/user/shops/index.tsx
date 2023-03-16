@@ -153,32 +153,6 @@ export const shopHandler = async (req, res) => {
   }
 };
 
-export const findShopHandler = async (req, res) => {
-  try {
-    const payload = await querySchema.validateAsync(req?.query);
-    const tokenData: any = req?.tokenData;
-
-    const user = tokenData?.user;
-    const merchantId = user?.id || user?.userID;
-
-    const name = payload?.name?.toLowerCase();
-
-    if (!name) {
-      const merchantShops = await getShopByMerchantId(merchantId);
-
-      return res.json(merchantShops);
-    }
-
-    const shop = await getShopByName(name);
-
-    return res.json(shop);
-  } catch (error) {
-    return res.json({
-      message: error?.message || "Internal Server Error",
-      status: error?.status || 500,
-    });
-  }
-};
 export const findAllShopsHandler = async (req, res) => {
   try {
     const query = req?.query;
