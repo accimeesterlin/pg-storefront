@@ -9,7 +9,7 @@ export const findProductHandler = async (req, res) => {
     const shops: any = await getLatestShops();
 
     const products = await Promise.all(
-      shops.map(async (shop) => {
+      shops?.map(async (shop) => {
         const shopId = shop?.id;
 
         let productList = [];
