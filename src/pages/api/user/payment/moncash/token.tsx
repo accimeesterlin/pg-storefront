@@ -112,7 +112,7 @@ const updateHandler = async (req, res) => {
       paymentId: orderId,
       shippingRate: 0,
       totalPrice: amount,
-      paymentMethod: "pgpay",
+      paymentMethod: "moncash",
       quantity: products?.reduce((acc, item) => acc + item?.qty, 0),
       userID: user?.id,
       transactionType: "sales",
@@ -140,9 +140,12 @@ const updateHandler = async (req, res) => {
     console.log("Gdes: ", gdes);
 
     const moncashPayload = {
-      amount: `${gdes.toFixed(2)}`,
+      // amount: `${gdes.toFixed(2)}`,
+      amount: `${30}`,
       orderId,
     };
+
+    console.log("Order Id: ", orderId);
 
     const paymentCreator = moncash.payment;
 

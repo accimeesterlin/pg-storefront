@@ -4,6 +4,7 @@ interface Shop {
   id?: string;
   slug?: string;
   user?: any;
+  description?: string;
   email?: string;
   name?: string;
   merchantId?: string;

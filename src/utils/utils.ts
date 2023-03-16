@@ -178,3 +178,13 @@ export const createLocalStorage = (key) => {
 export function clearLocalStorageKeys(keys: string[]) {
   keys.forEach((key) => localStorage.removeItem(key));
 }
+
+export function removeEmptyStrings(obj) {
+  const result = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (value !== "" || value !== null || value !== undefined) {
+      result[key] = value;
+    }
+  }
+  return result;
+}

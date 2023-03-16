@@ -148,6 +148,31 @@ const getOrderByOrderId = async (orderId: string) => {
   return items[0];
 };
 
+// Define a function to check if a customer has already purchased a product
+const hasCustomerPurchasedProduct = async (customerId, productId) => {
+  try {
+    // Query the Orders table for orders that match the customer ID and the product ID
+    const params = {
+      TableName: orderTable,
+      IndexName: 'byCustomerId',
+      KeyConditionExpression: 'customerId = :customerId',
+      FilterExpression: 'contains(products, :productId)',
+      ExpressionAttributeValues: {
+        ':customerId': { S: customerId },
+        ':productId': { S: productId }
+      },
+      ProjectionExpression: 'id'
+    }
+    const items = await fetchData(params, "hasCustomerPurchasedProduct");
+
+    // Return true if any orders were found, false otherwise
+    return items.Count > 0;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
+
 export {
   getOrderBySender,
   getOrderByPhone,
@@ -158,5 +183,6 @@ export {
   getOrderByStatus,
   getOrderByPlatform,
   getOrderByUserId,
-  getOrderByOrderId
+  getOrderByOrderId,
+  hasCustomerPurchasedProduct
 };
