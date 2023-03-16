@@ -49,17 +49,21 @@ export const getShopByName = async (name: string) => {
 };
 
 export const getLatestShops = async () => {
-  const params = {
-    TableName: SHOP_TABLE,
-    Limit: 15,
-    ScanIndexForward: false, // Sort in descending order
-    IndexName: "byCreatedAt", // Use the secondary index for createdAt
-    FilterExpression: "verified = :verified",
-    ExpressionAttributeValues: { ":verified": true },
-  };
-
-  const shops = await db.scan(params).promise();
-  return shops?.Items;
+  try {
+    const params = {
+      TableName: SHOP_TABLE,
+      Limit: 15,
+      ScanIndexForward: false, // Sort in descending order
+      IndexName: "byCreatedAt", // Use the secondary index for createdAt
+      FilterExpression: "verified = :verified",
+      ExpressionAttributeValues: { ":verified": true },
+    };
+  
+    const shops = await db.scan(params).promise();
+    return shops?.Items;
+  } catch (error) {
+    return [];
+  }
 };
 
 export const getTotalShopCount = async () => {
