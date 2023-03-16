@@ -1,14 +1,12 @@
 import nc from "next-connect";
-import { getLatestProducts, getProductByShopId } from "pages/api/queries/getProduct";
-
-
-console.log("PID: ", process.pid);
+import { getProductByShopId } from "pages/api/queries/getProduct";
+import { getLatestShops } from "pages/api/queries/getShop";
 
 export const findProductHandler = async (req, res) => {
   try {
     const query = req?.query;
     console.log("Query: ", query);
-    const shops: any = await getLatestProducts();
+    const shops: any = await getLatestShops();
 
     const products = await Promise.all(
       shops.map(async (shop) => {
