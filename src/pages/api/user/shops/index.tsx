@@ -181,6 +181,7 @@ export const findShopHandler = async (req, res) => {
 };
 export const findAllShopsHandler = async (req, res) => {
   try {
+    const query = req?.query;
     const shops = await getLatestShops();
     const totalShops = await getTotalShopCount();
 
@@ -215,6 +216,7 @@ export const findAllShopsHandler = async (req, res) => {
     return res.json({
       shops: shopsWithUser,
       totalShops,
+      ...query
     });
   } catch (error) {
     return res.status(500).json({
