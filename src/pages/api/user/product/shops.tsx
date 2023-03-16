@@ -16,7 +16,9 @@ export const findProductHandler = async (req, res) => {
         let productList = [];
 
         try {
-          productList = await getProductByShopId(shopId);
+          if (shopId) {
+            productList = await getProductByShopId(shopId);
+          }
         } catch (error) {
           // No product
           console.log("Error product: ", error);
