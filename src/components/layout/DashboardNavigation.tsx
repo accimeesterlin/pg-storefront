@@ -74,6 +74,7 @@ const DashboardNavigation = () => {
         { href: "/profile", title: "Profile Info", iconName: "user", count: 0 },
         { href: "/address", title: "Addresses", iconName: "pin", count: addressCount },
         { href: "/payment-methods", title: "Payment Methods", iconName: "credit-card", count: 0 },
+        { href: "/signout", title: "Signout", iconName: "", count: 0 },
       ],
     },
   ];

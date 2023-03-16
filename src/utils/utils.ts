@@ -122,6 +122,10 @@ export function getPreviousPath() {
   // Set the previous path as the value of the current path.
   const prevPath = storage.getItem("prevPath");
 
+  if (prevPath === "/signout") {
+    return "/profile";
+  }
+
   return prevPath;
 }
 
