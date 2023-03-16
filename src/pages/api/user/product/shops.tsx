@@ -1,12 +1,13 @@
 import nc from "next-connect";
 import { getProductByShopId } from "pages/api/queries/getProduct";
-import { getLatestShops } from "pages/api/queries/getShop";
+// import { getLatestShops } from "pages/api/queries/getShop";
 
 export const findProductHandler = async (req, res) => {
   try {
     const query = req?.query;
     console.log("Query: ", query);
-    const shops: any = await getLatestShops();
+    // const shops: any = await getLatestShops();
+    const shops: any = []
 
     const products = await Promise.all(
       shops?.map(async (shop) => {

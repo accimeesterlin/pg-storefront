@@ -115,11 +115,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   let shops = [];
 
-  // try {
-  //   shops = await api.getAvailableShop();
-  // } catch (error) {
-  //   // No shops available
-  // }
+  try {
+    shops = await api.getAvailableShop();
+  } catch (error) {
+    // No shops available
+  }
 
   // const frequentlyBought = await api.getFrequentlyBought();
   let product: Product = {};
