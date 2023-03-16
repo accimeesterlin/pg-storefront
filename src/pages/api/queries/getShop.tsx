@@ -55,13 +55,16 @@ export const getLatestShops = async () => {
       Limit: 15,
       ScanIndexForward: false, // Sort in descending order
       IndexName: "byCreatedAt", // Use the secondary index for createdAt
+      // KeyConditionExpression: "#createdAt > :createdAt",
       FilterExpression: "verified = :verified",
+      // ExpressionAttributeNames: { "#createdAt": "createdAt" },
       ExpressionAttributeValues: { ":verified": true },
     };
   
     const shops = await db.scan(params).promise();
     return shops?.Items;
   } catch (error) {
+    console.log("Error getting latest shops", error);
     return [];
   }
 };
