@@ -7,6 +7,7 @@ console.log("PID: ", process.pid);
 export const findProductHandler = async (req, res) => {
   try {
     const query = req?.query;
+    console.log("Query: ", query);
     const shops: any = await getLatestProducts();
 
     const products = await Promise.all(
@@ -29,10 +30,7 @@ export const findProductHandler = async (req, res) => {
       })
     );
 
-    return res.json({
-      products,
-      ...query
-    });
+    return res.json(products);
   } catch (error) {
     return res.status(500).json({
       message: error?.message || "Internal Server Error",

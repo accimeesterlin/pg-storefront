@@ -58,8 +58,8 @@ export const getLatestShops = async () => {
     ExpressionAttributeValues: { ":verified": true },
   };
 
-  const items = await fetchData(params, "getLatestShops");
-  return items;
+  const shops = await db.scan(params).promise();
+  return shops?.Items;
 };
 
 export const getTotalShopCount = async () => {

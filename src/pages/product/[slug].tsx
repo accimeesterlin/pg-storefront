@@ -120,7 +120,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   } catch (error) {
     // No shops available
   }
-  
+
   // const frequentlyBought = await api.getFrequentlyBought();
   let product: Product = {};
 
@@ -135,6 +135,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     product = await api.getDemoProduct(params.slug as string) || {};
   }
 
+  
   let relatedProducts = [];
   try {
     relatedProducts = await api.getRelatedProducts(product?.id);

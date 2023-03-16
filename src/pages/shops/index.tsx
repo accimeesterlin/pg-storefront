@@ -53,6 +53,7 @@ export const getStaticProps: GetStaticProps = async () => {
     shopList = await api.getShopList();
   } catch (error) {
     // No shops found
+    console.log("Error: ", error?.response?.data?.message);
   }
   return { props: { shopList: shopList } };
 };
