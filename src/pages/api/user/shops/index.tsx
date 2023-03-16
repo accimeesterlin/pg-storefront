@@ -9,7 +9,6 @@ import { serialize } from "cookie";
 import { s3 } from "pages/api/utils/authUtils";
 import {
   getLatestShops,
-  getShopByMerchantId,
   getShopByName,
   getTotalShopCount,
 } from "pages/api/queries/getShop";
