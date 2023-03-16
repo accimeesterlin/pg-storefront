@@ -97,7 +97,7 @@ const ProductDetails = (props: Props) => {
 ProductDetails.layout = NavbarLayout;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  let paths = [ { params: { slug: 'pgecom' } } ]
+  let paths = [ { params: { slug: 'hair' } } ]
 
   try {
     paths = await api.getSlugs();
