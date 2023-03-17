@@ -3,10 +3,10 @@ import nc from "next-connect";
 import Joi from "joi";
 import multer from "multer";
 import multerS3 from "multer-s3";
-// import { getAddressByUserId } from "../queries/getAddress";
-// import { getBalanceById } from "../queries/getBalance";
-// import { getOrderByUserId } from "../queries/getOrder";
-// import { authenticationMiddleware } from "../token/verify";
+import { getAddressByUserId } from "../queries/getAddress";
+import { getBalanceById } from "../queries/getBalance";
+import { getOrderByUserId } from "../queries/getOrder";
+import { authenticationMiddleware } from "../token/verify";
 import { s3 } from "../utils/authUtils";
 import MulterS3File from "@models/file.model";
 import { updateUser } from "../mutation/user";
@@ -39,32 +39,34 @@ const upload = multer({
 const uploadMiddleware = upload.single("file");
 
 const getHandler = async (req, res) => {
-  console.log("Request: ", req);
   try {
-    // const user: User = req?.tokenData?.user;
+    const user: User = req?.tokenData?.user;
 
-    // const userID = user?.id;
+    const userID = user?.id;
 
-    // // Execute the database queries in parallel
-    // const [balance, addresses, orders] = await Promise.all([
-    //   getBalanceById(userID),
-    //   getAddressByUserId(userID),
-    //   getOrderByUserId(userID),
-    // ]);
+    // Execute the database queries in parallel
+    const [balance, addresses, orders] = await Promise.all([
+      getBalanceById(userID),
+      getAddressByUserId(userID),
+      getOrderByUserId(userID),
+    ]);
 
-    // // TODO: get the following
-    // // Await Payments Total
-    // // Order Total
-    // // Await Delivery
-    // // Wishlists
-    // // Payment Methods
-    // // Support Tickets
+    // TODO: get the following
+    // Await Payments Total
+    // Order Total
+    // Await Delivery
+    // Wishlists
+    // Payment Methods
+    // Support Tickets
 
-    // if (user?.apiKeySecret) {
-    //   delete user?.apiKeySecret;
-    // }
+    if (user?.apiKeySecret) {
+      delete user?.apiKeySecret;
+    }
     return res.json({
-      message: "User successfully updated" 
+      ...user,
+      addresses,
+      orders,
+      balance,
     });
   } catch (error) {
     res.status(500).json({
@@ -112,7 +114,7 @@ const updateHandler = async (req, res) => {
 };
 
 export default nc()
-  // .use(authenticationMiddleware)
+  .use(authenticationMiddleware)
   .get(getHandler)
   .use(uploadMiddleware)
   .put(updateHandler);
