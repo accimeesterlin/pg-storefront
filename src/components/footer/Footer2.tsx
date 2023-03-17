@@ -61,9 +61,9 @@ const Footer2: FC = () => {
         <Grid container spacing={6}>
           <Grid item md={6} sm={6} xs={12}>
             <Paragraph mb="1.25rem" color="gray.500" maxWidth="370px">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor libero id et, in
-              gravida. Sit diam duis mauris nulla cursus. Erat et lectus vel ut sollicitudin elit at
-              amet.
+              PGecom offers a comprehensive suite of services to meet the needs
+              of our customers, from gift cards and online courses, to
+              instructors, virtual cards, and ecommerce market access.
             </Paragraph>
 
             <AppStore />

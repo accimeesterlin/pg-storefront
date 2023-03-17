@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import Box from "@component/Box";
 import Image from "@component/Image";
 import Icon from "@component/icon/Icon";
@@ -15,15 +15,29 @@ import { SearchInputWithCategory } from "@component/search-box";
 import { useAppContext } from "@context/AppContext";
 import StyledHeader from "./styles";
 import UserLoginDialog from "./LoginDialog";
+import { createLocalStorage } from "@utils/utils";
 
 // ====================================================================
 type HeaderProps = { isFixed?: boolean; className?: string };
 // =====================================================================
 
 const Header: FC<HeaderProps> = ({ isFixed, className }) => {
-  const { state } = useAppContext();
+  const [, loadCartState] = createLocalStorage("cartState");
+  const { state, dispatch } = useAppContext();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
+
+
+  useEffect(() => {
+    const cartState: any = loadCartState("cartState");
+
+    if (cartState) {
+      dispatch({
+        type: "LOAD_CART",
+        payload: cartState,
+      });
+    }
+  }, []);
 
   const CART_HANDLE = (
     <Box ml="20px" position="relative">

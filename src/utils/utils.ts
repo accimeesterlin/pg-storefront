@@ -62,11 +62,8 @@ export const renderProductCount = (
  */
 
 export function calculateDiscount(price: number, comparePrice: number) {
-  console.log("typeof price", typeof price);
-  console.log("typeof compare price", typeof comparePrice);
   const afterDiscount = Number((price - price * (comparePrice / 100)).toFixed(2));
-  
-  console.log("afterDiscount", afterDiscount);
+
   return currency(afterDiscount);
 }
 
@@ -100,4 +97,98 @@ export function currency(price: number, fraction: number = 2) {
   });
 
   return formatCurrency.format(price);
+}
+
+
+export function storePathValues() {
+  const storage = globalThis?.sessionStorage;
+
+  if (!storage) return;
+  // Set the previous path as the value of the current path.
+  const prevPath = storage.getItem("currentPath");
+  const pathName = globalThis.location.pathname;
+  if (pathName !== prevPath) {
+    storage.setItem("prevPath", prevPath);
+    // Set the current path value by looking at the browser's location object.
+    storage.setItem("currentPath", pathName);
+  }
+}
+
+
+export function getPreviousPath() {
+  const storage = globalThis?.sessionStorage;
+
+  if (!storage) return;
+  // Set the previous path as the value of the current path.
+  const prevPath = storage.getItem("prevPath");
+
+  if (prevPath === "/signout") {
+    return "/profile";
+  }
+
+  return prevPath;
+}
+
+export const getTotalPrice = (cart: any[]) => {
+  return cart.reduce((accumulator, item) => accumulator + item.price * item.qty, 0) || 0;
+};
+
+export function getTotalQuantity(arr) {
+  let total = 0;
+  for (let i = 0; i < arr.length; i++) {
+    total += arr[i].qty;
+  }
+  return total;
+}
+
+export function groupByShopId(arr) {
+  const result = {};
+  arr.forEach(item => {
+    if (!result[item.shopId]) {
+      result[item.shopId] = [];
+    }
+    result[item.shopId].push(item);
+  });
+  return result;
+}
+
+
+export const createLocalStorage = (key) => {
+  const saveData = (data) => {
+    try {
+      const serializedData = JSON.stringify(data);
+      localStorage.setItem(key, serializedData);
+    } catch (error) {
+      console.error(`Error saving ${key} to local storage:`, error);
+    }
+  };
+
+  const getData = () => {
+    try {
+      const serializedData = localStorage.getItem(key);
+      if (serializedData === null) {
+        return undefined;
+      }
+      return JSON.parse(serializedData);
+    } catch (error) {
+      console.error(`Error retrieving ${key} from local storage:`, error);
+      return undefined;
+    }
+  };
+
+  return [saveData, getData];
+};
+
+export function clearLocalStorageKeys(keys: string[]) {
+  keys.forEach((key) => localStorage.removeItem(key));
+}
+
+export function removeEmptyStrings(obj) {
+  const result = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (value !== "" || value !== null || value !== undefined) {
+      result[key] = value;
+    }
+  }
+  return result;
 }

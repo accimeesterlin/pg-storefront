@@ -19,7 +19,6 @@ const Topbar: FC = () => {
 
   useEffect(() => {
     // get language from browser
-    // console.log(navigator.language);
   }, []);
 
   return (
@@ -31,12 +30,12 @@ const Topbar: FC = () => {
           </div>
 
           <FlexBox alignItems="center">
-            <Icon size="14px">phone-call</Icon>
-            <span>+88012 3456 7894</span>
+            <Icon size="14px" color="gray">phone-call</Icon>
+            <span>+1 404 999 7045</span>
           </FlexBox>
 
           <FlexBox alignItems="center" ml="20px">
-            <Icon size="14px">mail</Icon>
+            <Icon size="14px" color="gray">mail</Icon>
             <span>info@nourish.com</span>
           </FlexBox>
         </FlexBox>

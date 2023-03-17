@@ -9,8 +9,9 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import LazyImage from "@component/LazyImage";
 import { H3, Span } from "@component/Typography";
-import { calculateDiscount, currency } from "@utils/utils";
+import { calculateDiscount, createLocalStorage, currency } from "@utils/utils";
 import { useAppContext } from "@context/AppContext";
+import Shop from "@models/shop.model";
 
 // styled components
 const StyledCard = styled(Box)(({ theme }) => ({
@@ -111,6 +112,7 @@ interface Props {
   price: number;
   mainImageUrl: string;
   status: string;
+  shop: Shop;
   rating?: number;
   id: string | number;
   productColors: string[];
@@ -118,7 +120,8 @@ interface Props {
 // =====================================================================
 
 const ProductCard13: FC<Props> = (props) => {
-  const { off, status, id, name, price, mainImageUrl, rating, productColors, slug } = props;
+  const [saveCartState] = createLocalStorage("cartState");
+  const { off, status, id, name, price, mainImageUrl, rating, productColors, slug, shop } = props;
 
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.slug === slug);
@@ -126,8 +129,10 @@ const ProductCard13: FC<Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name },
+      payload: { price, mainImageUrl, id, qty, slug, name, shopId: shop.id },
     });
+
+    saveCartState(state.cart);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { FC, Fragment, useEffect } from "react";
 import Link from "next/link";
 import NextImage from "next/image";
 import Icon from "@component/icon/Icon";
@@ -9,23 +9,27 @@ import { Button } from "@component/buttons";
 import Typography, { H5, Paragraph, Tiny } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
 import { StyledMiniCart } from "./styles";
-import { currency } from "@utils/utils";
+import { createLocalStorage, currency, getTotalPrice } from "@utils/utils";
 
 type MiniCartProps = { toggleSidenav?: () => void };
 
 const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const { state, dispatch } = useAppContext();
-
   const handleCartAmountChange = (amount: number, product: any) => () => {
+    
     dispatch({
       type: "CHANGE_CART_AMOUNT",
       payload: { ...product, qty: amount },
     });
   };
+  
+  useEffect(() => {
+    if (state.cart) {
+      saveCartState(state.cart);
+    }
+  }, [state.cart]);
 
-  const getTotalPrice = () => {
-    return state.cart.reduce((accumulator, item) => accumulator + item.price * item.qty, 0) || 0;
-  };
 
   return (
     <StyledMiniCart>
@@ -139,7 +143,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
               m="1rem 1rem 0.75rem"
               onClick={toggleSidenav}
             >
-              <Typography fontWeight={600}>Checkout Now ({currency(getTotalPrice())})</Typography>
+              <Typography fontWeight={600}>Checkout Now ({currency(getTotalPrice(state.cart))})</Typography>
             </Button>
           </Link>
 

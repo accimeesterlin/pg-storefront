@@ -11,7 +11,7 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import { H1, H2, H3, H6, SemiSpan } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
-import { currency } from "@utils/utils";
+import { createLocalStorage, currency } from "@utils/utils";
 import Shop from "@models/shop.model";
 
 // ========================================
@@ -19,30 +19,68 @@ type ProductIntroProps = {
   price: number;
   rating: number;
   mainImageUrl?: string;
-  shop: Shop
+  shop: Shop;
   name: string;
   images: any[];
   id: string | number;
 };
 // ========================================
 
-const ProductIntro: FC<ProductIntroProps> = ({ images, name, price, id, shop, mainImageUrl }) => {
+const ProductIntro: FC<ProductIntroProps> = ({
+  images,
+  name,
+  price,
+  id,
+  shop,
+  mainImageUrl,
+}) => {
+  const [saveCartState] = createLocalStorage("cartState");
+  const [isPGPayLoading, setIsPGPayLoading] = useState(false);
+  const [isMonCashLoading, setIsMonCashLoading] = useState(false);
   const router = useRouter();
   const { state, dispatch } = useAppContext();
   const [selectedImage, setSelectedImage] = useState(0);
 
   const routerId = router.query.id as string;
-  const cartItem = state.cart.find((item) => item.id === id || item.id === routerId);
+  const cartItem = state.cart.find(
+    (item) => item.id === id || item.id === routerId
+  );
 
   const handleImageClick = (ind: number) => () => setSelectedImage(ind);
 
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, qty: amount, name: name, mainImageUrl: images[0]?.url, id: id || routerId },
+      payload: {
+        price,
+        qty: amount,
+        name: name,
+        mainImageUrl: images[0]?.url,
+        shopId: shop?.id,
+        id: id || routerId,
+      },
     });
-    
+
+    saveCartState(state.cart);
   };
+
+  const handlePGPay = () => {
+    setIsPGPayLoading(true);
+    dispatch({
+      type: "SET_PAYMENT_METHOD",
+      payload: "pgpay",
+    })
+    router?.push("/checkout")
+  }
+
+  const handleMonCash = () => {
+    setIsMonCashLoading(true);
+    dispatch({
+      type: "SET_PAYMENT_METHOD",
+      payload: "moncash",
+    })
+    router?.push("/checkout")
+  }
 
   return (
     <Box overflow="hidden">
@@ -53,7 +91,11 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, name, price, id, shop, ma
               <Image
                 width={300}
                 height={300}
-                src={images?.length >= 0 ? images[selectedImage]?.url : mainImageUrl}
+                src={
+                  images?.length >= 0
+                    ? images[selectedImage]?.url
+                    : mainImageUrl
+                }
                 style={{ objectFit: "contain" }}
               />
             </FlexBox>
@@ -73,7 +115,9 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, name, price, id, shop, ma
                   justifyContent="center"
                   ml={ind === 0 && "auto"}
                   mr={ind === images?.length - 1 ? "auto" : "10px"}
-                  borderColor={selectedImage === ind ? "primary.main" : "gray.400"}
+                  borderColor={
+                    selectedImage === ind ? "primary.main" : "gray.400"
+                  }
                   onClick={handleImageClick(ind)}
                 >
                   <Avatar src={image?.url} borderRadius="10px" size={40} />
@@ -154,6 +198,29 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, name, price, id, shop, ma
                 </H6>
               </a>
             </Link>
+          </FlexBox>
+          <FlexBox alignItems="center">
+            <Button
+              p="9px"
+              size="small"
+              color="primary"
+              loading={isPGPayLoading}
+              variant="contained"
+              onClick={handlePGPay}
+            >
+              Pay now with PG Pay
+            </Button>
+            <Button
+              p="9px"
+              ml="10px"
+              size="small"
+              loading={isMonCashLoading}
+              color="primary"
+              variant="outlined"
+              onClick={handleMonCash}
+            >
+              Pay now with Mon Cash
+            </Button>
           </FlexBox>
         </Grid>
       </Grid>

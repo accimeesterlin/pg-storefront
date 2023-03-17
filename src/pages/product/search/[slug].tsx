@@ -95,7 +95,7 @@ const ProductSearchResult = () => {
 
         <Grid item lg={9} xs={12}>
           {view === "grid" ? (
-            <ProductCard1List products={db.slice(95, 104)} />
+            <ProductCard1List products={db.slice(95, 104)} shop={{ id: "" }} />
           ) : (
             <ProductCard9List products={db.slice(95, 104)} />
           )}

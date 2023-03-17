@@ -9,6 +9,7 @@ const gray = {
   200: "#F3F5F9", // Line Stroke
   100: "#F6F9FC",
   white: "#FFFFFF",
+  main: "#FFFFFF",
 };
 
 const textColor = {
@@ -54,7 +55,7 @@ const dark = { main: "#222" };
 
 const warningColor = { main: "#FFCD4E", text: textColor.primary };
 
-const errorColor = { main: "#010080", light: "#FFE1E6", text: textColor.primary };
+const errorColor = { main: "#FF0000", light: "#FFE1E6", text: textColor.primary };
 
 const successColor = {
   text: textColor.primary,

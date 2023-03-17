@@ -5,7 +5,7 @@ import Shop from "@models/shop.model";
 import { uniqueProudcts } from "../../__server__/__db__/products/data";
 
 
-const API_URL = process.env.NEXT_PUBLIC_SELLER_BASE_URL;
+const API_URL = process.env.WEBSITE_ORIGIN;
 
 const api = axios.create({
   baseURL: API_URL,

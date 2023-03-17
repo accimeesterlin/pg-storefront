@@ -27,7 +27,6 @@ const Section7: FC<Props> = ({ shops, brands, title, productList }) => {
   const [type, setType] = useState<"brands" | "shops">("brands");
 
   const handleCategoryClick = (brand: any) => () => {
-    console.log(brand);
     if (selected.match(brand)) setSelected("");
     else setSelected(brand);
   };

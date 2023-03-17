@@ -13,7 +13,7 @@ import LazyImage from "@component/LazyImage";
 import { H3, Span } from "@component/Typography";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { useAppContext } from "@context/AppContext";
-import { calculateDiscount, currency } from "@utils/utils";
+import { calculateDiscount, createLocalStorage, currency } from "@utils/utils";
 import Shop from "@models/shop.model";
 
 // styled components
@@ -130,6 +130,7 @@ type ProductCardProps = {
 // =============================================================
 
 const ProductCard16: FC<ProductCardProps> = (props) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const { off, id, name, price, mainImageUrl, rating, hoverEffect, slug, images, shop } = props;
 
   const { state, dispatch } = useAppContext();
@@ -142,8 +143,10 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: name },
+      payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop.id },
     });
+
+    saveCartState(state.cart);
   };
 
   return (

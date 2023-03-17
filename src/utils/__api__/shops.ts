@@ -2,7 +2,7 @@ import axios from "axios";
 
 import Shop from "models/shop.model";
 
-const API_URL = process.env.NEXT_PUBLIC_SELLER_BASE_URL;
+const API_URL = process.env.WEBSITE_ORIGIN;
 
 const api = axios.create({
   baseURL: API_URL,

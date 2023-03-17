@@ -5,12 +5,13 @@ import Pagination from "@component/pagination";
 import { ProductCard1 } from "@component/product-cards";
 import { SemiSpan } from "@component/Typography";
 import Product from "@models/product.model";
+import Shop from "@models/shop.model";
 
 // ==========================================================
-type Props = { products: Product[] };
+type Props = { products: Product[], shop: Shop };
 // ==========================================================
 
-const ProductCard1List: FC<Props> = ({ products }) => {
+const ProductCard1List: FC<Props> = ({ products, shop }) => {
   return (
     <div>
       <Grid container spacing={6}>
@@ -25,6 +26,7 @@ const ProductCard1List: FC<Props> = ({ products }) => {
               images={item.images}
               mainImageUrl={`${item.mainImageUrl}`}
               rating={item.rating || 4}
+              shop={shop}
             />
           </Grid>
         ))}

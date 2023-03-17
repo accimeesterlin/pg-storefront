@@ -13,6 +13,7 @@ import Card, { CardProps } from "@component/Card";
 import { H3, SemiSpan } from "@component/Typography";
 import {
   calculateRemainingPercentage,
+  createLocalStorage,
   currency,
   getTheme,
 } from "@utils/utils";
@@ -131,6 +132,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
   shop,
   ...props
 }) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.id === id);
@@ -146,9 +148,12 @@ const ProductCard1: FC<ProductCard1Props> = ({
         price: off,
         mainImageUrl: mainImageUrl,
         name,
+        shopId: shop?.id,
         qty: amount,
       },
     });
+
+    saveCartState(state.cart);
   };
 
   const isSame = off === price;

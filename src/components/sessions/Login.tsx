@@ -1,28 +1,56 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { toast } from 'react-toastify';
 import { useFormik } from "formik";
+import { Auth } from "aws-amplify";
 import * as yup from "yup";
-import Box from "@component/Box";
+// import Box from "@component/Box";
 import Icon from "@component/icon/Icon";
-import Divider from "@component/Divider";
+// import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
 import TextField from "@component/text-field";
 import { Button, IconButton } from "@component/buttons";
-import { H3, H5, H6, SemiSpan, Small, Span } from "@component/Typography";
+import { H3, H5, H6, SemiSpan} from "@component/Typography";
+// import { H3, H5, H6, SemiSpan, Small, Span } from "@component/Typography";
 import { StyledSessionCard } from "./styles";
+import { getAccessToken, setUserToken } from "@utils/__api__/users";
+import { getPreviousPath } from "@utils/utils";
 
 const Login: FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [previousPath, setPreviousPath] = useState("/profile");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const router = useRouter();
+
+  useEffect(() => {
+    // Get the URL of the previous page
+    const previousPage = getPreviousPath();
+    setPreviousPath(previousPage);
+
+  }, []);
 
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   }, []);
 
   const handleFormSubmit = async (values) => {
-    router.push("/profile");
-    console.log(values);
+   try {
+    setIsLoading(true);
+    const email = values.email;
+    const password = values.password;
+    
+    await Auth.signIn(email, password);
+
+    const token = await getAccessToken();
+    await setUserToken(token);
+   
+    setIsLoading(false);
+    toast.success("Login successfully");
+    window.location.href = previousPath;
+   } catch (error) {
+    const errorMessage = error?.message;
+    toast.error(errorMessage);
+    setIsLoading(false);
+   }
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
@@ -83,10 +111,10 @@ const Login: FC = () => {
           }
         />
 
-        <Button mb="1.65rem" variant="contained" color="primary" type="submit" fullwidth>
+        <Button loading={isLoading} mb="1.65rem" variant="contained" color="primary" type="submit" fullwidth>
           Login
         </Button>
-
+{/* 
         <Box mb="1rem">
           <Divider width="200px" mx="auto" />
           <FlexBox justifyContent="center" mt="-14px">
@@ -126,7 +154,7 @@ const Login: FC = () => {
             google-1
           </Icon>
           <Small fontWeight="600">Continue with Google</Small>
-        </FlexBox>
+        </FlexBox> */}
 
         <FlexBox justifyContent="center" mb="1.25rem">
           <SemiSpan>Don’t have account?</SemiSpan>
