@@ -36,7 +36,7 @@ const ProductIntro: FC<ProductIntroProps> = ({
 }) => {
   const [saveCartState] = createLocalStorage("cartState");
   const [isPGPayLoading, setIsPGPayLoading] = useState(false);
-  const [isMonCashLoading, setIsMonCashLoading] = useState(false);
+  // const [isMonCashLoading, setIsMonCashLoading] = useState(false);
   const router = useRouter();
   const { state, dispatch } = useAppContext();
   const [selectedImage, setSelectedImage] = useState(0);
@@ -64,14 +64,14 @@ const ProductIntro: FC<ProductIntroProps> = ({
     saveCartState(state.cart);
   };
 
-  const handlePGPay = () => {
-    setIsPGPayLoading(true);
-    dispatch({
-      type: "SET_PAYMENT_METHOD",
-      payload: "pgpay",
-    })
-    router?.push("/checkout")
-  }
+  // const handlePGPay = () => {
+  //   setIsPGPayLoading(true);
+  //   dispatch({
+  //     type: "SET_PAYMENT_METHOD",
+  //     payload: "pgpay",
+  //   })
+  //   router?.push("/checkout")
+  // }
 
 
   const handleCrypto = () => {
@@ -83,14 +83,14 @@ const ProductIntro: FC<ProductIntroProps> = ({
     router?.push("/checkout")
   }
 
-  const handleMonCash = () => {
-    setIsMonCashLoading(true);
-    dispatch({
-      type: "SET_PAYMENT_METHOD",
-      payload: "moncash",
-    })
-    router?.push("/checkout")
-  }
+  // const handleMonCash = () => {
+  //   setIsMonCashLoading(true);
+  //   dispatch({
+  //     type: "SET_PAYMENT_METHOD",
+  //     payload: "moncash",
+  //   })
+  //   router?.push("/checkout")
+  // }
 
   return (
     <Box overflow="hidden">
