@@ -106,7 +106,7 @@ const updateHandler = async (req, res) => {
       message: "User updated",
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: error?.message || "Error finding user",
     });
   }
