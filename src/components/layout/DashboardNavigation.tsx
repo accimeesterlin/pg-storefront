@@ -60,12 +60,12 @@ const DashboardNavigation = () => {
       list: [
         { href: "/orders", title: "Orders", iconName: "bag", count: orderCount },
         { href: "/wish-list", title: "Wishlist", iconName: "heart", count: 0 },
-        {
-          href: "/support-tickets",
-          title: "Support Tickets",
-          iconName: "customer-service",
-          count: 0,
-        },
+        // {
+        //   href: "/support-tickets",
+        //   title: "Support Tickets",
+        //   iconName: "customer-service",
+        //   count: 0,
+        // },
       ],
     },
     {
@@ -73,7 +73,7 @@ const DashboardNavigation = () => {
       list: [
         { href: "/profile", title: "Profile Info", iconName: "user", count: 0 },
         { href: "/address", title: "Addresses", iconName: "pin", count: addressCount },
-        { href: "/payment-methods", title: "Payment Methods", iconName: "credit-card", count: 0 },
+        // { href: "/payment-methods", title: "Payment Methods", iconName: "credit-card", count: 0 },
         { href: "/signout", title: "Signout", iconName: "", count: 0 },
       ],
     },

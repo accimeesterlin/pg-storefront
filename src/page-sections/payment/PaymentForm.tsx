@@ -6,7 +6,7 @@ import { Card1 } from "@component/Card1";
 import { Button } from "@component/buttons";
 
 // import CreditCardForm from "./creditcardform";
-// import PGPayPayment from "./PGPayForm";
+import PGPayPayment from "./PGPayForm";
 // import MonCashPayment from "./monCashPayment";
 // import PaypalPayment from "./paypalPayment";
 // import CashOnDeliveryPayment from "./CashOnDeliveryForm";
@@ -43,7 +43,7 @@ const PaymentForm: FC = () => {
         {/* <CreditCardForm paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
         {/* <PGPayPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
         <CryptoPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/>
-        {/* <PGPayPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
+        <PGPayPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/>
         {/* <MonCashPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
         {/* <PaypalPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
         {/* <CashOnDeliveryPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
