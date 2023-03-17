@@ -6,7 +6,7 @@ import multerS3 from "multer-s3";
 // import { getAddressByUserId } from "../queries/getAddress";
 // import { getBalanceById } from "../queries/getBalance";
 // import { getOrderByUserId } from "../queries/getOrder";
-import { authenticationMiddleware } from "../token/verify";
+// import { authenticationMiddleware } from "../token/verify";
 import { s3 } from "../utils/authUtils";
 import MulterS3File from "@models/file.model";
 import { updateUser } from "../mutation/user";
@@ -111,7 +111,7 @@ const updateHandler = async (req, res) => {
 };
 
 export default nc()
-  .use(authenticationMiddleware)
+  // .use(authenticationMiddleware)
   .get(getHandler)
   .use(uploadMiddleware)
   .put(updateHandler);
