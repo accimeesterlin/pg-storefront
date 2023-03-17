@@ -50,12 +50,12 @@ const FrequentlyBought: FC<Props> = ({ products }) => {
               id={item.id}
               slug={item.slug}
               price={item.price}
-              title={item.title}
-              off={item.discount}
-              imgUrl={item.thumbnail}
+              name={item.name}
+              off={item.comparePrice}
+              mainImageUrl={item.mainImageUrl}
             />
 
-            {ind < products.length - 1 && (
+            {ind < products?.length - 1 && (
               <FlexBox justifyContent="center" alignItems="center">
                 <H2 color="text.muted" mx="0.5rem">
                   +

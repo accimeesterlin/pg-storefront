@@ -9,21 +9,21 @@ import { currency } from "@utils/utils";
 
 // =======================================================
 type ProductCard4Props = {
-  title: string;
+  name: string;
   price: number;
   rating: number;
-  imgUrl: string;
+  mainImageUrl: string;
   reviewCount: number;
 };
 // =======================================================
 
 const ProductCard4: FC<ProductCard4Props> = (props) => {
-  const { imgUrl, rating, title, price, reviewCount } = props;
+  const { mainImageUrl, rating, name, price, reviewCount } = props;
 
   return (
     <Box>
       <HoverBox mb="1rem" mx="auto" borderRadius={8}>
-        <NextImage src={imgUrl} width={100} height={100} layout="responsive" alt={title} />
+        <NextImage src={mainImageUrl} width={100} height={100} layout="responsive" alt={name} />
       </HoverBox>
 
       <FlexBox justifyContent="center" alignItems="center" mb="0.25rem">
@@ -34,8 +34,8 @@ const ProductCard4: FC<ProductCard4Props> = (props) => {
         </Small>
       </FlexBox>
 
-      <H4 fontWeight="600" fontSize="14px" textAlign="center" mb="0.25rem" title={title} ellipsis>
-        {title}
+      <H4 fontWeight="600" fontSize="14px" textAlign="center" mb="0.25rem" title={name} ellipsis>
+        {name}
       </H4>
 
       <H4 fontWeight="600" fontSize="14px" textAlign="center" color="primary.main">

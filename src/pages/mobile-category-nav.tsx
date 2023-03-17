@@ -120,42 +120,42 @@ const suggestion = [
   {
     title: "Belt",
     href: "/belt",
-    imgUrl: "/assets/images/products/categories/belt.png",
+    mainImageUrl: "/assets/images/products/categories/belt.png",
   },
   {
     title: "Hat",
     href: "/Hat",
-    imgUrl: "/assets/images/products/categories/hat.png",
+    mainImageUrl: "/assets/images/products/categories/hat.png",
   },
   {
     title: "Watches",
     href: "/Watches",
-    imgUrl: "/assets/images/products/categories/watch.png",
+    mainImageUrl: "/assets/images/products/categories/watch.png",
   },
   {
     title: "Sunglasses",
     href: "/Sunglasses",
-    imgUrl: "/assets/images/products/categories/sunglass.png",
+    mainImageUrl: "/assets/images/products/categories/sunglass.png",
   },
   {
     title: "Sneakers",
     href: "/Sneakers",
-    imgUrl: "/assets/images/products/categories/sneaker.png",
+    mainImageUrl: "/assets/images/products/categories/sneaker.png",
   },
   {
     title: "Sandals",
     href: "/Sandals",
-    imgUrl: "/assets/images/products/categories/sandal.png",
+    mainImageUrl: "/assets/images/products/categories/sandal.png",
   },
   {
     title: "Formal",
     href: "/Formal",
-    imgUrl: "/assets/images/products/categories/shirt.png",
+    mainImageUrl: "/assets/images/products/categories/shirt.png",
   },
   {
     title: "Casual",
     href: "/Casual",
-    imgUrl: "/assets/images/products/categories/t-shirt.png",
+    mainImageUrl: "/assets/images/products/categories/t-shirt.png",
   },
 ];
 

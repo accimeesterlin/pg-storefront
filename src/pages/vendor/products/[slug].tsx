@@ -56,7 +56,7 @@ const ProductDetails = () => {
   }, [slug]);
 
   const initialValues = {
-    name: product?.title || "",
+    name: product?.name || "",
     price: product?.price || "",
     tags: "",
     stock: "",
@@ -140,7 +140,7 @@ const ProductDetails = () => {
                     <DropZone onChange={(files) => console.log(files)} />
 
                     <FlexBox flexDirection="row" mt={2} flexWrap="wrap">
-                      {product.images.map((item, i) => (
+                      {product.images?.map((item, i) => (
                         <UploadImageBox key={i} mr=".5rem">
                           <Image src={item} width="100%" />
                         </UploadImageBox>

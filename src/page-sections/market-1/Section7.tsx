@@ -27,7 +27,6 @@ const Section7: FC<Props> = ({ shops, brands, title, productList }) => {
   const [type, setType] = useState<"brands" | "shops">("brands");
 
   const handleCategoryClick = (brand: any) => () => {
-    console.log(brand);
     if (selected.match(brand)) setSelected("");
     else setSelected(brand);
   };
@@ -93,7 +92,7 @@ const Section7: FC<Props> = ({ shops, brands, title, productList }) => {
                   width={20}
                   alt=""
                   src={
-                    type === "shops" ? `/assets/images/shops/${brand.thumbnail}.png` : brand.image
+                    type === "shops" ? `/assets/images/shops/${brand.mainImageUrl}.png` : brand.image
                   }
                 />
                 <span className="product-category-title">{brand.name}</span>
@@ -121,12 +120,12 @@ const Section7: FC<Props> = ({ shops, brands, title, productList }) => {
                   hoverEffect
                   id={item.id}
                   slug={item.slug}
-                  title={item.title}
+                  name={item.name}
                   price={item.price}
-                  off={item.discount}
+                  off={item.comparePrice}
                   rating={item.rating}
                   images={item.images}
-                  imgUrl={item.thumbnail}
+                  mainImageUrl={item.mainImageUrl}
                 />
               </Grid>
             ))}

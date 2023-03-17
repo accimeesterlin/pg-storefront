@@ -108,7 +108,7 @@ Mock.onGet("/api/market-1/mobile-brand-list").reply(async () => {
 Mock.onGet("/api/market-1/mobile-shop-list").reply(async () => {
   try {
     const imageNames = ["herman miller", "otobi", "hatil", "steelcase"];
-    const shopList = shops.slice(4, 8).map((item, i) => ({ ...item, thumbnail: imageNames[i] }));
+    const shopList = shops.slice(4, 8).map((item, i) => ({ ...item, mainImageUrl: imageNames[i] }));
 
     return [200, shopList];
   } catch (err) {
@@ -140,7 +140,7 @@ Mock.onGet("/api/market-1/optics/watch-brands").reply(async () => {
 Mock.onGet("/api/market-1/optics/watch-shops").reply(async () => {
   try {
     const imageNames = ["herman miller", "zeiss", "hatil", "steelcase"];
-    const shopList = shops.slice(0, 4).map((item, i) => ({ ...item, thumbnail: imageNames[i] }));
+    const shopList = shops.slice(0, 4).map((item, i) => ({ ...item, mainImageUrl: imageNames[i] }));
 
     return [200, shopList];
   } catch (err) {

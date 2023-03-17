@@ -1,6 +1,6 @@
 export interface Banner {
   title: string;
-  thumbnail: string;
+  mainImageUrl: string;
   buttonText?: string;
   description?: string;
 }

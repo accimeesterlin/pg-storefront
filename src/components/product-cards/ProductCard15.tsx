@@ -9,9 +9,10 @@ import FlexBox from "@component/FlexBox";
 import LazyImage from "@component/LazyImage";
 import { H3, Paragraph, Span } from "@component/Typography";
 import { theme } from "@utils/theme";
-import { calculateDiscount, currency } from "@utils/utils";
+import { calculateDiscount, createLocalStorage, currency } from "@utils/utils";
 import { useAppContext } from "@context/AppContext";
 import ProductQuickView from "@component/products/ProductQuickView";
+import Shop from "@models/shop.model";
 
 // styled components
 const StyledCard = styled(Box)({
@@ -62,7 +63,7 @@ const ItemController = styled(FlexBox)({
 
 const ContentWrapper = styled(Box)({
   padding: "1rem",
-  "& .title, & .categories": {
+  "& .name, & .categories": {
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
@@ -86,17 +87,19 @@ const StyledChip = styled(Chip)({
 type Props = {
   off: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating?: number;
+  shop?: Shop;
   images: string[];
   id: string | number;
 };
 // ============================================================
 
 const ProductCard15: FC<Props> = (props) => {
-  const { off, id, title, price, imgUrl, rating, slug, images } = props;
+  const [saveCartState] = createLocalStorage("cartState");
+  const { off, id, name, price, mainImageUrl, rating, slug, images, shop } = props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -111,12 +114,15 @@ const ProductCard15: FC<Props> = (props) => {
       id,
       slug,
       price,
-      imgUrl,
-      name: title,
+      mainImageUrl,
+      name: name,
+      shopId: shop?.id,
       qty: (cartItem?.qty || 0) + 1,
     };
 
     dispatch({ type: "CHANGE_CART_AMOUNT", payload });
+
+    saveCartState(state.cart);
   };
 
   return (
@@ -127,7 +133,7 @@ const ProductCard15: FC<Props> = (props) => {
         <Link href={`/product/${slug}`}>
           <a>
             <LazyImage
-              src={imgUrl}
+              src={mainImageUrl}
               width={100}
               height={100}
               layout="responsive"
@@ -154,7 +160,7 @@ const ProductCard15: FC<Props> = (props) => {
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ id, slug, images, price, title }}
+        product={{ id, slug, images, price, name, shop }}
       />
 
       <ContentWrapper>
@@ -174,14 +180,14 @@ const ProductCard15: FC<Props> = (props) => {
           <a>
             <H3
               my="6px"
-              title={title}
+              name={name}
               fontSize="15px"
               fontWeight="600"
-              className="title"
+              className="name"
               textAlign="center"
               color="text.secondary"
             >
-              {title}
+              {name}
             </H3>
           </a>
         </Link>

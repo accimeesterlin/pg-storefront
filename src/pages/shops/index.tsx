@@ -9,11 +9,13 @@ import NavbarLayout from "@component/layout/NavbarLayout";
 import api from "@utils/__api__/shops";
 import Shop from "@models/shop.model";
 
+
 // =============================================
 type Props = { shopList: Shop[] };
 // =============================================
 
 const ShopList = ({ shopList }: Props) => {
+
   return (
     <Fragment>
       <H2 mb="24px">All Shops</H2>
@@ -26,8 +28,8 @@ const ShopList = ({ shopList }: Props) => {
               phone={item.phone}
               address={item.address}
               rating={item.rating || 5}
-              imgUrl={item.profilePicture}
-              coverImgUrl={item.coverPicture}
+              mainImageUrl={item.profilePicture}
+              covermainImageUrl={item.coverPicture}
               shopUrl={`/shops/${item.slug}`}
             />
           </Grid>
@@ -45,8 +47,15 @@ const ShopList = ({ shopList }: Props) => {
 ShopList.layout = NavbarLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const shopList = await api.getShopList();
-  return { props: { shopList } };
+  let shopList = [];
+
+  try {
+    shopList = await api.getShopList();
+  } catch (error) {
+    // No shops found
+    console.log("Error: ", error?.response?.data?.message);
+  }
+  return { props: { shopList: shopList } };
 };
 
 export default ShopList;

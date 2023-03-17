@@ -12,14 +12,14 @@ const StyledImage = styled(NextImage)`
 type MobileCategoryImageBoxProps = {
   icon?: string;
   title: string;
-  imgUrl?: string;
+  mainImageUrl?: string;
 };
 
-const MobileCategoryImageBox: FC<MobileCategoryImageBoxProps> = ({ title, imgUrl, icon }) => {
+const MobileCategoryImageBox: FC<MobileCategoryImageBoxProps> = ({ title, mainImageUrl, icon }) => {
   return (
     <FlexBox flexDirection="column" alignItems="center" justifyContent="center">
-      {imgUrl ? (
-        <StyledImage src={imgUrl} width={100} height={100} objectFit="cover" />
+      {mainImageUrl ? (
+        <StyledImage src={mainImageUrl} width={100} height={100} objectFit="cover" />
       ) : (
         icon && <Icon size="48px">{icon}</Icon>
       )}

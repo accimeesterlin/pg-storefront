@@ -20,7 +20,7 @@ const VendorDashboard = () => {
     setLoading(true);
 
     try {
-      const data = await Promise.all([
+      const data: any = await Promise.all([
         api.getSummeryCards(),
         api.getCountryBasedSales(),
         api.getSales(),
@@ -31,7 +31,6 @@ const VendorDashboard = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error.message);
     }
   };
 

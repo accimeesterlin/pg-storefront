@@ -11,33 +11,76 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import { H1, H2, H3, H6, SemiSpan } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
-import { currency } from "@utils/utils";
+import { createLocalStorage, currency } from "@utils/utils";
+import Shop from "@models/shop.model";
 
 // ========================================
 type ProductIntroProps = {
   price: number;
-  title: string;
-  images: string[];
+  rating: number;
+  mainImageUrl?: string;
+  shop: Shop;
+  name: string;
+  images: any[];
   id: string | number;
 };
 // ========================================
 
-const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
+const ProductIntro: FC<ProductIntroProps> = ({
+  images,
+  name,
+  price,
+  id,
+  shop,
+  mainImageUrl,
+}) => {
+  const [saveCartState] = createLocalStorage("cartState");
+  const [isPGPayLoading, setIsPGPayLoading] = useState(false);
+  const [isMonCashLoading, setIsMonCashLoading] = useState(false);
   const router = useRouter();
   const { state, dispatch } = useAppContext();
   const [selectedImage, setSelectedImage] = useState(0);
 
   const routerId = router.query.id as string;
-  const cartItem = state.cart.find((item) => item.id === id || item.id === routerId);
+  const cartItem = state.cart.find(
+    (item) => item.id === id || item.id === routerId
+  );
 
   const handleImageClick = (ind: number) => () => setSelectedImage(ind);
 
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, qty: amount, name: title, imgUrl: images[0], id: id || routerId },
+      payload: {
+        price,
+        qty: amount,
+        name: name,
+        mainImageUrl: images[0]?.url,
+        shopId: shop?.id,
+        id: id || routerId,
+      },
     });
+
+    saveCartState(state.cart);
   };
+
+  const handlePGPay = () => {
+    setIsPGPayLoading(true);
+    dispatch({
+      type: "SET_PAYMENT_METHOD",
+      payload: "pgpay",
+    })
+    router?.push("/checkout")
+  }
+
+  const handleMonCash = () => {
+    setIsMonCashLoading(true);
+    dispatch({
+      type: "SET_PAYMENT_METHOD",
+      payload: "moncash",
+    })
+    router?.push("/checkout")
+  }
 
   return (
     <Box overflow="hidden">
@@ -48,13 +91,17 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
               <Image
                 width={300}
                 height={300}
-                src={images[selectedImage]}
+                src={
+                  images?.length >= 0
+                    ? images[selectedImage]?.url
+                    : mainImageUrl
+                }
                 style={{ objectFit: "contain" }}
               />
             </FlexBox>
 
             <FlexBox overflow="auto">
-              {images.map((url, ind) => (
+              {images?.map((image, ind) => (
                 <Box
                   key={ind}
                   size={70}
@@ -67,11 +114,13 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
                   alignItems="center"
                   justifyContent="center"
                   ml={ind === 0 && "auto"}
-                  mr={ind === images.length - 1 ? "auto" : "10px"}
-                  borderColor={selectedImage === ind ? "primary.main" : "gray.400"}
+                  mr={ind === images?.length - 1 ? "auto" : "10px"}
+                  borderColor={
+                    selectedImage === ind ? "primary.main" : "gray.400"
+                  }
                   onClick={handleImageClick(ind)}
                 >
-                  <Avatar src={url} borderRadius="10px" size={40} />
+                  <Avatar src={image?.url} borderRadius="10px" size={40} />
                 </Box>
               ))}
             </FlexBox>
@@ -79,12 +128,12 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
         </Grid>
 
         <Grid item md={6} xs={12} alignItems="center">
-          <H1 mb="1rem">{title}</H1>
+          <H1 mb="1rem">{name}</H1>
 
-          <FlexBox alignItems="center" mb="1rem">
+          {/* <FlexBox alignItems="center" mb="1rem">
             <SemiSpan>Brand:</SemiSpan>
             <H6 ml="8px">Ziaomi</H6>
-          </FlexBox>
+          </FlexBox> */}
 
           <FlexBox alignItems="center" mb="1rem">
             <SemiSpan>Rated:</SemiSpan>
@@ -145,10 +194,33 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
             <Link href="/shops/scarlett-beauty">
               <a>
                 <H6 lineHeight="1" ml="8px">
-                  Mobile Store
+                  {shop?.name}
                 </H6>
               </a>
             </Link>
+          </FlexBox>
+          <FlexBox alignItems="center">
+            <Button
+              p="9px"
+              size="small"
+              color="primary"
+              loading={isPGPayLoading}
+              variant="contained"
+              onClick={handlePGPay}
+            >
+              Pay now with PG Pay
+            </Button>
+            <Button
+              p="9px"
+              ml="10px"
+              size="small"
+              loading={isMonCashLoading}
+              color="primary"
+              variant="outlined"
+              onClick={handleMonCash}
+            >
+              Pay now with Mon Cash
+            </Button>
           </FlexBox>
         </Grid>
       </Grid>

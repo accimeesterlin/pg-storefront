@@ -24,7 +24,7 @@ const Section2: FC<Props> = ({ products }) => {
   return (
     <CategorySectionCreator iconName="light" title="Flash Deals" seeMoreLink="#">
       <Box mt="-0.25rem" mb="-0.25rem">
-        <Carousel totalSlides={products.length} visibleSlides={visibleSlides}>
+        <Carousel totalSlides={products?.length} visibleSlides={visibleSlides}>
           {products.map((item, ind) => (
             <Box py="0.25rem" key={ind}>
               <ProductCard1
@@ -32,10 +32,10 @@ const Section2: FC<Props> = ({ products }) => {
                 id={item.id}
                 slug={item.slug}
                 price={item.price}
-                title={item.title}
-                off={item.discount}
+                name={item.name}
+                off={item.comparePrice}
                 images={item.images}
-                imgUrl={item.thumbnail}
+                mainImageUrl={item.mainImageUrl}
                 rating={item.rating || 4}
               />
             </Box>

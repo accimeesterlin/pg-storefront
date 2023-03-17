@@ -1,13 +1,13 @@
 export interface OfferCard {
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   buttonText: string;
   discountOffer: string;
 }
 
 export interface MainCarouselItem {
   title?: string;
-  imgUrl?: string;
+  mainImageUrl?: string;
   buttonLink?: string;
   buttonText?: string;
   description?: string;

@@ -69,7 +69,7 @@ const Section6: FC<Props> = ({ list }) => {
               <Card p="1rem" bg="secondary.100" overflow="hidden" position="relative">
                 <Grid container alignItems="center" spacing={6}>
                   <Grid item md={6} xs={12}>
-                    <Image mx="auto" maxWidth="100%" src={item.imgUrl} />
+                    <Image mx="auto" maxWidth="100%" src={item.mainImageUrl} />
                   </Grid>
 
                   <Grid item md={6} xs={12}>

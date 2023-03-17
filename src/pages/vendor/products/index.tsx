@@ -58,9 +58,9 @@ const Products = () => {
         <Link href={`/vendor/products/${item.slug}`} key={item.id} passHref>
           <TableRow as="a" my="1rem" padding="6px 18px">
             <FlexBox alignItems="center" m="6px" flex="2 2 220px !important">
-              <Avatar src={item.thumbnail} size={36} />
+              <Avatar src={item.mainImageUrl} size={36} />
               <Typography textAlign="left" ml="20px">
-                {item.title}
+                {item.name}
               </Typography>
             </FlexBox>
 
@@ -69,7 +69,7 @@ const Products = () => {
             </H5>
 
             <H5 m="6px" textAlign="left" fontWeight="400">
-              {calculateDiscount(item.price, item.discount)}
+              {calculateDiscount(item.price, item.comparePrice)}
             </H5>
 
             <Hidden flex="0 0 0 !important" down={769}>

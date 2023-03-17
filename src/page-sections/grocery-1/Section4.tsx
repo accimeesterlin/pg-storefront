@@ -31,13 +31,13 @@ const Section4: FC<Props> = ({ products }) => {
             <ProductCard10
               id={item.id}
               slug={item.slug}
-              unit={item.unit}
-              title={item.title}
+              unit={item.inventory}
+              name={item.name}
               price={item.price}
-              off={item.discount}
+              off={item.comparePrice}
               rating={item.rating}
               images={item.images}
-              imgUrl={item.thumbnail}
+              mainImageUrl={item.mainImageUrl}
             />
           </Grid>
         ))}

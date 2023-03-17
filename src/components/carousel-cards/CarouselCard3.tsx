@@ -34,14 +34,14 @@ type Props = {
   img: string;
   title: string;
   category: string;
-  discount: number;
+  comparePrice: number;
   buttonText: string;
   description: string;
 };
 // =============================================================
 
 const CarouselCard3: FC<Props> = (props) => {
-  const { img, title, category, discount, description, buttonText } = props;
+  const { img, title, category, comparePrice, description, buttonText } = props;
 
   return (
     <CarouselCard img={img}>
@@ -55,7 +55,7 @@ const CarouselCard3: FC<Props> = (props) => {
         </H1>
 
         <H4 fontSize={30} lineHeight={1} mt=".75rem" textTransform="uppercase">
-          SALE UP TO <Span color="primary.main">{discount}% OFF</Span>
+          SALE UP TO <Span color="primary.main">{comparePrice}% OFF</Span>
         </H4>
 
         <Paragraph fontSize={18} mb="2rem">

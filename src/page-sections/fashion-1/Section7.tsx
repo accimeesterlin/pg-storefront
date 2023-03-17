@@ -15,7 +15,7 @@ type Props = { products: Product[] };
 // ==========================================================
 
 const Section7: FC<Props> = ({ products }) => {
-  const trendings = products.slice(1, products.length);
+  const trendings = products.slice(1, products?.length);
 
   return (
     <Box mb="3.75rem">
@@ -24,14 +24,14 @@ const Section7: FC<Props> = ({ products }) => {
       <Grid container spacing={6}>
         <GridOne item md={4} xs={12}>
           <ProductCard1
-            id={products[0].title}
+            id={products[0].name}
             slug={products[0].slug}
-            title={products[0].title}
+            name={products[0].name}
             price={products[0].price}
-            off={products[0].discount}
+            off={products[0].comparePrice}
             rating={products[0].rating}
             images={products[0].images}
-            imgUrl={products[0].thumbnail}
+            mainImageUrl={products[0].mainImageUrl}
           />
         </GridOne>
 
@@ -43,11 +43,11 @@ const Section7: FC<Props> = ({ products }) => {
                   id={item.id}
                   off={ind * 10}
                   slug={item.slug}
-                  title={item.title}
+                  name={item.name}
                   price={item.price}
                   rating={item.rating}
                   images={item.images}
-                  imgUrl={item.thumbnail}
+                  mainImageUrl={item.mainImageUrl}
                 />
               </Grid>
             ))}

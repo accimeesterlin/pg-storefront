@@ -89,7 +89,7 @@ const Section1: FC<Props> = ({ carouselData }) => {
               </Box>
 
               <Box className="card__img" minWidth="285px" height="180px" position="relative">
-                <NextImage layout="fill" objectFit="contain" src={item.imgUrl} />
+                <NextImage layout="fill" objectFit="contain" src={item.mainImageUrl} />
               </Box>
             </ContentWrapper>
           </Card>

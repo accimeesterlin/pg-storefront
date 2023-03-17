@@ -13,9 +13,10 @@ import FlexBox from "../FlexBox";
 import NavLink from "../nav-link";
 import { Button } from "../buttons";
 import { H5, SemiSpan } from "../Typography";
-import { calculateDiscount, currency, getTheme } from "@utils/utils";
+import { calculateDiscount, createLocalStorage, currency, getTheme } from "@utils/utils";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { useAppContext } from "@context/AppContext";
+import Shop from "@models/shop.model";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -95,10 +96,11 @@ const Wrapper = styled(Card)`
 type ProductCard9Props = {
   off?: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating: number;
+  shop?: Shop;
   images: string[];
   id: string | number;
   categories: string[];
@@ -110,14 +112,16 @@ const ProductCard9: FC<ProductCard9Props> = ({
   id,
   off,
   slug,
-  title,
+  name,
   price,
-  imgUrl,
+  mainImageUrl,
   rating,
   images,
   categories,
+  shop,
   ...props
 }) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.id === id);
@@ -127,8 +131,10 @@ const ProductCard9: FC<ProductCard9Props> = ({
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, imgUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop?.id },
     });
+
+    saveCartState(state.cart);
   };
 
   return (
@@ -155,7 +161,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
               eye-alt
             </Icon>
 
-            <Image src={imgUrl} alt={title} width="100%" borderRadius="0.5rem" />
+            <Image src={mainImageUrl} alt={name} width="100%" borderRadius="0.5rem" />
           </Box>
         </Grid>
 
@@ -174,7 +180,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
             <Link href={`/product/${slug}`}>
               <a>
                 <H5 fontWeight="600" my="0.5rem">
-                  {title}
+                  {name}
                 </H5>
               </a>
             </Link>
@@ -296,7 +302,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ id, images, price, title, slug }}
+        product={{ id, images, price, name, slug, shop }}
       />
     </Wrapper>
   );

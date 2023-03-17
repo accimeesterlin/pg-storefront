@@ -11,8 +11,9 @@ import { IconButton } from "@component/buttons";
 import { H4, Paragraph, Small } from "@component/Typography";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { theme } from "@utils/theme";
-import { currency } from "@utils/utils";
+import { createLocalStorage, currency } from "@utils/utils";
 import { useAppContext } from "@context/AppContext";
+import Shop from "@models/shop.model";
 
 // styled components
 const Wrapper = styled(Box)({
@@ -63,10 +64,11 @@ const QuickViewButton = styled(Button)({
 // ==============================================================
 type ProductCard17Props = {
   slug: string;
-  title: string;
+  name: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating?: number;
+  shop?: Shop;
   reviews: number;
   category: string;
   images: string[];
@@ -76,7 +78,8 @@ type ProductCard17Props = {
 // ==============================================================
 
 const ProductCard17: FC<ProductCard17Props> = (props) => {
-  const { id, title, price, imgUrl, category, reviews, slug, images } = props;
+  const [saveCartState] = createLocalStorage("cartState");
+  const { id, name, price, mainImageUrl, category, reviews, slug, images, shop } = props;
 
   const { state, dispatch } = useAppContext();
   const [openDialog, setOpenDialog] = useState(false);
@@ -93,12 +96,15 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
       id,
       slug,
       price,
-      imgUrl,
-      name: title,
+      mainImageUrl,
+      name: name,
+      shopId: shop?.id,
       qty: (cartItem?.qty || 0) + 1,
     };
 
     dispatch({ type: "CHANGE_CART_AMOUNT", payload });
+
+    saveCartState(state.cart);
   };
 
   return (
@@ -109,7 +115,7 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
             <Image
               width={300}
               height={300}
-              src={imgUrl}
+              src={mainImageUrl}
               alt="category"
               objectFit="cover"
               layout="responsive"
@@ -139,12 +145,12 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
       <ProductQuickView
         open={openDialog}
         onClose={toggleDialog}
-        product={{ id, images, slug, price, title }}
+        product={{ id, images, slug, price, name, shop }}
       />
 
       <Box p={1} textAlign="center">
         <Small color="gray.500">{category}</Small>
-        <Paragraph fontWeight="bold">{title}</Paragraph>
+        <Paragraph fontWeight="bold">{name}</Paragraph>
         <H4 fontWeight={700} py={0.5}>
           {currency(price)}
         </H4>

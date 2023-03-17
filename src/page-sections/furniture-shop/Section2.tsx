@@ -8,14 +8,14 @@ import { H1, H3, H6, Paragraph } from "components/Typography";
 import { theme } from "@utils/theme";
 
 // styled components
-const ContentBox = styled(Box)<{ imgUrl: string }>(({ imgUrl }) => ({
+const ContentBox = styled(Box)<{ mainImageUrl: string }>(({ mainImageUrl }) => ({
   height: 230,
   display: "flex",
   borderRadius: 0,
   boxShadow: "none",
   alignItems: "center",
   background: theme.colors.paste[50],
-  backgroundImage: `url('${imgUrl}')`,
+  backgroundImage: `url('${mainImageUrl}')`,
   backgroundOrigin: "content-box",
   backgroundRepeat: "no-repeat",
   backgroundSize: "contain",
@@ -60,7 +60,7 @@ const Section2: FC = () => {
         <Grid item xs={12} md={7}>
           <Link href="/sale-page-1">
             <a>
-              <LeftContentBox imgUrl={product1}>
+              <LeftContentBox mainImageUrl={product1}>
                 <RightContent>
                   <H6>Modern Furniture.</H6>
                   <H1 fontSize={35} color="primary.main">
@@ -77,7 +77,7 @@ const Section2: FC = () => {
         <Grid item xs={12} md={5}>
           <Link href="/sale-page-1">
             <a>
-              <RightContentBox imgUrl={product2} mb={2}>
+              <RightContentBox mainImageUrl={product2} mb={2}>
                 <Box textAlign="center" pt={3}>
                   <H6>Sofa Collection</H6>
                   <H3 fontSize={23} color="primary.main">
@@ -96,7 +96,7 @@ const Section2: FC = () => {
           <Link href="/sale-page-1">
             <a>
               <RightContentBox
-                imgUrl={product4}
+                mainImageUrl={product4}
                 style={{
                   height: 484,
                   paddingTop: "20px",
@@ -121,7 +121,7 @@ const Section2: FC = () => {
         <Grid item xs={12} md={5}>
           <Link href="/sale-page-1">
             <a>
-              <LeftContentBox imgUrl={product5} style={{ padding: "20px auto 20px 20px" }}>
+              <LeftContentBox mainImageUrl={product5} style={{ padding: "20px auto 20px 20px" }}>
                 <RightContent>
                   <Paragraph>Modern & Comfortable</Paragraph>
                   <H3 fontSize={20} color="primary.main">
@@ -137,7 +137,7 @@ const Section2: FC = () => {
           <Link href="/sale-page-1">
             <a>
               <LeftContentBox
-                imgUrl={product3}
+                mainImageUrl={product3}
                 style={{ marginTop: 24, padding: "20px auto 20px 20px" }}
               >
                 <RightContent>

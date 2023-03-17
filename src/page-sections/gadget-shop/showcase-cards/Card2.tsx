@@ -10,7 +10,7 @@ import { H3, H6, SemiSpan } from "@component/Typography";
 type CardProps = {
   bg?: string;
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   color?: string;
   subtitle: string;
   productUrl: string;
@@ -22,7 +22,7 @@ const Card5: FC<CardProps> = ({
   bg,
   color,
   title,
-  imgUrl,
+  mainImageUrl,
   subtitle,
   productUrl,
   subtitleColor,
@@ -61,7 +61,7 @@ const Card5: FC<CardProps> = ({
             width={100}
             alt="model"
             height={100}
-            src={imgUrl}
+            src={mainImageUrl}
             layout="responsive"
             objectFit="contain"
           />

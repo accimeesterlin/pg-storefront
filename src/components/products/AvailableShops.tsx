@@ -18,8 +18,8 @@ const AvailableShops: FC<Props> = ({ shops }) => {
       <H3 mb="1.5rem">Also Available at</H3>
 
       <Grid container spacing={8}>
-        {shops.map((item) => (
-          <Grid item lg={2} md={4} sm={6} xs={12} key={item.name}>
+        {shops?.map((item) => (
+          <Grid item lg={2} md={4} sm={6} xs={12} key={item.id}>
             <Link href={`/shops/${item.slug}`}>
               <a>
                 <FlexBox
@@ -45,9 +45,9 @@ const AvailableShops: FC<Props> = ({ shops }) => {
 };
 
 // const shopList = [
-//   { name: "Tech Friend", imgUrl: "/assets/images/faces/propic.png" },
-//   { name: "Smart Shop", imgUrl: "/assets/images/faces/propic(1).png" },
-//   { name: "Gadget 360", imgUrl: "/assets/images/faces/propic(8).png" },
+//   { name: "Tech Friend", mainImageUrl: "/assets/images/faces/propic.png" },
+//   { name: "Smart Shop", mainImageUrl: "/assets/images/faces/propic(1).png" },
+//   { name: "Gadget 360", mainImageUrl: "/assets/images/faces/propic(8).png" },
 // ];
 
 export default AvailableShops;

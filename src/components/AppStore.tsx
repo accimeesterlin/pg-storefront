@@ -19,7 +19,7 @@ const AppStore: FC = () => {
             borderRadius="5px"
             alignItems="center"
           >
-            <Icon defaultcolor="auto" size="24px">
+            <Icon color="gray" size="24px">
               {item.iconName}
             </Icon>
 

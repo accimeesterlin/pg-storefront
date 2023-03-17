@@ -40,19 +40,19 @@ const Section13: FC<Props> = ({ bigDiscountList }) => {
                       <NextImage
                         width={100}
                         height={100}
-                        alt={item.title}
-                        src={item.thumbnail}
+                        alt={item.name}
+                        src={item.mainImageUrl}
                         layout="responsive"
                       />
                     </HoverBox>
 
                     <H4 fontWeight="600" fontSize="14px" mb="0.25rem">
-                      {item.title}
+                      {item.name}
                     </H4>
 
                     <FlexBox>
                       <H4 fontWeight="600" fontSize="14px" color="primary.main" mr="0.5rem">
-                        {calculateDiscount(item.price, item.discount)}
+                        {calculateDiscount(item.price, item.comparePrice)}
                       </H4>
 
                       <H4 fontWeight="600" fontSize="14px" color="text.muted">

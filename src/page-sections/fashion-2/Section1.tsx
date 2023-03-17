@@ -85,7 +85,7 @@ const Section1: FC<Props> = ({ data }) => {
                 </Grid>
 
                 <Grid item md={5} xs={12}>
-                  <Image alt="apple-watch-1" src={item.imgUrl} />
+                  <Image alt="apple-watch-1" src={item.mainImageUrl} />
                 </Grid>
               </Grid>
             </StyledBox>

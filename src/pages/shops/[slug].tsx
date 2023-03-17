@@ -30,7 +30,7 @@ const ShopDetails = ({ shop }: Props) => {
 
   return (
     <Fragment>
-      <ShopIntroCard />
+      <ShopIntroCard shop={shop}/>
 
       <Grid container spacing={6}>
         {/* SHOW IN LARGE DEVICE */}
@@ -54,7 +54,7 @@ const ShopDetails = ({ shop }: Props) => {
             </Sidenav>
           )}
 
-          <ProductCardList products={shop.products.slice(0, 9)} />
+          <ProductCardList products={shop?.products?.slice(0, 9)} shop={shop} />
         </Grid>
       </Grid>
     </Fragment>
@@ -64,7 +64,15 @@ const ShopDetails = ({ shop }: Props) => {
 ShopDetails.layout = NavbarLayout;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await api.getSlugs();
+  let paths = [
+    { params: { slug: "shop-1" } },
+  ];
+
+  try {
+    paths = await api.getSlugs();
+  } catch (error) {
+    // No need to do anything here
+  }
 
   return {
     paths: paths, //indicates that no page needs be created at build time
@@ -73,7 +81,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const shop = await api.getShopBySlug(String(params.slug));
+  let shop = {};
+
+  try {
+    shop = await api.getShopBySlug(String(params.slug));
+  } catch (error) {
+    // No need to do anything here
+  }
+
   return { props: { shop } };
 };
 

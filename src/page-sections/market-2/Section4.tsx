@@ -24,16 +24,16 @@ const Section4: FC<Section4Props> = ({ products }) => {
       </FlexBox>
 
       <CarouselWrapper color="dark">
-        <Carousel totalSlides={products.length} visibleSlides={visibleSlides}>
+        <Carousel totalSlides={products?.length} visibleSlides={visibleSlides}>
           {products.map((product) => (
             <ProductCard19
               key={product.id}
               id={product.id}
               slug={product.slug}
-              name={product.title}
+              name={product.name}
               price={product.price}
               images={product.images}
-              img={product.thumbnail}
+              img={product.mainImageUrl}
               reviews={product.reviews.length || 11}
             />
           ))}

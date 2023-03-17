@@ -1,6 +1,6 @@
 import systemCss from "@styled-system/css";
 import { colorOptions } from "interfaces";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import {
   BackgroundProps,
   border,
@@ -19,12 +19,77 @@ import {
 interface ButtonProps {
   fullwidth?: boolean;
   color?: colorOptions;
+  loading?: boolean;
+  children?: any;
   variant?: "text" | "outlined" | "contained";
   size?: "small" | "medium" | "large" | "none";
+  mb?: string;
+  type?: "button" | "submit" | "reset";
+  borderRadius?: any;
+  borderTopRightRadius?: any;
+  borderTopLeftRadius?: any;
+  borderBottomRightRadius?: any;
+  borderBottomLeftRadius?: any;
+  borderLeft?: string;
+  borderRight?: string;
+  borderTop?: string;
+  p?: string;
+  className?: string;
+  width?: string;
+  height?: string;
+  padding?: string;
+  overflow?: string;
+  disabled?: boolean;
+  borderColor?: string;
+  bg?: string;
+  as?: any;
+  px?: string;
+  style?: any;
+  onClick?: any;
+  m?: any;
+  mr?: any;
+  ml?: any;
+  mt?: any;
+  mx?: any;
+  minWidth?: string;
+  maxWidth?: string;
+  minHeight?: string;
+  maxHeight?: string;
+  boxShadow?: string;
+  borderRightColor?: string;
+  borderLeftColor?: string;
+  borderBottomColor?: string;
+  borderTopColor?: string;
+  borderRightWidth?: string;
+  borderLeftWidth?: string;
+  borderBottomWidth?: string;
+  borderTopWidth?: string;
+  borderRightStyle?: string;
+  borderLeftStyle?: string;
+  borderBottomStyle?: string;
+  borderTopStyle?: string;
+  borderStyle?: string;
+  borderWidth?: string;
+  borderX?: string;
+  borderY?: string;
+  border?: string;
+  borderXColor?: string;
+  borderYColor?: string;
+  borderXWidth?: string;
+  borderYWidth?: string;
+  borderXStyle?: string;
+  borderYStyle?: string;
+  borderXRadius?: string;
+  borderYRadius?: string;
+  borderImage?: string;
+  borderImageSource?: string;
+  borderImageSlice?: string;
+  borderImageWidth?: string;
+  my?: any;
 }
 
-const Button = styled.button<
-  ColorProps & BackgroundProps & BorderProps & SpaceProps & ButtonProps & LayoutProps
+const ButtonEl = styled.button<
+  any & ColorProps & BackgroundProps & BorderProps & SpaceProps & ButtonProps & LayoutProps & any
 >(
   ({ color, fullwidth }) =>
     systemCss({
@@ -125,6 +190,40 @@ const Button = styled.button<
   compose(color, layout, space, border, shadow)
 );
 
+const spin = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const Spinner = styled.span`
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: rgba(255, 255, 255, 0.8);
+  animation: ${spin} 1s ease-in-out infinite;
+  margin-right: 8px;
+`;
+
+
+function Button({ loading, ...props }: ButtonProps) {
+
+  if (props?.size === "none") {
+    return <ButtonEl {...props} />
+  }
+
+  return (
+    <ButtonEl {...props}>
+      {loading ? <Spinner /> : null}
+      {loading ? 'Submitting...' : props?.children || 'Submit'}
+    </ButtonEl>
+  )
+};
+
+
 Button.defaultProps = { size: "small", borderRadius: 5 };
+
 
 export default Button;

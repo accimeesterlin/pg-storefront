@@ -11,7 +11,7 @@ import { H5, H6, Paragraph, SemiSpan } from "@component/Typography";
 
 const ProductFilterCard: FC = () => {
   const render = (items: string[]) =>
-    items.map((name) => (
+    items?.map((name) => (
       <Paragraph
         py="6px"
         pl="22px"
@@ -28,7 +28,7 @@ const ProductFilterCard: FC = () => {
     <Card p="18px 27px" elevation={5}>
       <H6 mb="10px">Categories</H6>
 
-      {categroyList.map((item) =>
+      {categroyList?.map((item) =>
         item.child ? (
           <Accordion key={item.title} expanded>
             <AccordionHeader px="0px" py="6px" color="text.muted">
@@ -70,7 +70,7 @@ const ProductFilterCard: FC = () => {
 
       {/* BRANDS FILTER */}
       <H6 mb="16px">Brands</H6>
-      {brandList.map((item) => (
+      {brandList?.map((item) => (
         <CheckBox
           my="10px"
           key={item}
@@ -85,7 +85,7 @@ const ProductFilterCard: FC = () => {
       <Divider my="24px" />
 
       {/* STOCK AND SALES FILTERS */}
-      {otherOptions.map((item) => (
+      {otherOptions?.map((item) => (
         <CheckBox
           my="10px"
           key={item}

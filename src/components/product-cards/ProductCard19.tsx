@@ -11,8 +11,9 @@ import { IconButton } from "@component/buttons";
 import { H4, Paragraph, Small } from "@component/Typography";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { theme } from "@utils/theme";
-import { currency } from "@utils/utils";
+import { createLocalStorage, currency } from "@utils/utils";
 import { useAppContext } from "@context/AppContext";
+import Shop from "@models/shop.model";
 
 // styled components
 const CardBox = styled(Box)({
@@ -58,6 +59,7 @@ type ProductCard19Props = {
   name: string;
   slug: string;
   price: number;
+  shop?: Shop;
   reviews: number;
   images: string[];
   id: string | number;
@@ -65,7 +67,8 @@ type ProductCard19Props = {
 // ==============================================================
 
 const ProductCard19: FC<ProductCard19Props> = (props) => {
-  const { img, name, price, reviews, id, slug, images } = props;
+  const [saveCartState] = createLocalStorage("cartState");
+  const { img, name, price, reviews, id, slug, images, shop } = props;
 
   const { state, dispatch } = useAppContext();
   const [openDialog, setOpenDialog] = useState(false);
@@ -86,11 +89,14 @@ const ProductCard19: FC<ProductCard19Props> = (props) => {
       slug,
       name,
       price,
-      imgUrl: img,
+      mainImageUrl: img,
+      shopId: shop?.id,
       qty: (cartItem?.qty || 0) + 1,
     };
 
     dispatch({ type: "CHANGE_CART_AMOUNT", payload });
+
+    saveCartState(state.cart);
   };
 
   return (
@@ -143,7 +149,7 @@ const ProductCard19: FC<ProductCard19Props> = (props) => {
       <ProductQuickView
         open={openDialog}
         onClose={toggleDialog}
-        product={{ id, images, price, slug, title: name }}
+        product={{ id, images, price, slug, name, shop }}
       />
     </Fragment>
   );

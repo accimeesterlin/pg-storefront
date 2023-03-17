@@ -22,12 +22,12 @@ const Section4: FC<Props> = ({ products }) => {
               <ProductCard1
                 id={item.id}
                 slug={item.slug}
-                title={item.title}
+                name={item.name}
                 price={item.price}
-                off={item.discount}
+                off={item.comparePrice}
                 rating={item.rating}
                 images={item.images}
-                imgUrl={item.thumbnail}
+                mainImageUrl={item.mainImageUrl}
               />
             </Box>
           ))}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { FC, Fragment, useCallback, useState } from "react";
 import styled from "styled-components";
 import { useAppContext } from "@context/AppContext";
@@ -11,9 +11,15 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import Card, { CardProps } from "@component/Card";
 import { H3, SemiSpan } from "@component/Typography";
-import { calculateDiscount, currency, getTheme } from "@utils/utils";
+import {
+  calculateRemainingPercentage,
+  createLocalStorage,
+  currency,
+  getTheme,
+} from "@utils/utils";
 import { deviceSize } from "@utils/constants";
 import ProductQuickView from "@component/products/ProductQuickView";
+import Shop from "@models/shop.model";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -104,11 +110,12 @@ const Wrapper = styled(Card)`
 interface ProductCard1Props extends CardProps {
   off?: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating: number;
-  images: string[];
+  shop?: Shop;
+  images: any[];
   id?: string | number;
 }
 // =======================================================================
@@ -117,13 +124,15 @@ const ProductCard1: FC<ProductCard1Props> = ({
   id,
   off,
   slug,
-  title,
+  name,
   price,
-  imgUrl,
+  mainImageUrl,
   images,
   rating = 4,
+  shop,
   ...props
 }) => {
+  const [saveCartState] = createLocalStorage("cartState");
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.id === id);
@@ -133,15 +142,27 @@ const ProductCard1: FC<ProductCard1Props> = ({
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { id, slug, price, imgUrl, name: title, qty: amount },
+      payload: {
+        id,
+        slug,
+        price: off,
+        mainImageUrl: mainImageUrl,
+        name,
+        shopId: shop?.id,
+        qty: amount,
+      },
     });
+
+    saveCartState(state.cart);
   };
+
+  const isSame = off === price;
 
   return (
     <>
       <Wrapper {...props}>
         <div className="image-holder">
-          {!!off && (
+          {!isSame && (
             <Chip
               top="10px"
               left="10px"
@@ -153,12 +174,17 @@ const ProductCard1: FC<ProductCard1Props> = ({
               color="primary.text"
               zIndex={1}
             >
-              {off}% off
+              {calculateRemainingPercentage(off, price)}% off
             </Chip>
           )}
 
           <FlexBox className="extra-icons">
-            <Icon color="secondary" variant="small" mb="0.5rem" onClick={toggleDialog}>
+            <Icon
+              color="secondary"
+              variant="small"
+              mb="0.5rem"
+              onClick={toggleDialog}
+            >
               eye-alt
             </Icon>
 
@@ -169,13 +195,13 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
           <Link href={`/product/${slug}`}>
             <a>
-              <Image
-                alt={title}
+              <img
+                alt={name}
                 width={100}
-                src={imgUrl}
+                src={mainImageUrl}
                 height={100}
-                objectFit="cover"
-                layout="responsive"
+                // objectFit="cover"
+                // layout="responsive"
               />
             </a>
           </Link>
@@ -188,14 +214,14 @@ const ProductCard1: FC<ProductCard1Props> = ({
                 <a>
                   <H3
                     mb="10px"
-                    title={title}
+                    title={name}
                     fontSize="14px"
                     textAlign="left"
                     fontWeight="600"
                     className="title"
                     color="text.secondary"
                   >
-                    {title}
+                    {name}
                   </H3>
                 </a>
               </Link>
@@ -204,10 +230,10 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
               <FlexBox alignItems="center" mt="10px">
                 <SemiSpan pr="0.5rem" fontWeight="600" color="primary.main">
-                  {calculateDiscount(price, off)}
+                  {currency(off)}
                 </SemiSpan>
 
-                {!!off && (
+                {!isSame && (
                   <SemiSpan color="text.muted" fontWeight="600">
                     <del>{currency(price)}</del>
                   </SemiSpan>
@@ -258,7 +284,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ images, title, price, id, slug }}
+        product={{ images, name, price, id, slug, shop }}
       />
     </>
   );

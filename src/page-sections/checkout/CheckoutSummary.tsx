@@ -5,8 +5,15 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import TextField from "@component/text-field";
 import Typography from "@component/Typography";
+import { useAppContext } from "@context/AppContext";
+import { currency, getTotalPrice } from "@utils/utils";
 
 const CheckoutSummary: FC = () => {
+  const { state } = useAppContext();
+  const totalPrice = getTotalPrice(state.cart);
+
+  const totalPriceCurrency = currency(totalPrice);
+
   return (
     <Card1>
       <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
@@ -14,7 +21,7 @@ const CheckoutSummary: FC = () => {
 
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
-            $2610.
+            {totalPriceCurrency}.
           </Typography>
 
           <Typography fontWeight="600" fontSize="14px" lineHeight="1">
@@ -38,7 +45,7 @@ const CheckoutSummary: FC = () => {
 
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
-            $40.
+            $0.
           </Typography>
 
           <Typography fontWeight="600" fontSize="14px" lineHeight="1">
@@ -48,7 +55,7 @@ const CheckoutSummary: FC = () => {
       </FlexBox>
 
       <FlexBox justifyContent="space-between" alignItems="center" mb="1rem">
-        <Typography color="text.hint">Discount:</Typography>
+        <Typography color="text.hint">comparePrice:</Typography>
 
         <FlexBox alignItems="flex-end">
           <Typography fontSize="18px" fontWeight="600" lineHeight="1">
@@ -60,7 +67,7 @@ const CheckoutSummary: FC = () => {
       <Divider mb="1rem" />
 
       <Typography fontSize="25px" fontWeight="600" lineHeight="1" textAlign="right" mb="1.5rem">
-        $2610.00
+        {totalPriceCurrency}
       </Typography>
 
       <TextField placeholder="Voucher" fullwidth />

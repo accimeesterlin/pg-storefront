@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
+import { isEmpty } from 'lodash';
 import Box from "@component/Box";
 import FlexBox from "@component/FlexBox";
 import { H5 } from "@component/Typography";
@@ -14,6 +15,7 @@ import ProductDescription from "@component/products/ProductDescription";
 import api from "@utils/__api__/products";
 import Shop from "@models/shop.model";
 import Product from "@models/product.model";
+
 
 // ===============================================================
 type Props = {
@@ -40,10 +42,13 @@ const ProductDetails = (props: Props) => {
   return (
     <Fragment>
       <ProductIntro
-        id={product.id}
-        price={product.price}
-        title={product.title}
-        images={product.images}
+        id={product?.id}
+        price={product?.price}
+        name={product?.name}
+        images={product?.images}
+        mainImageUrl={product?.mainImageUrl}
+        rating={product?.rating}
+        shop={product?.shop}
       />
 
       <FlexBox borderBottom="1px solid" borderColor="gray.400" mt="80px" mb="26px">
@@ -73,18 +78,18 @@ const ProductDetails = (props: Props) => {
 
       {/* DESCRIPTION AND REVIEW TAB DETAILS */}
       <Box mb="50px">
-        {selectedOption === "description" && <ProductDescription />}
+        {selectedOption === "description" && <ProductDescription description={product?.description} />}
         {selectedOption === "review" && <ProductReview />}
       </Box>
 
       {/* FREQUENTLY BOUGHT TOGETHER PRODUCTS */}
-      {frequentlyBought && <FrequentlyBought products={frequentlyBought} />}
+      {frequentlyBought?.length > 0 && <FrequentlyBought products={frequentlyBought} />}
 
       {/* AVAILABLE SHOPS */}
       {shops && <AvailableShops shops={shops} />}
 
       {/* RELATED PRODUCTS */}
-      {relatedProducts && <RelatedProducts products={relatedProducts} />}
+      {relatedProducts?.length > 0 && <RelatedProducts products={relatedProducts} />}
     </Fragment>
   );
 };
@@ -92,21 +97,53 @@ const ProductDetails = (props: Props) => {
 ProductDetails.layout = NavbarLayout;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await api.getSlugs();
+  let paths = [ { params: { slug: 'hair' } } ]
+
+  try {
+    paths = await api.getSlugs();
+  } catch (error) {
+    // No slugs available
+  }
+
 
   return {
-    paths: paths, //indicates that no page needs be created at build time
-    fallback: "blocking", //indicates the type of fallback
+    paths: paths, // indicates that no page needs be created at build time
+    fallback: "blocking", // indicates the type of fallback
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const shops = await api.getAvailableShop();
-  const relatedProducts = await api.getRelatedProducts();
-  const frequentlyBought = await api.getFrequentlyBought();
-  const product = await api.getProduct(params.slug as string);
+  let shops = [];
 
-  return { props: { frequentlyBought, relatedProducts, product, shops } };
+  try {
+    shops = await api.getAvailableShop();
+  } catch (error) {
+    // No shops available
+  }
+
+  // const frequentlyBought = await api.getFrequentlyBought();
+  let product: Product = {};
+
+  try {
+    product = await api.getProduct(params.slug as string);
+
+    if (isEmpty(product)) {
+      product = await api.getDemoProduct(params.slug as string) || {};
+    }
+  } catch (error) {
+    // No product found
+    product = await api.getDemoProduct(params.slug as string) || {};
+  }
+
+  
+  let relatedProducts = [];
+  try {
+    relatedProducts = await api.getRelatedProducts(product?.id);
+  } catch (error) {
+    // No related products
+  }
+
+  return { props: { frequentlyBought: [], relatedProducts, product, shops } };
 };
 
 export default ProductDetails;

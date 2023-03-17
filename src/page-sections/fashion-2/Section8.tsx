@@ -75,7 +75,7 @@ const Section8: FC<Section8Props> = ({ blogs }) => {
                   alt="blog-1"
                   objectFit="cover"
                   layout="responsive"
-                  src={item.thumbnail}
+                  src={item.mainImageUrl}
                 />
 
                 <DateBox>

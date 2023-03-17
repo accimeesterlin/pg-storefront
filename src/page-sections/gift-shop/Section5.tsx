@@ -31,18 +31,18 @@ const Section5: FC<Props> = ({ products, title }) => {
   return (
     <CategorySectionCreator title={title} seeMoreLink="#">
       <Wrapper>
-        <Carousel infinite={true} visibleSlides={visibleSlides} totalSlides={products.length}>
+        <Carousel infinite={true} visibleSlides={visibleSlides} totalSlides={products?.length}>
           {products.map((item) => (
             <ProductCard15
               id={item.id}
               key={item.id}
               slug={item.slug}
-              title={item.title}
+              name={item.name}
               price={item.price}
-              off={item.discount}
+              off={item.comparePrice}
               rating={item.rating}
               images={item.images}
-              imgUrl={item.thumbnail}
+              mainImageUrl={item.mainImageUrl}
             />
           ))}
         </Carousel>

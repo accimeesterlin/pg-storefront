@@ -8,6 +8,7 @@ import FlexBox from "@component/FlexBox";
 import Typography from "@component/Typography";
 import NavLink from "@component/nav-link";
 import { getTheme } from "@utils/utils";
+import { useAppContext } from "@context/AppContext";
 
 // styled component
 const DashboardNavigationWrapper = styled(Card)`
@@ -42,6 +43,41 @@ const StyledDashboardNav = styled(NavLink)<{ isCurrentPath?: boolean }>`
 
 const DashboardNavigation = () => {
   const { pathname } = useRouter();
+  const { state } = useAppContext();
+
+  const orderCount = state?.user.orders?.length || 0;
+  const addressCount = state?.user?.addresses?.length || 0;
+
+  // TODO: add the following count
+  // Ticket Count
+  // Wishlist Count
+  // Payment Method Count
+  
+
+  const linkList = [
+    {
+      title: "DASHBOARD",
+      list: [
+        { href: "/orders", title: "Orders", iconName: "bag", count: orderCount },
+        { href: "/wish-list", title: "Wishlist", iconName: "heart", count: 0 },
+        {
+          href: "/support-tickets",
+          title: "Support Tickets",
+          iconName: "customer-service",
+          count: 0,
+        },
+      ],
+    },
+    {
+      title: "ACCOUNT SETTINGS",
+      list: [
+        { href: "/profile", title: "Profile Info", iconName: "user", count: 0 },
+        { href: "/address", title: "Addresses", iconName: "pin", count: addressCount },
+        { href: "/payment-methods", title: "Payment Methods", iconName: "credit-card", count: 0 },
+        { href: "/signout", title: "Signout", iconName: "", count: 0 },
+      ],
+    },
+  ];
 
   return (
     <DashboardNavigationWrapper px="0px" pb="1.5rem" color="gray.900">
@@ -69,7 +105,9 @@ const DashboardNavigation = () => {
                 <span>{item.title}</span>
               </FlexBox>
 
-              <span>{item.count}</span>
+              {
+                item.count > 0 && <span>{item.count}</span>
+              }
             </StyledDashboardNav>
           ))}
         </Fragment>
@@ -78,28 +116,6 @@ const DashboardNavigation = () => {
   );
 };
 
-const linkList = [
-  {
-    title: "DASHBOARD",
-    list: [
-      { href: "/orders", title: "Orders", iconName: "bag", count: 5 },
-      { href: "/wish-list", title: "Wishlist", iconName: "heart", count: 19 },
-      {
-        href: "/support-tickets",
-        title: "Support Tickets",
-        iconName: "customer-service",
-        count: 1,
-      },
-    ],
-  },
-  {
-    title: "ACCOUNT SETTINGS",
-    list: [
-      { href: "/profile", title: "Profile Info", iconName: "user", count: 3 },
-      { href: "/address", title: "Addresses", iconName: "pin", count: 16 },
-      { href: "/payment-methods", title: "Payment Methods", iconName: "credit-card", count: 4 },
-    ],
-  },
-];
+
 
 export default DashboardNavigation;

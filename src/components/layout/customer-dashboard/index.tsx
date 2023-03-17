@@ -5,6 +5,7 @@ import Grid from "@component/grid/Grid";
 import Container from "@component/Container";
 import Navbar from "@component/navbar/Navbar";
 import DashboardNavigation from "../DashboardNavigation";
+import ProtectedRoute from "@component/auth/protected";
 
 // ======================================================
 type Props = { children: ReactNode };
@@ -12,6 +13,7 @@ type Props = { children: ReactNode };
 
 const CustomerDashboardLayout: FC<Props> = ({ children }) => {
   return (
+    <ProtectedRoute>
     <AppLayout navbar={<Navbar />}>
       <Container my="2rem">
         <Grid container spacing={6}>
@@ -25,6 +27,7 @@ const CustomerDashboardLayout: FC<Props> = ({ children }) => {
         </Grid>
       </Container>
     </AppLayout>
+    </ProtectedRoute>
   );
 };
 

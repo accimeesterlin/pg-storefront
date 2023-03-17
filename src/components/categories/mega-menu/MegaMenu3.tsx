@@ -40,7 +40,7 @@ const MegaMenu3: FC<MegaMenu3Props> = ({ data: { categories, rightImage }, minWi
             <Link href={rightImage.href}>
               <a>
                 <Box position="relative" width="153px" height="100%">
-                  <NextImage src={rightImage.imgUrl} layout="fill" objectFit="contain" />
+                  <NextImage src={rightImage.mainImageUrl} layout="fill" objectFit="contain" />
                 </Box>
               </a>
             </Link>

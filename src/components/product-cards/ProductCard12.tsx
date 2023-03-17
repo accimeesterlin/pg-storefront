@@ -12,7 +12,8 @@ import { H3, Span } from "@component/Typography";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { theme } from "@utils/theme";
 import { useAppContext } from "@context/AppContext";
-import { calculateDiscount, currency } from "@utils/utils";
+import { calculateDiscount, createLocalStorage, currency } from "@utils/utils";
+import Shop from "@models/shop.model";
 
 // styled components
 const Wrapper = styled("div")`
@@ -89,7 +90,7 @@ const ItemController = styled(FlexBox)({
 
 const ContentWrapper = styled(Box)({
   padding: "1rem",
-  "& .title, & .categories": {
+  "& .name, & .categories": {
     overflow: "hidden",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
@@ -101,16 +102,18 @@ type ProductCard12Props = {
   id: string;
   off?: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating: number;
+  shop?: Shop;
   images: string[];
 };
 // =============================================================
 
 const ProductCard12: FC<ProductCard12Props> = (props) => {
-  const { off, title, price, imgUrl, rating, slug, id, images } = props;
+  const [saveCartState] = createLocalStorage("cartState");
+  const { off, name, price, mainImageUrl, rating, slug, id, images, shop } = props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -122,8 +125,10 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, imgUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop?.id },
     });
+
+    saveCartState(state.cart);
   };
 
   return (
@@ -149,10 +154,10 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
           <Link href={`/product/${slug}`}>
             <a>
               <LazyImage
-                alt={title}
+                alt={name}
                 width={190}
                 height={190}
-                src={imgUrl}
+                src={mainImageUrl}
                 layout="responsive"
                 objectFit="contain"
               />
@@ -208,13 +213,13 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
           <a>
             <H3
               mb={1}
-              title={title}
+              name={name}
               fontSize="14px"
               fontWeight="600"
-              className="title"
+              className="name"
               color="text.secondary"
             >
-              {title}
+              {name}
             </H3>
           </a>
         </Link>
@@ -242,7 +247,7 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ id, images, slug, price, title }}
+        product={{ id, images, slug, price, name, shop }}
       />
     </Wrapper>
   );

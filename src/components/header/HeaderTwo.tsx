@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
 import MiniCart from "@component/mini-cart";
@@ -12,15 +12,29 @@ import { SearchInput } from "@component/search-box";
 import { useAppContext } from "@context/AppContext";
 import UserLoginDialog from "./LoginDialog";
 import StyledHeader from "./styles";
+import { createLocalStorage } from "@utils/utils";
 
 // ========================================================================
 type HeaderProps = { isFixed?: boolean; className?: string };
 // ========================================================================
 
 const HeaderTwo: FC<HeaderProps> = ({ className }) => {
-  const { state } = useAppContext();
+  const [, loadCartState] = createLocalStorage("cartState");
+  const { state, dispatch } = useAppContext();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
+
+  useEffect(() => {
+    const cartState: any = loadCartState("cartState");
+
+    if (cartState) {
+      dispatch({
+        type: "LOAD_CART",
+        payload: cartState,
+      });
+    }
+  }, []);
+  
 
   const CART_HANDLE = (
     <FlexBox ml="20px" alignItems="flex-start">

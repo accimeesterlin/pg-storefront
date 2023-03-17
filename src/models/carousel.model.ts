@@ -1,7 +1,7 @@
 export interface FurnitureCarouselItem {
   id: string | number;
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   subTitle: string;
   buttonText: string;
   buttonLink: string;
@@ -11,7 +11,7 @@ export interface FurnitureCarouselItem {
 export interface GiftCarouselItem {
   id: string | number;
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   subTitle: string;
   buttonText: string;
   buttonLink: string;
@@ -20,7 +20,7 @@ export interface GiftCarouselItem {
 export interface HealthCarouselItem {
   id: number;
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   buttonText: string;
   buttonLink: string;
 }
@@ -28,7 +28,7 @@ export interface HealthCarouselItem {
 export interface GroceryTwoCarouselItem {
   id: number;
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   description: string;
   appStoreLink: string;
   playStoreLink: string;

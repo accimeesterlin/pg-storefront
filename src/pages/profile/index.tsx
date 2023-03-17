@@ -1,5 +1,4 @@
-import { Fragment } from "react";
-import { GetStaticProps } from "next";
+import { Fragment, useEffect } from "react";
 import Router from "next/router";
 import { format } from "date-fns";
 import Box from "@component/Box";
@@ -12,15 +11,35 @@ import { Button } from "@component/buttons";
 import Typography, { H3, H5, Small } from "@component/Typography";
 import DashboardLayout from "@component/layout/customer-dashboard";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
-import User from "@models/user.model";
+// import User from "@models/user.model";
 import api from "@utils/__api__/users";
+import { useAppContext } from "@context/AppContext";
 
 // ============================================================
-type ProfileProps = { user: User };
+// type ProfileProps = { user: User };
 // ============================================================
 
-const Profile = ({ user }: ProfileProps) => {
+const Profile = () => {
+  const { dispatch, state } = useAppContext();
   const handleEdit = () => Router.push("/profile/edit");
+
+  useEffect(() => {
+    handleUserProfile();
+  }, []);
+
+  const user = state?.user;
+
+  const firstName = user?.firstName || "";
+  const lastName = user?.lastName || "";
+
+  const handleUserProfile = async () => {
+    try {
+      const data = await api.getMe();
+      dispatch({ type: "SET_USER", payload: data });
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
 
   const HEADER_LINK = (
     <Button color="primary" bg="primary.light" px="2rem" onClick={handleEdit}>
@@ -29,7 +48,7 @@ const Profile = ({ user }: ProfileProps) => {
   );
 
   const infoList = [
-    { title: "16", subtitle: "All Orders" },
+    { title: `${user?.orders?.length}`, subtitle: "All Orders" },
     { title: "02", subtitle: "Awaiting Payments" },
     { title: "00", subtitle: "Awaiting Shipment" },
     { title: "01", subtitle: "Awaiting Delivery" },
@@ -37,18 +56,26 @@ const Profile = ({ user }: ProfileProps) => {
 
   return (
     <Fragment>
-      <DashboardPageHeader iconName="user_filled" title="My Profile" button={HEADER_LINK} />
+      <DashboardPageHeader
+        iconName="user_filled"
+        title="My Profile"
+        button={HEADER_LINK}
+      />
 
       <Box mb="30px">
         <Grid container spacing={6}>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <FlexBox as={Card} p="14px 32px" height="100%" alignItems="center">
-              <Avatar src={user.avatar} size={64} />
+              <Avatar src={user?.profileImageUrl} size={64} />
 
               <Box ml="12px" flex="1 1 0">
-                <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center">
+                <FlexBox
+                  flexWrap="wrap"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
                   <div>
-                    <H5 my="0px">{`${user.name.firstName} ${user.name.lastName}`}</H5>
+                    <H5 my="0px">{`${firstName} ${lastName}`}</H5>
 
                     <FlexBox alignItems="center">
                       <Typography fontSize="14px" color="text.hint">
@@ -56,12 +83,16 @@ const Profile = ({ user }: ProfileProps) => {
                       </Typography>
 
                       <Typography ml="4px" fontSize="14px" color="primary.main">
-                        $500
+                        ${user?.balance?.amount}
                       </Typography>
                     </FlexBox>
                   </div>
 
-                  <Typography ontSize="14px" color="text.hint" letterSpacing="0.2em">
+                  <Typography
+                    ontSize="14px"
+                    color="text.hint"
+                    letterSpacing="0.2em"
+                  >
                     SILVER USER
                   </Typography>
                 </FlexBox>
@@ -71,8 +102,8 @@ const Profile = ({ user }: ProfileProps) => {
 
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Grid container spacing={4}>
-              {infoList.map((item) => (
-                <Grid item lg={3} sm={6} xs={6} key={item.subtitle}>
+              {infoList?.map((item) => (
+                <Grid item lg={3} sm={6} xs={6} key={item?.subtitle}>
                   <FlexBox
                     as={Card}
                     height="100%"
@@ -81,11 +112,11 @@ const Profile = ({ user }: ProfileProps) => {
                     flexDirection="column"
                   >
                     <H3 color="primary.main" my="0px" fontWeight="600">
-                      {item.title}
+                      {item?.title}
                     </H3>
 
                     <Small color="text.muted" textAlign="center">
-                      {item.subtitle}
+                      {item?.subtitle}
                     </Small>
                   </FlexBox>
                 </Grid>
@@ -96,55 +127,63 @@ const Profile = ({ user }: ProfileProps) => {
       </Box>
 
       <TableRow p="0.75rem 1.5rem">
-        <FlexBox flexDirection="column" p="0.5rem">
-          <Small color="text.muted" mb="4px" textAlign="left">
-            First Name
-          </Small>
+        {firstName && (
+          <FlexBox flexDirection="column" p="0.5rem">
+            <Small color="text.muted" mb="4px" textAlign="left">
+              First Name
+            </Small>
 
-          <span>{user.name.firstName}</span>
-        </FlexBox>
+            <span>{firstName}</span>
+          </FlexBox>
+        )}
 
-        <FlexBox flexDirection="column" p="0.5rem">
-          <Small color="text.muted" mb="4px" textAlign="left">
-            Last Name
-          </Small>
+        {lastName && (
+          <FlexBox flexDirection="column" p="0.5rem">
+            <Small color="text.muted" mb="4px" textAlign="left">
+              Last Name
+            </Small>
 
-          <span>{user.name.lastName}</span>
-        </FlexBox>
+            <span>{lastName}</span>
+          </FlexBox>
+        )}
 
         <FlexBox flexDirection="column" p="0.5rem">
           <Small color="text.muted" mb="4px" textAlign="left">
             Email
           </Small>
 
-          <span>{user.email}</span>
+          <span>{user?.email}</span>
         </FlexBox>
 
-        <FlexBox flexDirection="column" p="0.5rem">
-          <Small color="text.muted" mb="4px" textAlign="left">
-            Phone
-          </Small>
+        {user?.phone && (
+          <FlexBox flexDirection="column" p="0.5rem">
+            <Small color="text.muted" mb="4px" textAlign="left">
+              Phone
+            </Small>
 
-          <span>{user.phone}</span>
-        </FlexBox>
+            <span>{user?.phone}</span>
+          </FlexBox>
+        )}
 
-        <FlexBox flexDirection="column" p="0.5rem">
-          <Small color="text.muted" mb="4px">
-            Birth date
-          </Small>
+        {user?.birthDay && (
+          <FlexBox flexDirection="column" p="0.5rem">
+            <Small color="text.muted" mb="4px">
+              Birth date
+            </Small>
 
-          <span className="pre">{format(new Date(user.dateOfBirth), "dd MMM, yyyy")}</span>
-        </FlexBox>
+            <span className="pre">
+              {format(
+                user?.birthDay ? new Date(user?.birthDay) : new Date(),
+                "dd MMM, yyyy"
+              )}
+            </span>
+          </FlexBox>
+        )}
       </TableRow>
     </Fragment>
   );
 };
 
 Profile.layout = DashboardLayout;
-
-export const getStaticProps: GetStaticProps = async () => {
-  const user = await api.getUser();
-  return { props: { user } };
-};
 
 export default Profile;

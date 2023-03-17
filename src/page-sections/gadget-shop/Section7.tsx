@@ -17,7 +17,7 @@ const Section7: FC<Props> = ({ blogs }) => {
             <Card3
               title={item.title}
               date={item.createdAt}
-              imgUrl={item.thumbnail}
+              mainImageUrl={item.mainImageUrl}
               commentCount={item.comments}
               description={item.description}
             />

@@ -14,14 +14,11 @@ import { ProductCard7 } from "@component/product-cards";
 import CheckoutNavLayout from "@component/layout/CheckoutNavLayout";
 import { useAppContext } from "@context/AppContext";
 import countryList from "@data/countryList";
-import { currency } from "@utils/utils";
+import { currency, getTotalPrice } from "@utils/utils";
 
 const Cart = () => {
   const { state } = useAppContext();
 
-  const getTotalPrice = () => {
-    return state.cart.reduce((accumulator, item) => accumulator + item.price * item.qty, 0) || 0;
-  };
 
   return (
     <Fragment>
@@ -31,12 +28,15 @@ const Cart = () => {
             <ProductCard7
               mb="1.5rem"
               id={item.id}
+              shop={{
+                id: item.shopId,
+              }}
               key={item.id}
               qty={item.qty}
               slug={item.slug}
               name={item.name}
               price={item.price}
-              imgUrl={item.imgUrl}
+              mainImageUrl={item.mainImageUrl}
             />
           ))}
         </Grid>
@@ -47,7 +47,7 @@ const Cart = () => {
               <Typography color="gray.600">Total:</Typography>
 
               <Typography fontSize="18px" fontWeight="600" lineHeight="1">
-                {currency(getTotalPrice())}
+                {currency(getTotalPrice(state.cart))}
               </Typography>
             </FlexBox>
 

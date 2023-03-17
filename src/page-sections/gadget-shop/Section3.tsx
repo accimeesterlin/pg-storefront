@@ -15,7 +15,7 @@ const Section3: FC<Props> = ({ bannerData }) => {
           <Card2
             productUrl="/"
             title={bannerData[0].title}
-            imgUrl={bannerData[0].thumbnail}
+            mainImageUrl={bannerData[0].mainImageUrl}
             subtitle={bannerData[0].description}
           />
         </Grid>
@@ -27,7 +27,7 @@ const Section3: FC<Props> = ({ bannerData }) => {
             bg="text.muted"
             subtitleColor="gray.400"
             title={bannerData[1].title}
-            imgUrl={bannerData[1].thumbnail}
+            mainImageUrl={bannerData[1].mainImageUrl}
             subtitle={bannerData[1].description}
           />
         </Grid>

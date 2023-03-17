@@ -10,19 +10,19 @@ import { getDateDifference } from "@utils/utils";
 type ProductCommentProps = {
   name: string;
   date: string;
-  imgUrl: string;
+  mainImageUrl: string;
   rating: number;
   comment: string;
 };
 // =========================================
 
 const ProductComment: FC<ProductCommentProps> = (props) => {
-  const { name, imgUrl, rating, date, comment } = props;
+  const { name, mainImageUrl, rating, date, comment } = props;
 
   return (
     <Box mb="32px" maxWidth="600px">
       <FlexBox alignItems="center" mb="1rem">
-        <Avatar src={imgUrl} />
+        <Avatar src={mainImageUrl} />
 
         <Box ml="1rem">
           <H5 mb="4px">{name}</H5>

@@ -1,5 +1,4 @@
-import { Fragment } from "react";
-import { GetStaticProps } from "next";
+import { Fragment, useEffect } from "react";
 import Router from "next/router";
 import Link from "next/link";
 import Icon from "@component/icon/Icon";
@@ -11,15 +10,33 @@ import Typography from "@component/Typography";
 import { IconButton } from "@component/buttons";
 import DashboardLayout from "@component/layout/customer-dashboard";
 import DashboardPageHeader from "@component/layout/DashboardPageHeader";
-import Address from "@models/address.model";
+// import Address from "@models/address.model";
 import api from "@utils/__api__/address";
+import { useAppContext } from "@context/AppContext";
 
 // =======================================================
-type AddressListProps = { addressList: Address[] };
+// type AddressListProps = { addressList: Address[] };
 // =======================================================
 
-const AddressList = ({ addressList }: AddressListProps) => {
+const AddressList = () => {
+  const { dispatch, state } = useAppContext();
   const handleNavigate = () => Router.push("/address/create");
+  
+  const addressList = state?.user?.addresses;
+
+  useEffect(() => {
+    handleAddressList();  
+  }, []);
+
+  const handleAddressList = async () => {
+    try {
+      const data = await api.getAddressList();
+      dispatch({ type: "SET_ADDRESS", payload: data });
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
 
   const HEADER_LINK = (
     <Button color="primary" bg="primary.light" px="2rem" onClick={handleNavigate}>
@@ -31,10 +48,10 @@ const AddressList = ({ addressList }: AddressListProps) => {
     <Fragment>
       <DashboardPageHeader title="My Addresses" iconName="pin_filled" button={HEADER_LINK} />
 
-      {addressList.map((item) => (
+      {addressList?.map((item) => (
         <TableRow my="1rem" padding="6px 18px" key={item.id}>
           <Typography className="pre" m="6px" textAlign="left">
-            {item.title}
+            {item.name}
           </Typography>
 
           <Typography flex="1 1 260px !important" m="6px" textAlign="left">
@@ -68,7 +85,7 @@ const AddressList = ({ addressList }: AddressListProps) => {
       <FlexBox justifyContent="center" mt="2.5rem">
         <Pagination
           onChange={(data) => console.log(data)}
-          pageCount={Math.ceil(addressList.length / 5)}
+          pageCount={Math.ceil(addressList?.length / 5)}
         />
       </FlexBox>
     </Fragment>
@@ -76,10 +93,5 @@ const AddressList = ({ addressList }: AddressListProps) => {
 };
 
 AddressList.layout = DashboardLayout;
-
-export const getStaticProps: GetStaticProps = async () => {
-  const addressList = await api.getAddressList();
-  return { props: { addressList } };
-};
 
 export default AddressList;

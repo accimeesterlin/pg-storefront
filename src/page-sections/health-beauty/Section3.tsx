@@ -38,7 +38,7 @@ const Section3: FC<Props> = ({ title, products }) => {
         <Carousel
           showArrowOnHover={true}
           arrowButtonColor="inherit"
-          totalSlides={products.length}
+          totalSlides={products?.length}
           visibleSlides={visibleSlides}
         >
           {products.map((item) => (
@@ -46,12 +46,12 @@ const Section3: FC<Props> = ({ title, products }) => {
               <ProductCard16
                 id={item.id}
                 slug={item.slug}
-                title={item.title}
+                name={item.name}
                 price={item.price}
-                off={item.discount}
+                off={item.comparePrice}
                 rating={item.rating}
                 images={item.images}
-                imgUrl={item.thumbnail}
+                mainImageUrl={item.mainImageUrl}
               />
             </Box>
           ))}

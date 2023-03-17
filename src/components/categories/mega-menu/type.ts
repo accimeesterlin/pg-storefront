@@ -1,4 +1,4 @@
-type Image = { href: string; imgUrl: string };
+type Image = { href: string; mainImageUrl: string };
 
 type SubCategory = { href: string; title: string };
 

@@ -13,20 +13,20 @@ type ProductCard8Props = {
   off: number;
   slug: string;
   price: number;
-  title: string;
-  imgUrl: string;
+  name: string;
+  mainImageUrl: string;
   [key: string]: unknown;
 };
 // ==============================================================
 
-const ProductCard8: FC<ProductCard8Props> = ({ id, price, title, off, slug, imgUrl, ...props }) => {
+const ProductCard8: FC<ProductCard8Props> = ({ id, price, name, off, slug, mainImageUrl, ...props }) => {
   return (
     <Card p="1rem" {...props}>
       <Link href={`/product/${slug}`}>
         <a>
           <HoverBox mb="0.75rem" borderRadius={8} overflow="hidden">
             <NextImage
-              src={imgUrl || "/assets/images/products/Rectangle 116.png"}
+              src={mainImageUrl || "/assets/images/products/Rectangle 116.png"}
               width={500}
               height={500}
               layout="responsive"
@@ -35,8 +35,8 @@ const ProductCard8: FC<ProductCard8Props> = ({ id, price, title, off, slug, imgU
             />
           </HoverBox>
 
-          <SemiSpan title={title} mb="0.25rem" color="inherit" ellipsis display="block">
-            {title}
+          <SemiSpan title={name} mb="0.25rem" color="inherit" ellipsis display="block">
+            {name}
           </SemiSpan>
 
           <FlexBox alignItems="center">

@@ -66,10 +66,10 @@ const Section1: FC<Props> = ({ carouselData }) => {
               {carouselData.map((item, index) => (
                 <CarouselCard3
                   key={index}
-                  img={item.imgUrl}
+                  img={item.mainImageUrl}
                   title={item.title}
                   category={item.category}
-                  discount={item.discount}
+                  comparePrice={item.comparePrice}
                   buttonText={item.buttonText}
                   description={item.description}
                 />

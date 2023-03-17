@@ -130,7 +130,7 @@ const Header: FC = () => {
               </Typography>
             </Scroll>
 
-            <a href="https://1.envato.market/oeNbNe">
+            <a href="/">
               <Button variant="outlined" color="primary">
                 Purchase Now
               </Button>

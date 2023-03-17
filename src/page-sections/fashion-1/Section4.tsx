@@ -24,14 +24,14 @@ const Section4: FC<Props> = ({ products }) => {
   return (
     <CategorySectionCreator iconName="new-product-1" title="New Arrivals" seeMoreLink="#">
       <Box mt="-0.25rem" mb="-0.25rem">
-        <Carousel totalSlides={products.length} visibleSlides={visibleSlides}>
+        <Carousel totalSlides={products?.length} visibleSlides={visibleSlides}>
           {products.map((item) => (
             <Box py="0.25rem" key={item.id}>
               <ProductCard2
                 slug={item.slug}
                 price={item.price}
-                title={item.title}
-                imgUrl={item.thumbnail}
+                name={item.name}
+                mainImageUrl={item.mainImageUrl}
               />
             </Box>
           ))}

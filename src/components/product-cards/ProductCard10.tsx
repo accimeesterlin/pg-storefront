@@ -12,7 +12,8 @@ import { H3, SemiSpan } from "../Typography";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { deviceSize } from "@utils/constants";
 import { useAppContext } from "@context/AppContext";
-import { calculateDiscount, currency, getTheme } from "@utils/utils";
+import { calculateDiscount, createLocalStorage, currency, getTheme } from "@utils/utils";
+import Shop from "@models/shop.model";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -59,7 +60,7 @@ const Wrapper = styled(Card)`
   .details {
     padding: 1rem;
 
-    .title,
+    .name,
     .categories {
       overflow: hidden;
       white-space: nowrap;
@@ -103,17 +104,19 @@ type ProductCard10Props = {
   off: number;
   slug: string;
   unit: string;
-  title: string;
+  name: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   rating: number;
+  shop?: Shop;
   images: string[];
   id: string | number;
 };
 // ======================================================================
 
 const ProductCard10: FC<ProductCard10Props> = (props) => {
-  const { id, off, unit, slug, title, price, imgUrl, images } = props;
+  const [saveCartState] = createLocalStorage("cartState");
+  const { id, off, unit, slug, name, price, mainImageUrl, images, shop } = props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -124,8 +127,10 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, imgUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop?.id },
     });
+
+    saveCartState(state.cart);
   };
 
   return (
@@ -158,7 +163,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
 
         <Link href={`/product/${slug}`}>
           <a>
-            <NextImage src={imgUrl} width={100} height={100} layout="responsive" alt={title} />
+            <NextImage src={mainImageUrl} width={100} height={100} layout="responsive" alt={name} />
           </a>
         </Link>
       </div>
@@ -170,14 +175,14 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
               <a>
                 <H3
                   mb="6px"
-                  title={title}
+                  name={name}
                   fontSize="14px"
                   textAlign="left"
                   fontWeight="600"
-                  className="title"
+                  className="name"
                   color="text.secondary"
                 >
-                  {title}
+                  {name}
                 </H3>
               </a>
             </Link>
@@ -239,7 +244,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
       <ProductQuickView
         open={open}
         onClose={toggleDialog}
-        product={{ id, images, slug, price, title }}
+        product={{ id, images, slug, price, name, shop }}
       />
     </Wrapper>
   );

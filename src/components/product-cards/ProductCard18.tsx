@@ -22,14 +22,14 @@ const StyledFlexBox = styled(FlexBox)({
 type ProductCard18Props = {
   slug: string;
   image: string;
-  title: string;
+  name: string;
   price: number;
   rating: number;
 };
 // ===========================================
 
 const ProductCard18: FC<ProductCard18Props> = (props) => {
-  const { image, title, price, slug, rating } = props;
+  const { image, name, price, slug, rating } = props;
 
   return (
     <StyledFlexBox mb="1rem">
@@ -43,7 +43,7 @@ const ProductCard18: FC<ProductCard18Props> = (props) => {
 
       <Box>
         <NavLink href="#">
-          <Paragraph fontSize={16}>{title}</Paragraph>
+          <Paragraph fontSize={16}>{name}</Paragraph>
         </NavLink>
 
         <Paragraph fontWeight={700} my={1}>

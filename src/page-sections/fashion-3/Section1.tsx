@@ -45,9 +45,9 @@ const Section1: FC<Props> = ({ carouselData }) => {
               key={index}
               mode="dark"
               title={item.title}
-              bgImage={item.imgUrl}
+              bgImage={item.mainImageUrl}
               category={item.category}
-              discount={item.discount}
+              comparePrice={item.comparePrice}
             />
           ))}
         </Carousel>

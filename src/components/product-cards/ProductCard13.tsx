@@ -9,8 +9,9 @@ import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import LazyImage from "@component/LazyImage";
 import { H3, Span } from "@component/Typography";
-import { calculateDiscount, currency } from "@utils/utils";
+import { calculateDiscount, createLocalStorage, currency } from "@utils/utils";
 import { useAppContext } from "@context/AppContext";
+import Shop from "@models/shop.model";
 
 // styled components
 const StyledCard = styled(Box)(({ theme }) => ({
@@ -107,10 +108,11 @@ const StyledButton = styled(Button)(({ theme }) => ({
 interface Props {
   off: number;
   slug: string;
-  title: string;
+  name: string;
   price: number;
-  imgUrl: string;
+  mainImageUrl: string;
   status: string;
+  shop: Shop;
   rating?: number;
   id: string | number;
   productColors: string[];
@@ -118,7 +120,8 @@ interface Props {
 // =====================================================================
 
 const ProductCard13: FC<Props> = (props) => {
-  const { off, status, id, title, price, imgUrl, rating, productColors, slug } = props;
+  const [saveCartState] = createLocalStorage("cartState");
+  const { off, status, id, name, price, mainImageUrl, rating, productColors, slug, shop } = props;
 
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.slug === slug);
@@ -126,8 +129,10 @@ const ProductCard13: FC<Props> = (props) => {
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, imgUrl, id, qty, slug, name: title },
+      payload: { price, mainImageUrl, id, qty, slug, name, shopId: shop.id },
     });
+
+    saveCartState(state.cart);
   };
 
   return (
@@ -164,7 +169,7 @@ const ProductCard13: FC<Props> = (props) => {
             <LazyImage
               width={100}
               height={100}
-              src={imgUrl}
+              src={mainImageUrl}
               id="productImg"
               layout="responsive"
               objectFit="contain"
@@ -180,13 +185,13 @@ const ProductCard13: FC<Props> = (props) => {
               <a>
                 <H3
                   mb={1}
-                  title={title}
+                  title={name}
                   fontSize="24px"
                   fontWeight="700"
                   className="title"
                   color="text.secondary"
                 >
-                  {title}
+                  {name}
                 </H3>
               </a>
             </Link>

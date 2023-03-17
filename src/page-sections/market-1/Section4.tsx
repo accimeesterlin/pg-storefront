@@ -24,13 +24,13 @@ const Section4: FC<Props> = ({ topRatedBrands, topRatedList }) => {
             <Card p="1rem">
               <Grid container spacing={4}>
                 {topRatedList.map((item) => (
-                  <Grid item md={3} sm={6} xs={6} key={item.title}>
+                  <Grid item md={3} sm={6} xs={6} key={item.name}>
                     <Link href={`/product/search/${item.slug}`} passHref>
                       <a>
                         <ProductCard4
-                          title={item.title}
+                          name={item.name}
                           price={item.price}
-                          imgUrl={item.thumbnail}
+                          mainImageUrl={item.mainImageUrl}
                           rating={item.rating || 4}
                           reviewCount={item.reviews.length || 12}
                         />
@@ -51,7 +51,7 @@ const Section4: FC<Props> = ({ topRatedBrands, topRatedList }) => {
                   <Grid item sm={6} xs={12} key={item.id}>
                     <Link href={`/product/search/${item.slug}`} passHref>
                       <a>
-                        <ProductCard5 title={item.name} imgUrl={item.image} />
+                        <ProductCard5 name={item.name} mainImageUrl={item.image} />
                       </a>
                     </Link>
                   </Grid>

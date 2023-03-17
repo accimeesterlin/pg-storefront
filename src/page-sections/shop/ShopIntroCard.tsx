@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import Box from "@component/Box";
 import Rating from "@component/rating";
 import Avatar from "@component/avatar";
@@ -6,11 +6,39 @@ import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import { H3, SemiSpan, Small } from "@component/Typography";
+import Shop from "models/shop.model";
 import { ShopIntroWrapper } from "./styles";
 
-const ShopIntroCard: FC = () => {
+
+type ShopIntroCardProps = {
+  shop: Shop;
+};
+
+const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
+
+  const links = shop?.socialMedialLinks;
+  
+  const socialLinks = [
+    {
+      name: "facebook",
+      url: links?.facebook,
+    },
+    {
+      name: "twitter",
+      url: links?.twitter,
+    },
+    {
+      name: "youtube",
+      url: links?.youtube,
+    },
+    {
+      name: "instagram",
+      url: links?.instagram,
+    },
+  ];
+
   return (
-    <ShopIntroWrapper mb="32px" pb="20px" overflow="hidden">
+    <ShopIntroWrapper mb="32px" pb="20px" overflow="hidden" covermainImageUrl={shop?.coverPicture}>
       <Box className="cover-image" height="202px" />
 
       <FlexBox mt="-64px" px="30px" flexWrap="wrap">
@@ -19,7 +47,7 @@ const ShopIntroCard: FC = () => {
           mr="37px"
           border="4px solid"
           borderColor="gray.100"
-          src="/assets/images/faces/propic.png"
+          src={shop?.profilePicture}
         />
 
         <Box className="description-holder" flex="1 1 0">
@@ -38,7 +66,7 @@ const ShopIntroCard: FC = () => {
               display="inline-block"
             >
               <H3 fontWeight="600" color="gray.100">
-                Scarlett Beauty
+                {shop?.name}
               </H3>
             </Box>
 
@@ -71,7 +99,7 @@ const ShopIntroCard: FC = () => {
                 </Icon>
 
                 <SemiSpan color="text.muted" ml="12px">
-                  845 N. Stonybrook Ave. Tonawanda, NY 14210, Denmark
+                  {shop?.address}
                 </SemiSpan>
               </FlexBox>
 
@@ -81,12 +109,12 @@ const ShopIntroCard: FC = () => {
                 </Icon>
 
                 <SemiSpan color="text.muted" ml="12px">
-                  (613) 343-9004
+                  {shop?.phone}
                 </SemiSpan>
               </FlexBox>
             </Box>
 
-            <a href="mailto:scarletbeauty@xmail.com">
+            <a href={`mailto:${shop?.email}`}>
               <Button variant="outlined" color="primary" my="12px">
                 Contact Vendor
               </Button>
@@ -98,23 +126,6 @@ const ShopIntroCard: FC = () => {
   );
 };
 
-const socialLinks = [
-  {
-    name: "facebook",
-    url: "https://facebook.com",
-  },
-  {
-    name: "twitter",
-    url: "https://twitter.com",
-  },
-  {
-    name: "youtube",
-    url: "https://youtube.com",
-  },
-  {
-    name: "instagram",
-    url: "https://instagram.com",
-  },
-];
+
 
 export default ShopIntroCard;

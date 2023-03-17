@@ -147,7 +147,7 @@ const OrderDetails = () => {
 
             <FlexBox justifyContent="space-between" alignItems="center" mb="0.5rem">
               <Typography fontSize="14px" color="text.hint">
-                Discount:
+                comparePrice:
               </Typography>
 
               <FlexBox alignItems="center" maxWidth="100px" ml="8px" mt="0.25rem">

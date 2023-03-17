@@ -5,34 +5,36 @@ import Pagination from "@component/pagination";
 import { ProductCard1 } from "@component/product-cards";
 import { SemiSpan } from "@component/Typography";
 import Product from "@models/product.model";
+import Shop from "@models/shop.model";
 
 // ==========================================================
-type Props = { products: Product[] };
+type Props = { products: Product[], shop: Shop };
 // ==========================================================
 
-const ProductCard1List: FC<Props> = ({ products }) => {
+const ProductCard1List: FC<Props> = ({ products, shop }) => {
   return (
     <div>
       <Grid container spacing={6}>
-        {products.map((item) => (
+        {products?.map((item) => (
           <Grid item lg={4} sm={6} xs={12} key={item.id}>
             <ProductCard1
               id={item.id}
               slug={item.slug}
-              price={item.price}
-              title={item.title}
-              off={item.discount}
+              price={Number(item.price)}
+              name={item.name}
+              off={Number(item.comparePrice)}
               images={item.images}
-              imgUrl={item.thumbnail}
+              mainImageUrl={`${item.mainImageUrl}`}
               rating={item.rating || 4}
+              shop={shop}
             />
           </Grid>
         ))}
       </Grid>
 
       <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center" mt="32px">
-        <SemiSpan>Showing 1-9 of 1.3k Products</SemiSpan>
-        <Pagination pageCount={products.length} />
+        <SemiSpan>Showing 1-4 of {products?.length} Products</SemiSpan>
+        <Pagination pageCount={products?.length} />
       </FlexBox>
     </div>
   );

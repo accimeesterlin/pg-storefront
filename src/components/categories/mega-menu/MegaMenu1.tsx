@@ -43,7 +43,7 @@ const MegaMenu1: FC<MegaMenu1Props> = ({
             <Link href={rightImage.href}>
               <a>
                 <Box position="relative" width="153px" height="100%">
-                  <NextImage src={rightImage.imgUrl} layout="fill" objectFit="contain" />
+                  <NextImage src={rightImage.mainImageUrl} layout="fill" objectFit="contain" />
                 </Box>
               </a>
             </Link>
@@ -54,7 +54,7 @@ const MegaMenu1: FC<MegaMenu1Props> = ({
           <Link href={bottomImage.href}>
             <a>
               <Box position="relative" height="170px">
-                <NextImage src={bottomImage.imgUrl} layout="fill" objectFit="cover" />
+                <NextImage src={bottomImage.mainImageUrl} layout="fill" objectFit="cover" />
               </Box>
             </a>
           </Link>

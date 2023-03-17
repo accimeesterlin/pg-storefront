@@ -1,7 +1,8 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as yup from "yup";
+import { toast } from "react-toastify";
 import { Formik } from "formik";
 import Select from "@component/Select";
 import Grid from "@component/grid/Grid";
@@ -11,14 +12,94 @@ import countryList from "@data/countryList";
 import { Button } from "@component/buttons";
 import TextField from "@component/text-field";
 import Typography from "@component/Typography";
+import { useAppContext } from "@context/AppContext";
+import { createLocalStorage } from "@utils/utils";
 
 const CheckoutForm: FC = () => {
   const router = useRouter();
-  const [sameAsShipping, setSameAsShipping] = useState(false);
+  const { state, dispatch } = useAppContext();
+  const [saveCheckoutToLocalStorage, getCheckoutFromLocalStorage] = createLocalStorage("checkoutData");
+  const [isLoading, setIsLoading] = useState(false);
+  const [sameAsShipping, setSameAsShipping] = useState(true);
+
+  const user = state?.user;
+  const address = state?.checkout?.address;
+
+  const email = user?.email || "";
+  
+  useEffect(() => {
+    const savedCheckoutData: any = getCheckoutFromLocalStorage("checkoutData");
+    if (savedCheckoutData) {
+      dispatch({
+        type: "SET_CHECKOUT",
+        payload: savedCheckoutData,
+      });
+    }
+  }, []);
+
+  const defaultCountry = {
+    label: "United States",
+    value: "US",
+  }
+
+  const initialValues = {
+    shipping_name: address?.name || "",
+    shipping_email: email,
+    shipping_contact: address?.phone,
+    shipping_company: address?.company || "",
+    shipping_zip: address?.zip || "",
+    shipping_city: address?.city || "",
+    shipping_country: { label: address?.country, value: address?.country } || defaultCountry,
+    shipping_address1: address?.street || "",
+    shipping_address2: address?.apartment || "",
+
+    billing_name: address?.name || "",
+    billing_email: email,
+    billing_contact: address?.phone || "",
+    billing_company: address?.company || "",
+    billing_zip: address?.zip || "",
+    billing_city: address?.city || "",
+    billing_country: address?.country || "",
+    billing_address1: address?.street || "",
+    billing_address2: address?.apartment || "",
+  };
 
   const handleFormSubmit = async (values) => {
-    console.log(values);
-    router.push("/payment");
+    try {
+      setIsLoading(true);
+
+      const checkoutPayload = {
+        address: {
+          name: values.shipping_name,
+          phone: values.shipping_contact,
+          company: values.shipping_company,
+          zip: values.shipping_zip,
+          country: values.shipping_country?.value,
+          street: values.shipping_address1,
+          city: values.shipping_city,
+          apartment: values.shipping_address2,
+        },
+        billingAddress: {
+          name: values.billing_name,
+          phone: values.billing_contact,
+          company: values.billing_company,
+          zip: values.billing_zip,
+          country: values.billing_country,
+          street: values.billing_address1,
+          city: values.billing_city,
+          apartment: values.billing_address2,
+        },
+      };
+
+      saveCheckoutToLocalStorage(checkoutPayload);
+      dispatch({ type: "SET_CHECKOUT", payload: checkoutPayload });
+      router.push("/payment");
+      setIsLoading(false);
+    } catch (error) {
+      const errorMessage = error?.message;
+      toast.error(errorMessage);
+      setIsLoading(false);
+    }
   };
 
   const handleCheckboxChange =
@@ -32,10 +113,19 @@ const CheckoutForm: FC = () => {
   return (
     <Formik
       initialValues={initialValues}
+      enableReinitialize
       validationSchema={checkoutSchema}
       onSubmit={handleFormSubmit}
     >
-      {({ values, errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue }) => (
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        setFieldValue,
+      }) => (
         <form onSubmit={handleSubmit}>
           <Card1 mb="2rem">
             <Typography fontWeight="600" mb="1rem">
@@ -55,6 +145,7 @@ const CheckoutForm: FC = () => {
                   errorText={touched.shipping_name && errors.shipping_name}
                 />
 
+
                 <TextField
                   fullwidth
                   mb="1rem"
@@ -63,8 +154,38 @@ const CheckoutForm: FC = () => {
                   onChange={handleChange}
                   name="shipping_contact"
                   value={values.shipping_contact}
-                  errorText={touched.shipping_contact && errors.shipping_contact}
+                  errorText={
+                    touched.shipping_contact && errors.shipping_contact
+                  }
                 />
+
+
+                <TextField
+                  mb="1rem"
+                  fullwidth
+                  label="Address 1"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  name="shipping_address1"
+                  value={values.shipping_address1}
+                  errorText={
+                    touched.shipping_address1 && errors.shipping_address1
+                  }
+                />
+
+
+                <TextField
+                  fullwidth
+                  mb="1rem"
+                  type="text"
+                  label="City"
+                  onBlur={handleBlur}
+                  name="shipping_city"
+                  onChange={handleChange}
+                  value={values.shipping_city}
+                  errorText={touched.shipping_city && errors.shipping_city}
+                />
+
 
                 <TextField
                   fullwidth
@@ -78,15 +199,6 @@ const CheckoutForm: FC = () => {
                   errorText={touched.shipping_zip && errors.shipping_zip}
                 />
 
-                <TextField
-                  fullwidth
-                  label="Address 1"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  name="shipping_address1"
-                  value={values.shipping_address1}
-                  errorText={touched.shipping_address1 && errors.shipping_address1}
-                />
               </Grid>
 
               <Grid item sm={6} xs={12}>
@@ -102,6 +214,7 @@ const CheckoutForm: FC = () => {
                   errorText={touched.shipping_email && errors.shipping_email}
                 />
 
+
                 <TextField
                   fullwidth
                   mb="1rem"
@@ -110,16 +223,22 @@ const CheckoutForm: FC = () => {
                   onChange={handleChange}
                   name="shipping_company"
                   value={values.shipping_company}
-                  errorText={touched.shipping_company && errors.shipping_company}
+                  errorText={
+                    touched.shipping_company && errors.shipping_company
+                  }
                 />
+
 
                 <Select
                   mb="1rem"
                   label="Country"
                   options={countryList}
                   value={values.shipping_country || "US"}
-                  errorText={touched.shipping_country && errors.shipping_country}
-                  onChange={(country) => setFieldValue("shipping_country", country)}
+                  errorText={
+                    touched.shipping_country && errors.shipping_country
+                  }
+                  onChange={(country) => setFieldValue("shipping_country", country)
+                  }
                 />
 
                 <TextField
@@ -129,7 +248,9 @@ const CheckoutForm: FC = () => {
                   onChange={handleChange}
                   name="shipping_address2"
                   value={values.shipping_address2}
-                  errorText={touched.shipping_address2 && errors.shipping_address2}
+                  errorText={
+                    touched.shipping_address2 && errors.shipping_address2
+                  }
                 />
               </Grid>
             </Grid>
@@ -144,6 +265,7 @@ const CheckoutForm: FC = () => {
               color="secondary"
               label="Same as shipping address"
               mb={sameAsShipping ? "" : "1rem"}
+              checked={sameAsShipping}
               onChange={handleCheckboxChange(values, setFieldValue)}
             />
 
@@ -169,7 +291,34 @@ const CheckoutForm: FC = () => {
                     name="billing_contact"
                     onChange={handleChange}
                     value={values.billing_contact}
-                    errorText={touched.billing_contact && errors.billing_contact}
+                    errorText={
+                      touched.billing_contact && errors.billing_contact
+                    }
+                  />
+
+                  <TextField
+                    mb="1rem"
+                    fullwidth
+                    label="Address 1"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    name="billing_address1"
+                    value={values.billing_address1}
+                    errorText={
+                      touched.billing_address1 && errors.billing_address1
+                    }
+                  />
+
+                  <TextField
+                    fullwidth
+                    mb="1rem"
+                    type="text"
+                    label="City"
+                    name="billing_city"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={values.billing_city}
+                    errorText={touched.billing_city && errors.billing_city}
                   />
 
                   <TextField
@@ -182,16 +331,6 @@ const CheckoutForm: FC = () => {
                     onChange={handleChange}
                     value={values.billing_zip}
                     errorText={touched.billing_zip && errors.billing_zip}
-                  />
-
-                  <TextField
-                    fullwidth
-                    label="Address 1"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    name="billing_address1"
-                    value={values.billing_address1}
-                    errorText={touched.billing_address1 && errors.billing_address1}
                   />
                 </Grid>
 
@@ -216,14 +355,18 @@ const CheckoutForm: FC = () => {
                     name="billing_company"
                     onChange={handleChange}
                     value={values.billing_company}
-                    errorText={touched.billing_company && errors.billing_company}
+                    errorText={
+                      touched.billing_company && errors.billing_company
+                    }
                   />
 
                   <Select
                     mb="1rem"
                     label="Country"
                     options={countryList}
-                    errorText={touched.billing_country && errors.billing_country}
+                    errorText={
+                      touched.billing_country && errors.billing_country
+                    }
                   />
 
                   <TextField
@@ -233,7 +376,9 @@ const CheckoutForm: FC = () => {
                     name="billing_address2"
                     onChange={handleChange}
                     value={values.billing_address2}
-                    errorText={touched.billing_address2 && errors.billing_address2}
+                    errorText={
+                      touched.billing_address2 && errors.billing_address2
+                    }
                   />
                 </Grid>
               </Grid>
@@ -243,14 +388,25 @@ const CheckoutForm: FC = () => {
           <Grid container spacing={7}>
             <Grid item sm={6} xs={12}>
               <Link href="/cart">
-                <Button variant="outlined" color="primary" type="button" fullwidth>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  type="button"
+                  fullwidth
+                >
                   Back to Cart
                 </Button>
               </Link>
             </Grid>
 
             <Grid item sm={6} xs={12}>
-              <Button variant="contained" color="primary" type="submit" fullwidth>
+              <Button
+                loading={isLoading}
+                variant="contained"
+                color="primary"
+                type="submit"
+                fullwidth
+              >
                 Proceed to Payment
               </Button>
             </Grid>
@@ -261,39 +417,21 @@ const CheckoutForm: FC = () => {
   );
 };
 
-const initialValues = {
-  shipping_name: "",
-  shipping_email: "",
-  shipping_contact: "",
-  shipping_company: "",
-  shipping_zip: "",
-  shipping_country: "",
-  shipping_address1: "",
-  shipping_address2: "",
-
-  billing_name: "",
-  billing_email: "",
-  billing_contact: "",
-  billing_company: "",
-  billing_zip: "",
-  billing_country: "",
-  billing_address1: "",
-  billing_address2: "",
-};
-
 const checkoutSchema = yup.object().shape({
-  // shipping_name: yup.string().required("required"),
-  // shipping_email: yup.string().email("invalid email").required("required"),
-  // shipping_contact: yup.string().required("required"),
-  // shipping_zip: yup.string().required("required"),
-  // shipping_country: yup.object().required("required"),
-  // shipping_address1: yup.string().required("required"),
-  // billing_name: yup.string().required("required"),
-  // billing_email: yup.string().required("required"),
-  // billing_contact: yup.string().required("required"),
-  // billing_zip: yup.string().required("required"),
-  // billing_country: yup.string().required("required"),
-  // billing_address1: yup.string().required("required"),
+  shipping_name: yup.string().required("required"),
+  shipping_email: yup.string().email("invalid email").required("required"),
+  shipping_contact: yup.string().required("required"),
+  shipping_zip: yup.string().required("required"),
+  shipping_city: yup.string().required("required"),
+  shipping_country: yup.object().required("required"),
+  shipping_address1: yup.string().required("required"),
+  billing_name: yup.string().required("required"),
+  billing_email: yup.string().required("required"),
+  billing_contact: yup.string().required("required"),
+  billing_zip: yup.string().required("required"),
+  billing_city: yup.string().required("required"),
+  billing_country: yup.string().required("required"),
+  billing_address1: yup.string().required("required"),
 });
 
 export default CheckoutForm;

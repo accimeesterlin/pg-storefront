@@ -34,21 +34,31 @@ const Footer1: FC = () => {
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <Link href="/">
                   <a>
-                    <Image alt="logo" mb="1.25rem" src="/assets/images/pglogo.jpeg" width="50px" />
+                    <Image
+                      alt="logo"
+                      mb="1.25rem"
+                      src="/assets/images/pglogo.jpeg"
+                      width="50px"
+                    />
                   </a>
                 </Link>
 
                 <Paragraph mb="1.25rem" color="gray.500">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor libero id et, in
-                  gravida. Sit diam duis mauris nulla cursus. Erat et lectus vel ut sollicitudin
-                  elit at amet.
+                  PGecom offers a comprehensive suite of services to meet the
+                  needs of our customers, from gift cards and online courses, to
+                  instructors, virtual cards, and ecommerce market access.
                 </Paragraph>
 
                 <AppStore />
               </Grid>
 
               <Grid item lg={2} md={6} sm={6} xs={12}>
-                <Typography mb="1.25rem" lineHeight="1" fontSize="25px" fontWeight="600">
+                <Typography
+                  mb="1.25rem"
+                  lineHeight="1"
+                  fontSize="25px"
+                  fontWeight="600"
+                >
                   About Us
                 </Typography>
 
@@ -62,7 +72,12 @@ const Footer1: FC = () => {
               </Grid>
 
               <Grid item lg={3} md={6} sm={6} xs={12}>
-                <Typography mb="1.25rem" lineHeight="1" fontSize="25px" fontWeight="600">
+                <Typography
+                  mb="1.25rem"
+                  lineHeight="1"
+                  fontSize="25px"
+                  fontWeight="600"
+                >
                   Customer Care
                 </Typography>
 
@@ -76,7 +91,12 @@ const Footer1: FC = () => {
               </Grid>
 
               <Grid item lg={3} md={6} sm={6} xs={12}>
-                <Typography mb="1.25rem" lineHeight="1" fontSize="25px" fontWeight="600">
+                <Typography
+                  mb="1.25rem"
+                  lineHeight="1"
+                  fontSize="25px"
+                  fontWeight="600"
+                >
                   Contact Us
                 </Typography>
 
@@ -89,7 +109,7 @@ const Footer1: FC = () => {
                 </Typography>
 
                 <Typography py="0.3rem" mb="1rem" color="gray.500">
-                  Phone: +1 1123 456 780
+                  Phone: +1  404 999 7045
                 </Typography>
 
                 <FlexBox className="flex" mx="-5px">
@@ -100,8 +120,14 @@ const Footer1: FC = () => {
                       key={item.iconName}
                       rel="noreferrer noopenner"
                     >
-                      <Box m="5px" p="10px" size="small" borderRadius="50%" bg="rgba(0,0,0,0.2)">
-                        <Icon size="12px" defaultcolor="auto">
+                      <Box
+                        m="5px"
+                        p="10px"
+                        size="small"
+                        borderRadius="50%"
+                        bg="rgba(0,0,0,0.2)"
+                      >
+                        <Icon size="12px" color="gray">
                           {item.iconName}
                         </Icon>
                       </Box>
@@ -117,7 +143,13 @@ const Footer1: FC = () => {
   );
 };
 
-const aboutLinks = ["Careers", "Our Stores", "Our Cares", "Terms & Conditions", "Privacy Policy"];
+const aboutLinks = [
+  "Careers",
+  "Our Stores",
+  "Our Cares",
+  "Terms & Conditions",
+  "Privacy Policy",
+];
 
 const customerCareLinks = [
   "Help Center",
@@ -130,7 +162,10 @@ const customerCareLinks = [
 const iconList = [
   { iconName: "facebook", url: "https://www.facebook.com/UILibOfficial" },
   { iconName: "twitter", url: "/" },
-  { iconName: "youtube", url: "https://www.youtube.com/channel/UCsIyD-TSO1wQFz-n2Y4i3Rg" },
+  {
+    iconName: "youtube",
+    url: "https://www.youtube.com/channel/UCsIyD-TSO1wQFz-n2Y4i3Rg",
+  },
   { iconName: "google", url: "/" },
   { iconName: "instagram", url: "/" },
 ];

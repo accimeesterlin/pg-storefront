@@ -17,17 +17,17 @@ const StyledImage = styled(NextImage)`
 type CardProps = {
   date: string;
   title: string;
-  imgUrl: string;
+  mainImageUrl: string;
   description: string;
   commentCount: number;
 };
 // ===============================================================
 
-const Card6: FC<CardProps> = ({ date, title, imgUrl, description, commentCount }) => {
+const Card6: FC<CardProps> = ({ date, title, mainImageUrl, description, commentCount }) => {
   return (
     <Box>
       <Box mb="1.5rem">
-        <StyledImage src={imgUrl} width={588} height={272} layout="responsive" />
+        <StyledImage src={mainImageUrl} width={588} height={272} layout="responsive" />
       </Box>
 
       <H3 fontWeight="600" mb="0.25rem">
