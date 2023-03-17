@@ -6,5 +6,3 @@
 <p>PGecom comes with 4 different shop versions (Superstore, Grocery delivery, Niche Market version 1, Niche Market version 2), And tons of inner pages including multivendor and user account.</p>
 
 
-<img src="https://i.ibb.co/NswLPcF/Presentation-2.png" alt="Presentation-2" border="0">
-
