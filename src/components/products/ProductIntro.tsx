@@ -73,6 +73,16 @@ const ProductIntro: FC<ProductIntroProps> = ({
     router?.push("/checkout")
   }
 
+
+  const handleCrypto = () => {
+    setIsPGPayLoading(true);
+    dispatch({
+      type: "SET_PAYMENT_METHOD",
+      payload: "crypto",
+    })
+    router?.push("/checkout")
+  }
+
   const handleMonCash = () => {
     setIsMonCashLoading(true);
     dispatch({
@@ -206,6 +216,17 @@ const ProductIntro: FC<ProductIntroProps> = ({
               color="primary"
               loading={isPGPayLoading}
               variant="contained"
+              onClick={handleCrypto}
+            >
+              Pay now with Crypto
+            </Button>
+{/* 
+            <Button
+              p="9px"
+              size="small"
+              color="primary"
+              loading={isPGPayLoading}
+              variant="contained"
               onClick={handlePGPay}
             >
               Pay now with PG Pay
@@ -220,7 +241,7 @@ const ProductIntro: FC<ProductIntroProps> = ({
               onClick={handleMonCash}
             >
               Pay now with Mon Cash
-            </Button>
+            </Button> */}
           </FlexBox>
         </Grid>
       </Grid>
