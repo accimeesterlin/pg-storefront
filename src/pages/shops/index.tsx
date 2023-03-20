@@ -11,17 +11,21 @@ import Shop from "@models/shop.model";
 
 
 // =============================================
-type Props = { shopList: Shop[] };
+type Props = { shopList: Shop[], errors: any };
 // =============================================
 
-const ShopList = ({ shopList }: Props) => {
+const ShopList = ({ shopList, errors }: Props) => {
+
+  console.log("shopList: ", shopList);
+
+  console.log("errors: ", errors);
 
   return (
     <Fragment>
       <H2 mb="24px">All Shops</H2>
 
       <Grid container spacing={6}>
-        {shopList.map((item) => (
+        {shopList?.map((item) => (
           <Grid item lg={4} sm={6} xs={12} key={item.id}>
             <ShopCard1
               name={item.name}
@@ -37,8 +41,8 @@ const ShopList = ({ shopList }: Props) => {
       </Grid>
 
       <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center" mt="32px">
-        <SemiSpan>Showing 1-9 of {shopList.length} Shops</SemiSpan>
-        <Pagination pageCount={Math.ceil(shopList.length / 9)} />
+        <SemiSpan>Showing 1-9 of {shopList?.length} Shops</SemiSpan>
+        <Pagination pageCount={Math.ceil(shopList?.length / 9)} />
       </FlexBox>
     </Fragment>
   );
@@ -48,14 +52,16 @@ ShopList.layout = NavbarLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
   let shopList = [];
+  let errors = [];
 
   try {
     shopList = await api.getShopList();
   } catch (error) {
     // No shops found
+    errors = error;
     console.log("Error: ", error?.response?.data?.message);
   }
-  return { props: { shopList: shopList } };
+  return { props: { shopList: shopList, errors } };
 };
 
 export default ShopList;
