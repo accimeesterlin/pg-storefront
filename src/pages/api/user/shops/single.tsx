@@ -1,5 +1,6 @@
 import nc from "next-connect";
 import Joi from "joi";
+import isEmpty from 'lodash.isempty';
 import { getShopBySlug } from "pages/api/queries/getShop";
 import { getProductByShopId } from "pages/api/queries/getProduct";
 
@@ -14,6 +15,14 @@ export const findShopHandler = async (req, res) => {
     const slug = payload?.slug;
 
     const shops = await getShopBySlug(slug);
+
+    if (isEmpty(shops)) {
+      return res.status(404).json({
+        message: "No shop found",
+        status: 404,
+      });
+
+    }
     const singleshop = shops[0];
 
     const shopId = singleshop?.id;

@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { useRouter } from "next/router";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Hidden from "@component/hidden";
 import Grid from "@component/grid/Grid";
 import Icon from "@component/icon/Icon";
@@ -22,6 +22,8 @@ const ShopDetails = ({ shop }: Props) => {
   const router = useRouter();
   const width = useWindowSize();
   const isTablet = width < 1025;
+
+  console.log("shop: ", shop);
 
   // Show a loading state when the fallback is rendered
   if (router.isFallback) {
@@ -63,31 +65,10 @@ const ShopDetails = ({ shop }: Props) => {
 
 ShopDetails.layout = NavbarLayout;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  let paths = [
-    { params: { slug: "shop-1" } },
-  ];
-
-  try {
-    paths = await api.getSlugs();
-  } catch (error) {
-    // No need to do anything here
-  }
-
-  return {
-    paths: paths, //indicates that no page needs be created at build time
-    fallback: "blocking", //indicates the type of fallback
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  let shop = {};
-
-  try {
-    shop = await api.getShopBySlug(String(params.slug));
-  } catch (error) {
-    // No need to do anything here
-  }
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  
+  const slug = query?.slug as string;
+  const shop = await api.getShopBySlug(slug);
 
   return { props: { shop } };
 };

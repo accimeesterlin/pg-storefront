@@ -22,9 +22,13 @@ export const getSlugs = async (): Promise<{ params: { slug: string } }[]> => {
 };
 
 export const getShopBySlug = async (slug: string): Promise<Shop> => {
-  const response = await api.get("/api/user/shops/single", { params: { slug } });
+  try {
+    const response = await api.get("/api/user/shops/single", { params: { slug } });
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    return {}
+  }
 };
 
 export default { getShopList, getSlugs, getShopBySlug };
