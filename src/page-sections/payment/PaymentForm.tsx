@@ -5,11 +5,11 @@ import Grid from "@component/grid/Grid";
 import { Card1 } from "@component/Card1";
 import { Button } from "@component/buttons";
 
-import CreditCardForm from "./creditcardform";
+// import CreditCardForm from "./creditcardform";
 import PGPayPayment from "./PGPayForm";
 import MonCashPayment from "./monCashPayment";
-import PaypalPayment from "./paypalPayment";
-import CashOnDeliveryPayment from "./CashOnDeliveryForm";
+// import PaypalPayment from "./paypalPayment";
+// import CashOnDeliveryPayment from "./CashOnDeliveryForm";
 import { useAppContext } from "@context/AppContext";
 
 const PaymentForm: FC = () => {
@@ -39,11 +39,11 @@ const PaymentForm: FC = () => {
   return (
     <Fragment>
       <Card1 mb="2rem">
-        <CreditCardForm paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/>
+        {/* <CreditCardForm paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
         <PGPayPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/>
         <MonCashPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/>
-        <PaypalPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/>
-        <CashOnDeliveryPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/>
+        {/* <PaypalPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
+        {/* <CashOnDeliveryPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
 
        
       </Card1>
