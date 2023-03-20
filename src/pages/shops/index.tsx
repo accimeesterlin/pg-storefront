@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Grid from "@component/grid/Grid";
 import FlexBox from "@component/FlexBox";
 import Pagination from "@component/pagination";
@@ -11,14 +11,12 @@ import Shop from "@models/shop.model";
 
 
 // =============================================
-type Props = { shopList: Shop[], errors: any };
+type Props = { shopList: Shop[] };
 // =============================================
 
-const ShopList = ({ shopList, errors }: Props) => {
+const ShopList = ({ shopList }: Props) => {
 
   console.log("shopList: ", shopList);
-
-  console.log("errors: ", errors);
 
   return (
     <Fragment>
@@ -50,18 +48,10 @@ const ShopList = ({ shopList, errors }: Props) => {
 
 ShopList.layout = NavbarLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
-  let shopList = [];
-  let errors = [];
+export const getServerSideProps: GetServerSideProps = async () => {
+  const shopList =  await api.getShopList();
 
-  try {
-    shopList = await api.getShopList();
-  } catch (error) {
-    // No shops found
-    errors = error;
-    console.log("Error: ", error?.response?.data?.message);
-  }
-  return { props: { shopList: shopList, errors } };
+  return { props: { shopList: shopList } };
 };
 
 export default ShopList;
