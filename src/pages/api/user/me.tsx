@@ -13,7 +13,7 @@ import { updateUser } from "../mutation/user";
 
 export const config = {
   api: {
-    bodyParser: false, // Disallow body parsing, consume as stream
+    bodyParser: false,
   },
 };
 

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Grid from "@component/grid/Grid";
 import FlexBox from "@component/FlexBox";
 import Pagination from "@component/pagination";
@@ -16,12 +16,14 @@ type Props = { shopList: Shop[] };
 
 const ShopList = ({ shopList }: Props) => {
 
+  console.log("shopList: ", shopList);
+
   return (
     <Fragment>
       <H2 mb="24px">All Shops</H2>
 
       <Grid container spacing={6}>
-        {shopList.map((item) => (
+        {shopList?.map((item) => (
           <Grid item lg={4} sm={6} xs={12} key={item.id}>
             <ShopCard1
               name={item.name}
@@ -37,8 +39,8 @@ const ShopList = ({ shopList }: Props) => {
       </Grid>
 
       <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center" mt="32px">
-        <SemiSpan>Showing 1-9 of {shopList.length} Shops</SemiSpan>
-        <Pagination pageCount={Math.ceil(shopList.length / 9)} />
+        <SemiSpan>Showing 1-9 of {shopList?.length} Shops</SemiSpan>
+        <Pagination pageCount={Math.ceil(shopList?.length / 9)} />
       </FlexBox>
     </Fragment>
   );
@@ -46,15 +48,9 @@ const ShopList = ({ shopList }: Props) => {
 
 ShopList.layout = NavbarLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
-  let shopList = [];
+export const getServerSideProps: GetServerSideProps = async () => {
+  const shopList =  await api.getShopList();
 
-  try {
-    shopList = await api.getShopList();
-  } catch (error) {
-    // No shops found
-    console.log("Error: ", error?.response?.data?.message);
-  }
   return { props: { shopList: shopList } };
 };
 

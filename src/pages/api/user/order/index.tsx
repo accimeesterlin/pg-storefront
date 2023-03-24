@@ -5,7 +5,6 @@ import Joi from "joi";
 import { getOrderByUserId } from "../../queries/getOrder";
 import { authenticationMiddleware } from "../../token/verify";
 import Order from "@models/order.model";
-// import { updateUser } from "../../mutation/user";
 
 const getHandler = async (req, res) => {
   try {

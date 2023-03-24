@@ -10,8 +10,12 @@ const api = axios.create({
 
 
 export const getShopList = async (): Promise<Shop[]> => {
-  const response = await api.get("/api/user/shops");
-  return response.data?.shops;
+  try {
+    const response = await api.get("/api/user/shops");
+    return response.data?.shops;
+  } catch (error) {
+    return []
+  }
 };
 
 
@@ -22,9 +26,13 @@ export const getSlugs = async (): Promise<{ params: { slug: string } }[]> => {
 };
 
 export const getShopBySlug = async (slug: string): Promise<Shop> => {
-  const response = await api.get("/api/user/shops/single", { params: { slug } });
+  try {
+    const response = await api.get("/api/user/shops/single", { params: { slug } });
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    return {}
+  }
 };
 
 export default { getShopList, getSlugs, getShopBySlug };

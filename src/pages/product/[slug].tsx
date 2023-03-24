@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { isEmpty } from 'lodash';
+import { isEmpty } from "lodash";
 import Box from "@component/Box";
 import FlexBox from "@component/FlexBox";
 import { H5 } from "@component/Typography";
@@ -16,9 +16,8 @@ import api from "@utils/__api__/products";
 import Shop from "@models/shop.model";
 import Product from "@models/product.model";
 
-
 // ===============================================================
-type Props = {
+type ProductDetailsProps = {
   product: Product;
   shops: Shop[];
   relatedProducts: Product[];
@@ -26,7 +25,7 @@ type Props = {
 };
 // ===============================================================
 
-const ProductDetails = (props: Props) => {
+const ProductDetails = (props: ProductDetailsProps) => {
   const { product, shops, relatedProducts, frequentlyBought } = props;
 
   const router = useRouter();
@@ -51,7 +50,12 @@ const ProductDetails = (props: Props) => {
         shop={product?.shop}
       />
 
-      <FlexBox borderBottom="1px solid" borderColor="gray.400" mt="80px" mb="26px">
+      <FlexBox
+        borderBottom="1px solid"
+        borderColor="gray.400"
+        mt="80px"
+        mb="26px"
+      >
         <H5
           mr="25px"
           p="4px 10px"
@@ -59,7 +63,9 @@ const ProductDetails = (props: Props) => {
           borderColor="primary.main"
           onClick={handleOptionClick("description")}
           borderBottom={selectedOption === "description" && "2px solid"}
-          color={selectedOption === "description" ? "primary.main" : "text.muted"}
+          color={
+            selectedOption === "description" ? "primary.main" : "text.muted"
+          }
         >
           Description
         </H5>
@@ -78,71 +84,42 @@ const ProductDetails = (props: Props) => {
 
       {/* DESCRIPTION AND REVIEW TAB DETAILS */}
       <Box mb="50px">
-        {selectedOption === "description" && <ProductDescription description={product?.description} />}
+        {selectedOption === "description" && (
+          <ProductDescription description={product?.description} />
+        )}
         {selectedOption === "review" && <ProductReview />}
       </Box>
 
       {/* FREQUENTLY BOUGHT TOGETHER PRODUCTS */}
-      {frequentlyBought?.length > 0 && <FrequentlyBought products={frequentlyBought} />}
+      {frequentlyBought?.length > 0 && (
+        <FrequentlyBought products={frequentlyBought} />
+      )}
 
       {/* AVAILABLE SHOPS */}
       {shops && <AvailableShops shops={shops} />}
 
       {/* RELATED PRODUCTS */}
-      {relatedProducts?.length > 0 && <RelatedProducts products={relatedProducts} />}
+      {relatedProducts?.length > 0 && (
+        <RelatedProducts products={relatedProducts} />
+      )}
     </Fragment>
   );
 };
 
 ProductDetails.layout = NavbarLayout;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  let paths = [ { params: { slug: 'hair' } } ]
-
-  try {
-    paths = await api.getSlugs();
-  } catch (error) {
-    // No slugs available
-  }
-
-
-  return {
-    paths: paths, // indicates that no page needs be created at build time
-    fallback: "blocking", // indicates the type of fallback
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  let shops = [];
-
-  try {
-    shops = await api.getAvailableShop();
-  } catch (error) {
-    // No shops available
-  }
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const slug = query.slug as string;
+  const shops = await api.getAvailableShop();
 
   // const frequentlyBought = await api.getFrequentlyBought();
-  let product: Product = {};
+  let product: Product = await api.getProduct(slug);
 
-  try {
-    product = await api.getProduct(params.slug as string);
-
-    if (isEmpty(product)) {
-      product = await api.getDemoProduct(params.slug as string) || {};
-    }
-  } catch (error) {
-    // No product found
-    product = await api.getDemoProduct(params.slug as string) || {};
+  if (isEmpty(product)) {
+    product = (await api.getDemoProduct(slug)) || {};
   }
 
-  
-  let relatedProducts = [];
-  try {
-    relatedProducts = await api.getRelatedProducts(product?.id);
-  } catch (error) {
-    // No related products
-  }
-
+  const relatedProducts = await api.getRelatedProducts(product?.id);
   return { props: { frequentlyBought: [], relatedProducts, product, shops } };
 };
 

@@ -13,17 +13,26 @@ const api = axios.create({
 
 // get all product slug
 const getSlugs = async (): Promise<{ params: { slug: string } }[]> => {
-  const products = await getAvailableShop();
+  try {
+    const products = await getAvailableShop();
 
-  const uniqueProducts = products.map((item) => ({ params: { slug: item.slug } }));
+    const uniqueProducts = products.map((item) => ({ params: { slug: item.slug } }));
+  
+    return uniqueProducts;
+  } catch (error) {
+    return [];
+  }
 
-  return uniqueProducts;
 };
 
 // get product based on slug
 const getProduct = async (slug: string): Promise<Product> => {
-  const response = await api.get("/api/user/product/slug", { params: { slug } });
-  return response.data;
+  try {
+    const response = await api.get(`/api/user/product/${slug}`);
+    return response.data;
+  } catch (error) {
+    return {};
+  }
 };
 
 const getDemoProduct = async (slug: string): Promise<Product> => {
@@ -32,18 +41,30 @@ const getDemoProduct = async (slug: string): Promise<Product> => {
 };
 
 const getFrequentlyBought = async (): Promise<Product[]> => {
-  const response = await api.get("/api/user/product/frequently-bought-products");
-  return response.data;
+  try {
+    const response = await api.get("/api/user/product/frequently-bought");
+    return response.data;
+  } catch (error) {
+    return [];
+  }
 };
 
 const getRelatedProducts = async (productId: string): Promise<Product[]> => {
-  const response = await api.get(`/api/user/product/related-products?productId=${productId}`);
-  return response.data;
+  try {
+    const response = await api.get(`/api/user/product/related-products?productId=${productId}`);
+    return response.data;
+  } catch (error) {
+    return [];
+  }
 };
 
 const getAvailableShop = async (): Promise<Shop[]> => {
-  const response = await api.get("/api/user/product/shops");
-  return response.data;
+  try {
+    const response = await api.get("/api/user/product/shops");
+    return response.data;
+  } catch (error) {
+    return [];
+  }
 };
 
 export default { getSlugs, getProduct, getFrequentlyBought, getRelatedProducts, getAvailableShop, getDemoProduct };

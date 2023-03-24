@@ -102,7 +102,7 @@ const ProductIntro: FC<ProductIntroProps> = ({
                 width={300}
                 height={300}
                 src={
-                  images?.length >= 0
+                  images?.length > 0
                     ? images[selectedImage]?.url
                     : mainImageUrl
                 }
