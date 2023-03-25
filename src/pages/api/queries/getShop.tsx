@@ -41,8 +41,9 @@ export const getShopByName = async (name: string) => {
     IndexName: "byShopName",
     KeyConditionExpression: "#name = :name",
     ExpressionAttributeNames: { "#name": "name" },
-    ExpressionAttributeValues: { ":name": name, ":published": true },
-    FilterExpression: "published = :published",
+    ExpressionAttributeValues: { ":name": name },
+    // ExpressionAttributeValues: { ":name": name, ":published": true },
+    // FilterExpression: "published = :published",
   };
   const items = await fetchData(params, "getShopByName");
   return items;
@@ -52,7 +53,7 @@ export const getLatestShops = async () => {
   try {
     const params = {
       TableName: SHOP_TABLE,
-      Limit: 15,
+      // Limit: 15,
       ScanIndexForward: false, // Sort in descending order
       IndexName: "byCreatedAt", // Use the secondary index for createdAt
       // KeyConditionExpression: "#createdAt > :createdAt",
