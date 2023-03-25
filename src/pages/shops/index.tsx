@@ -16,8 +16,6 @@ type Props = { shopList: Shop[] };
 
 const ShopList = ({ shopList }: Props) => {
 
-  console.log("shopList: ", shopList);
-
   return (
     <Fragment>
       <H2 mb="24px">All Shops</H2>

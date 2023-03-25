@@ -66,6 +66,14 @@ export const payloadSchema = Joi.object({
       country: Joi.string().required(),
       phone: Joi.string().required(),
       state: Joi.string().allow(null, ""),
+
+      // Order
+      userID: Joi.string().allow(null, ""),
+      updatedAt: Joi.string().allow(null, ""),
+      createdAt: Joi.string().allow(null, ""),
+
+      
+      id: Joi.string().allow(null, ""),
       zip: Joi.string().required(),
     }),
     billingAddress: Joi.object({
