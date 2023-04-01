@@ -12,18 +12,19 @@ import ProductFilterCard from "@component/products/ProductFilterCard";
 import ShopIntroCard from "@sections/shop/ShopIntroCard";
 import useWindowSize from "@hook/useWindowSize";
 import Shop from "@models/shop.model";
-import api from "@utils/__api__/shops";
+// import api from "@utils/__api__/shops";
+import { getShopById } from "../../api/queries/getShop";
+import { getProductByShopId } from "../../api/queries/getProduct";
+import Product from "@models/product.model";
 
 // ============================================================
-type Props = { shop: Shop };
+type Props = { shop: Shop, products: Product[], };
 // ============================================================
 
-const ShopDetails = ({ shop }: Props) => {
+const ShopDetails = ({ shop, products }: Props) => {
   const router = useRouter();
   const width = useWindowSize();
   const isTablet = width < 1025;
-
-  console.log("shop: ", shop);
 
   // Show a loading state when the fallback is rendered
   if (router.isFallback) {
@@ -56,7 +57,7 @@ const ShopDetails = ({ shop }: Props) => {
             </Sidenav>
           )}
 
-          <ProductCardList products={shop?.products?.slice(0, 9)} shop={shop} />
+          <ProductCardList products={products?.slice(0, 9)} shop={shop} />
         </Grid>
       </Grid>
     </Fragment>
@@ -67,10 +68,14 @@ ShopDetails.layout = NavbarLayout;
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   
-  const slug = query?.slug as string;
-  const shop = await api.getShopBySlug(slug);
+  const shopId = query?.shopId as string;
 
-  return { props: { shop } };
+
+  const shop = await getShopById(shopId);
+  const products = await getProductByShopId(shopId);
+
+
+  return { props: { shop, products } };
 };
 
 export default ShopDetails;

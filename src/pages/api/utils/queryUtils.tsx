@@ -12,6 +12,7 @@ const fetchData = async (params: any, queryName?: string) => {
 
     return items;
   } catch (error) {
+    console.log("Error fetching data", error);
     const errorName = queryName || "fetchData";
     throw new Error(`${errorName} ${error?.message}`);
   }

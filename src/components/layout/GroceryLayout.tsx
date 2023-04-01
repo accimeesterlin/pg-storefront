@@ -13,7 +13,7 @@ type Props = { title?: string; showNavbar?: boolean; children: ReactNode };
 const GroceryLayout: FC<Props> = ({
   children,
   showNavbar = true,
-  title = "MarketPlace - Nourish",
+  title = "MarketPlace - PGecom",
 }) => (
   <StyledAppLayout>
     <Head>

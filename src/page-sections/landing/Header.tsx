@@ -101,7 +101,7 @@ const Header: FC = () => {
         <FlexBox justifyContent="space-between" alignItems="center" height={headerHeight}>
           <Scroll to="top" duration={400} smooth={true} isDynamic>
             <Box cursor="pointer">
-              <Image width="50px" height="44px" src="/assets/images/nourish.png" alt="logo"  />
+              <Image width="50px" height="44px" src="/assets/images/pglogo.jpeg" alt="logo"  />
             </Box>
           </Scroll>
 
