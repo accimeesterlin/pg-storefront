@@ -6,8 +6,9 @@ import Pagination from "@component/pagination";
 import ShopCard1 from "@sections/shop/ShopCard1";
 import { H2, SemiSpan } from "@component/Typography";
 import NavbarLayout from "@component/layout/NavbarLayout";
-import api from "@utils/__api__/shops";
+// import api from "@utils/__api__/shops";
 import Shop from "@models/shop.model";
+import { getLatestShops } from "../api/queries/getShop";
 
 
 // =============================================
@@ -30,7 +31,7 @@ const ShopList = ({ shopList }: Props) => {
               rating={item.rating || 5}
               mainImageUrl={item.profilePicture}
               covermainImageUrl={item.coverPicture}
-              shopUrl={`/shops/${item.slug}`}
+              shopUrl={`/shops/${item.slug}/${item?.id}`}
             />
           </Grid>
         ))}
@@ -47,7 +48,7 @@ const ShopList = ({ shopList }: Props) => {
 ShopList.layout = NavbarLayout;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const shopList =  await api.getShopList();
+  const shopList =  await getLatestShops();
 
   return { props: { shopList: shopList } };
 };

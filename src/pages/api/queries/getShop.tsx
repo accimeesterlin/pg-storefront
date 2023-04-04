@@ -23,16 +23,25 @@ export const getShopById = async (id: string) => {
 };
 
 export const getShopBySlug = async (slug: string) => {
-  const params = {
-    TableName: shopTable,
-    IndexName: "byShopSlug",
-    KeyConditionExpression: "#slug = :slug",
-    ExpressionAttributeNames: { "#slug": "slug" },
-    ExpressionAttributeValues: { ":slug": slug, ":verified": true },
-    FilterExpression: "verified = :verified",
-  };
-  const items = await fetchData(params, "getShopBySlug");
-  return items;
+  try {
+    console.log("Shop Table: ", shopTable);
+    const params = {
+      TableName: shopTable,
+      IndexName: "byShopSlug",
+      KeyConditionExpression: "#slug = :slug",
+      ExpressionAttributeNames: { "#slug": "slug" },
+      ExpressionAttributeValues: { ":slug": slug, ":verified": true },
+      FilterExpression: "verified = :verified",
+    };
+    const items = await fetchData(params, "getShopBySlug");
+
+    console.log("items: ", items);
+    return items;
+  } catch (error) {
+    console.log("Error getting shop by slug", error);
+    return [];
+    
+  }
 };
 
 export const getShopByName = async (name: string) => {
@@ -41,8 +50,8 @@ export const getShopByName = async (name: string) => {
     IndexName: "byShopName",
     KeyConditionExpression: "#name = :name",
     ExpressionAttributeNames: { "#name": "name" },
-    // ExpressionAttributeValues: { ":name": name, ":published": true },
     ExpressionAttributeValues: { ":name": name },
+    // ExpressionAttributeValues: { ":name": name, ":published": true },
     // FilterExpression: "published = :published",
   };
   const items = await fetchData(params, "getShopByName");

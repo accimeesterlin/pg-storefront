@@ -36,7 +36,7 @@ const Topbar: FC = () => {
 
           <FlexBox alignItems="center" ml="20px">
             <Icon size="14px" color="gray">mail</Icon>
-            <span>info@nourish.com</span>
+            <span>info@pgecom.com</span>
           </FlexBox>
         </FlexBox>
 

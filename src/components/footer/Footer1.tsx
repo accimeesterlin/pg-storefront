@@ -100,7 +100,7 @@ const Footer1: FC = () => {
                 </Typography>
 
                 <Typography py="0.3rem" color="gray.500">
-                  Email: info@nourish.com
+                  Email: info@pgecom.com
                 </Typography>
 
                 <Typography py="0.3rem" mb="1rem" color="gray.500">
