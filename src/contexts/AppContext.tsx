@@ -1,6 +1,7 @@
 import Address from "@models/address.model";
 import Checkout from "@models/checkout.model";
 import Order from "@models/order.model";
+import Product from "@models/product.model";
 import User from "@models/user.model";
 import {
   createContext,
@@ -41,6 +42,7 @@ type OrderActionType = { type: "SET_ORDER_LIST"; payload: Order[] };
 type PaymentMethodActionType = { type: "SET_PAYMENT_METHOD"; payload: string };
 type CheckoutActionType = { type: "SET_CHECKOUT"; payload: Checkout };
 type AddressActionType = { type: "SET_ADDRESS"; payload: Address[] };
+type ProductActionType = { type: "LOAD_PRODUCTS"; payload: Product[] };
 type LayoutActionType = { type: "TOGGLE_HEADER"; payload: boolean };
 type ActionType =
   | CartActionType
@@ -51,6 +53,7 @@ type ActionType =
   | OrderActionType
   | PurchaseCartActionType
   | LoadCartActionType
+  | ProductActionType
   | PaymentMethodActionType;
 
 // =================================================================================
@@ -62,6 +65,7 @@ const INITIAL_STATE = {
   isHeaderFixed: false,
   user: {
     orders: [],
+    products: [],
   },
   checkout: {
     address: {},
@@ -129,6 +133,16 @@ const reducer = (state: InitialState, action: ActionType) => {
         user: {
           ...state.user,
           orders: action.payload,
+        },
+      };
+
+
+    case "LOAD_PRODUCTS":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          products: action.payload,
         },
       };
 

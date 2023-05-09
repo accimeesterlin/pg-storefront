@@ -18,6 +18,7 @@ interface User {
   balance?: Balance
   orders?: Order[];
   addresses?: Address[];
+  products?: Address[];
 }
 
 export default User;

@@ -14,11 +14,14 @@ import ProductCard1List from "@component/products/ProductCard1List";
 import ProductCard9List from "@component/products/ProductCard9List";
 import ProductFilterCard from "@component/products/ProductFilterCard";
 import useWindowSize from "@hook/useWindowSize";
-import db from "@data/db";
+import { useAppContext } from "@context/AppContext";
 
 const ProductSearchResult = () => {
   const width = useWindowSize();
+  const { state } = useAppContext();
   const [view, setView] = useState<"grid" | "list">("grid");
+
+  const products = state?.user?.products || [];
 
   const isTablet = width < 1025;
   const toggleView = useCallback((v) => () => setView(v), []);
@@ -95,9 +98,9 @@ const ProductSearchResult = () => {
 
         <Grid item lg={9} xs={12}>
           {view === "grid" ? (
-            <ProductCard1List products={db.slice(95, 104)} shop={{ id: "" }} />
+            <ProductCard1List products={products} shop={{ id: "" }} />
           ) : (
-            <ProductCard9List products={db.slice(95, 104)} />
+            <ProductCard9List products={products} />
           )}
         </Grid>
       </Grid>

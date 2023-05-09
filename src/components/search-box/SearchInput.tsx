@@ -9,19 +9,49 @@ import { Button } from "../buttons";
 import { Span } from "../Typography";
 import TextField from "../text-field";
 import SearchBoxStyle from "./styled";
+import axios from "axios";
+import { useAppContext } from "@context/AppContext";
 
 const SearchInput: FC = () => {
+  const [, setQuery] = useState("");
+  const { dispatch } = useAppContext();
   const [resultList, setResultList] = useState([]);
 
   const search = debounce((e) => {
     const value = e.target?.value;
 
     if (!value) setResultList([]);
-    else setResultList(dummySearchResult);
+    else {
+
+      searchProducts(value);
+    }
   }, 200);
+
+  const searchProducts = async (value) => {
+    try {
+      const response = await axios({
+        method: "GET",
+        url: "/api/user/algolia/productsearch",
+        params: { query: value },
+      });
+
+      const data = response?.data?.map((item) => item?.name);
+
+      dispatch({
+        type: "LOAD_PRODUCTS",
+        payload: response?.data
+      });
+
+      setResultList(data);
+    } catch (error) {
+      console.log("Error searching products", error);
+    }
+  }
+
 
   const hanldeSearch = useCallback((event) => {
     event.persist();
+    setQuery(event.target.value);
     search(event);
   }, []);
 
@@ -55,9 +85,9 @@ const SearchInput: FC = () => {
         </Box>
       </SearchBoxStyle>
 
-      {!!resultList.length && (
+      {!!resultList?.length && (
         <Card position="absolute" top="100%" py="0.5rem" width="100%" boxShadow="large" zIndex={99}>
-          {resultList.map((item) => (
+          {resultList?.map((item) => (
             <Link href={`/product/search/${item}`} key={item}>
               <MenuItem key={item}>
                 <Span fontSize="14px">{item}</Span>
