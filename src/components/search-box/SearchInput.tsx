@@ -100,6 +100,6 @@ const SearchInput: FC = () => {
   );
 };
 
-const dummySearchResult = ["Macbook Air 13", "Ksus K555LA", "Acer Aspire X453", "iPad Mini 3"];
+// const dummySearchResult = ["Macbook Air 13", "Ksus K555LA", "Acer Aspire X453", "iPad Mini 3"];
 
 export default SearchInput;
