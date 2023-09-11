@@ -98,34 +98,80 @@ const Header: FC = () => {
   return (
     <HeaderWrapper fixed={isFixed}>
       <Container>
-        <FlexBox justifyContent="space-between" alignItems="center" height={headerHeight}>
+        <FlexBox
+          justifyContent="space-between"
+          alignItems="center"
+          height={headerHeight}
+        >
           <Scroll to="top" duration={400} smooth={true} isDynamic>
             <Box cursor="pointer">
-              <Image width="50px" height="44px" src="/assets/images/nourish.png" alt="logo"  />
+              <Image
+                width="50px"
+                height="44px"
+                src="/assets/images/pglogo.jpeg"
+                alt="logo"
+              />
             </Box>
           </Scroll>
 
           <FlexBox className="right-links" alignItems="center">
-            <Scroll to="features" duration={400} offset={-headerHeight - 16} smooth={true}>
-              <Typography className="link" color="text.muted" p="0.25rem 1.25rem">
+            <Scroll
+              to="features"
+              duration={400}
+              offset={-headerHeight - 16}
+              smooth={true}
+            >
+              <Typography
+                className="link"
+                color="text.muted"
+                p="0.25rem 1.25rem"
+              >
                 Features
               </Typography>
             </Scroll>
 
-            <Scroll to="demos" duration={400} offset={-headerHeight - 16} smooth={true}>
-              <Typography className="link" color="text.muted" p="0.25rem 1.25rem">
+            <Scroll
+              to="demos"
+              duration={400}
+              offset={-headerHeight - 16}
+              smooth={true}
+            >
+              <Typography
+                className="link"
+                color="text.muted"
+                p="0.25rem 1.25rem"
+              >
                 Demos
               </Typography>
             </Scroll>
 
-            <Scroll to="technologies" duration={400} offset={-headerHeight - 16} smooth={true}>
-              <Typography className="link" color="text.muted" p="0.25rem 1.25rem">
+            <Scroll
+              to="technologies"
+              duration={400}
+              offset={-headerHeight - 16}
+              smooth={true}
+            >
+              <Typography
+                className="link"
+                color="text.muted"
+                p="0.25rem 1.25rem"
+              >
                 Technologies
               </Typography>
             </Scroll>
 
-            <Scroll to="price" duration={400} offset={-headerHeight} smooth={true}>
-              <Typography className="link" color="text.muted" p="0.25rem 1.25rem" mr="3rem">
+            <Scroll
+              to="price"
+              duration={400}
+              offset={-headerHeight}
+              smooth={true}
+            >
+              <Typography
+                className="link"
+                color="text.muted"
+                p="0.25rem 1.25rem"
+                mr="3rem"
+              >
                 Pricing
               </Typography>
             </Scroll>
@@ -150,26 +196,63 @@ const Header: FC = () => {
             toggleSidenav={toggleSidenav}
           >
             <Box p="1rem">
-              <Scroll to="features" duration={400} offset={-headerHeight - 16} smooth={true}>
-                <Typography className="link" py="0.5rem" onClick={toggleSidenav}>
+              <Scroll
+                to="features"
+                duration={400}
+                offset={-headerHeight - 16}
+                smooth={true}
+              >
+                <Typography
+                  className="link"
+                  py="0.5rem"
+                  onClick={toggleSidenav}
+                >
                   Features
                 </Typography>
               </Scroll>
 
-              <Scroll to="demos" duration={400} offset={-headerHeight - 16} smooth={true}>
-                <Typography className="link" py="0.5rem" onClick={toggleSidenav}>
+              <Scroll
+                to="demos"
+                duration={400}
+                offset={-headerHeight - 16}
+                smooth={true}
+              >
+                <Typography
+                  className="link"
+                  py="0.5rem"
+                  onClick={toggleSidenav}
+                >
                   Demos
                 </Typography>
               </Scroll>
 
-              <Scroll to="technologies" duration={400} offset={-headerHeight - 16} smooth={true}>
-                <Typography className="link" py="0.5rem" onClick={toggleSidenav}>
+              <Scroll
+                to="technologies"
+                duration={400}
+                offset={-headerHeight - 16}
+                smooth={true}
+              >
+                <Typography
+                  className="link"
+                  py="0.5rem"
+                  onClick={toggleSidenav}
+                >
                   Technologies
                 </Typography>
               </Scroll>
 
-              <Scroll to="price" duration={400} offset={-headerHeight} smooth={true}>
-                <Typography className="link" py="0.5rem" onClick={toggleSidenav} mb="1rem">
+              <Scroll
+                to="price"
+                duration={400}
+                offset={-headerHeight}
+                smooth={true}
+              >
+                <Typography
+                  className="link"
+                  py="0.5rem"
+                  onClick={toggleSidenav}
+                  mb="1rem"
+                >
                   Pricing
                 </Typography>
               </Scroll>

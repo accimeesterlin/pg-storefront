@@ -27,7 +27,6 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
 
-
   useEffect(() => {
     const cartState: any = loadCartState("cartState");
 
@@ -73,11 +72,16 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
 
   return (
     <StyledHeader className={className}>
-      <Container display="flex" alignItems="center" justifyContent="space-between" height="100%">
+      <Container
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        height="100%"
+      >
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
             <a>
-              <Image src="/assets/images/nourish.png" alt="logo" width="50px" />
+              <Image src="/assets/images/pglogo.jpeg" alt="logo" width="50px" />
             </a>
           </Link>
 

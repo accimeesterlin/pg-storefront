@@ -13,9 +13,11 @@ const Topbar: FC = () => {
   const [currency, setCurrency] = useState(currencyList[0]);
   const [language, setLanguage] = useState(languageList[0]);
 
-  const handleCurrencyClick = (curr: typeof currency) => () => setCurrency(curr);
+  const handleCurrencyClick = (curr: typeof currency) => () =>
+    setCurrency(curr);
 
-  const handleLanguageClick = (lang: typeof language) => () => setLanguage(lang);
+  const handleLanguageClick = (lang: typeof language) => () =>
+    setLanguage(lang);
 
   useEffect(() => {
     // get language from browser
@@ -23,19 +25,28 @@ const Topbar: FC = () => {
 
   return (
     <StyledTopbar>
-      <Container display="flex" justifyContent="space-between" alignItems="center" height="100%">
+      <Container
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        height="100%"
+      >
         <FlexBox className="topbar-left">
           <div className="logo">
-            <img src="/assets/images/nourish.png" alt="logo" width="50px" />
+            <img src="/assets/images/pglogo.jpeg" alt="logo" width="50px" />
           </div>
 
           <FlexBox alignItems="center">
-            <Icon size="14px" color="gray">phone-call</Icon>
-            <span>+1 404 999 7045</span>
+            <Icon size="14px" color="gray">
+              phone-call
+            </Icon>
+            <span>+1 470 681 0077</span>
           </FlexBox>
 
           <FlexBox alignItems="center" ml="20px">
-            <Icon size="14px" color="gray">mail</Icon>
+            <Icon size="14px" color="gray">
+              mail
+            </Icon>
             <span>info@pgecom.com</span>
           </FlexBox>
         </FlexBox>
@@ -52,7 +63,12 @@ const Topbar: FC = () => {
           <Menu
             direction="right"
             handler={
-              <FlexBox className="dropdown-handler" alignItems="center" height="40px" mr="1.25rem">
+              <FlexBox
+                className="dropdown-handler"
+                alignItems="center"
+                height="40px"
+                mr="1.25rem"
+              >
                 <Image src={language.mainImageUrl} alt={language.title} />
                 <Small fontWeight="600">{language.title}</Small>
                 <Icon size="1rem">chevron-down</Icon>
@@ -61,7 +77,12 @@ const Topbar: FC = () => {
           >
             {languageList.map((item) => (
               <MenuItem key={item.title} onClick={handleLanguageClick(item)}>
-                <Image src={item.mainImageUrl} borderRadius="2px" mr="0.5rem" alt={item.title} />
+                <Image
+                  src={item.mainImageUrl}
+                  borderRadius="2px"
+                  mr="0.5rem"
+                  alt={item.title}
+                />
                 <Small fontWeight="600">{item.title}</Small>
               </MenuItem>
             ))}
@@ -70,7 +91,11 @@ const Topbar: FC = () => {
           <Menu
             direction="right"
             handler={
-              <FlexBox className="dropdown-handler" alignItems="center" height="40px">
+              <FlexBox
+                className="dropdown-handler"
+                alignItems="center"
+                height="40px"
+              >
                 <Image src={currency.mainImageUrl} alt={currency.title} />
                 <Small fontWeight="600">{currency.title}</Small>
                 <Icon size="1rem">chevron-down</Icon>
@@ -79,7 +104,12 @@ const Topbar: FC = () => {
           >
             {currencyList.map((item) => (
               <MenuItem key={item.title} onClick={handleCurrencyClick(item)}>
-                <Image src={item.mainImageUrl} borderRadius="2px" mr="0.5rem" alt={item.title} />
+                <Image
+                  src={item.mainImageUrl}
+                  borderRadius="2px"
+                  mr="0.5rem"
+                  alt={item.title}
+                />
                 <Small fontWeight="600">{item.title}</Small>
               </MenuItem>
             ))}

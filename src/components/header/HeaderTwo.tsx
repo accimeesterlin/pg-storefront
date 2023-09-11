@@ -34,7 +34,6 @@ const HeaderTwo: FC<HeaderProps> = ({ className }) => {
       });
     }
   }, []);
-  
 
   const CART_HANDLE = (
     <FlexBox ml="20px" alignItems="flex-start">
@@ -69,11 +68,16 @@ const HeaderTwo: FC<HeaderProps> = ({ className }) => {
 
   return (
     <StyledHeader className={className}>
-      <Container display="flex" alignItems="center" justifyContent="space-between" height="100%">
+      <Container
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        height="100%"
+      >
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
             <a>
-              <img src="/assets/images/nourish.png" alt="logo" width="50px" />
+              <img src="/assets/images/pglogo.jpeg" alt="logo" width="50px" />
             </a>
           </Link>
         </FlexBox>

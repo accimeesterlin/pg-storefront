@@ -3,14 +3,14 @@ export const mainCarouselData = [
   {
     title: "50% Off For Your First Shopping",
     mainImageUrl: "assets/images/products/apple-watch-0.png",
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convalliss.`,
+    description: `Don't Miss Out! Limited-Time Offers Inside!`,
     buttonText: "Shop Now",
     buttonLik: "#",
   },
   {
     title: "50% Off For Your First Shopping",
     mainImageUrl: "assets/images/products/apple-watch-0.png",
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convalliss.`,
+    description: `Unbeatable Deals Await! Grab Yours Today!`,
     buttonText: "Shop Now",
     buttonLik: "#",
   },
@@ -2096,10 +2096,10 @@ export const products = [
     },
     title: "Lphone 7",
     brand: null,
-    price: 109,
+    price: 699,
     size: null,
     colors: [],
-    comparePrice: 5,
+    comparePrice: 499,
     mainImageUrl: "/assets/images/products/Electronics/32.iphone7.png",
     images: [
       { url: "/assets/images/products/Electronics/32.iphone7.png" },
@@ -2898,9 +2898,9 @@ export const products = [
     mainImageUrl: "/assets/images/products/Bikes/21.TarzT3.png",
     images: [
       { url: "/assets/images/products/Bikes/21.TarzT3.png" },
-     {
-      url:  "/assets/images/products/Bikes/21.TarzT3.png"
-     },
+      {
+        url: "/assets/images/products/Bikes/21.TarzT3.png"
+      },
     ],
     categories: ["bikes"],
     status: null,
@@ -3547,14 +3547,14 @@ export const brands = [
     type: "car",
     for: { demo: "market-1", type: "car-brands" },
   },
-  {
-    id: "e73dc783-c355-4a30-9ae3-4995d4f13513",
-    slug: "apple",
-    name: "Apple",
-    image: "/assets/images/brands/apple.png",
-    type: "mobile",
-    for: { demo: "market-1", type: "mobile-brands" },
-  },
+  // {
+  //   id: "e73dc783-c355-4a30-9ae3-4995d4f13513",
+  //   slug: "apple",
+  //   name: "Apple",
+  //   image: "/assets/images/brands/apple.png",
+  //   type: "mobile",
+  //   for: { demo: "market-1", type: "mobile-brands" },
+  // },
   {
     id: "52cc15f6-d076-432b-94d2-1bd73bd01447",
     slug: "dell",
@@ -3619,14 +3619,14 @@ export const brands = [
     type: "optics",
     for: { demo: "market-1", type: "optics-brands" },
   },
-  {
-    id: "74e2c93e-ba4c-413e-97d0-1bfd969f35ee",
-    slug: "apple",
-    name: "Apple",
-    image: "/assets/images/brands/apple.png",
-    type: "optics",
-    for: { demo: "market-1", type: "optics-brands" },
-  },
+  // {
+  //   id: "74e2c93e-ba4c-413e-97d0-1bfd969f35ee",
+  //   slug: "apple",
+  //   name: "Apple",
+  //   image: "/assets/images/brands/apple.png",
+  //   type: "optics",
+  //   for: { demo: "market-1", type: "optics-brands" },
+  // },
   {
     id: "22e9b7ce-b32d-4877-9442-6c2273ef9ed1",
     slug: "titan",

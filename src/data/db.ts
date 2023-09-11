@@ -4323,10 +4323,10 @@ export default [
     },
     title: "Lphone 7",
     brand: null,
-    price: 164,
+    price: 699,
     size: null,
     colors: [],
-    comparePrice: 0,
+    comparePrice: 499,
     mainImageUrl: "/assets/images/products/Electronics/32.iphone7.png",
     images: [
       { url: "/assets/images/products/Electronics/32.iphone7.png" },

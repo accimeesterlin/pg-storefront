@@ -34,7 +34,12 @@ const Footer1: FC = () => {
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <Link href="/">
                   <a>
-                    <Image alt="logo" mb="1.25rem" src="/assets/images/nourish.png" width="50px" />
+                    <Image
+                      alt="logo"
+                      mb="1.25rem"
+                      src="/assets/images/pglogo.jpeg"
+                      width="50px"
+                    />
                   </a>
                 </Link>
 
@@ -44,7 +49,7 @@ const Footer1: FC = () => {
                   instructors, virtual cards, and ecommerce market access.
                 </Paragraph>
 
-                <AppStore />
+                {/* <AppStore /> */}
               </Grid>
 
               <Grid item lg={2} md={6} sm={6} xs={12}>
@@ -95,16 +100,16 @@ const Footer1: FC = () => {
                   Contact Us
                 </Typography>
 
-                <Typography py="0.3rem" color="gray.500">
+                {/* <Typography py="0.3rem" color="gray.500">
                   70 Washington Square South, New York, NY 10012, United States
-                </Typography>
+                </Typography> */}
 
                 <Typography py="0.3rem" color="gray.500">
                   Email: info@pgecom.com
                 </Typography>
 
                 <Typography py="0.3rem" mb="1rem" color="gray.500">
-                  Phone: +1  404 999 7045
+                  Phone: +1 470 681 0077
                 </Typography>
 
                 <FlexBox className="flex" mx="-5px">

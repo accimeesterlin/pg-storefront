@@ -112,7 +112,7 @@ const commentList = [
     rating: 4.7,
     date: "2021-02-14",
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius massa id ut mattis. Facilisis vitae gravida egestas ac account.",
+      "I recently purchased a new item, and I'm incredibly satisfied with my purchase. It exceeded my expectations in terms of performance and quality. The user experience is smooth and intuitive, and I love the sleek design. It's become an essential part of my daily routine, and I can't imagine life without it now.",
   },
   {
     name: "Joe Kenan",
@@ -120,7 +120,7 @@ const commentList = [
     rating: 4.7,
     date: "2019-08-10",
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius massa id ut mattis. Facilisis vitae gravida egestas ac account.",
+      "I've been on the lookout for a product like this for a while, and I'm glad I finally found it. The value for the price is outstanding, and it offers versatility that I've been looking for. I've already recommended it to my friends and family. It's truly a game-changer!",
   },
   {
     name: "Jenifer Tulio",
@@ -128,7 +128,7 @@ const commentList = [
     rating: 4.7,
     date: "2021-02-05",
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius massa id ut mattis. Facilisis vitae gravida egestas ac account.",
+      "This product aligns perfectly with my values of sustainability and eco-friendliness. It's made a positive impact on my lifestyle by reducing waste and promoting a greener way of living. The quality is remarkable, and it's built to last. I appreciate companies that prioritize the environment, and this purchase has been a small step in the right direction.",
   },
 ];
 
