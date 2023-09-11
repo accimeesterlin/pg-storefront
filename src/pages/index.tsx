@@ -9,7 +9,7 @@ import Section5 from "@sections/market-1/Section5";
 import Section7 from "@sections/market-1/Section7";
 import Section8 from "@sections/market-1/Section8";
 import Section10 from "@sections/market-1/Section10";
-import Section11 from "@sections/market-1/Section11";
+// import Section11 from "@sections/market-1/Section11";
 import Section12 from "@sections/market-1/Section12";
 import Section13 from "@sections/market-1/Section13";
 import api from "@utils/__api__/market-1";

@@ -6,7 +6,7 @@ import Image from "@component/Image";
 import Grid from "@component/grid/Grid";
 import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
-import AppStore from "@component/AppStore";
+// import AppStore from "@component/AppStore";
 import Container from "@component/Container";
 import Typography, { Paragraph } from "@component/Typography";
 import { getTheme } from "@utils/utils";
