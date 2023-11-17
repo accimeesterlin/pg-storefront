@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - yarn install
+      - yarn global add netlify-cli
+
+  build:
+    commands:
+      - yarn build
+      - netlify deploy --prod --build
+
+post_build:
+  commands:
+    - netlify deploy --prod --build
+
+artifacts:
+  base-directory: out
+  files:
+    - "**/*"
