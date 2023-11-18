@@ -41,7 +41,7 @@ const Section1: FC = () => {
           </H2>
 
           <Paragraph color="gray.700" maxWidth="400px" mx="auto" mb="2rem">
-            SEO friendly server side rendered MarketPlace - PGecom.
+            SEO friendly server side rendered MarketPlace - Store.
           </Paragraph>
 
           <FlexBox justifyContent="center" m="-0.5rem">

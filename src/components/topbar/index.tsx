@@ -33,7 +33,7 @@ const Topbar: FC = () => {
       >
         <FlexBox className="topbar-left">
           <div className="logo">
-            <img src="/assets/images/pglogo.jpeg" alt="logo" width="50px" />
+            {/* <img src="/assets/images/pglogo.jpeg" alt="logo" width="50px" /> */}
           </div>
 
           <FlexBox alignItems="center">
@@ -47,7 +47,7 @@ const Topbar: FC = () => {
             <Icon size="14px" color="gray">
               mail
             </Icon>
-            <span>info@pgecom.com</span>
+            <span>under_construction@gmail.com</span>
           </FlexBox>
         </FlexBox>
 

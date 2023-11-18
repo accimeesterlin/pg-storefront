@@ -34,17 +34,17 @@ const Footer1: FC = () => {
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <Link href="/">
                   <a>
-                    <Image
+                    {/* <Image
                       alt="logo"
                       mb="1.25rem"
                       src="/assets/images/pglogo.jpeg"
                       width="50px"
-                    />
+                    /> */}
                   </a>
                 </Link>
 
                 <Paragraph mb="1.25rem" color="gray.500">
-                  PGecom offers a comprehensive suite of services to meet the
+                  Store offers a comprehensive suite of services to meet the
                   needs of our customers, from gift cards and online courses, to
                   instructors, virtual cards, and ecommerce market access.
                 </Paragraph>
@@ -105,7 +105,7 @@ const Footer1: FC = () => {
                 </Typography> */}
 
                 <Typography py="0.3rem" color="gray.500">
-                  Email: info@pgecom.com
+                  Email: under_construction@gmail.com
                 </Typography>
 
                 <Typography py="0.3rem" mb="1rem" color="gray.500">

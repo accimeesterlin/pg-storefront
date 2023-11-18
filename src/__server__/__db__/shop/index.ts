@@ -1,7 +1,7 @@
 // FOLLOWING CODES ARE MOCK SERVER IMPLEMENTATION
 // YOU NEED TO BUILD YOUR OWN SERVER
 // IF YOU NEED HELP ABOUT SERVER SIDE IMPLEMENTATION
-// CONTACT US AT info@pgecom.com
+// CONTACT US AT under_construction@gmail.com
 import shops from "./data";
 import Mock from "../../mock";
 import Shop from "@models/shop.model";

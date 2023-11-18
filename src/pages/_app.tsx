@@ -10,11 +10,11 @@ import GoogleAnalytics from "@component/GoogleAnalytics";
 import { AppProvider } from "@context/AppContext";
 // import { GlobalStyles } from "@utils/globalStyles";
 // import { theme } from "@utils/theme";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 import theme from "../theme";
 import GlobalStyles from "theme/globalStyles";
 
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { storePathValues } from "@utils/utils";
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -47,9 +47,9 @@ interface MyAppProps extends AppProps {
 // ============================================================
 
 const App = ({ Component, pageProps }: MyAppProps) => {
-  const router = useRouter();;
+  const router = useRouter();
   let Layout = Component.layout || Fragment;
-  const lastVisitedUrl = router?.asPath || "/profile"
+  const lastVisitedUrl = router?.asPath || "/profile";
 
   useEffect(storePathValues, [lastVisitedUrl]);
 
@@ -61,14 +61,17 @@ const App = ({ Component, pageProps }: MyAppProps) => {
         <meta property="og:url" content="https://marketplace.com" />
         {/* thumbnail And title for social media */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Find everything you need in one convenient place at PGecom, your go-to destination for shopping with confidence." />
+        <meta
+          property="og:title"
+          content="Find everything you need in one convenient place at Store, your go-to destination for shopping with confidence."
+        />
         <meta
           property="og:description"
-          content="Find everything you need in one convenient place at PGecom, your go-to destination for shopping with confidence."
+          content="Find everything you need in one convenient place at Store, your go-to destination for shopping with confidence."
         />
         {/* TODO: Add this to the head of your page */}
         {/* <meta property="og:image" content="/assets/images/landing/preview.png" /> */}
-        <link rel="shortcut icon" href="pgecom.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="Store.png" type="image/x-icon" />
 
         {/* Google analytics */}
         <GoogleAnalytics />
