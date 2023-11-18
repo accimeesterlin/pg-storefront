@@ -81,7 +81,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
             <a>
-              {/* <Image src="/assets/images/pglogo.jpeg" alt="logo" width="50px" /> */}
+              <Image src="/assets/images/pglogo.jpeg" alt="logo" width="50px" />
             </a>
           </Link>
 

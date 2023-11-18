@@ -34,12 +34,12 @@ const Footer1: FC = () => {
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <Link href="/">
                   <a>
-                    {/* <Image
+                    <Image
                       alt="logo"
                       mb="1.25rem"
                       src="/assets/images/pglogo.jpeg"
                       width="50px"
-                    /> */}
+                    />
                   </a>
                 </Link>
 

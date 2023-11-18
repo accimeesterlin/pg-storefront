@@ -105,12 +105,12 @@ const Header: FC = () => {
         >
           <Scroll to="top" duration={400} smooth={true} isDynamic>
             <Box cursor="pointer">
-              {/* <Image
+              <Image
                 width="50px"
                 height="44px"
                 src="/assets/images/pglogo.jpeg"
                 alt="logo"
-              /> */}
+              />
             </Box>
           </Scroll>
 
