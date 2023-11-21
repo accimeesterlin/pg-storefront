@@ -10,6 +10,7 @@ import FlexBox from "@component/FlexBox";
 import Container from "@component/Container";
 import Typography, { Paragraph } from "@component/Typography";
 import { getTheme } from "@utils/utils";
+import { useAppContext } from "@context/AppContext";
 
 // styled component
 const StyledLink = styled.a`
@@ -25,6 +26,14 @@ const StyledLink = styled.a`
 `;
 
 const Footer1: FC = () => {
+  const { state } = useAppContext();
+
+  const shop = state.shop;
+  const logoUrl = shop?.profilePicture || "";
+  const description = shop?.description || "";
+  const email = shop?.email || "";
+  const phone = shop?.phone || "";
+
   return (
     <footer>
       <Box bg="#0F3460">
@@ -34,19 +43,12 @@ const Footer1: FC = () => {
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <Link href="/">
                   <a>
-                    <Image
-                      alt="logo"
-                      mb="1.25rem"
-                      src="/assets/images/pglogo.jpeg"
-                      width="50px"
-                    />
+                    <Image alt="logo" mb="1.25rem" src={logoUrl} width="50px" />
                   </a>
                 </Link>
 
                 <Paragraph mb="1.25rem" color="gray.500">
-                  Store offers a comprehensive suite of services to meet the
-                  needs of our customers, from gift cards and online courses, to
-                  instructors, virtual cards, and ecommerce market access.
+                  {description}
                 </Paragraph>
 
                 {/* <AppStore /> */}
@@ -105,11 +107,11 @@ const Footer1: FC = () => {
                 </Typography> */}
 
                 <Typography py="0.3rem" color="gray.500">
-                  Email: under_construction@gmail.com
+                  Email: {email}
                 </Typography>
 
                 <Typography py="0.3rem" mb="1rem" color="gray.500">
-                  Phone: +1 470 681 0077
+                  Phone: {phone}
                 </Typography>
 
                 <FlexBox className="flex" mx="-5px">

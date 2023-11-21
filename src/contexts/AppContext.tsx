@@ -2,6 +2,7 @@ import Address from "@models/address.model";
 import Checkout from "@models/checkout.model";
 import Order from "@models/order.model";
 import Product from "@models/product.model";
+import Shop from "@models/shop.model";
 import User from "@models/user.model";
 import {
   createContext,
@@ -17,6 +18,7 @@ type InitialState = {
   cart: CartItem[];
   isHeaderFixed: boolean;
   user: User;
+  shop: Shop;
   checkout: Checkout;
 };
 
@@ -32,11 +34,10 @@ export type CartItem = {
 
 export type ICart = CartItem[];
 
-
-
 type PurchaseCartActionType = { type: "PURCHASE_COMPLETE" };
 type LoadCartActionType = { type: "LOAD_CART"; payload: ICart };
 type CartActionType = { type: "CHANGE_CART_AMOUNT"; payload: CartItem };
+type ShopActionType = { type: "SET_SHOP"; payload: Shop };
 type UserActionType = { type: "SET_USER"; payload: User };
 type OrderActionType = { type: "SET_ORDER_LIST"; payload: Order[] };
 type PaymentMethodActionType = { type: "SET_PAYMENT_METHOD"; payload: string };
@@ -47,6 +48,7 @@ type LayoutActionType = { type: "TOGGLE_HEADER"; payload: boolean };
 type ActionType =
   | CartActionType
   | LayoutActionType
+  | ShopActionType
   | UserActionType
   | AddressActionType
   | CheckoutActionType
@@ -63,6 +65,7 @@ const INITIAL_CART = [];
 const INITIAL_STATE = {
   cart: INITIAL_CART,
   isHeaderFixed: false,
+  shop: {},
   user: {
     orders: [],
     products: [],
@@ -88,6 +91,9 @@ const reducer = (state: InitialState, action: ActionType) => {
   switch (action.type) {
     case "TOGGLE_HEADER":
       return { ...state, isHeaderFixed: action.payload };
+
+    case "SET_SHOP":
+      return { ...state, shop: action.payload };
 
     case "SET_USER":
       return {
@@ -135,7 +141,6 @@ const reducer = (state: InitialState, action: ActionType) => {
           orders: action.payload,
         },
       };
-
 
     case "LOAD_PRODUCTS":
       return {

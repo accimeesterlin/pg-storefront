@@ -8,10 +8,18 @@ import MenuItem from "../MenuItem";
 import Container from "../Container";
 import { Small } from "../Typography";
 import StyledTopbar from "./styles";
+import { useAppContext } from "@context/AppContext";
 
 const Topbar: FC = () => {
   const [currency, setCurrency] = useState(currencyList[0]);
   const [language, setLanguage] = useState(languageList[0]);
+
+  const { state } = useAppContext();
+
+  const shop = state.shop;
+  const logoUrl = shop?.profilePicture || "";
+  const phone = shop?.phone || "";
+  const email = shop?.email || "";
 
   const handleCurrencyClick = (curr: typeof currency) => () =>
     setCurrency(curr);
@@ -33,21 +41,21 @@ const Topbar: FC = () => {
       >
         <FlexBox className="topbar-left">
           <div className="logo">
-            {/* <img src="/assets/images/pglogo.jpeg" alt="logo" width="50px" /> */}
+            <img src={logoUrl} alt="logo" width="50px" />
           </div>
 
           <FlexBox alignItems="center">
             <Icon size="14px" color="gray">
               phone-call
             </Icon>
-            <span>+1 470 681 0077</span>
+            <span>{phone}</span>
           </FlexBox>
 
           <FlexBox alignItems="center" ml="20px">
             <Icon size="14px" color="gray">
               mail
             </Icon>
-            <span>under_construction@gmail.com</span>
+            <span>{email}</span>
           </FlexBox>
         </FlexBox>
 

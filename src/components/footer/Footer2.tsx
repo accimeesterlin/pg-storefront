@@ -10,6 +10,7 @@ import AppStore from "@component/AppStore";
 import { Paragraph } from "@component/Typography";
 import { deviceSize } from "@utils/constants";
 import { getTheme } from "@utils/utils";
+import { useAppContext } from "@context/AppContext";
 
 // styled component
 const StyledLink = styled.a`
@@ -49,17 +50,17 @@ const Wrapper = styled(Box)`
 `;
 
 const Footer2: FC = () => {
+  const { state } = useAppContext();
+
+  const shop = state.shop;
+  const logoUrl = shop?.profilePicture || "";
+
   return (
     <footer>
       <Wrapper>
         <Link href="/">
           <a>
-            <Image
-              mb="1.5rem"
-              src="/assets/images/pglogo.jpeg"
-              alt="logo"
-              width="50px"
-            />
+            <Image mb="1.5rem" src={logoUrl} alt="logo" width="50px" />
           </a>
         </Link>
 

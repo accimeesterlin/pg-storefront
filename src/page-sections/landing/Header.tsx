@@ -11,6 +11,7 @@ import Typography from "@component/Typography";
 import Sidenav from "@component/sidenav/Sidenav";
 import { IconButton, Button } from "@component/buttons";
 import { getTheme } from "@utils/utils";
+import { useAppContext } from "@context/AppContext";
 
 const headerHeight = 72;
 
@@ -75,6 +76,10 @@ const HeaderWrapper = styled.div<{ fixed: boolean }>`
 const Header: FC = () => {
   const [open, setOpen] = useState(false);
   const [isFixed, setFixed] = useState(false);
+  const { state } = useAppContext();
+
+  const shop = state.shop;
+  const logoUrl = shop?.profilePicture || "";
 
   const toggleSidenav = () => {
     setOpen((open) => !open);
@@ -105,12 +110,7 @@ const Header: FC = () => {
         >
           <Scroll to="top" duration={400} smooth={true} isDynamic>
             <Box cursor="pointer">
-              <Image
-                width="50px"
-                height="44px"
-                src="/assets/images/pglogo.jpeg"
-                alt="logo"
-              />
+              <Image width="50px" height="44px" src={logoUrl} alt="logo" />
             </Box>
           </Scroll>
 

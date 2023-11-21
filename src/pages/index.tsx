@@ -13,6 +13,7 @@ import Section10 from "@sections/market-1/Section10";
 import Section12 from "@sections/market-1/Section12";
 import Section13 from "@sections/market-1/Section13";
 import api from "@utils/__api__/market-1";
+import { getShopById } from "@utils/__api__/shops";
 // data models
 import Shop from "@models/shop.model";
 import Brand from "@models/Brand.model";
@@ -20,6 +21,8 @@ import Product from "@models/product.model";
 import Service from "@models/service.model";
 import Category from "@models/category.model";
 import MainCarouselItem from "@models/market-1.model";
+import { useAppContext } from "@context/AppContext";
+import { useEffect } from "react";
 
 // =================================================================
 type Props = {
@@ -41,11 +44,20 @@ type Props = {
   topRatedProducts?: Product[];
   bottomCategories?: Category[];
   mainCarouselData?: MainCarouselItem[];
+  shop: Shop;
 };
 // =================================================================
 
 const Market1 = (props: Props) => {
-  console.log("ShopId: ", process.env.NEXT_PUBLIC_SHOP_ID);
+  const { dispatch } = useAppContext();
+
+  const shop = props?.shop;
+
+  useEffect(() => {
+    if (shop) {
+      dispatch({ type: "SET_SHOP", payload: props.shop });
+    }
+  }, [shop]);
 
   return (
     <main>
@@ -109,6 +121,9 @@ Market1.layout = AppLayout;
 // ==============================================================
 
 export const getStaticProps: GetStaticProps = async () => {
+  const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
+
+  const shop = await getShopById(shopId);
   const carList = await api.getCarList();
   const carBrands = await api.getCarBrands();
   const moreItems = await api.getMoreItems();
@@ -148,6 +163,7 @@ export const getStaticProps: GetStaticProps = async () => {
       mainCarouselData,
       topRatedProducts,
       bottomCategories,
+      shop,
     },
   };
 };

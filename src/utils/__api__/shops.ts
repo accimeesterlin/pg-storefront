@@ -2,10 +2,10 @@ import axios from "axios";
 
 import Shop from "models/shop.model";
 
-const API_URL = process.env.WEBSITE_ORIGIN;
+const API_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://app.pgecom.com";
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: `${API_URL}/api/v1/storefront`,
 });
 
 
@@ -15,6 +15,19 @@ export const getShopList = async (): Promise<Shop[]> => {
     return response.data?.shops;
   } catch (error) {
     return []
+  }
+};
+
+
+export const getShopById = async (id: string): Promise<Shop> => {
+  try {
+    const response = await api.get(`/shop`, { params: { shopId: id } });
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error?.response?.data?.message);
+
+    return {}
   }
 };
 
@@ -35,4 +48,4 @@ export const getShopBySlug = async (slug: string): Promise<Shop> => {
   }
 };
 
-export default { getShopList, getSlugs, getShopBySlug };
+export default { getShopList, getSlugs, getShopBySlug, getShopById };

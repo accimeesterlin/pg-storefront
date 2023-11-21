@@ -27,6 +27,9 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
 
+  const shop = state.shop;
+  const logoUrl = shop?.profilePicture || "";
+
   useEffect(() => {
     const cartState: any = loadCartState("cartState");
 
@@ -81,7 +84,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
             <a>
-              <Image src="/assets/images/pglogo.jpeg" alt="logo" width="50px" />
+              <Image src={logoUrl} alt="logo" width="50px" />
             </a>
           </Link>
 
