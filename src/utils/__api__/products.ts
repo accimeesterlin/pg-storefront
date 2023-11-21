@@ -25,10 +25,10 @@ const getSlugs = async (): Promise<{ params: { slug: string } }[]> => {
 
 };
 
-// get product based on slug
-const getProduct = async (slug: string): Promise<Product> => {
+// get product based on id
+const getProduct = async (productId: string): Promise<Product> => {
   try {
-    const response = await api.get(`/api/user/product/${slug}`);
+    const response = await api.get(`/product`, { params: { productId } });
     return response.data;
   } catch (error) {
     return {};

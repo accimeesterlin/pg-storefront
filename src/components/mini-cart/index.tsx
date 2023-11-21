@@ -17,19 +17,17 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
   const [saveCartState] = createLocalStorage("cartState");
   const { state, dispatch } = useAppContext();
   const handleCartAmountChange = (amount: number, product: any) => () => {
-    
     dispatch({
       type: "CHANGE_CART_AMOUNT",
       payload: { ...product, qty: amount },
     });
   };
-  
+
   useEffect(() => {
     if (state.cart) {
       saveCartState(state.cart);
     }
   }, [state.cart]);
-
 
   return (
     <StyledMiniCart>
@@ -50,8 +48,17 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
             justifyContent="center"
             height="calc(100% - 80px)"
           >
-            <NextImage src="/assets/images/logos/shopping-bag.svg" width="90px" height="100%" />
-            <Paragraph mt="1rem" color="text.muted" textAlign="center" maxWidth="200px">
+            <NextImage
+              src="/assets/images/logos/shopping-bag.svg"
+              width="90px"
+              height="100%"
+            />
+            <Paragraph
+              mt="1rem"
+              color="text.muted"
+              textAlign="center"
+              maxWidth="200px"
+            >
               Your shopping bag is empty. Start shopping
             </Paragraph>
           </FlexBox>
@@ -97,7 +104,10 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
                     size={76}
                     mx="1rem"
                     alt={item.name}
-                    src={item.mainImageUrl || "/assets/images/products/iphone-x.png"}
+                    src={
+                      item.mainImageUrl ||
+                      "/assets/images/products/iphone-x.png"
+                    }
                   />
                 </a>
               </Link>
@@ -115,7 +125,12 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
                   {currency(item.price, 0)} x {item.qty}
                 </Tiny>
 
-                <Typography fontWeight={600} fontSize="14px" color="primary.main" mt="4px">
+                <Typography
+                  fontWeight={600}
+                  fontSize="14px"
+                  color="primary.main"
+                  mt="4px"
+                >
                   {currency(item.qty * item.price)}
                 </Typography>
               </div>
@@ -140,15 +155,23 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
             <Button
               color="primary"
               variant="contained"
+              disabled
               m="1rem 1rem 0.75rem"
               onClick={toggleSidenav}
             >
-              <Typography fontWeight={600}>Checkout Now ({currency(getTotalPrice(state.cart))})</Typography>
+              <Typography fontWeight={600}>
+                Checkout Now ({currency(getTotalPrice(state.cart))})
+              </Typography>
             </Button>
           </Link>
 
           <Link href="/cart">
-            <Button color="primary" variant="outlined" m="0px 1rem 0.75rem" onClick={toggleSidenav}>
+            <Button
+              color="primary"
+              variant="outlined"
+              m="0px 1rem 0.75rem"
+              onClick={toggleSidenav}
+            >
               <Typography fontWeight={600}>View Cart</Typography>
             </Button>
           </Link>

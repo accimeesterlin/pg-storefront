@@ -1,7 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { isEmpty } from "lodash";
 import Box from "@component/Box";
 import FlexBox from "@component/FlexBox";
 import { H5 } from "@component/Typography";
@@ -15,18 +14,22 @@ import ProductDescription from "@component/products/ProductDescription";
 import api from "@utils/__api__/products";
 import Shop from "@models/shop.model";
 import Product from "@models/product.model";
+import { getShopById } from "@utils/__api__/shops";
+import { useAppContext } from "@context/AppContext";
 
 // ===============================================================
 type ProductDetailsProps = {
   product: Product;
   shops: Shop[];
+  shop: Shop;
   relatedProducts: Product[];
   frequentlyBought: Product[];
 };
 // ===============================================================
 
 const ProductDetails = (props: ProductDetailsProps) => {
-  const { product, shops, relatedProducts, frequentlyBought } = props;
+  const { product, shops, relatedProducts, frequentlyBought, shop } = props;
+  const { dispatch } = useAppContext();
 
   const router = useRouter();
   const [selectedOption, setSelectedOption] = useState("description");
@@ -37,6 +40,12 @@ const ProductDetails = (props: ProductDetailsProps) => {
   if (router.isFallback) {
     return <h1>Loading...</h1>;
   }
+
+  useEffect(() => {
+    if (shop) {
+      dispatch({ type: "SET_SHOP", payload: shop });
+    }
+  }, [shop]);
 
   return (
     <Fragment>
@@ -109,18 +118,18 @@ const ProductDetails = (props: ProductDetailsProps) => {
 ProductDetails.layout = NavbarLayout;
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const slug = query.slug as string;
-  const shops = await api.getAvailableShop();
+  const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
 
-  // const frequentlyBought = await api.getFrequentlyBought();
-  let product: Product = await api.getProduct(slug);
+  const productId = query.id as string;
+  const shops = [];
+  const shop = await getShopById(shopId);
 
-  if (isEmpty(product)) {
-    product = (await api.getDemoProduct(slug)) || {};
-  }
+  const product: Product = await api.getProduct(productId);
 
   const relatedProducts = await api.getRelatedProducts(product?.id);
-  return { props: { frequentlyBought: [], relatedProducts, product, shops } };
+  return {
+    props: { frequentlyBought: [], relatedProducts, product, shop, shops },
+  };
 };
 
 export default ProductDetails;

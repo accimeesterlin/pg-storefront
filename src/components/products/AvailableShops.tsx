@@ -13,6 +13,9 @@ type Props = { shops: Shop[] };
 // ============================================================
 
 const AvailableShops: FC<Props> = ({ shops }) => {
+  if (shops?.length === 0) {
+    return null;
+  }
   return (
     <Box mb="3.75rem">
       <H3 mb="1.5rem">Also Available at</H3>
@@ -31,7 +34,13 @@ const AvailableShops: FC<Props> = ({ shops }) => {
                   justifyContent="center"
                 >
                   <Avatar src={item.profilePicture} />
-                  <H4 textAlign="center" width="inherit" mt="0.75rem" color="gray.800" ellipsis>
+                  <H4
+                    textAlign="center"
+                    width="inherit"
+                    mt="0.75rem"
+                    color="gray.800"
+                    ellipsis
+                  >
                     {item.name}
                   </H4>
                 </FlexBox>

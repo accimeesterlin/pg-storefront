@@ -196,7 +196,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
             </Icon>
           </FlexBox>
 
-          <Link href={`/product/${slug}`}>
+          <Link href={`/product/${id}`}>
             <a>
               <img
                 alt={name}
@@ -213,7 +213,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
         <div className="details">
           <FlexBox>
             <Box flex="1 1 0" minWidth="0px" mr="0.5rem">
-              <Link href={`/product/${slug}`}>
+              <Link href={`/product/${id}`}>
                 <a>
                   <H3
                     mb="10px"

@@ -73,15 +73,14 @@ const ProductIntro: FC<ProductIntroProps> = ({
   //   router?.push("/checkout")
   // }
 
-
   const handleCrypto = () => {
     setIsPGPayLoading(true);
     dispatch({
       type: "SET_PAYMENT_METHOD",
       payload: "crypto",
-    })
-    router?.push("/checkout")
-  }
+    });
+    router?.push("/checkout");
+  };
 
   // const handleMonCash = () => {
   //   setIsMonCashLoading(true);
@@ -102,9 +101,7 @@ const ProductIntro: FC<ProductIntroProps> = ({
                 width={300}
                 height={300}
                 src={
-                  images?.length > 0
-                    ? images[selectedImage]?.url
-                    : mainImageUrl
+                  images?.length > 0 ? images[selectedImage]?.url : mainImageUrl
                 }
                 style={{ objectFit: "contain" }}
               />
@@ -214,13 +211,14 @@ const ProductIntro: FC<ProductIntroProps> = ({
               p="9px"
               size="small"
               color="primary"
+              disabled
               loading={isPGPayLoading}
               variant="contained"
               onClick={handleCrypto}
             >
               Pay now with Crypto
             </Button>
-{/* 
+            {/* 
             <Button
               p="9px"
               size="small"

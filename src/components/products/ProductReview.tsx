@@ -42,6 +42,12 @@ const ProductReview: FC = () => {
     onSubmit: handleFormSubmit,
   });
 
+  const isEnabled = false;
+
+  if (!isEnabled) {
+    return <p>No Reviews at this moment</p>;
+  }
+
   return (
     <Box>
       {commentList.map((item, ind) => (

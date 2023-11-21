@@ -19,7 +19,6 @@ import { currency, getTotalPrice } from "@utils/utils";
 const Cart = () => {
   const { state } = useAppContext();
 
-
   return (
     <Fragment>
       <Grid container spacing={6}>
@@ -43,7 +42,11 @@ const Cart = () => {
 
         <Grid item lg={4} md={4} xs={12}>
           <Card1>
-            <FlexBox justifyContent="space-between" alignItems="center" mb="1rem">
+            <FlexBox
+              justifyContent="space-between"
+              alignItems="center"
+              mb="1rem"
+            >
               <Typography color="gray.600">Total:</Typography>
 
               <Typography fontSize="18px" fontWeight="600" lineHeight="1">
@@ -71,7 +74,13 @@ const Cart = () => {
 
             <TextField placeholder="Voucher" fullwidth />
 
-            <Button variant="outlined" color="primary" mt="1rem" mb="30px" fullwidth>
+            <Button
+              variant="outlined"
+              color="primary"
+              mt="1rem"
+              mb="30px"
+              fullwidth
+            >
               Apply Voucher
             </Button>
 
@@ -105,7 +114,7 @@ const Cart = () => {
             </Button>
 
             <Link href="/checkout">
-              <Button variant="contained" color="primary" fullwidth>
+              <Button variant="contained" color="primary" disabled fullwidth>
                 Checkout Now
               </Button>
             </Link>
