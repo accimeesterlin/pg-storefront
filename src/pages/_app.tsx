@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Head from "next/head";
 import { NextPage } from "next";
 import Router, { useRouter } from "next/router";
@@ -7,7 +7,7 @@ import NProgress from "nprogress";
 import { Auth } from "aws-amplify";
 import { ThemeProvider } from "styled-components";
 import GoogleAnalytics from "@component/GoogleAnalytics";
-import { AppProvider } from "@context/AppContext";
+import { AppProvider, useAppContext } from "@context/AppContext";
 // import { GlobalStyles } from "@utils/globalStyles";
 // import { theme } from "@utils/theme";
 import { ToastContainer } from "react-toastify";
@@ -48,8 +48,20 @@ interface MyAppProps extends AppProps {
 
 const App = ({ Component, pageProps }: MyAppProps) => {
   const router = useRouter();
+  const [domainName, setDomainName] = useState("");
+  const { state } = useAppContext();
   let Layout = Component.layout || Fragment;
   const lastVisitedUrl = router?.asPath || "/profile";
+
+  const shop = state.shop;
+  const shopName = shop?.name;
+  const description = shop?.description;
+  const logo = shop?.profilePicture;
+
+  useEffect(() => {
+    const domain = window.location.hostname;
+    setDomainName(`https://${domain}`);
+  }, []);
 
   useEffect(storePathValues, [lastVisitedUrl]);
 
@@ -58,20 +70,36 @@ const App = ({ Component, pageProps }: MyAppProps) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta property="og:url" content="https://marketplace.com" />
-        {/* thumbnail And title for social media */}
+        {/* Facebook Meta Tags */}
+        <meta property="og:title" content={shopName} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={logo} />
+        <meta property="og:url" content={domainName} />
         <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="Find everything you need in one convenient place at Store, your go-to destination for shopping with confidence."
-        />
-        <meta
-          property="og:description"
-          content="Find everything you need in one convenient place at Store, your go-to destination for shopping with confidence."
-        />
+        {/* Twitter Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={shopName} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={logo} />
+        {/* Google Meta Tags */}
+        <meta name="description" content={description} />
+        {/* <meta name="keywords" content="Your, Keywords, Here" /> */}
+
+        {/* YouTube Meta Tags */}
+        <meta property="og:title" content={shopName} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={logo} />
+        <meta property="og:url" content={domainName} />
+        <meta property="og:video" content={domainName} />
+        <meta property="og:video:secure_url" content={domainName} />
+        <meta property="og:video:type" content="video/mp4" />
+
+        {/* Instagram Meta Tags */}
+        <meta property="og:image" content={logo} />
+
         {/* TODO: Add this to the head of your page */}
         {/* <meta property="og:image" content="/assets/images/landing/preview.png" /> */}
-        <link rel="shortcut icon" href="Store.png" type="image/x-icon" />
+        <link rel="shortcut icon" href={logo} type="image/x-icon" />
 
         {/* Google analytics */}
         <GoogleAnalytics />
