@@ -7,10 +7,10 @@ import useWindowSize from "@hook/useWindowSize";
 import Product from "@models/product.model";
 
 // =============================================================
-type Props = { products: Product[] };
+type Props = { products: Product[]; title?: string };
 // =============================================================
 
-const Section2: FC<Props> = ({ products }) => {
+const Section2: FC<Props> = ({ products, title }) => {
   const width = useWindowSize();
   const [visibleSlides, setVisibleSlides] = useState(4);
 
@@ -22,7 +22,11 @@ const Section2: FC<Props> = ({ products }) => {
   }, [width]);
 
   return (
-    <CategorySectionCreator iconName="light" title="Flash Deals" seeMoreLink="#">
+    <CategorySectionCreator
+      iconName="light"
+      title={title || "Flash Deals"}
+      seeMoreLink="#"
+    >
       <Box mt="-0.25rem" mb="-0.25rem">
         <Carousel totalSlides={products?.length} visibleSlides={visibleSlides}>
           {products.map((item, ind) => (

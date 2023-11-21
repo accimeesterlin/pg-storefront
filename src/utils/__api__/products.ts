@@ -71,6 +71,15 @@ const getRelatedProducts = async (productId: string): Promise<Product[]> => {
   }
 };
 
+const getCollections = async (shopId: string): Promise<Product[]> => {
+  try {
+    const response = await api.get(`/collection/list`, { params: { shopId } });
+    return response.data;
+  } catch (error) {
+    return [];
+  }
+};
+
 const getAvailableShop = async (): Promise<Shop[]> => {
   try {
     const response = await api.get("/api/user/product/shops");
@@ -80,4 +89,4 @@ const getAvailableShop = async (): Promise<Shop[]> => {
   }
 };
 
-export default { getSlugs, getProduct, getFrequentlyBought, getRelatedProducts, getAvailableShop, getDemoProduct, getProducts };
+export default { getCollections, getSlugs, getProduct, getFrequentlyBought, getRelatedProducts, getAvailableShop, getDemoProduct, getProducts };

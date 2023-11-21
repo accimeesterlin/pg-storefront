@@ -1,5 +1,6 @@
 import Link from "next/link";
 // import Image from "next/image";
+import isEmpty from "lodash.isempty";
 import { FC, Fragment, useCallback, useState } from "react";
 import styled from "styled-components";
 import { useAppContext } from "@context/AppContext";
@@ -112,6 +113,7 @@ interface ProductCard1Props extends CardProps {
   slug: string;
   name: string;
   price: number;
+  comparePrice?: number;
   mainImageUrl: string;
   rating: number;
   shop?: Shop;
@@ -126,6 +128,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
   slug,
   name,
   price,
+  comparePrice,
   mainImageUrl,
   images,
   rating = 4,
@@ -156,7 +159,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
     saveCartState(state.cart);
   };
 
-  const isSame = off === price;
+  const isSame = off === price || isEmpty(comparePrice);
 
   return (
     <>
@@ -174,7 +177,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
               color="primary.text"
               zIndex={1}
             >
-              {calculateRemainingPercentage(off, price)}% off
+              {calculateRemainingPercentage(off, comparePrice)}% off
             </Chip>
           )}
 
@@ -197,9 +200,9 @@ const ProductCard1: FC<ProductCard1Props> = ({
             <a>
               <img
                 alt={name}
-                width={100}
+                width={282}
                 src={mainImageUrl}
-                height={100}
+                // height={105}
                 // objectFit="cover"
                 // layout="responsive"
               />
@@ -230,7 +233,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
               <FlexBox alignItems="center" mt="10px">
                 <SemiSpan pr="0.5rem" fontWeight="600" color="primary.main">
-                  {currency(off)}
+                  {currency(price)}
                 </SemiSpan>
 
                 {!isSame && (

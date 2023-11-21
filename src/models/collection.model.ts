@@ -1,3 +1,5 @@
+import Product from "./product.model";
+
 interface Collection {
     id?: string;
     name?: string;
@@ -7,7 +9,7 @@ interface Collection {
     shopId?: string;
     files?: any[];
     discountId?: string;
-    products?: string[];
+    products?: Product[];
     mainImageUrl?: string;
     searchEngineTitle?: string;
     searchEngineDescription?: string;
