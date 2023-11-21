@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
+import * as Sentry from "@sentry/nextjs";
 import { useRouter } from "next/router";
 import Box from "@component/Box";
 import FlexBox from "@component/FlexBox";
@@ -87,7 +88,7 @@ const ProductDetails = (props: ProductDetailsProps) => {
           borderBottom={selectedOption === "review" && "2px solid"}
           color={selectedOption === "review" ? "primary.main" : "text.muted"}
         >
-          Review (3)
+          Review
         </H5>
       </FlexBox>
 
@@ -119,17 +120,35 @@ ProductDetails.layout = NavbarLayout;
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
+  try {
+    const productId = query.id as string;
+    const shops = [];
+    const shop = await getShopById(shopId);
 
-  const productId = query.id as string;
-  const shops = [];
-  const shop = await getShopById(shopId);
+    const product: Product = await api.getProduct(productId);
 
-  const product: Product = await api.getProduct(productId);
-
-  const relatedProducts = await api.getRelatedProducts(product?.id);
-  return {
-    props: { frequentlyBought: [], relatedProducts, product, shop, shops },
-  };
+    const relatedProducts = await api.getRelatedProducts(product?.id);
+    return {
+      props: { frequentlyBought: [], relatedProducts, product, shop, shops },
+    };
+  } catch (error) {
+    Sentry.captureException(error, {
+      user: {
+        extra: {
+          shopId,
+        },
+      },
+    });
+    return {
+      props: {
+        frequentlyBought: [],
+        relatedProducts: [],
+        product: {},
+        shop: {},
+        shops: [],
+      },
+    };
+  }
 };
 
 export default ProductDetails;

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@aws-amplify/core": "^5.1.1",
+    "@sentry/nextjs": "^7.81.1",
     "@styled-system/theme-get": "^5.1.2",
     "algoliasearch": "^4.17.0",
     "aws-amplify": "^5.0.18",
@@ -52,7 +53,6 @@
   },
   "devDependencies": {
     "@netlify/plugin-nextjs": "^4.41.2",
-    "netlify-cli": "^17.2.2",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.17",
     "@types/nprogress": "^0.2.0",
@@ -63,6 +63,7 @@
     "@types/styled-system": "^5.1.15",
     "@types/styled-system__css": "^5.0.17",
     "@types/styled-system__theme-get": "^5.0.2",
+    "netlify-cli": "^17.2.2",
     "typescript": "^4.9.4"
   },
   "license": "MIT"
