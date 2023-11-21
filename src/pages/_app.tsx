@@ -16,6 +16,7 @@ import GlobalStyles from "theme/globalStyles";
 
 import "react-toastify/dist/ReactToastify.css";
 import { storePathValues } from "@utils/utils";
+import { capitalize } from "lodash";
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -54,7 +55,7 @@ const App = ({ Component, pageProps }: MyAppProps) => {
   const lastVisitedUrl = router?.asPath || "/profile";
 
   const shop = state.shop;
-  const shopName = shop?.name;
+  const shopName = capitalize(shop?.name);
   const description = shop?.description;
   const logo = shop?.profilePicture;
 
@@ -68,6 +69,7 @@ const App = ({ Component, pageProps }: MyAppProps) => {
   return (
     <Fragment>
       <Head>
+        <title>{shopName}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         {/* Facebook Meta Tags */}
@@ -97,9 +99,8 @@ const App = ({ Component, pageProps }: MyAppProps) => {
         {/* Instagram Meta Tags */}
         <meta property="og:image" content={logo} />
 
-        {/* TODO: Add this to the head of your page */}
-        {/* <meta property="og:image" content="/assets/images/landing/preview.png" /> */}
         <link rel="shortcut icon" href={logo} type="image/x-icon" />
+        <link rel="icon" href={logo} type="image/x-icon" />
 
         {/* Google analytics */}
         <GoogleAnalytics />

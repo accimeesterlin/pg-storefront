@@ -20,7 +20,7 @@ const AppLayout: FC<Props> = (props) => {
   const { state } = useAppContext();
 
   const shop = state.shop;
-  const shopName = shop?.name;
+  const shopName = capitalize(shop?.name);
   const description = shop?.description;
   const logo = shop?.profilePicture;
 
@@ -32,7 +32,7 @@ const AppLayout: FC<Props> = (props) => {
   return (
     <StyledAppLayout>
       <Head>
-        <title>{capitalize(shop?.name) || title}</title>
+        <title>{shopName || title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         {/* Facebook Meta Tags */}
@@ -61,6 +61,8 @@ const AppLayout: FC<Props> = (props) => {
 
         {/* Instagram Meta Tags */}
         <meta property="og:image" content={logo} />
+        <link rel="shortcut icon" href={logo} type="image/x-icon" />
+        <link rel="icon" href={logo} type="image/x-icon" />
       </Head>
 
       <Topbar />
