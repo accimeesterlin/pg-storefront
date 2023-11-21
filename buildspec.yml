@@ -10,7 +10,6 @@ phases:
 
   build:
     commands:
-      - yarn build
       - netlify deploy --prod --build
 
 post_build:
