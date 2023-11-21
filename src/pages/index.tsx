@@ -82,30 +82,23 @@ const Market1 = (props: Props) => {
     <main>
       {/* HERO CAROUSEL AREA */}
       <Section1 carouselData={props.mainCarouselData} />
-
       {listOfCollections}
-
+      <Section2 products={products} title="All products" />;
       {/* FLASH DEAL PRODUCTS AREA */}
       {/* <Section2 products={props.flashDealsData} /> */}
-
       {/* TOP CATEGORIES AREA */}
       {/* <Section3 categoryList={props.topCategories} /> */}
-
       {/* TOP RATING AND BRANDS AREA */}
       {/* <Section4
         topRatedList={props.topRatedProducts}
         topRatedBrands={props.topRatedBrands}
       /> */}
-
       {/* NEW ARRIVALS AREA */}
       {/* <Section5 newArrivalsList={props.newArrivalsList} /> */}
-
       {/* BIG DISCOUNT AREA */}
       {/* <Section13 bigDiscountList={props.bigDiscountList} /> */}
-
       {/* CAR LIST AREA */}
       {/* <Section6 carBrands={props.carBrands} carList={props.carList} /> */}
-
       {/* MOBILE PHONES AREA */}
       {/* <Section7
         title="Mobile Phones"
@@ -113,10 +106,8 @@ const Market1 = (props: Props) => {
         brands={props.mobileBrands}
         productList={props.mobileList}
       /> */}
-
       {/* DISCOUNT BANNERS AREA */}
       {/* <Section8 /> */}
-
       {/* OPTICS AND WATCH AREA */}
       {/* <Section7
         title="Optics / Watch"
@@ -124,13 +115,10 @@ const Market1 = (props: Props) => {
         brands={props.opticsBrands}
         productList={props.opticsList}
       /> */}
-
       {/* CATEGORIES AREA */}
       {/* <Section10 categories={props.bottomCategories} /> */}
-
       {/* MORE PRODUCTS AREA */}
       {/* <Section11 moreItems={props.moreItems} /> */}
-
       {/* SERVICES AREA */}
       <Section12 serviceList={props.serviceList} />
     </main>

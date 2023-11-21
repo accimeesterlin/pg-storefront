@@ -24,7 +24,6 @@ const StyledCarouselCard1 = styled.div`
     position: relative;
     img {
       width: 257px;
-      height: 391px;
     }
   }
 
@@ -85,7 +84,7 @@ const CarouselCard1: FC<Props> = ({
       </Box>
 
       <div className="image-holder">
-        <img src={image} width={257} height={391} alt={title} />
+        <img src={image} width={257} alt={title} />
       </div>
     </StyledCarouselCard1>
   );
