@@ -5,14 +5,14 @@ export const mainCarouselData = [
     mainImageUrl: "assets/images/products/apple-watch-0.png",
     description: `Don't Miss Out! Limited-Time Offers Inside!`,
     buttonText: "Shop Now",
-    buttonLik: "#",
+    buttonLink: "#",
   },
   {
     title: "50% Off For Your First Shopping",
     mainImageUrl: "assets/images/products/apple-watch-0.png",
     description: `Unbeatable Deals Await! Grab Yours Today!`,
     buttonText: "Shop Now",
-    buttonLik: "#",
+    buttonLink: "#",
   },
 ];
 

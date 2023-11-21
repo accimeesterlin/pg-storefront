@@ -57,7 +57,10 @@ const Market1 = (props: Props) => {
       <Section3 categoryList={props.topCategories} />
 
       {/* TOP RATING AND BRANDS AREA */}
-      <Section4 topRatedList={props.topRatedProducts} topRatedBrands={props.topRatedBrands} />
+      <Section4
+        topRatedList={props.topRatedProducts}
+        topRatedBrands={props.topRatedBrands}
+      />
 
       {/* NEW ARRIVALS AREA */}
       <Section5 newArrivalsList={props.newArrivalsList} />
@@ -104,6 +107,8 @@ Market1.layout = AppLayout;
 // ==============================================================
 
 export const getStaticProps: GetStaticProps = async () => {
+  const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
+
   const carList = await api.getCarList();
   const carBrands = await api.getCarBrands();
   const moreItems = await api.getMoreItems();
@@ -118,7 +123,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const bottomCategories = await api.getCategories();
   const topCategories = await api.getTopCategories();
   const topRatedBrands = await api.getTopRatedBrand();
-  const mainCarouselData = await api.getMainCarousel();
+  const mainCarouselData = await api.getMainCarousel(shopId);
   const newArrivalsList = await api.getNewArrivalList();
   const bigDiscountList = await api.getBigDiscountList();
   const topRatedProducts = await api.getTopRatedProduct();

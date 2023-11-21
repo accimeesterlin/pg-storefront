@@ -6,6 +6,13 @@ import Category from "@models/category.model";
 import MainCarouselItem from "@models/market-1.model";
 import * as db from "../../__server__/__db__/market-1/data";
 import shops from "../../__server__/__db__/shop/data";
+import axios from "axios";
+
+const API_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://app.pgecom.com";
+
+const api = axios.create({
+  baseURL: `${API_URL}/api/v1/storefront`,
+});
 
 const getTopRatedProduct = async (): Promise<Product[]> => {
   const products = db.products.filter((item) => item.for.type === "top-ratings");
@@ -67,28 +74,28 @@ const getOpticsShops = async (): Promise<Shop[]> => {
   const imageNames = ["herman miller", "zeiss", "hatil", "steelcase"];
   const shopList = shops.slice(0, 4).map((item, i) => ({ ...item, mainImageUrl: imageNames[i] }));
 
-  
+
   // const response = await axios.get("/api/market-1/optics/watch-shops");
   return shopList;
 };
 
 const getOpticsList = async (): Promise<Product[]> => {
   const products = db.products.filter((item) => item.for.type === "optics");
-    
+
   // const response = await axios.get("/api/market-1/optics-list");
   return products;
 };
 
 const getCategories = async (): Promise<Category[]> => {
   const categories = db.categories.filter((item) => item.for.type === "categories");
-    
+
   // const response = await axios.get("/api/market-1/bottom-categories");
   return categories;
 };
 
 const getMoreItems = async (): Promise<Product[]> => {
   const products = db.products.filter((item) => item.for.type === "more-products");
-   
+
   // const response = await axios.get("/api/market-1/get-more-items");
   return products;
 };
@@ -98,14 +105,20 @@ const getServiceList = async (): Promise<Service[]> => {
   return db.serviceList;
 };
 
-const getMainCarousel = async (): Promise<MainCarouselItem[]> => {
-  // const response = await axios.get("/api/market-1/main-carousel");
-  return db.mainCarouselData;
+
+// Size of the carousel is 251 * 391
+const getMainCarousel = async (shopId: string): Promise<MainCarouselItem[]> => {
+  try {
+    const response = await api.get(`/banner`, { params: { shopId } });
+    return response.data;
+  } catch (error) {
+    return [];
+  }
 };
 
 const getFlashDeals = async (): Promise<Product[]> => {
   const products = db.products.filter((item) => item.for.type === "flash-deals");
-    
+
   // const response = await axios.get("/api/market-1/flash-deals");
   return products;
 };

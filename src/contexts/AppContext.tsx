@@ -39,6 +39,7 @@ type LoadCartActionType = { type: "LOAD_CART"; payload: ICart };
 type CartActionType = { type: "CHANGE_CART_AMOUNT"; payload: CartItem };
 type ShopActionType = { type: "SET_SHOP"; payload: Shop };
 type UserActionType = { type: "SET_USER"; payload: User };
+type ProductListType = { type: "SET_PRODUCT_LIST"; payload: Product[] };
 type OrderActionType = { type: "SET_ORDER_LIST"; payload: Order[] };
 type PaymentMethodActionType = { type: "SET_PAYMENT_METHOD"; payload: string };
 type CheckoutActionType = { type: "SET_CHECKOUT"; payload: Checkout };
@@ -51,6 +52,7 @@ type ActionType =
   | ShopActionType
   | UserActionType
   | AddressActionType
+  | ProductListType
   | CheckoutActionType
   | OrderActionType
   | PurchaseCartActionType
@@ -65,6 +67,7 @@ const INITIAL_CART = [];
 const INITIAL_STATE = {
   cart: INITIAL_CART,
   isHeaderFixed: false,
+  products: [],
   shop: {},
   user: {
     orders: [],
@@ -94,6 +97,12 @@ const reducer = (state: InitialState, action: ActionType) => {
 
     case "SET_SHOP":
       return { ...state, shop: action.payload };
+
+    case "SET_PRODUCT_LIST":
+      return {
+        ...state,
+        products: action.payload,
+      };
 
     case "SET_USER":
       return {

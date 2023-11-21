@@ -14,6 +14,7 @@ import Section12 from "@sections/market-1/Section12";
 import Section13 from "@sections/market-1/Section13";
 import api from "@utils/__api__/market-1";
 import { getShopById } from "@utils/__api__/shops";
+import productApi from "@utils/__api__/products";
 // data models
 import Shop from "@models/shop.model";
 import Brand from "@models/Brand.model";
@@ -45,6 +46,7 @@ type Props = {
   bottomCategories?: Category[];
   mainCarouselData?: MainCarouselItem[];
   shop: Shop;
+  products: Product[];
 };
 // =================================================================
 
@@ -52,12 +54,19 @@ const Market1 = (props: Props) => {
   const { dispatch } = useAppContext();
 
   const shop = props?.shop;
+  const products = props?.products;
 
   useEffect(() => {
     if (shop) {
-      dispatch({ type: "SET_SHOP", payload: props.shop });
+      dispatch({ type: "SET_SHOP", payload: shop });
     }
   }, [shop]);
+
+  useEffect(() => {
+    if (products) {
+      dispatch({ type: "SET_PRODUCT_LIST", payload: products });
+    }
+  }, [products]);
 
   return (
     <main>
@@ -124,6 +133,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
 
   const shop = await getShopById(shopId);
+  const products = await productApi?.getProducts(shopId);
   const carList = await api.getCarList();
   const carBrands = await api.getCarBrands();
   const moreItems = await api.getMoreItems();
@@ -138,7 +148,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const bottomCategories = await api.getCategories();
   const topCategories = await api.getTopCategories();
   const topRatedBrands = await api.getTopRatedBrand();
-  const mainCarouselData = await api.getMainCarousel();
+  const mainCarouselData = await api.getMainCarousel(shopId);
   const newArrivalsList = await api.getNewArrivalList();
   const bigDiscountList = await api.getBigDiscountList();
   const topRatedProducts = await api.getTopRatedProduct();
@@ -164,6 +174,7 @@ export const getStaticProps: GetStaticProps = async () => {
       topRatedProducts,
       bottomCategories,
       shop,
+      products,
     },
   };
 };

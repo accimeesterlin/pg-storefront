@@ -23,7 +23,8 @@ const StyledCarouselCard1 = styled.div`
   .image-holder {
     position: relative;
     img {
-      width: 100%;
+      width: 257px;
+      height: 391px;
     }
   }
 
@@ -59,7 +60,12 @@ type Props = {
 };
 // ===============================================
 
-const CarouselCard1: FC<Props> = ({ title, image, buttonText, description }) => {
+const CarouselCard1: FC<Props> = ({
+  title,
+  image,
+  buttonText,
+  description,
+}) => {
   return (
     <StyledCarouselCard1>
       <Box>
@@ -68,13 +74,18 @@ const CarouselCard1: FC<Props> = ({ title, image, buttonText, description }) => 
           {description}
         </Typography>
 
-        <Button className="button-link" variant="contained" color="primary" p="1rem 1.5rem">
+        <Button
+          className="button-link"
+          variant="contained"
+          color="primary"
+          p="1rem 1.5rem"
+        >
           {buttonText}
         </Button>
       </Box>
 
       <div className="image-holder">
-        <img src={image} alt="apple-watch-1" />
+        <img src={image} width={257} height={391} alt={title} />
       </div>
     </StyledCarouselCard1>
   );

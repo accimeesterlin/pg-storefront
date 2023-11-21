@@ -5,14 +5,14 @@ export const mainCarouselData = [
     mainImageUrl: "/assets/images/products/bag.png",
     description: "Get Free Shipping on all orders over $99.00",
     buttonText: "Shop Now",
-    buttonLik: "#",
+    buttonLink: "#",
   },
   {
     name: "Fashionable Collection",
     mainImageUrl: "/assets/images/products/nike-black.png",
     description: "Get Free Shipping on all orders over $99.00",
     buttonText: "Shop Now",
-    buttonLik: "#",
+    buttonLink: "#",
   },
 ];
 

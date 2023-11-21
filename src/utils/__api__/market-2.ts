@@ -22,7 +22,7 @@ const getCategories = async () => {
 
 const getBrands = async (): Promise<Brand[]> => {
   // const response = await axios.get("/api/market-2/brand");
-  return  db.brandList;
+  return db.brandList;
 };
 
 const getMainCarouselData = async (): Promise<MainCarouselItem[]> => {

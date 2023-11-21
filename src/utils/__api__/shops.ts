@@ -22,7 +22,6 @@ export const getShopList = async (): Promise<Shop[]> => {
 export const getShopById = async (id: string): Promise<Shop> => {
   try {
     const response = await api.get(`/shop`, { params: { shopId: id } });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error?.response?.data?.message);

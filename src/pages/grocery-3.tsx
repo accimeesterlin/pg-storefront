@@ -48,7 +48,9 @@ export const getStaticProps: GetStaticProps = async () => {
   const mainCarouselData = await api.getMainCarousel();
   const topSailedProducts = await api.getTopSailedProducts();
 
-  return { props: { allProducts, offerCards, topSailedProducts, mainCarouselData } };
+  return {
+    props: { allProducts, offerCards, topSailedProducts, mainCarouselData },
+  };
 };
 
 export default GroceryThree;

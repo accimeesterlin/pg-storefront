@@ -64,14 +64,19 @@ const Section1: FC<Props> = ({ data }) => {
         >
           {data.map((item, ind) => (
             <StyledBox key={ind}>
-              <Grid container spacing={3} alignItems="center" justifyContent="center">
+              <Grid
+                container
+                spacing={3}
+                alignItems="center"
+                justifyContent="center"
+              >
                 <Grid item className="grid-item" md={5} xs={12}>
                   <h1 className="title">{item.title}</h1>
                   <Paragraph color="secondary.main" mb={2.7}>
                     {item.description}
                   </Paragraph>
 
-                  <a href={item.buttonLik}>
+                  <a href={item.buttonLink}>
                     <Button
                       mt={4}
                       size="medium"

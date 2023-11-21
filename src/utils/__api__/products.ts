@@ -5,10 +5,10 @@ import Shop from "@models/shop.model";
 import { uniqueProudcts } from "../../__server__/__db__/products/data";
 
 
-const API_URL = process.env.WEBSITE_ORIGIN;
+const API_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://app.pgecom.com";
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: `${API_URL}/api/v1/storefront`,
 });
 
 // get all product slug
@@ -17,7 +17,7 @@ const getSlugs = async (): Promise<{ params: { slug: string } }[]> => {
     const products = await getAvailableShop();
 
     const uniqueProducts = products.map((item) => ({ params: { slug: item.slug } }));
-  
+
     return uniqueProducts;
   } catch (error) {
     return [];
@@ -32,6 +32,19 @@ const getProduct = async (slug: string): Promise<Product> => {
     return response.data;
   } catch (error) {
     return {};
+  }
+};
+
+// get product based on slug
+const getProducts = async (shopId: string): Promise<Product[]> => {
+  try {
+    const response = await api.get(`/product/list`, { params: { shopId } });
+
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error?.response);
+    return [];
   }
 };
 
@@ -67,4 +80,4 @@ const getAvailableShop = async (): Promise<Shop[]> => {
   }
 };
 
-export default { getSlugs, getProduct, getFrequentlyBought, getRelatedProducts, getAvailableShop, getDemoProduct };
+export default { getSlugs, getProduct, getFrequentlyBought, getRelatedProducts, getAvailableShop, getDemoProduct, getProducts };
