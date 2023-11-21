@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Hub, Auth } from "aws-amplify";
+// import { Hub, Auth } from "aws-amplify";
 import { useRouter } from "next/router";
 import { getUserSession } from "@utils/__api__/users";
 import LoadingSkeleton from "@component/skeleton/homePageSkeleton";
@@ -21,11 +21,11 @@ const ProtectedRoute = ({ children, isSidebar }: IProtectedProps) => {
   const initialize = async () => {
     try {
       await getUserDetail();
-      Hub.listen("auth", async (authData) => {
-        if (authData.payload.event === "signOut") {
-          // TODO: Clean up after signOut
-        }
-      });
+      // Hub.listen("auth", async (authData) => {
+      //   if (authData.payload.event === "signOut") {
+      //     // TODO: Clean up after signOut
+      //   }
+      // });
     } catch (authError) {
       // console.log("Error initializing");
     }
@@ -33,7 +33,7 @@ const ProtectedRoute = ({ children, isSidebar }: IProtectedProps) => {
 
   const getUserDetail = async () => {
     try {
-      const user: any = await getUserSession()
+      const user: any = await getUserSession();
 
       const isActive = user?.isActive;
       const isBanned = user?.isBanned;
@@ -60,14 +60,14 @@ const ProtectedRoute = ({ children, isSidebar }: IProtectedProps) => {
 
       return user;
     } catch (userDetailError) {
-      await Auth.signOut();
-    
+      // await Auth.signOut();
+
       return router?.push("/login");
     }
   };
 
   if (!isAuthorized) {
-    return <LoadingSkeleton />
+    return <LoadingSkeleton />;
   }
 
   return isSidebar && children;

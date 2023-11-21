@@ -1,10 +1,9 @@
-
 import { FC, useState } from "react";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import Link from "next/link";
 // import { useRouter } from "next/router";
 import * as yup from "yup";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useFormik } from "formik";
 // import Box from "../Box";
 import Icon from "../icon/Icon";
@@ -13,7 +12,7 @@ import FlexBox from "../FlexBox";
 import CheckBox from "../CheckBox";
 import TextField from "../text-field";
 import { Button, IconButton } from "../buttons";
-import { H3, H5, H6, SemiSpan} from "../Typography";
+import { H3, H5, H6, SemiSpan } from "../Typography";
 // import { H3, H5, H6, SemiSpan, Small, Span } from "../Typography";
 import { StyledSessionCard } from "./styles";
 import { getAccessToken, setUserToken } from "@utils/__api__/users";
@@ -27,44 +26,44 @@ const Signup: FC = () => {
   };
 
   const handleFormSubmit = async (values) => {
-   try {
-   
-    setIsLoading(true);
-    const email = values.email;
-    const password = values.password;
-  
-    const payload = {
-      username: email,
-      password,
-      attributes: {
-        email: values.email,
-        "custom:firstName": values.firstName,
-        "custom:lastName": values.lastName,
-      },
+    try {
+      setIsLoading(true);
+      const email = values.email;
+      const password = values.password;
+
+      const payload = {
+        username: email,
+        password,
+        attributes: {
+          email: values.email,
+          "custom:firstName": values.firstName,
+          "custom:lastName": values.lastName,
+        },
+      };
+
+      console.log("Payload: ", payload);
+
+      // await Auth.signUp(payload);
+      // await Auth.signIn(email, password);
+      const token = await getAccessToken();
+      await setUserToken(token);
+      setIsLoading(false);
+      toast.success("Account created successfully");
+      window.location.href = "/profile";
+    } catch (error) {
+      const errorMessage = error?.message;
+      toast.error(errorMessage);
+      setIsLoading(false);
     }
-
-
-    await Auth.signUp(payload);
-    await Auth.signIn(email, password);
-    const token = await getAccessToken();
-    await setUserToken(token);
-    setIsLoading(false);
-    toast.success("Account created successfully");
-    window.location.href = "/profile";
-
-   } catch (error) {
-    const errorMessage = error?.message;
-    toast.error(errorMessage);
-    setIsLoading(false);
-   }
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues,
-    onSubmit: handleFormSubmit,
-    validationSchema: formSchema,
-  });
-  
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues,
+      onSubmit: handleFormSubmit,
+      validationSchema: formSchema,
+    });
+
   return (
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large">
       <form className="content" onSubmit={handleSubmit}>
@@ -72,7 +71,13 @@ const Signup: FC = () => {
           Create Your Account
         </H3>
 
-        <H5 fontWeight="600" fontSize="12px" color="gray.800" textAlign="center" mb="2.25rem">
+        <H5
+          fontWeight="600"
+          fontSize="12px"
+          color="gray.800"
+          textAlign="center"
+          mb="2.25rem"
+        >
           Please fill all forms to continued
         </H5>
 
@@ -183,10 +188,17 @@ const Signup: FC = () => {
           }
         />
 
-        <Button loading={isLoading} mb="1.65rem" variant="contained" color="primary" type="submit" fullwidth>
+        <Button
+          loading={isLoading}
+          mb="1.65rem"
+          variant="contained"
+          color="primary"
+          type="submit"
+          fullwidth
+        >
           Create Account
         </Button>
-{/* 
+        {/* 
         <Box mb="1rem">
           <Divider width="200px" mx="auto" />
           <FlexBox justifyContent="center" mt="-14px">
@@ -268,7 +280,7 @@ const formSchema = yup.object().shape({
       "You have to agree with our Terms and Conditions!",
       (value) => value === true
     )
-    .required("You have to agree with our Terms and Conditions!")
+    .required("You have to agree with our Terms and Conditions!"),
 });
 
 export default Signup;

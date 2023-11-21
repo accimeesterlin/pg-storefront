@@ -24,8 +24,6 @@ export const getShopById = async (id: string): Promise<Shop> => {
     const response = await api.get(`/shop`, { params: { shopId: id } });
     return response.data;
   } catch (error) {
-    console.log(error?.response?.data?.message);
-
     return {}
   }
 };

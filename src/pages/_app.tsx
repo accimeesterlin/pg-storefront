@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import Router, { useRouter } from "next/router";
 import { AppProps } from "next/app";
 import NProgress from "nprogress";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import { ThemeProvider } from "styled-components";
 import GoogleAnalytics from "@component/GoogleAnalytics";
 import { AppProvider, useAppContext } from "@context/AppContext";
@@ -39,7 +39,9 @@ const awsconfig = {
   },
 };
 
-Auth.configure(awsconfig);
+console.log("awsconfig", awsconfig);
+
+// Auth.configure(awsconfig);
 
 // ============================================================
 interface MyAppProps extends AppProps {

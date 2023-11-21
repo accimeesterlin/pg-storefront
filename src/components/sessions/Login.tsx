@@ -1,8 +1,8 @@
 import { FC, useCallback, useState, useEffect } from "react";
 import Link from "next/link";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useFormik } from "formik";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
 import * as yup from "yup";
 // import Box from "@component/Box";
 import Icon from "@component/icon/Icon";
@@ -10,7 +10,7 @@ import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
 import TextField from "@component/text-field";
 import { Button, IconButton } from "@component/buttons";
-import { H3, H5, H6, SemiSpan} from "@component/Typography";
+import { H3, H5, H6, SemiSpan } from "@component/Typography";
 // import { H3, H5, H6, SemiSpan, Small, Span } from "@component/Typography";
 import { StyledSessionCard } from "./styles";
 import { getAccessToken, setUserToken } from "@utils/__api__/users";
@@ -25,7 +25,6 @@ const Login: FC = () => {
     // Get the URL of the previous page
     const previousPage = getPreviousPath();
     setPreviousPath(previousPage);
-
   }, []);
 
   const togglePasswordVisibility = useCallback(() => {
@@ -33,31 +32,33 @@ const Login: FC = () => {
   }, []);
 
   const handleFormSubmit = async (values) => {
-   try {
-    setIsLoading(true);
-    const email = values.email;
-    const password = values.password;
-    
-    await Auth.signIn(email, password);
+    try {
+      console.log("Values: ", values);
+      setIsLoading(true);
+      // const email = values.email;
+      // const password = values.password;
 
-    const token = await getAccessToken();
-    await setUserToken(token);
-   
-    setIsLoading(false);
-    toast.success("Login successfully");
-    window.location.href = previousPath;
-   } catch (error) {
-    const errorMessage = error?.message;
-    toast.error(errorMessage);
-    setIsLoading(false);
-   }
+      // await Auth.signIn(email, password);
+
+      const token = await getAccessToken();
+      await setUserToken(token);
+
+      setIsLoading(false);
+      toast.success("Login successfully");
+      window.location.href = previousPath;
+    } catch (error) {
+      const errorMessage = error?.message;
+      toast.error(errorMessage);
+      setIsLoading(false);
+    }
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-    onSubmit: handleFormSubmit,
-    initialValues,
-    validationSchema: formSchema,
-  });
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      onSubmit: handleFormSubmit,
+      initialValues,
+      validationSchema: formSchema,
+    });
 
   return (
     <StyledSessionCard mx="auto" my="2rem" boxShadow="large">
@@ -66,7 +67,13 @@ const Login: FC = () => {
           Welcome To Ecommerce
         </H3>
 
-        <H5 fontWeight="600" fontSize="12px" color="gray.800" textAlign="center" mb="2.25rem">
+        <H5
+          fontWeight="600"
+          fontSize="12px"
+          color="gray.800"
+          textAlign="center"
+          mb="2.25rem"
+        >
           Log in with email & password
         </H5>
 
@@ -111,10 +118,17 @@ const Login: FC = () => {
           }
         />
 
-        <Button loading={isLoading} mb="1.65rem" variant="contained" color="primary" type="submit" fullwidth>
+        <Button
+          loading={isLoading}
+          mb="1.65rem"
+          variant="contained"
+          color="primary"
+          type="submit"
+          fullwidth
+        >
           Login
         </Button>
-{/* 
+        {/* 
         <Box mb="1rem">
           <Divider width="200px" mx="auto" />
           <FlexBox justifyContent="center" mt="-14px">

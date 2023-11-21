@@ -126,8 +126,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const shop = await getShopById(shopId);
 
     const product: Product = await api.getProduct(productId);
+    const relatedProducts = [];
 
-    const relatedProducts = await api.getRelatedProducts(product?.id);
     return {
       props: { frequentlyBought: [], relatedProducts, product, shop, shops },
     };
