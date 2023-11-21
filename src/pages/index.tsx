@@ -45,6 +45,8 @@ type Props = {
 // =================================================================
 
 const Market1 = (props: Props) => {
+  console.log("ShopId: ", process.env.NEXT_PUBLIC_SHOP_ID);
+
   return (
     <main>
       {/* HERO CAROUSEL AREA */}
