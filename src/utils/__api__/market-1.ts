@@ -110,9 +110,15 @@ const getServiceList = async (): Promise<Service[]> => {
 const getMainCarousel = async (shopId: string): Promise<MainCarouselItem[]> => {
   try {
     const response = await api.get(`/banner`, { params: { shopId } });
-    return response.data;
+
+    const carousels = response.data;
+
+    if (carousels.length === 0) {
+      return db.mainCarouselData || [];
+    }
+    return response.data || [];
   } catch (error) {
-    return [];
+    return db.mainCarouselData || [];
   }
 };
 
