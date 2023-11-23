@@ -17,7 +17,9 @@ const MegaMenu2: FC<MegaMenu2Props> = ({ data }) => {
             title={item.title}
             caret={!!item.menuData}
           >
-            {item.menuData && <MegaMenu3 minWidth="560px" data={item.menuData} />}
+            {item.menuData && (
+              <MegaMenu3 minWidth="560px" data={item.menuData} />
+            )}
           </CategoryMenuItem>
         ))}
       </Card>

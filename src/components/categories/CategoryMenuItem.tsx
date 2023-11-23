@@ -14,7 +14,11 @@ type CategoryMenuItemProps = {
 // ===============================================================
 
 const CategoryMenuItem: FC<CategoryMenuItemProps> = (props) => {
-  const { href, icon, title, caret, children } = props;
+  const href = props?.href;
+  const icon = props?.icon;
+  const title = props?.title;
+  const caret = props?.caret;
+  const children = props?.children;
 
   return (
     <StyledCategoryMenuItem>

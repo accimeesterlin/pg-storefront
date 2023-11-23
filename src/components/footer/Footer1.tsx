@@ -34,9 +34,11 @@ const Footer1: FC = () => {
   const email = shop?.email || "";
   const phone = shop?.phone || "";
 
+  const footerBg = shop?.footerColorHex || "#0F3460";
+
   return (
     <footer>
-      <Box bg="#0F3460">
+      <Box bg={footerBg || "#0F3460"}>
         <Container p="1rem" color="white">
           <Box py="5rem" overflow="hidden">
             <Grid container spacing={6}>

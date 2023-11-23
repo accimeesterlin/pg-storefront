@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { getTheme } from "@utils/utils";
 import Menu from "../Menu";
 import Image from "../Image";
 import Icon from "../icon/Icon";
@@ -17,6 +18,7 @@ const Topbar: FC = () => {
   const { state } = useAppContext();
 
   const shop = state.shop;
+  const headerColor = shop?.headerColorHex || getTheme("colors.secondary.main");
   const logoUrl = shop?.profilePicture || "";
   const phone = shop?.phone || "";
   const email = shop?.email || "";
@@ -32,7 +34,7 @@ const Topbar: FC = () => {
   }, []);
 
   return (
-    <StyledTopbar>
+    <StyledTopbar backgroundColor={headerColor}>
       <Container
         display="flex"
         justifyContent="space-between"

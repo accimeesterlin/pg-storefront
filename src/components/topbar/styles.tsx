@@ -1,8 +1,9 @@
 import { getTheme } from "@utils/utils";
 import styled from "styled-components";
 
-const StyledTopbar = styled.div`
-  background: ${getTheme("colors.secondary.main")};
+const StyledTopbar: any = styled.div`
+  background: ${(props: any) =>
+    props?.backgroundColor || getTheme("colors.secondary.main")};
   color: white;
   height: 40px;
   font-size: 12px;

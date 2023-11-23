@@ -13,7 +13,7 @@ import Section2 from "@sections/market-1/Section2";
 import Section12 from "@sections/market-1/Section12";
 // import Section13 from "@sections/market-1/Section13";
 import api from "@utils/__api__/market-1";
-import { getShopById } from "@utils/__api__/shops";
+import { getShopById, getShopMenus } from "@utils/__api__/shops";
 import productApi from "@utils/__api__/products";
 // data models
 import Shop from "@models/shop.model";
@@ -49,6 +49,7 @@ type Props = {
   shop: Shop;
   products: Product[];
   collections: Collection[];
+  menus: any[];
 };
 // =================================================================
 
@@ -57,6 +58,7 @@ const Market1 = (props: Props) => {
 
   const shop = props?.shop;
   const products = props?.products;
+  const menus = props?.menus;
   const collections = props?.collections;
 
   useEffect(() => {
@@ -70,6 +72,12 @@ const Market1 = (props: Props) => {
       dispatch({ type: "SET_PRODUCT_LIST", payload: products });
     }
   }, [products]);
+
+  useEffect(() => {
+    if (menus) {
+      dispatch({ type: "SET_NAVIGATION_MENU", payload: menus });
+    }
+  }, [menus]);
 
   const listOfCollections = collections?.map((collection) => {
     const products = collection?.products;
@@ -153,6 +161,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const newArrivalsList = await api.getNewArrivalList();
   const bigDiscountList = await api.getBigDiscountList();
   const topRatedProducts = await api.getTopRatedProduct();
+  const menus = await getShopMenus(shopId);
 
   return {
     props: {
@@ -177,6 +186,7 @@ export const getStaticProps: GetStaticProps = async () => {
       shop,
       products,
       collections,
+      menus,
     },
   };
 };

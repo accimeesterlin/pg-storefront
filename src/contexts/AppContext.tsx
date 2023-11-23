@@ -18,6 +18,7 @@ type InitialState = {
   cart: CartItem[];
   isHeaderFixed: boolean;
   user: User;
+  menus: any[];
   shop: Shop;
   checkout: Checkout;
 };
@@ -46,11 +47,13 @@ type CheckoutActionType = { type: "SET_CHECKOUT"; payload: Checkout };
 type AddressActionType = { type: "SET_ADDRESS"; payload: Address[] };
 type ProductActionType = { type: "LOAD_PRODUCTS"; payload: Product[] };
 type LayoutActionType = { type: "TOGGLE_HEADER"; payload: boolean };
+type NavigationMenuType = { type: "SET_NAVIGATION_MENU"; payload: any[] };
 type ActionType =
   | CartActionType
   | LayoutActionType
   | ShopActionType
   | UserActionType
+  | NavigationMenuType
   | AddressActionType
   | ProductListType
   | CheckoutActionType
@@ -69,6 +72,7 @@ const INITIAL_STATE = {
   isHeaderFixed: false,
   products: [],
   shop: {},
+  menus: [],
   user: {
     orders: [],
     products: [],
@@ -102,6 +106,12 @@ const reducer = (state: InitialState, action: ActionType) => {
       return {
         ...state,
         products: action.payload,
+      };
+
+    case "SET_NAVIGATION_MENU":
+      return {
+        ...state,
+        menus: action.payload,
       };
 
     case "SET_USER":

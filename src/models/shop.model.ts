@@ -9,6 +9,10 @@ interface Shop {
   name?: string;
   merchantId?: string;
   phone?: string;
+  headerColorHex?: string;
+  footerColorHex?: string;
+  primaryColorHex?: string;
+  secondaryColorHex?: string;
   walletAddress?: string;
   address?: string;
   rating?: number;
