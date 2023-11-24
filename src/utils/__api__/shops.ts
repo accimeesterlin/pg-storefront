@@ -38,6 +38,16 @@ export const getShopMenus = async (id: string): Promise<Shop> => {
 };
 
 
+export const getShopFooterMenus = async (id: string): Promise<Shop> => {
+  try {
+    const response = await api.get(`/menu/footer`, { params: { shopId: id } });
+    return response.data;
+  } catch (error) {
+    return {}
+  }
+};
+
+
 export const getSlugs = async (): Promise<{ params: { slug: string } }[]> => {
   const shops = await getShopList();
   const slugs = shops.map((item) => ({ params: { slug: item.slug } }));
@@ -54,4 +64,4 @@ export const getShopBySlug = async (slug: string): Promise<Shop> => {
   }
 };
 
-export default { getShopMenus, getShopList, getSlugs, getShopBySlug, getShopById };
+export default { getShopFooterMenus, getShopMenus, getShopList, getSlugs, getShopBySlug, getShopById };

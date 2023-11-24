@@ -19,6 +19,7 @@ type InitialState = {
   isHeaderFixed: boolean;
   user: User;
   menus: any[];
+  footerMenus: any[];
   shop: Shop;
   checkout: Checkout;
 };
@@ -45,6 +46,7 @@ type OrderActionType = { type: "SET_ORDER_LIST"; payload: Order[] };
 type PaymentMethodActionType = { type: "SET_PAYMENT_METHOD"; payload: string };
 type CheckoutActionType = { type: "SET_CHECKOUT"; payload: Checkout };
 type AddressActionType = { type: "SET_ADDRESS"; payload: Address[] };
+type FooterMenuActionType = { type: "SET_FOOTER_MENU"; payload: any[] };
 type ProductActionType = { type: "LOAD_PRODUCTS"; payload: Product[] };
 type LayoutActionType = { type: "TOGGLE_HEADER"; payload: boolean };
 type NavigationMenuType = { type: "SET_NAVIGATION_MENU"; payload: any[] };
@@ -56,6 +58,7 @@ type ActionType =
   | NavigationMenuType
   | AddressActionType
   | ProductListType
+  | FooterMenuActionType
   | CheckoutActionType
   | OrderActionType
   | PurchaseCartActionType
@@ -73,6 +76,7 @@ const INITIAL_STATE = {
   products: [],
   shop: {},
   menus: [],
+  footerMenus: [],
   user: {
     orders: [],
     products: [],
@@ -112,6 +116,12 @@ const reducer = (state: InitialState, action: ActionType) => {
       return {
         ...state,
         menus: action.payload,
+      };
+
+    case "SET_FOOTER_MENU":
+      return {
+        ...state,
+        footerMenus: action.payload,
       };
 
     case "SET_USER":

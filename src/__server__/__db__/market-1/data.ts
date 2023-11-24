@@ -2,19 +2,21 @@
 export const mainCarouselData = [
   {
     title: "50% Off For Your First Shopping",
-    mainImageUrl: "assets/images/products/apple-watch-0.png",
+    mainImageUrl: "https://placehold.co/257",
     description: `Don't Miss Out! Limited-Time Offers Inside!`,
     buttonText: "Shop Now",
     buttonLink: "#",
   },
   {
     title: "50% Off For Your First Shopping",
-    mainImageUrl: "assets/images/products/apple-watch-0.png",
+    mainImageUrl: "https://placehold.co/257",
     description: `Unbeatable Deals Await! Grab Yours Today!`,
     buttonText: "Shop Now",
     buttonLink: "#",
   },
 ];
+
+// 257 × 145 px
 
 export const categories = [
   {

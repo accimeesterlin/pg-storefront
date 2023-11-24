@@ -6,14 +6,14 @@ import { ProductCard17 } from "@component/product-cards";
 import Product from "@models/product.model";
 
 // ======================================================================
-type Section3Props = { products: Product[] };
+type Section3Props = { products: Product[]; title?: string };
 // ======================================================================
 
-const Section3: FC<Section3Props> = ({ products }) => {
+const Section3: FC<Section3Props> = ({ products, title }) => {
   return (
     <Container mt="4rem">
       <H2 textAlign="center" mb={4}>
-        Best Selling Product
+        {title || "Best Selling Product"}
       </H2>
 
       <Grid container spacing={5}>

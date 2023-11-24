@@ -13,7 +13,11 @@ import Section2 from "@sections/market-1/Section2";
 import Section12 from "@sections/market-1/Section12";
 // import Section13 from "@sections/market-1/Section13";
 import api from "@utils/__api__/market-1";
-import { getShopById, getShopMenus } from "@utils/__api__/shops";
+import {
+  getShopById,
+  getShopMenus,
+  getShopFooterMenus,
+} from "@utils/__api__/shops";
 import productApi from "@utils/__api__/products";
 // data models
 import Shop from "@models/shop.model";
@@ -25,6 +29,7 @@ import MainCarouselItem from "@models/market-1.model";
 import { useAppContext } from "@context/AppContext";
 import { useEffect } from "react";
 import Collection from "@models/collection.model";
+import Section3 from "@sections/fashion-3/Section3";
 
 // =================================================================
 type Props = {
@@ -50,6 +55,7 @@ type Props = {
   products: Product[];
   collections: Collection[];
   menus: any[];
+  footerMenus: any[];
 };
 // =================================================================
 
@@ -60,6 +66,7 @@ const Market1 = (props: Props) => {
   const products = props?.products;
   const menus = props?.menus;
   const collections = props?.collections;
+  const footerMenus = props?.footerMenus;
 
   useEffect(() => {
     if (shop) {
@@ -79,6 +86,12 @@ const Market1 = (props: Props) => {
     }
   }, [menus]);
 
+  useEffect(() => {
+    if (footerMenus) {
+      dispatch({ type: "SET_FOOTER_MENU", payload: footerMenus });
+    }
+  }, [footerMenus]);
+
   const listOfCollections = collections?.map((collection) => {
     const products = collection?.products;
     return <Section2 products={products} title={collection?.name} />;
@@ -91,7 +104,7 @@ const Market1 = (props: Props) => {
       {/* HERO CAROUSEL AREA */}
       <Section1 carouselData={props.mainCarouselData} />
       {listOfCollections}
-      <Section2 products={products} title="All products" />;
+      <Section3 products={products} title="All Products" />
       {/* FLASH DEAL PRODUCTS AREA */}
       {/* <Section2 products={props.flashDealsData} /> */}
       {/* TOP CATEGORIES AREA */}
@@ -141,6 +154,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
 
   const shop = await getShopById(shopId);
+  const footerMenus = await getShopFooterMenus(shopId);
+
   const products = await productApi?.getProducts(shopId);
   const collections = await productApi?.getCollections(shopId);
   const carList = await api.getCarList();
@@ -187,6 +202,7 @@ export const getStaticProps: GetStaticProps = async () => {
       products,
       collections,
       menus,
+      footerMenus,
     },
   };
 };
