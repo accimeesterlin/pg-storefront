@@ -79,7 +79,17 @@ type ProductCard17Props = {
 
 const ProductCard17: FC<ProductCard17Props> = (props) => {
   const [saveCartState] = createLocalStorage("cartState");
-  const { id, name, price, mainImageUrl, category, reviews, slug, images, shop } = props;
+  const {
+    id,
+    name,
+    price,
+    mainImageUrl,
+    category,
+    reviews,
+    slug,
+    images,
+    shop,
+  } = props;
 
   const { state, dispatch } = useAppContext();
   const [openDialog, setOpenDialog] = useState(false);
@@ -110,7 +120,7 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
   return (
     <Wrapper>
       <CardMedia>
-        <Link href={`/product/${slug}`}>
+        <Link href={`/product/${id}`}>
           <a>
             <Image
               width={300}
