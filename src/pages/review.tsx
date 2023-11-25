@@ -8,6 +8,7 @@ import { Card1 } from "@component/Card1";
 import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
 import api from "@utils/__api__/pgpay";
+import { getGlobalSetting } from "@utils/__api__/global-settings";
 import { createMonCashSession } from "@utils/__api__/moncash";
 import Avatar from "@component/avatar";
 import { Button } from "@component/buttons";
@@ -15,18 +16,63 @@ import Typography, { H5, Paragraph, Tiny } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
 import { clearLocalStorageKeys, currency, getTotalPrice } from "@utils/utils";
 import CheckoutNavLayout from "@component/layout/CheckoutNavLayout";
+import { GetStaticProps } from "next";
+import marketApi from "@utils/__api__/market-1";
+import {
+  getShopById,
+  getShopMenus,
+  getShopFooterMenus,
+} from "@utils/__api__/shops";
+import Shop from "@models/shop.model";
 
 import Grid from "@component/grid/Grid";
+import { GlobalSetting } from "@models/globalSetting.model";
 // import { StyledMiniCart } from "@component/mini-cart/styles";
 
-const PaymentReview = () => {
+type Props = {
+  shop: Shop;
+  menus: any[];
+  footerMenus: any[];
+  globalSetting: GlobalSetting;
+};
+
+const PaymentReview = (props: Props) => {
   const router = useRouter();
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
   const paymentMethod = state?.checkout?.paymentMethod;
+
+  const shop = props?.shop;
+  const menus = props?.menus;
+  const footerMenus = props?.footerMenus;
+  const globalSetting = props?.globalSetting;
+
+  useEffect(() => {
+    if (shop) {
+      dispatch({ type: "SET_SHOP", payload: shop });
+    }
+  }, [shop]);
+
+  useEffect(() => {
+    if (menus) {
+      dispatch({ type: "SET_NAVIGATION_MENU", payload: menus });
+    }
+  }, [menus]);
+
+  useEffect(() => {
+    if (footerMenus) {
+      dispatch({ type: "SET_FOOTER_MENU", payload: footerMenus });
+    }
+  }, [footerMenus]);
 
   useEffect(() => {
     navigateBackToCheckout();
   }, [paymentMethod]);
+
+  useEffect(() => {
+    if (globalSetting) {
+      dispatch({ type: "SET_GLOBAL_SETTING", payload: globalSetting });
+    }
+  }, [globalSetting]);
 
   const navigateBackToCheckout = () => {
     if (!paymentMethod) {
@@ -59,7 +105,13 @@ const MiniCart: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useAppContext();
 
+  const globalSetting = state?.globalSetting;
+
+  const exchangeAmount = globalSetting?.monCashFees || 1;
+  const shop = state.shop;
   const paymentMethod = state?.checkout?.paymentMethod;
+
+  const totalPrice = getTotalPrice(state.cart);
 
   const handleSubmit = async () => {
     try {
@@ -78,12 +130,21 @@ const MiniCart: FC = () => {
           router?.push(`/orders/${data?.order?.id}`);
         }
       } else if (paymentMethod === "moncash") {
-        const data = await createMonCashSession(checkoutPayload);
+        const data = await createMonCashSession({
+          ...checkoutPayload,
+          totalPrice,
+          exchangeAmount,
+          shop,
+        });
 
-        if (data?.moncashRedirectUrl) {
+        setIsLoading(false);
+        const redirectUrl = data?.redirectUrl;
+        if (data?.redirectUrl) {
           // Redirect to order page
-          router?.push(data?.moncashRedirectUrl);
+          window.location.href = redirectUrl;
+          return;
         }
+
         return;
       }
 
@@ -97,7 +158,7 @@ const MiniCart: FC = () => {
       clearLocalStorageKeys(["cartState", "checkoutState"]);
 
       // TODO:
-      // setIsLoading(false);
+      setIsLoading(false);
     } catch (error) {
       const errorMessage = error?.response?.data?.message || error?.message;
       toast.error(errorMessage);
@@ -204,5 +265,26 @@ const MiniCart: FC = () => {
 
 PaymentReview.layout = CheckoutNavLayout;
 MiniCart.defaultProps = { handleSubmit: () => {} };
+
+export const getStaticProps: GetStaticProps = async () => {
+  const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
+
+  const shop = await getShopById(shopId);
+  const footerMenus = await getShopFooterMenus(shopId);
+  const globalSetting = await getGlobalSetting();
+
+  const mainCarouselData = await marketApi.getMainCarousel(shopId);
+  const menus = await getShopMenus(shopId);
+
+  return {
+    props: {
+      mainCarouselData,
+      shop,
+      menus,
+      footerMenus,
+      globalSetting,
+    },
+  };
+};
 
 export default PaymentReview;

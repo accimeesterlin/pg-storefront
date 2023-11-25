@@ -1,4 +1,5 @@
 import { ceil } from "lodash";
+import numeral from 'numeral'
 import { differenceInMinutes } from "date-fns";
 import { themeGet } from "@styled-system/theme-get";
 
@@ -204,3 +205,25 @@ export function capitalizeWord(inputWord: string) {
 
   return formattedWord;
 }
+
+export const displayDecimal = (num) => Number(Number(num)?.toFixed(2));
+
+
+export const convertUsdToGdes = ({
+  amount,
+  exchangeAmount = 126.87,
+  feePercentage = 8,
+}) => {
+  const transactionFees = (feePercentage / 100) * exchangeAmount;
+  const fAmount = numeral(amount).value() || 0;
+
+  const conversion = displayDecimal(exchangeAmount + transactionFees);
+
+  const totalAmount = displayDecimal(conversion * fAmount);
+
+  return {
+    totalAmount,
+    transactionFees: displayDecimal(transactionFees * fAmount),
+    exchangeAmount,
+  };
+};

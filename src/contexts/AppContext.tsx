@@ -1,5 +1,6 @@
 import Address from "@models/address.model";
 import Checkout from "@models/checkout.model";
+import { GlobalSetting } from "@models/globalSetting.model";
 import Order from "@models/order.model";
 import Product from "@models/product.model";
 import Shop from "@models/shop.model";
@@ -22,6 +23,7 @@ type InitialState = {
   footerMenus: any[];
   shop: Shop;
   checkout: Checkout;
+  globalSetting: GlobalSetting;
 };
 
 export type CartItem = {
@@ -47,6 +49,10 @@ type PaymentMethodActionType = { type: "SET_PAYMENT_METHOD"; payload: string };
 type CheckoutActionType = { type: "SET_CHECKOUT"; payload: Checkout };
 type AddressActionType = { type: "SET_ADDRESS"; payload: Address[] };
 type FooterMenuActionType = { type: "SET_FOOTER_MENU"; payload: any[] };
+type GlobalSettingActionType = {
+  type: "SET_GLOBAL_SETTING";
+  payload: GlobalSetting;
+};
 type ProductActionType = { type: "LOAD_PRODUCTS"; payload: Product[] };
 type LayoutActionType = { type: "TOGGLE_HEADER"; payload: boolean };
 type NavigationMenuType = { type: "SET_NAVIGATION_MENU"; payload: any[] };
@@ -55,6 +61,7 @@ type ActionType =
   | LayoutActionType
   | ShopActionType
   | UserActionType
+  | GlobalSettingActionType
   | NavigationMenuType
   | AddressActionType
   | ProductListType
@@ -77,6 +84,7 @@ const INITIAL_STATE = {
   shop: {},
   menus: [],
   footerMenus: [],
+  globalSetting: {},
   user: {
     orders: [],
     products: [],
@@ -110,6 +118,12 @@ const reducer = (state: InitialState, action: ActionType) => {
       return {
         ...state,
         products: action.payload,
+      };
+
+    case "SET_GLOBAL_SETTING":
+      return {
+        ...state,
+        globalSetting: action.payload,
       };
 
     case "SET_NAVIGATION_MENU":

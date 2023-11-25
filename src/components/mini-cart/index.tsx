@@ -155,7 +155,6 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
             <Button
               color="primary"
               variant="contained"
-              disabled
               m="1rem 1rem 0.75rem"
               onClick={toggleSidenav}
             >

@@ -114,7 +114,7 @@ const Cart = () => {
             </Button>
 
             <Link href="/checkout">
-              <Button variant="contained" color="primary" disabled fullwidth>
+              <Button variant="contained" color="primary" fullwidth>
                 Checkout Now
               </Button>
             </Link>

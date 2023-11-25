@@ -6,28 +6,26 @@ import { Card1 } from "@component/Card1";
 import { Button } from "@component/buttons";
 
 // import CreditCardForm from "./creditcardform";
-import PGPayPayment from "./PGPayForm";
-// import MonCashPayment from "./monCashPayment";
+// import PGPayPayment from "./PGPayForm";
+import MonCashPayment from "./monCashPayment";
 // import PaypalPayment from "./paypalPayment";
 // import CashOnDeliveryPayment from "./CashOnDeliveryForm";
 import { useAppContext } from "@context/AppContext";
-import CryptoPayment from "./cryptoPayment";
+// import CryptoPayment from "./cryptoPayment";
 
 const PaymentForm: FC = () => {
   const { dispatch } = useAppContext();
   const router = useRouter();
-  const [paymentMethod, setPaymentMethod] = useState("credit-card");
-
+  const [paymentMethod, setPaymentMethod] = useState("moncash");
 
   const handleFormSubmit = async () => {
     try {
       dispatch({
         type: "SET_PAYMENT_METHOD",
-        payload: paymentMethod
+        payload: paymentMethod,
       });
 
-
-    router.push("/review");
+      router.push("/review");
     } catch (error) {
       // console.log(error);
     }
@@ -42,13 +40,12 @@ const PaymentForm: FC = () => {
       <Card1 mb="2rem">
         {/* <CreditCardForm paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
         {/* <PGPayPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
-        <CryptoPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/>
-        <PGPayPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/>
-        {/* <MonCashPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
+        <MonCashPayment
+          paymentMethod={paymentMethod}
+          setPaymentMethod={setPaymentMethod}
+        />
         {/* <PaypalPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
         {/* <CashOnDeliveryPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
-
-       
       </Card1>
 
       <Grid container spacing={7}>
@@ -61,9 +58,15 @@ const PaymentForm: FC = () => {
         </Grid>
 
         <Grid item sm={6} xs={12}>
-            <Button variant="contained" color="primary" type="submit" fullwidth onClick={handleFormSubmit}>
-              Review
-            </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            fullwidth
+            onClick={handleFormSubmit}
+          >
+            Review
+          </Button>
         </Grid>
       </Grid>
     </Fragment>
