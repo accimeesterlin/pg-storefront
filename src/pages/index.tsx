@@ -13,10 +13,12 @@ import Section2 from "@sections/market-1/Section2";
 import Section12 from "@sections/market-1/Section12";
 // import Section13 from "@sections/market-1/Section13";
 import api from "@utils/__api__/market-1";
+import categoryApi from "@utils/__api__/category";
 import {
   getShopById,
   getShopMenus,
   getShopFooterMenus,
+  getHomeMenus,
 } from "@utils/__api__/shops";
 import productApi from "@utils/__api__/products";
 // data models
@@ -56,6 +58,8 @@ type Props = {
   collections: Collection[];
   menus: any[];
   footerMenus: any[];
+  categories: Category[];
+  homeMenus: any[];
 };
 // =================================================================
 
@@ -67,30 +71,34 @@ const Market1 = (props: Props) => {
   const menus = props?.menus;
   const collections = props?.collections;
   const footerMenus = props?.footerMenus;
+  const categories = props?.categories;
+  const homeMenus = props?.homeMenus;
 
   useEffect(() => {
     if (shop) {
       dispatch({ type: "SET_SHOP", payload: shop });
     }
-  }, [shop]);
 
-  useEffect(() => {
     if (products) {
       dispatch({ type: "SET_PRODUCT_LIST", payload: products });
     }
-  }, [products]);
 
-  useEffect(() => {
     if (menus) {
       dispatch({ type: "SET_NAVIGATION_MENU", payload: menus });
     }
-  }, [menus]);
 
-  useEffect(() => {
     if (footerMenus) {
       dispatch({ type: "SET_FOOTER_MENU", payload: footerMenus });
     }
-  }, [footerMenus]);
+
+    if (categories) {
+      dispatch({ type: "SET_CATEGORY", payload: categories });
+    }
+
+    if (homeMenus) {
+      dispatch({ type: "SET_HOME_MENU", payload: homeMenus });
+    }
+  }, [shop, products, menus, footerMenus, categories, homeMenus]);
 
   const listOfCollections = collections?.map((collection) => {
     const products = collection?.products;
@@ -158,6 +166,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const products = await productApi?.getProducts(shopId);
   const collections = await productApi?.getCollections(shopId);
+  const categories = await categoryApi?.getCategoryByShopId(shopId);
   const carList = await api.getCarList();
   const carBrands = await api.getCarBrands();
   const moreItems = await api.getMoreItems();
@@ -177,6 +186,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const bigDiscountList = await api.getBigDiscountList();
   const topRatedProducts = await api.getTopRatedProduct();
   const menus = await getShopMenus(shopId);
+  const homeMenus = await getHomeMenus(shopId);
 
   return {
     props: {
@@ -202,7 +212,9 @@ export const getStaticProps: GetStaticProps = async () => {
       products,
       collections,
       menus,
+      homeMenus,
       footerMenus,
+      categories,
     },
   };
 };

@@ -11,7 +11,8 @@ import Container from "../Container";
 import Typography, { Span } from "../Typography";
 import Categories from "../categories/Categories";
 import StyledNavbar from "./styles";
-import navbarNavigations from "@data/navbarNavigations";
+// import navbarNavigations from "@data/navbarNavigations";
+import { useAppContext } from "@context/AppContext";
 
 interface Nav {
   url: string;
@@ -24,6 +25,10 @@ interface Nav {
 type NavbarProps = { navListOpen?: boolean };
 
 const Navbar: FC<NavbarProps> = ({ navListOpen }) => {
+  const { state } = useAppContext();
+
+  const navbarNavigations = state?.homeMenus;
+
   const renderNestedNav = (list: any[], isRoot = false) => {
     return list?.map((nav: Nav) => {
       if (isRoot) {
@@ -72,7 +77,12 @@ const Navbar: FC<NavbarProps> = ({ navListOpen }) => {
                 <Span className="nav-link">{nav.title}</Span>
               )}
               <Box className="root-child">
-                <Card mt="1.25rem" py="0.5rem" boxShadow="large" minWidth="230px">
+                <Card
+                  mt="1.25rem"
+                  py="0.5rem"
+                  boxShadow="large"
+                  minWidth="230px"
+                >
                   {renderNestedNav(nav.child)}
                 </Card>
               </Box>
@@ -96,7 +106,12 @@ const Navbar: FC<NavbarProps> = ({ navListOpen }) => {
 
         if (nav.child)
           return (
-            <Box className="parent" position="relative" minWidth="230px" key={nav.title}>
+            <Box
+              className="parent"
+              position="relative"
+              minWidth="230px"
+              key={nav.title}
+            >
               <MenuItem
                 color="gray.700"
                 style={{ display: "flex", justifyContent: "space-between" }}
@@ -125,11 +140,22 @@ const Navbar: FC<NavbarProps> = ({ navListOpen }) => {
 
   return (
     <StyledNavbar>
-      <Container height="100%" display="flex" alignItems="center" justifyContent="space-between">
+      <Container
+        height="100%"
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <Categories open={navListOpen}>
           <Button width="278px" height="40px" bg="body.default" variant="text">
             <Icon>categories</Icon>
-            <Typography ml="10px" flex="1 1 0" fontWeight="600" textAlign="left" color="text.muted">
+            <Typography
+              ml="10px"
+              flex="1 1 0"
+              fontWeight="600"
+              textAlign="left"
+              color="text.muted"
+            >
               Categories
             </Typography>
 

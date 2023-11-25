@@ -37,6 +37,15 @@ export const getShopMenus = async (id: string): Promise<Shop> => {
   }
 };
 
+export const getHomeMenus = async (shopId: string): Promise<Shop> => {
+  try {
+    const response = await api.get(`/menu/home`, { params: { shopId } });
+    return response.data;
+  } catch (error) {
+    return {}
+  }
+};
+
 
 export const getShopFooterMenus = async (id: string): Promise<Shop> => {
   try {
@@ -64,4 +73,4 @@ export const getShopBySlug = async (slug: string): Promise<Shop> => {
   }
 };
 
-export default { getShopFooterMenus, getShopMenus, getShopList, getSlugs, getShopBySlug, getShopById };
+export default { getHomeMenus, getShopFooterMenus, getShopMenus, getShopList, getSlugs, getShopBySlug, getShopById };

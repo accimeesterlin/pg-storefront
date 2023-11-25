@@ -10,10 +10,12 @@ import MenuItem from "../MenuItem";
 import { Span } from "../Typography";
 import TextField from "../text-field";
 import StyledSearchBox from "./styled";
+import { useAppContext } from "@context/AppContext";
 
 const SearchInputWithCategory: FC = () => {
   const [resultList, setResultList] = useState([]);
   const [category, setCategory] = useState("All Categories");
+  const { state } = useAppContext();
 
   const handleCategoryChange = (cat) => () => setCategory(cat);
 
@@ -30,6 +32,8 @@ const SearchInputWithCategory: FC = () => {
   }, []);
 
   const handleDocumentClick = () => setResultList([]);
+
+  const categories = state?.category;
 
   useEffect(() => {
     window.addEventListener("click", handleDocumentClick);
@@ -60,16 +64,23 @@ const SearchInputWithCategory: FC = () => {
             </FlexBox>
           }
         >
-          {categories.map((item) => (
-            <MenuItem key={item} onClick={handleCategoryChange(item)}>
-              {item}
+          {categories?.map(({ id, title }) => (
+            <MenuItem key={id} onClick={handleCategoryChange({ id, title })}>
+              {title}
             </MenuItem>
           ))}
         </Menu>
       </StyledSearchBox>
 
       {!!resultList.length && (
-        <Card position="absolute" top="100%" py="0.5rem" width="100%" boxShadow="large" zIndex={99}>
+        <Card
+          position="absolute"
+          top="100%"
+          py="0.5rem"
+          width="100%"
+          boxShadow="large"
+          zIndex={99}
+        >
           {resultList.map((item) => (
             <Link href={`/product/search/${item}`} key={item}>
               <MenuItem key={item}>
@@ -83,17 +94,11 @@ const SearchInputWithCategory: FC = () => {
   );
 };
 
-const categories = [
-  "All Categories",
-  "Car",
-  "Clothes",
-  "Electronics",
-  "Laptop",
-  "Desktop",
-  "Camera",
-  "Toys",
+const dummySearchResult = [
+  "Macbook Air 13",
+  "Ksus K555LA",
+  "Acer Aspire X453",
+  "iPad Mini 3",
 ];
-
-const dummySearchResult = ["Macbook Air 13", "Ksus K555LA", "Acer Aspire X453", "iPad Mini 3"];
 
 export default SearchInputWithCategory;
