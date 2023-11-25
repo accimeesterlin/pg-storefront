@@ -13,12 +13,10 @@ import ShopIntroCard from "@sections/shop/ShopIntroCard";
 import useWindowSize from "@hook/useWindowSize";
 import Shop from "@models/shop.model";
 // import api from "@utils/__api__/shops";
-import { getShopById } from "../../api/queries/getShop";
-import { getProductByShopId } from "../../api/queries/getProduct";
 import Product from "@models/product.model";
 
 // ============================================================
-type Props = { shop: Shop, products: Product[], };
+type Props = { shop: Shop; products: Product[] };
 // ============================================================
 
 const ShopDetails = ({ shop, products }: Props) => {
@@ -33,7 +31,7 @@ const ShopDetails = ({ shop, products }: Props) => {
 
   return (
     <Fragment>
-      <ShopIntroCard shop={shop}/>
+      <ShopIntroCard shop={shop} />
 
       <Grid container spacing={6}>
         {/* SHOW IN LARGE DEVICE */}
@@ -66,16 +64,8 @@ const ShopDetails = ({ shop, products }: Props) => {
 
 ShopDetails.layout = NavbarLayout;
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  
-  const shopId = query?.shopId as string;
-
-
-  const shop = await getShopById(shopId);
-  const products = await getProductByShopId(shopId);
-
-
-  return { props: { shop, products } };
+export const getServerSideProps: GetServerSideProps = async () => {
+  return { props: {} };
 };
 
 export default ShopDetails;

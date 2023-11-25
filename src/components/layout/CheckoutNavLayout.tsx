@@ -6,7 +6,6 @@ import AppLayout from "./AppLayout";
 import Navbar from "../navbar/Navbar";
 import Grid from "@component/grid/Grid";
 import Container from "@component/Container";
-// import ProtectedRoute from "@component/auth/protected";
 
 // ======================================================
 type Props = { children: ReactNode };

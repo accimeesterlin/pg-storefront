@@ -8,15 +8,12 @@ import { H2, SemiSpan } from "@component/Typography";
 import NavbarLayout from "@component/layout/NavbarLayout";
 // import api from "@utils/__api__/shops";
 import Shop from "@models/shop.model";
-import { getLatestShops } from "../api/queries/getShop";
-
 
 // =============================================
 type Props = { shopList: Shop[] };
 // =============================================
 
 const ShopList = ({ shopList }: Props) => {
-
   return (
     <Fragment>
       <H2 mb="24px">All Shops</H2>
@@ -37,7 +34,12 @@ const ShopList = ({ shopList }: Props) => {
         ))}
       </Grid>
 
-      <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center" mt="32px">
+      <FlexBox
+        flexWrap="wrap"
+        justifyContent="space-between"
+        alignItems="center"
+        mt="32px"
+      >
         <SemiSpan>Showing 1-9 of {shopList?.length} Shops</SemiSpan>
         <Pagination pageCount={Math.ceil(shopList?.length / 9)} />
       </FlexBox>
@@ -48,9 +50,7 @@ const ShopList = ({ shopList }: Props) => {
 ShopList.layout = NavbarLayout;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const shopList =  await getLatestShops();
-
-  return { props: { shopList: shopList } };
+  return { props: {} };
 };
 
 export default ShopList;
