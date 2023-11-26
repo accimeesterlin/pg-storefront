@@ -50,7 +50,7 @@ const ProductSearchResult = () => {
         justifyContent="space-between"
       >
         <div>
-          <H5>Searching for “ mobile phone ”</H5>
+          <H5>Searching for “ {slug} ”</H5>
           <Paragraph color="text.muted">
             {searchResult?.length} results found
           </Paragraph>
