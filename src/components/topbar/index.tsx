@@ -1,19 +1,19 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { getTheme } from "@utils/utils";
-import Menu from "../Menu";
-import Image from "../Image";
+// import Menu from "../Menu";
+// import Image from "../Image";
 import Icon from "../icon/Icon";
 import FlexBox from "../FlexBox";
-import NavLink from "../nav-link";
-import MenuItem from "../MenuItem";
+// import NavLink from "../nav-link";
+// import MenuItem from "../MenuItem";
 import Container from "../Container";
-import { Small } from "../Typography";
+// import { Small } from "../Typography";
 import StyledTopbar from "./styles";
 import { useAppContext } from "@context/AppContext";
 
 const Topbar: FC = () => {
-  const [currency, setCurrency] = useState(currencyList[0]);
-  const [language, setLanguage] = useState(languageList[0]);
+  // const [currency, setCurrency] = useState(currencyList[0]);
+  // const [language, setLanguage] = useState(languageList[0]);
 
   const { state } = useAppContext();
 
@@ -23,11 +23,11 @@ const Topbar: FC = () => {
   const phone = shop?.phone || "";
   const email = shop?.email || "";
 
-  const handleCurrencyClick = (curr: typeof currency) => () =>
-    setCurrency(curr);
+  // const handleCurrencyClick = (curr: typeof currency) => () =>
+  //   setCurrency(curr);
 
-  const handleLanguageClick = (lang: typeof language) => () =>
-    setLanguage(lang);
+  // const handleLanguageClick = (lang: typeof language) => () =>
+  //   setLanguage(lang);
 
   useEffect(() => {
     // get language from browser
@@ -62,14 +62,14 @@ const Topbar: FC = () => {
         </FlexBox>
 
         <FlexBox className="topbar-right" alignItems="center">
-          <NavLink className="link" href="/">
+          {/* <NavLink className="link" href="/">
             FAQ"s
-          </NavLink>
-
+          </NavLink> */}
+          {/* 
           <NavLink className="link" href="/">
             Need Help?
-          </NavLink>
-
+          </NavLink> */}
+          {/* 
           <Menu
             direction="right"
             handler={
@@ -123,24 +123,24 @@ const Topbar: FC = () => {
                 <Small fontWeight="600">{item.title}</Small>
               </MenuItem>
             ))}
-          </Menu>
+          </Menu> */}
         </FlexBox>
       </Container>
     </StyledTopbar>
   );
 };
 
-const languageList = [
-  { title: "EN", mainImageUrl: "/assets/images/flags/usa.png" },
-  { title: "BN", mainImageUrl: "/assets/images/flags/bd.png" },
-  { title: "HN", mainImageUrl: "/assets/images/flags/in.png" },
-];
+// const languageList = [
+//   { title: "EN", mainImageUrl: "/assets/images/flags/usa.png" },
+//   { title: "BN", mainImageUrl: "/assets/images/flags/bd.png" },
+//   { title: "HN", mainImageUrl: "/assets/images/flags/in.png" },
+// ];
 
-const currencyList = [
-  { title: "USD", mainImageUrl: "/assets/images/flags/usa.png" },
-  { title: "EUR", mainImageUrl: "/assets/images/flags/uk.png" },
-  { title: "BDT", mainImageUrl: "/assets/images/flags/bd.png" },
-  { title: "INR", mainImageUrl: "/assets/images/flags/in.png" },
-];
+// const currencyList = [
+//   { title: "USD", mainImageUrl: "/assets/images/flags/usa.png" },
+//   { title: "EUR", mainImageUrl: "/assets/images/flags/uk.png" },
+//   { title: "BDT", mainImageUrl: "/assets/images/flags/bd.png" },
+//   { title: "INR", mainImageUrl: "/assets/images/flags/in.png" },
+// ];
 
 export default Topbar;

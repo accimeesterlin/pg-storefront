@@ -10,6 +10,7 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "@netlify/functions": "^2.4.0",
     "@sentry/nextjs": "^7.81.1",
     "@styled-system/theme-get": "^5.1.2",
     "algoliasearch": "^4.17.0",

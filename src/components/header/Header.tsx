@@ -7,14 +7,14 @@ import FlexBox from "@component/FlexBox";
 import MiniCart from "@component/mini-cart";
 import Container from "@component/Container";
 import { Tiny } from "@component/Typography";
-import Login from "@component/sessions/Login";
+// import Login from "@component/sessions/Login";
 import { IconButton } from "@component/buttons";
 import Sidenav from "@component/sidenav/Sidenav";
 import Categories from "@component/categories/Categories";
 import { SearchInputWithCategory } from "@component/search-box";
 import { useAppContext } from "@context/AppContext";
 import StyledHeader from "./styles";
-import UserLoginDialog from "./LoginDialog";
+// import UserLoginDialog from "./LoginDialog";
 import { createLocalStorage } from "@utils/utils";
 
 // ====================================================================
@@ -67,11 +67,11 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
     </Box>
   );
 
-  const LOGIN_HANDLE = (
-    <IconButton ml="1rem" bg="gray.200" p="8px">
-      <Icon size="28px">user</Icon>
-    </IconButton>
-  );
+  // const LOGIN_HANDLE = (
+  //   <IconButton ml="1rem" bg="gray.200" p="8px">
+  //     <Icon size="28px">user</Icon>
+  //   </IconButton>
+  // );
 
   return (
     <StyledHeader className={className}>
@@ -105,9 +105,9 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
         </FlexBox>
 
         <FlexBox className="header-right" alignItems="center">
-          <UserLoginDialog handle={LOGIN_HANDLE}>
+          {/* <UserLoginDialog handle={LOGIN_HANDLE}>
             <Login />
-          </UserLoginDialog>
+          </UserLoginDialog> */}
 
           <Sidenav
             open={open}
