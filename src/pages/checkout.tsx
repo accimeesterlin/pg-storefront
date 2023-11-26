@@ -1,23 +1,20 @@
 import { useEffect } from "react";
 import Grid from "@component/grid/Grid";
-import isEmpty from "lodash.isempty";
 import CheckoutForm from "@sections/checkout/CheckoutForm";
 import CheckoutSummary from "@sections/checkout/CheckoutSummary";
 import CheckoutNavLayout from "@component/layout/CheckoutNavLayout";
-import api from "@utils/__api__/address";
-import { getMe } from "@utils/__api__/users";
-import Address from "@models/address.model";
-import User from "@models/user.model";
+import categoryApi from "@utils/__api__/category";
 import { useAppContext } from "@context/AppContext";
-import { createLocalStorage } from "@utils/utils";
 import { GetStaticProps } from "next";
 import marketApi from "@utils/__api__/market-1";
 import {
   getShopById,
   getShopMenus,
   getShopFooterMenus,
+  getHomeMenus,
 } from "@utils/__api__/shops";
 import Shop from "@models/shop.model";
+import Category from "@models/category.model";
 // data models
 
 // =================================================================
@@ -25,69 +22,40 @@ type Props = {
   shop: Shop;
   menus: any[];
   footerMenus: any[];
+  categories: Category[];
+  homeMenus: any[];
 };
 
 const Checkout = (props: Props) => {
-  const { dispatch, state } = useAppContext();
-  const [, getCheckoutFromLocalStorage] = createLocalStorage("checkoutData");
+  const { dispatch } = useAppContext();
 
   const shop = props?.shop;
   const menus = props?.menus;
   const footerMenus = props?.footerMenus;
-
-  useEffect(() => {
-    handleAddress();
-    getUserProfile();
-  }, [state.checkout]);
+  const categories = props?.categories;
+  const homeMenus = props?.homeMenus;
 
   useEffect(() => {
     if (shop) {
       dispatch({ type: "SET_SHOP", payload: shop });
     }
-  }, [shop]);
 
-  useEffect(() => {
     if (menus) {
       dispatch({ type: "SET_NAVIGATION_MENU", payload: menus });
     }
-  }, [menus]);
 
-  useEffect(() => {
     if (footerMenus) {
       dispatch({ type: "SET_FOOTER_MENU", payload: footerMenus });
     }
-  }, [footerMenus]);
 
-  const handleAddress = async () => {
-    try {
-      const savedCheckoutData = getCheckoutFromLocalStorage("checkoutData");
-      if (!isEmpty(savedCheckoutData)) {
-        return;
-      }
-
-      const addresses: Address[] = await api.getAddressList();
-
-      if (addresses?.length > 0) {
-        dispatch({
-          type: "SET_CHECKOUT",
-          payload: {
-            address: addresses[0],
-          },
-        });
-      }
-    } catch (error) {
-      // No address found
+    if (categories) {
+      dispatch({ type: "SET_CATEGORY", payload: categories });
     }
-  };
 
-  const getUserProfile = async () => {
-    try {
-      const user: User = await getMe();
-      dispatch({ type: "SET_USER", payload: user });
-    } catch (error) {
-      // No address found
+    if (homeMenus) {
+      dispatch({ type: "SET_HOME_MENU", payload: homeMenus });
     }
-  };
+  }, [shop, menus, footerMenus, categories, homeMenus]);
 
   return (
     <Grid container flexWrap="wrap-reverse" spacing={6}>
@@ -112,6 +80,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const mainCarouselData = await marketApi.getMainCarousel(shopId);
   const menus = await getShopMenus(shopId);
+  const homeMenus = await getHomeMenus(shopId);
+  const categories = await categoryApi?.getCategoryByShopId(shopId);
 
   return {
     props: {
@@ -119,6 +89,8 @@ export const getStaticProps: GetStaticProps = async () => {
       shop,
       menus,
       footerMenus,
+      categories,
+      homeMenus,
     },
   };
 };

@@ -57,7 +57,7 @@ const ProductDetails = (props: ProductDetailsProps) => {
         images={product?.images}
         mainImageUrl={product?.mainImageUrl}
         rating={product?.rating}
-        shop={product?.shop}
+        shop={shop}
       />
 
       <FlexBox

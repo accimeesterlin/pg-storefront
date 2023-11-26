@@ -9,9 +9,9 @@ import Grid from "@component/grid/Grid";
 import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
-import { H1, H2, H3, H6, SemiSpan } from "@component/Typography";
+import Typography, { H1, H2, H3, H6, SemiSpan } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
-import { createLocalStorage, currency } from "@utils/utils";
+import { createLocalStorage, currency, getTotalPrice } from "@utils/utils";
 import Shop from "@models/shop.model";
 
 // ========================================
@@ -35,8 +35,8 @@ const ProductIntro: FC<ProductIntroProps> = ({
   mainImageUrl,
 }) => {
   const [saveCartState] = createLocalStorage("cartState");
-  const [isPGPayLoading, setIsPGPayLoading] = useState(false);
-  // const [isMonCashLoading, setIsMonCashLoading] = useState(false);
+  // const [, setIsPGPayLoading] = useState(false);
+  const [isMonCashLoading, setIsMonCashLoading] = useState(false);
   const router = useRouter();
   const { state, dispatch } = useAppContext();
   const [selectedImage, setSelectedImage] = useState(0);
@@ -73,23 +73,23 @@ const ProductIntro: FC<ProductIntroProps> = ({
   //   router?.push("/checkout")
   // }
 
-  const handleCrypto = () => {
-    setIsPGPayLoading(true);
+  // const handleCrypto = () => {
+  //   setIsPGPayLoading(true);
+  //   dispatch({
+  //     type: "SET_PAYMENT_METHOD",
+  //     payload: "crypto",
+  //   });
+  //   router?.push("/checkout");
+  // };
+
+  const handleMonCash = () => {
+    setIsMonCashLoading(true);
     dispatch({
       type: "SET_PAYMENT_METHOD",
-      payload: "crypto",
+      payload: "moncash",
     });
     router?.push("/checkout");
   };
-
-  // const handleMonCash = () => {
-  //   setIsMonCashLoading(true);
-  //   dispatch({
-  //     type: "SET_PAYMENT_METHOD",
-  //     payload: "moncash",
-  //   })
-  //   router?.push("/checkout")
-  // }
 
   return (
     <Box overflow="hidden">
@@ -207,7 +207,7 @@ const ProductIntro: FC<ProductIntroProps> = ({
             </Link>
           </FlexBox>
           <FlexBox alignItems="center">
-            <Button
+            {/* <Button
               p="9px"
               size="small"
               color="primary"
@@ -217,7 +217,7 @@ const ProductIntro: FC<ProductIntroProps> = ({
               onClick={handleCrypto}
             >
               Pay now with Crypto
-            </Button>
+            </Button> */}
             {/* 
             <Button
               p="9px"
@@ -229,17 +229,20 @@ const ProductIntro: FC<ProductIntroProps> = ({
             >
               Pay now with PG Pay
             </Button>
+             */}
             <Button
               p="9px"
               ml="10px"
               size="small"
               loading={isMonCashLoading}
               color="primary"
-              variant="outlined"
+              variant="contained"
               onClick={handleMonCash}
             >
-              Pay now with Mon Cash
-            </Button> */}
+              <Typography fontWeight={600}>
+                Pay With Mon Cash ({currency(getTotalPrice(state.cart))})
+              </Typography>
+            </Button>
           </FlexBox>
         </Grid>
       </Grid>
