@@ -1,6 +1,7 @@
 import { FC, Fragment, useState, useEffect } from "react";
 import Link from "next/link";
 import NextImage from "next/image";
+import isEmpty from "lodash.isempty";
 // import Icon from "@component/icon/Icon";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -8,6 +9,7 @@ import { Card1 } from "@component/Card1";
 import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
 import api from "@utils/__api__/pgpay";
+import { createLocalStorage } from "@utils/utils";
 import { getGlobalSetting } from "@utils/__api__/global-settings";
 import { createMonCashSession } from "@utils/__api__/moncash";
 import Avatar from "@component/avatar";
@@ -38,6 +40,7 @@ type Props = {
 
 const PaymentReview = (props: Props) => {
   const router = useRouter();
+  const [getCheckout] = createLocalStorage("checkoutData");
   const { state, dispatch } = useAppContext();
   const paymentMethod = state?.checkout?.paymentMethod;
 
@@ -45,6 +48,7 @@ const PaymentReview = (props: Props) => {
   const menus = props?.menus;
   const footerMenus = props?.footerMenus;
   const globalSetting = props?.globalSetting;
+  const address = state.checkout?.address;
 
   useEffect(() => {
     if (shop) {
@@ -65,8 +69,12 @@ const PaymentReview = (props: Props) => {
   }, [footerMenus]);
 
   useEffect(() => {
-    navigateBackToCheckout();
-  }, [paymentMethod]);
+    const savedCheckoutData: any = getCheckout("checkoutData");
+
+    if (isEmpty(savedCheckoutData?.address) && isEmpty(address)) {
+      navigateBackToCheckout();
+    }
+  }, [address]);
 
   useEffect(() => {
     if (globalSetting) {

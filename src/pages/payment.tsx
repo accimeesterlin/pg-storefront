@@ -6,7 +6,7 @@ import PaymentForm from "@sections/payment/PaymentForm";
 import PaymentSummary from "@sections/payment/PaymentSummary";
 import CheckoutNavLayout from "@component/layout/CheckoutNavLayout";
 import { useAppContext } from "@context/AppContext";
-
+import { createLocalStorage } from "@utils/utils";
 import { GetStaticProps } from "next";
 import marketApi from "@utils/__api__/market-1";
 import {
@@ -28,9 +28,11 @@ type Props = {
 };
 
 const Checkout = (props: Props) => {
+  const [getCheckout] = createLocalStorage("checkoutData");
   const { state, dispatch } = useAppContext();
   const router = useRouter();
 
+  const address = state.checkout?.address;
   const shop = props?.shop;
   const products = props?.products;
   const menus = props?.menus;
@@ -60,16 +62,16 @@ const Checkout = (props: Props) => {
     }
   }, [footerMenus]);
 
-  const address = state.checkout?.address;
-
   useEffect(() => {
-    navigateBackToCheckout();
+    const savedCheckoutData: any = getCheckout("checkoutData");
+
+    if (isEmpty(savedCheckoutData?.address) && isEmpty(address)) {
+      navigateBackToCheckout();
+    }
   }, [address]);
 
   const navigateBackToCheckout = () => {
-    if (isEmpty(address)) {
-      return router?.push("/checkout");
-    }
+    return router?.push("/checkout");
   };
 
   return (

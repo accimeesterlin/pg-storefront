@@ -17,7 +17,10 @@ const SearchInputWithCategory: FC = () => {
   const [category, setCategory] = useState("All Categories");
   const { state } = useAppContext();
 
-  const handleCategoryChange = (cat) => () => setCategory(cat);
+  const handleCategoryChange =
+    ({ title }) =>
+    () =>
+      setCategory(title);
 
   const products = state?.products;
 
@@ -73,7 +76,7 @@ const SearchInputWithCategory: FC = () => {
           }
         >
           {categories?.map(({ id, title }) => (
-            <MenuItem key={id} onClick={handleCategoryChange({ id, title })}>
+            <MenuItem key={id} onClick={handleCategoryChange({ title })}>
               {title}
             </MenuItem>
           ))}
