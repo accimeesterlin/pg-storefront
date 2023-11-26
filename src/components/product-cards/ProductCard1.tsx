@@ -148,7 +148,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
       payload: {
         id,
         slug,
-        price: off,
+        price: off || price,
         mainImageUrl: mainImageUrl,
         name,
         shopId: shop?.id,

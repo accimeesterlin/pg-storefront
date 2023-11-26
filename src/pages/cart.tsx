@@ -72,7 +72,7 @@ const Cart = () => {
 
             <Divider mb="1rem" />
 
-            <TextField placeholder="Voucher" fullwidth />
+            {/* <TextField placeholder="Voucher" fullwidth />
 
             <Button
               variant="outlined"
@@ -82,7 +82,7 @@ const Cart = () => {
               fullwidth
             >
               Apply Voucher
-            </Button>
+            </Button> */}
 
             <Divider mb="1.5rem" />
 

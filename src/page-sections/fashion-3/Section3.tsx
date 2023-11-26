@@ -4,12 +4,16 @@ import { H2 } from "@component/Typography";
 import Container from "@component/Container";
 import { ProductCard17 } from "@component/product-cards";
 import Product from "@models/product.model";
+import { useAppContext } from "@context/AppContext";
 
 // ======================================================================
 type Section3Props = { products: Product[]; title?: string };
 // ======================================================================
 
 const Section3: FC<Section3Props> = ({ products, title }) => {
+  const { state } = useAppContext();
+  const shop = state?.shop;
+
   return (
     <Container mt="4rem">
       <H2 textAlign="center" mb={4}>
@@ -25,6 +29,7 @@ const Section3: FC<Section3Props> = ({ products, title }) => {
               name={product.name}
               price={product.price}
               images={product.images}
+              shop={shop}
               mainImageUrl={product.mainImageUrl}
               category={product.categories[0]}
               reviews={product.reviews.length || 5}

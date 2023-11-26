@@ -7,6 +7,7 @@ interface Address {
   title?: string;
   phone?: string;
   street?: string;
+  email?: string;
   company?: string;
   apartment?: string;
   country?: string;

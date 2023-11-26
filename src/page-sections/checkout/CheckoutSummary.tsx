@@ -2,8 +2,8 @@ import { FC } from "react";
 import { Card1 } from "@component/Card1";
 import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
-import { Button } from "@component/buttons";
-import TextField from "@component/text-field";
+// import { Button } from "@component/buttons";
+// import TextField from "@component/text-field";
 import Typography from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
 import { currency, getTotalPrice } from "@utils/utils";
@@ -66,15 +66,21 @@ const CheckoutSummary: FC = () => {
 
       <Divider mb="1rem" />
 
-      <Typography fontSize="25px" fontWeight="600" lineHeight="1" textAlign="right" mb="1.5rem">
+      <Typography
+        fontSize="25px"
+        fontWeight="600"
+        lineHeight="1"
+        textAlign="right"
+        mb="1.5rem"
+      >
         {totalPriceCurrency}
       </Typography>
 
-      <TextField placeholder="Voucher" fullwidth />
+      {/* <TextField placeholder="Voucher" fullwidth /> */}
 
-      <Button variant="outlined" color="primary" mt="1rem" mb="30px" fullwidth>
+      {/* <Button variant="outlined" color="primary" mt="1rem" mb="30px" fullwidth>
         Apply Voucher
-      </Button>
+      </Button> */}
     </Card1>
   );
 };

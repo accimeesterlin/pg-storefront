@@ -1,15 +1,19 @@
 import { FC } from "react";
 import Card from "@component/Card";
-import Avatar from "@component/avatar";
-import Rating from "@component/rating";
+// import Avatar from "@component/avatar";
+// import Rating from "@component/rating";
 import Divider from "@component/Divider";
-import FlexBox from "@component/FlexBox";
-import CheckBox from "@component/CheckBox";
-import TextField from "@component/text-field";
+// import FlexBox from "@component/FlexBox";
+// import CheckBox from "@component/CheckBox";
+// import TextField from "@component/text-field";
 import { Accordion, AccordionHeader } from "@component/accordion";
-import { H5, H6, Paragraph, SemiSpan } from "@component/Typography";
+import { H6, Paragraph, SemiSpan } from "@component/Typography";
+import { useAppContext } from "@context/AppContext";
 
 const ProductFilterCard: FC = () => {
+  const { state } = useAppContext();
+  const categories = state?.category || [];
+
   const render = (items: string[]) =>
     items?.map((name) => (
       <Paragraph
@@ -28,8 +32,8 @@ const ProductFilterCard: FC = () => {
     <Card p="18px 27px" elevation={5}>
       <H6 mb="10px">Categories</H6>
 
-      {categroyList?.map((item) =>
-        item.child ? (
+      {categories?.map((item) =>
+        item?.child ? (
           <Accordion key={item.title} expanded>
             <AccordionHeader px="0px" py="6px" color="text.muted">
               <SemiSpan className="cursor-pointer" mr="9px">
@@ -37,7 +41,7 @@ const ProductFilterCard: FC = () => {
               </SemiSpan>
             </AccordionHeader>
 
-            {render(item.child)}
+            {render(item?.child)}
           </Accordion>
         ) : (
           <Paragraph
@@ -55,7 +59,7 @@ const ProductFilterCard: FC = () => {
       <Divider mt="18px" mb="24px" />
 
       {/* PRICE RANGE FILTER */}
-      <H6 mb="16px">Price Range</H6>
+      {/* <H6 mb="16px">Price Range</H6>
       <FlexBox justifyContent="space-between" alignItems="center">
         <TextField placeholder="0" type="number" fullwidth />
 
@@ -64,12 +68,12 @@ const ProductFilterCard: FC = () => {
         </H5>
 
         <TextField placeholder="250" type="number" fullwidth />
-      </FlexBox>
+      </FlexBox> */}
 
-      <Divider my="24px" />
+      {/* <Divider my="24px" /> */}
 
       {/* BRANDS FILTER */}
-      <H6 mb="16px">Brands</H6>
+      {/* <H6 mb="16px">Brands</H6>
       {brandList?.map((item) => (
         <CheckBox
           my="10px"
@@ -80,12 +84,12 @@ const ProductFilterCard: FC = () => {
           label={<SemiSpan color="inherit">{item}</SemiSpan>}
           onChange={(e) => console.log(e.target.value, e.target.checked)}
         />
-      ))}
+      ))} */}
 
-      <Divider my="24px" />
+      {/* <Divider my="24px" /> */}
 
       {/* STOCK AND SALES FILTERS */}
-      {otherOptions?.map((item) => (
+      {/* {otherOptions?.map((item) => (
         <CheckBox
           my="10px"
           key={item}
@@ -95,12 +99,12 @@ const ProductFilterCard: FC = () => {
           label={<SemiSpan color="inherit">{item}</SemiSpan>}
           onChange={(e) => console.log(e.target.value, e.target.checked)}
         />
-      ))}
+      ))} */}
 
-      <Divider my="24px" />
+      {/* <Divider my="24px" /> */}
 
       {/* RATING FILTER */}
-      <H6 mb="16px">Ratings</H6>
+      {/* <H6 mb="16px">Ratings</H6>
       {[5, 4, 3, 2, 1].map((item) => (
         <CheckBox
           my="10px"
@@ -112,28 +116,44 @@ const ProductFilterCard: FC = () => {
         />
       ))}
 
-      <Divider my="24px" />
+      <Divider my="24px" /> */}
 
       {/* COLORS FILTER */}
-      <H6 mb="16px">Colors</H6>
+      {/* <H6 mb="16px">Colors</H6>
       <FlexBox mb="1rem">
         {colorList.map((item, ind) => (
-          <Avatar key={ind} bg={item} size={25} mr="10px" style={{ cursor: "pointer" }} />
+          <Avatar
+            key={ind}
+            bg={item}
+            size={25}
+            mr="10px"
+            style={{ cursor: "pointer" }}
+          />
         ))}
-      </FlexBox>
+      </FlexBox> */}
     </Card>
   );
 };
 
-const categroyList = [
-  { title: "Bath Preparations", child: ["Bubble Bath", "Bath Capsules", "Others"] },
-  { title: "Eye Makeup Preparations" },
-  { title: "Fragrance" },
-  { title: "Hair Preparations" },
-];
+// const categroyList = [
+//   {
+//     title: "Bath Preparations",
+//     child: ["Bubble Bath", "Bath Capsules", "Others"],
+//   },
+//   { title: "Eye Makeup Preparations" },
+//   { title: "Fragrance" },
+//   { title: "Hair Preparations" },
+// ];
 
-const otherOptions = ["On Sale", "In Stock", "Featured"];
-const brandList = ["Maccs", "Karts", "Baars", "Bukks", "Luasis"];
-const colorList = ["#1C1C1C", "#FF7A7A", "#FFC672", "#84FFB5", "#70F6FF", "#6B7AFF"];
+// const otherOptions = ["On Sale", "In Stock", "Featured"];
+// const brandList = ["Maccs", "Karts", "Baars", "Bukks", "Luasis"];
+// const colorList = [
+//   "#1C1C1C",
+//   "#FF7A7A",
+//   "#FFC672",
+//   "#84FFB5",
+//   "#70F6FF",
+//   "#6B7AFF",
+// ];
 
 export default ProductFilterCard;

@@ -1,15 +1,20 @@
 import { FC, Fragment } from "react";
 import FlexBox from "@component/FlexBox";
-import Pagination from "@component/pagination";
+// import Pagination from "@component/pagination";
 import { SemiSpan } from "@component/Typography";
 import { ProductCard9 } from "@component/product-cards";
 import Product from "@models/product.model";
+import { useAppContext } from "@context/AppContext";
 
 // ==========================================================
 type Props = { products: Product[] };
 // ==========================================================
 
 const ProductCard9List: FC<Props> = ({ products }) => {
+  const { state } = useAppContext();
+
+  const totalProducts = state?.products?.length;
+
   return (
     <Fragment>
       {products.map((item) => (
@@ -19,7 +24,7 @@ const ProductCard9List: FC<Props> = ({ products }) => {
           key={item.id}
           slug={item.slug}
           price={item.price}
-          name={item.name}
+          name={item.title}
           off={item.comparePrice}
           rating={item.rating}
           images={item.images}
@@ -29,9 +34,16 @@ const ProductCard9List: FC<Props> = ({ products }) => {
         />
       ))}
 
-      <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center" mt="32px">
-        <SemiSpan>Showing 1-9 of 1.3k Products</SemiSpan>
-        <Pagination pageCount={10} />
+      <FlexBox
+        flexWrap="wrap"
+        justifyContent="space-between"
+        alignItems="center"
+        mt="32px"
+      >
+        <SemiSpan>
+          Showing {products?.length} of {totalProducts} Products
+        </SemiSpan>
+        {/* <Pagination pageCount={10} /> */}
       </FlexBox>
     </Fragment>
   );

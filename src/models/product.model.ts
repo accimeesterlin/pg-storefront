@@ -6,7 +6,8 @@ interface Product {
   slug?: string;
   description?: string;
   price?: number;
-  name?: string;
+  title?: string;
+  name?: string; // Deprecated
   rating?: number;
   comparePrice?: number;
   mainImageUrl?: string;

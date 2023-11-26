@@ -60,7 +60,7 @@ const Section3: FC<Section3Props> = ({ categories }) => {
               />
 
               <CategoryTitle className="category-title">
-                <H4>{item.name}</H4>
+                <H4>{item.title}</H4>
               </CategoryTitle>
             </Wrapper>
           </Grid>

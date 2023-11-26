@@ -19,11 +19,19 @@ const SearchInputWithCategory: FC = () => {
 
   const handleCategoryChange = (cat) => () => setCategory(cat);
 
+  const products = state?.products;
+
   const search = debounce((e) => {
     const value = e.target?.value;
 
     if (!value) setResultList([]);
-    else setResultList(dummySearchResult);
+    else {
+      const searchResult = products?.filter((item) =>
+        item?.title?.toLowerCase().includes(value?.toLowerCase())
+      );
+
+      setResultList(searchResult?.map((item) => item?.title));
+    }
   }, 200);
 
   const hanldeSearch = useCallback((event) => {
@@ -93,12 +101,5 @@ const SearchInputWithCategory: FC = () => {
     </Box>
   );
 };
-
-const dummySearchResult = [
-  "Macbook Air 13",
-  "Ksus K555LA",
-  "Acer Aspire X453",
-  "iPad Mini 3",
-];
 
 export default SearchInputWithCategory;

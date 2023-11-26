@@ -4,21 +4,23 @@ import { useRouter } from "next/router";
 import * as yup from "yup";
 import { toast } from "react-toastify";
 import { Formik } from "formik";
-import Select from "@component/Select";
+// import Select from "@component/Select";
 import Grid from "@component/grid/Grid";
 import { Card1 } from "@component/Card1";
 import CheckBox from "@component/CheckBox";
-import countryList from "@data/countryList";
+// import countryList from "@data/countryList";
 import { Button } from "@component/buttons";
-import TextField from "@component/text-field";
+// import TextField from "@component/text-field";
 import Typography from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
 import { createLocalStorage } from "@utils/utils";
+import CheckoutShippingForm from "./CheckoutShippingForm";
+import CheckoutBillingForm from "./CheckoutBillingForm";
 
 const CheckoutForm: FC = () => {
   const router = useRouter();
   const { state, dispatch } = useAppContext();
-  const [saveCheckoutToLocalStorage, getCheckoutFromLocalStorage] = createLocalStorage("checkoutData");
+  const [saveCheckout, getCheckout] = createLocalStorage("checkoutData");
   const [isLoading, setIsLoading] = useState(false);
   const [sameAsShipping, setSameAsShipping] = useState(true);
 
@@ -26,9 +28,9 @@ const CheckoutForm: FC = () => {
   const address = state?.checkout?.address;
 
   const email = user?.email || "";
-  
+
   useEffect(() => {
-    const savedCheckoutData: any = getCheckoutFromLocalStorage("checkoutData");
+    const savedCheckoutData: any = getCheckout("checkoutData");
     if (savedCheckoutData) {
       dispatch({
         type: "SET_CHECKOUT",
@@ -40,21 +42,22 @@ const CheckoutForm: FC = () => {
   const defaultCountry = {
     label: "United States",
     value: "US",
-  }
+  };
 
   const initialValues = {
     shipping_name: address?.name || "",
-    shipping_email: email,
+    shipping_email: address?.email,
     shipping_contact: address?.phone,
     shipping_company: address?.company || "",
     shipping_zip: address?.zip || "",
     shipping_city: address?.city || "",
-    shipping_country: { label: address?.country, value: address?.country } || defaultCountry,
+    shipping_country:
+      { label: address?.country, value: address?.country } || defaultCountry,
     shipping_address1: address?.street || "",
     shipping_address2: address?.apartment || "",
 
     billing_name: address?.name || "",
-    billing_email: email,
+    billing_email: address?.email || email,
     billing_contact: address?.phone || "",
     billing_company: address?.company || "",
     billing_zip: address?.zip || "",
@@ -64,9 +67,12 @@ const CheckoutForm: FC = () => {
     billing_address2: address?.apartment || "",
   };
 
-  const handleFormSubmit = async (values) => {
+  const handleFormSubmit = async (values, { setSubmitting, setFieldError }) => {
     try {
+      console.log("Clicking submit button");
       setIsLoading(true);
+
+      console.log("values", values);
 
       const checkoutPayload = {
         address: {
@@ -78,9 +84,10 @@ const CheckoutForm: FC = () => {
           street: values.shipping_address1,
           city: values.shipping_city,
           apartment: values.shipping_address2,
+          email: values.shipping_email,
         },
         billingAddress: {
-          name: values.billing_name,
+          name: values.billing_name || values.shipping_name,
           phone: values.billing_contact,
           company: values.billing_company,
           zip: values.billing_zip,
@@ -88,17 +95,31 @@ const CheckoutForm: FC = () => {
           street: values.billing_address1,
           city: values.billing_city,
           apartment: values.billing_address2,
+          email: values.shipping_email || values?.billing_email,
         },
       };
 
-      saveCheckoutToLocalStorage(checkoutPayload);
+      saveCheckout(checkoutPayload);
+      await checkoutSchema.validate(values, { abortEarly: false });
+
       dispatch({ type: "SET_CHECKOUT", payload: checkoutPayload });
       router.push("/payment");
       setIsLoading(false);
     } catch (error) {
-      const errorMessage = error?.message;
-      toast.error(errorMessage);
-      setIsLoading(false);
+      // Handle validation errors
+      if (error.name === "ValidationError") {
+        error.inner.forEach(({ path, errors, message }) => {
+          setFieldError(path, message);
+          toast.error(`${path}: ${errors[0]}`);
+        });
+        setIsLoading(false);
+      } else {
+        // Handle other errors
+        const errorMessage = error?.message || "An error occurred";
+        toast.error(errorMessage);
+      }
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -108,13 +129,27 @@ const CheckoutForm: FC = () => {
       setSameAsShipping(checked);
       setFieldValue("same_as_shipping", checked);
       setFieldValue("billing_name", checked ? values.shipping_name : "");
+      setFieldValue("billing_email", checked ? values.shipping_email : "");
+      setFieldValue("billing_contact", checked ? values.shipping_contact : "");
+      setFieldValue("billing_company", checked ? values.shipping_company : "");
+      setFieldValue("billing_zip", checked ? values.shipping_zip : "");
+      setFieldValue("billing_city", checked ? values.shipping_city : "");
+      // setFieldValue("billing_country", checked ? values.shipping_country : "");
+      setFieldValue(
+        "billing_address1",
+        checked ? values.shipping_address1 : ""
+      );
+      setFieldValue(
+        "billing_address2",
+        checked ? values.shipping_address2 : ""
+      );
     };
 
   return (
     <Formik
       initialValues={initialValues}
       enableReinitialize
-      validationSchema={checkoutSchema}
+      // validationSchema={checkoutSchema}
       onSubmit={handleFormSubmit}
     >
       {({
@@ -132,128 +167,14 @@ const CheckoutForm: FC = () => {
               Shipping Address
             </Typography>
 
-            <Grid container spacing={7}>
-              <Grid item sm={6} xs={12}>
-                <TextField
-                  fullwidth
-                  mb="1rem"
-                  label="Full Name"
-                  name="shipping_name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.shipping_name}
-                  errorText={touched.shipping_name && errors.shipping_name}
-                />
-
-
-                <TextField
-                  fullwidth
-                  mb="1rem"
-                  label="Phone Number"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  name="shipping_contact"
-                  value={values.shipping_contact}
-                  errorText={
-                    touched.shipping_contact && errors.shipping_contact
-                  }
-                />
-
-
-                <TextField
-                  mb="1rem"
-                  fullwidth
-                  label="Address 1"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  name="shipping_address1"
-                  value={values.shipping_address1}
-                  errorText={
-                    touched.shipping_address1 && errors.shipping_address1
-                  }
-                />
-
-
-                <TextField
-                  fullwidth
-                  mb="1rem"
-                  type="text"
-                  label="City"
-                  onBlur={handleBlur}
-                  name="shipping_city"
-                  onChange={handleChange}
-                  value={values.shipping_city}
-                  errorText={touched.shipping_city && errors.shipping_city}
-                />
-
-
-                <TextField
-                  fullwidth
-                  mb="1rem"
-                  type="number"
-                  label="Zip Code"
-                  onBlur={handleBlur}
-                  name="shipping_zip"
-                  onChange={handleChange}
-                  value={values.shipping_zip}
-                  errorText={touched.shipping_zip && errors.shipping_zip}
-                />
-
-              </Grid>
-
-              <Grid item sm={6} xs={12}>
-                <TextField
-                  fullwidth
-                  mb="1rem"
-                  type="email"
-                  onBlur={handleBlur}
-                  label="Email Address"
-                  name="shipping_email"
-                  onChange={handleChange}
-                  value={values.shipping_email}
-                  errorText={touched.shipping_email && errors.shipping_email}
-                />
-
-
-                <TextField
-                  fullwidth
-                  mb="1rem"
-                  label="Company"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  name="shipping_company"
-                  value={values.shipping_company}
-                  errorText={
-                    touched.shipping_company && errors.shipping_company
-                  }
-                />
-
-
-                <Select
-                  mb="1rem"
-                  label="Country"
-                  options={countryList}
-                  value={values.shipping_country || "US"}
-                  errorText={
-                    touched.shipping_country && errors.shipping_country
-                  }
-                  onChange={(country) => setFieldValue("shipping_country", country)
-                  }
-                />
-
-                <TextField
-                  fullwidth
-                  label="Address 2"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  name="shipping_address2"
-                  value={values.shipping_address2}
-                  errorText={
-                    touched.shipping_address2 && errors.shipping_address2
-                  }
-                />
-              </Grid>
-            </Grid>
+            <CheckoutShippingForm
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+              values={values}
+              errors={errors}
+              touched={touched}
+              setFieldValue={setFieldValue}
+            />
           </Card1>
 
           <Card1 mb="2rem">
@@ -270,118 +191,13 @@ const CheckoutForm: FC = () => {
             />
 
             {!sameAsShipping && (
-              <Grid container spacing={7}>
-                <Grid item sm={6} xs={12}>
-                  <TextField
-                    fullwidth
-                    mb="1rem"
-                    label="Full Name"
-                    name="billing_name"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.billing_name}
-                    errorText={touched.billing_name && errors.billing_name}
-                  />
-
-                  <TextField
-                    fullwidth
-                    mb="1rem"
-                    onBlur={handleBlur}
-                    label="Phone Number"
-                    name="billing_contact"
-                    onChange={handleChange}
-                    value={values.billing_contact}
-                    errorText={
-                      touched.billing_contact && errors.billing_contact
-                    }
-                  />
-
-                  <TextField
-                    mb="1rem"
-                    fullwidth
-                    label="Address 1"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    name="billing_address1"
-                    value={values.billing_address1}
-                    errorText={
-                      touched.billing_address1 && errors.billing_address1
-                    }
-                  />
-
-                  <TextField
-                    fullwidth
-                    mb="1rem"
-                    type="text"
-                    label="City"
-                    name="billing_city"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.billing_city}
-                    errorText={touched.billing_city && errors.billing_city}
-                  />
-
-                  <TextField
-                    fullwidth
-                    mb="1rem"
-                    type="number"
-                    label="Zip Code"
-                    name="billing_zip"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.billing_zip}
-                    errorText={touched.billing_zip && errors.billing_zip}
-                  />
-                </Grid>
-
-                <Grid item sm={6} xs={12}>
-                  <TextField
-                    fullwidth
-                    mb="1rem"
-                    type="email"
-                    onBlur={handleBlur}
-                    name="billing_email"
-                    label="Email Address"
-                    onChange={handleChange}
-                    value={values.billing_email}
-                    errorText={touched.billing_email && errors.billing_email}
-                  />
-
-                  <TextField
-                    fullwidth
-                    mb="1rem"
-                    label="Company"
-                    onBlur={handleBlur}
-                    name="billing_company"
-                    onChange={handleChange}
-                    value={values.billing_company}
-                    errorText={
-                      touched.billing_company && errors.billing_company
-                    }
-                  />
-
-                  <Select
-                    mb="1rem"
-                    label="Country"
-                    options={countryList}
-                    errorText={
-                      touched.billing_country && errors.billing_country
-                    }
-                  />
-
-                  <TextField
-                    fullwidth
-                    label="Address 2"
-                    onBlur={handleBlur}
-                    name="billing_address2"
-                    onChange={handleChange}
-                    value={values.billing_address2}
-                    errorText={
-                      touched.billing_address2 && errors.billing_address2
-                    }
-                  />
-                </Grid>
-              </Grid>
+              <CheckoutBillingForm
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                values={values}
+                errors={errors}
+                touched={touched}
+              />
             )}
           </Card1>
 

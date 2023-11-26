@@ -1,14 +1,14 @@
 import { FC } from "react";
 import FlexBox from "@component/FlexBox";
 import Grid from "@component/grid/Grid";
-import Pagination from "@component/pagination";
+// import Pagination from "@component/pagination";
 import { ProductCard1 } from "@component/product-cards";
 import { SemiSpan } from "@component/Typography";
 import Product from "@models/product.model";
 import Shop from "@models/shop.model";
 
 // ==========================================================
-type Props = { products: Product[], shop: Shop };
+type Props = { products: Product[]; shop: Shop };
 // ==========================================================
 
 const ProductCard1List: FC<Props> = ({ products, shop }) => {
@@ -21,7 +21,7 @@ const ProductCard1List: FC<Props> = ({ products, shop }) => {
               id={item.id}
               slug={item.slug}
               price={Number(item.price)}
-              name={item.name}
+              name={item?.title}
               off={Number(item.comparePrice)}
               images={item.images}
               mainImageUrl={`${item.mainImageUrl}`}
@@ -32,9 +32,14 @@ const ProductCard1List: FC<Props> = ({ products, shop }) => {
         ))}
       </Grid>
 
-      <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center" mt="32px">
+      <FlexBox
+        flexWrap="wrap"
+        justifyContent="space-between"
+        alignItems="center"
+        mt="32px"
+      >
         <SemiSpan>Showing 1-4 of {products?.length} Products</SemiSpan>
-        <Pagination pageCount={products?.length} />
+        {/* <Pagination pageCount={products?.length} /> */}
       </FlexBox>
     </div>
   );

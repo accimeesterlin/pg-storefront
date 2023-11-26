@@ -1,7 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Box from "@component/Box";
 import Card from "@component/Card";
-import Select from "@component/Select";
+// import Select from "@component/Select";
 import Hidden from "@component/hidden";
 import Grid from "@component/grid/Grid";
 import Icon from "@component/icon/Icon";
@@ -15,13 +15,25 @@ import ProductCard9List from "@component/products/ProductCard9List";
 import ProductFilterCard from "@component/products/ProductFilterCard";
 import useWindowSize from "@hook/useWindowSize";
 import { useAppContext } from "@context/AppContext";
+import { useRouter } from "next/router";
 
 const ProductSearchResult = () => {
   const width = useWindowSize();
   const { state } = useAppContext();
+  const [searchResult, setSearchResult] = useState([]);
+  const router = useRouter();
   const [view, setView] = useState<"grid" | "list">("grid");
 
-  const products = state?.user?.products || [];
+  const slug = router.query.slug as string;
+  const products = state?.products || [];
+
+  useEffect(() => {
+    const searchResult = products?.filter((item) =>
+      item?.title?.toLowerCase().includes(slug?.toLowerCase())
+    );
+
+    setSearchResult(searchResult);
+  }, [slug]);
 
   const isTablet = width < 1025;
   const toggleView = useCallback((v) => () => setView(v), []);
@@ -39,17 +51,23 @@ const ProductSearchResult = () => {
       >
         <div>
           <H5>Searching for “ mobile phone ”</H5>
-          <Paragraph color="text.muted">48 results found</Paragraph>
+          <Paragraph color="text.muted">
+            {searchResult?.length} results found
+          </Paragraph>
         </div>
 
         <FlexBox alignItems="center" flexWrap="wrap">
-          <Paragraph color="text.muted" mr="1rem">
+          {/* <Paragraph color="text.muted" mr="1rem">
             Short by:
           </Paragraph>
 
           <Box flex="1 1 0" mr="1.75rem" minWidth="150px">
-            <Select placeholder="Short by" defaultValue={sortOptions[0]} options={sortOptions} />
-          </Box>
+            <Select
+              placeholder="Short by"
+              defaultValue={sortOptions[0]}
+              options={sortOptions}
+            />
+          </Box> */}
 
           <Paragraph color="text.muted" mr="0.5rem">
             View:
@@ -98,9 +116,9 @@ const ProductSearchResult = () => {
 
         <Grid item lg={9} xs={12}>
           {view === "grid" ? (
-            <ProductCard1List products={products} shop={{ id: "" }} />
+            <ProductCard1List products={searchResult} shop={{ id: "" }} />
           ) : (
-            <ProductCard9List products={products} />
+            <ProductCard9List products={searchResult} />
           )}
         </Grid>
       </Grid>
@@ -108,12 +126,12 @@ const ProductSearchResult = () => {
   );
 };
 
-const sortOptions = [
-  { label: "Relevance", value: "Relevance" },
-  { label: "Date", value: "Date" },
-  { label: "Price Low to High", value: "Price Low to High" },
-  { label: "Price High to Low", value: "Price High to Low" },
-];
+// const sortOptions = [
+//   { label: "Relevance", value: "Relevance" },
+//   { label: "Date", value: "Date" },
+//   { label: "Price Low to High", value: "Price Low to High" },
+//   { label: "Price High to Low", value: "Price High to Low" },
+// ];
 
 ProductSearchResult.layout = NavbarLayout;
 

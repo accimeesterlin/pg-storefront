@@ -23,6 +23,7 @@ type InitialState = {
   menus: any[];
   footerMenus: any[];
   shop: Shop;
+  products: Product[];
   checkout: Checkout;
   category: Category[];
   homeMenus: any[];
