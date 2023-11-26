@@ -67,27 +67,41 @@ const CheckoutForm: FC = () => {
     billing_address2: address?.apartment || "",
   };
 
-  const handleFormSubmit = async (values, { setSubmitting, setFieldError }) => {
+  const setValuesSameAsShipping = (values, setFieldValue) => {
+    setFieldValue("billing_name", values.shipping_name);
+    setFieldValue("billing_email", values.shipping_email);
+    setFieldValue("billing_contact", values.shipping_contact);
+    setFieldValue("billing_company", values.shipping_company);
+    setFieldValue("billing_zip", values.shipping_zip);
+    setFieldValue("billing_city", values.shipping_city);
+    setFieldValue("billing_country", values.shipping_country?.label);
+    setFieldValue("billing_address1", values.shipping_address1);
+    setFieldValue("billing_address2", values.shipping_address2);
+  };
+
+  const handleFormSubmit = async (
+    values,
+    { setSubmitting, setFieldError, setFieldValue }
+  ) => {
     try {
-      console.log("Clicking submit button");
       setIsLoading(true);
 
-      console.log("values", values);
+      const address = {
+        name: values.shipping_name,
+        phone: values.shipping_contact,
+        company: values.shipping_company,
+        zip: values.shipping_zip,
+        country: values.shipping_country?.value,
+        street: values.shipping_address1,
+        city: values.shipping_city,
+        apartment: values.shipping_address2,
+        email: values.shipping_email,
+      };
 
       const checkoutPayload = {
-        address: {
-          name: values.shipping_name,
-          phone: values.shipping_contact,
-          company: values.shipping_company,
-          zip: values.shipping_zip,
-          country: values.shipping_country?.value,
-          street: values.shipping_address1,
-          city: values.shipping_city,
-          apartment: values.shipping_address2,
-          email: values.shipping_email,
-        },
+        address,
         billingAddress: {
-          name: values.billing_name || values.shipping_name,
+          name: values.billing_name,
           phone: values.billing_contact,
           company: values.billing_company,
           zip: values.billing_zip,
@@ -98,6 +112,11 @@ const CheckoutForm: FC = () => {
           email: values.shipping_email || values?.billing_email,
         },
       };
+
+      if (sameAsShipping) {
+        checkoutPayload.billingAddress = address;
+        setValuesSameAsShipping(values, setFieldValue);
+      }
 
       saveCheckout(checkoutPayload);
       await checkoutSchema.validate(values, { abortEarly: false });
@@ -128,21 +147,11 @@ const CheckoutForm: FC = () => {
     ({ target: { checked } }) => {
       setSameAsShipping(checked);
       setFieldValue("same_as_shipping", checked);
-      setFieldValue("billing_name", checked ? values.shipping_name : "");
-      setFieldValue("billing_email", checked ? values.shipping_email : "");
-      setFieldValue("billing_contact", checked ? values.shipping_contact : "");
-      setFieldValue("billing_company", checked ? values.shipping_company : "");
-      setFieldValue("billing_zip", checked ? values.shipping_zip : "");
-      setFieldValue("billing_city", checked ? values.shipping_city : "");
-      // setFieldValue("billing_country", checked ? values.shipping_country : "");
-      setFieldValue(
-        "billing_address1",
-        checked ? values.shipping_address1 : ""
-      );
-      setFieldValue(
-        "billing_address2",
-        checked ? values.shipping_address2 : ""
-      );
+
+      if (checked) {
+        setValuesSameAsShipping(values, setFieldValue);
+        return;
+      }
     };
 
   return (
@@ -234,6 +243,7 @@ const CheckoutForm: FC = () => {
 };
 
 const checkoutSchema = yup.object().shape({
+  // Shipping Address
   shipping_name: yup.string().required("required"),
   shipping_email: yup.string().email("invalid email").required("required"),
   shipping_contact: yup.string().required("required"),
@@ -241,13 +251,15 @@ const checkoutSchema = yup.object().shape({
   shipping_city: yup.string().required("required"),
   shipping_country: yup.object().required("required"),
   shipping_address1: yup.string().required("required"),
-  billing_name: yup.string().required("required"),
-  billing_email: yup.string().required("required"),
-  billing_contact: yup.string().required("required"),
-  billing_zip: yup.string().required("required"),
-  billing_city: yup.string().required("required"),
-  billing_country: yup.string().required("required"),
-  billing_address1: yup.string().required("required"),
+
+  // Billing Address
+  billing_name: yup.string().nullable(),
+  billing_email: yup.string().nullable(),
+  billing_contact: yup.string().nullable(),
+  billing_zip: yup.string().nullable(),
+  billing_city: yup.string().nullable(),
+  billing_country: yup.string().nullable(),
+  billing_address1: yup.string().nullable(),
 });
 
 export default CheckoutForm;

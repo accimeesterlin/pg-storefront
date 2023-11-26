@@ -26,21 +26,24 @@ import {
   getShopFooterMenus,
 } from "@utils/__api__/shops";
 import Shop from "@models/shop.model";
-
+import categoryApi from "@utils/__api__/category";
 import Grid from "@component/grid/Grid";
 import { GlobalSetting } from "@models/globalSetting.model";
+import Category from "@models/category.model";
 // import { StyledMiniCart } from "@component/mini-cart/styles";
 
 type Props = {
   shop: Shop;
   menus: any[];
   footerMenus: any[];
+  categories: Category[];
   globalSetting: GlobalSetting;
+  homeMenus: any[];
 };
 
 const PaymentReview = (props: Props) => {
   const router = useRouter();
-  const [getCheckout] = createLocalStorage("checkoutData");
+  const [, getCheckout] = createLocalStorage("checkoutData");
   const { state, dispatch } = useAppContext();
   const paymentMethod = state?.checkout?.paymentMethod;
 
@@ -49,24 +52,30 @@ const PaymentReview = (props: Props) => {
   const footerMenus = props?.footerMenus;
   const globalSetting = props?.globalSetting;
   const address = state.checkout?.address;
+  const categories = props?.categories;
+  const homeMenus = props?.homeMenus;
 
   useEffect(() => {
     if (shop) {
       dispatch({ type: "SET_SHOP", payload: shop });
     }
-  }, [shop]);
 
-  useEffect(() => {
     if (menus) {
       dispatch({ type: "SET_NAVIGATION_MENU", payload: menus });
     }
-  }, [menus]);
 
-  useEffect(() => {
     if (footerMenus) {
       dispatch({ type: "SET_FOOTER_MENU", payload: footerMenus });
     }
-  }, [footerMenus]);
+
+    if (categories) {
+      dispatch({ type: "SET_CATEGORY", payload: categories });
+    }
+
+    if (homeMenus) {
+      dispatch({ type: "SET_HOME_MENU", payload: homeMenus });
+    }
+  }, [shop, menus, footerMenus, categories, homeMenus]);
 
   useEffect(() => {
     const savedCheckoutData: any = getCheckout("checkoutData");
@@ -165,7 +174,6 @@ const MiniCart: FC = () => {
 
       clearLocalStorageKeys(["cartState", "checkoutState"]);
 
-      // TODO:
       setIsLoading(false);
     } catch (error) {
       const errorMessage = error?.response?.data?.message || error?.message;
@@ -280,7 +288,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const shop = await getShopById(shopId);
   const footerMenus = await getShopFooterMenus(shopId);
   const globalSetting = await getGlobalSetting();
-
+  const categories = await categoryApi?.getCategoryByShopId(shopId);
   const mainCarouselData = await marketApi.getMainCarousel(shopId);
   const menus = await getShopMenus(shopId);
 
@@ -291,6 +299,7 @@ export const getStaticProps: GetStaticProps = async () => {
       menus,
       footerMenus,
       globalSetting,
+      categories,
     },
   };
 };

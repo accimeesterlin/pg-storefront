@@ -28,7 +28,7 @@ type Props = {
 };
 
 const Checkout = (props: Props) => {
-  const [getCheckout] = createLocalStorage("checkoutData");
+  const [, getCheckout] = createLocalStorage("checkoutData");
   const { state, dispatch } = useAppContext();
   const router = useRouter();
 
