@@ -163,6 +163,7 @@ export const getStaticProps: GetStaticProps = async () => {
       footerMenus,
       categories,
     },
+    revalidate: 60,
   };
 };
 
