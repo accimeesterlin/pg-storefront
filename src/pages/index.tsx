@@ -177,7 +177,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
       footerMenus,
       categories,
     },
-    revalidate: 60,
   };
 };
 
