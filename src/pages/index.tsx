@@ -46,7 +46,7 @@ type Props = {
 
 const Market1 = (props: Props) => {
   const { dispatch } = useAppContext();
-
+  const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
   const shop = props?.shop;
   const products = props?.products;
   const menus = props?.menus;
@@ -80,6 +80,20 @@ const Market1 = (props: Props) => {
       dispatch({ type: "SET_HOME_MENU", payload: homeMenus });
     }
   }, [shop, products, menus, footerMenus, categories, homeMenus]);
+
+  const getShop = async () => {
+    try {
+      const data: any = await getShopById(shopId);
+
+      if (data) {
+        dispatch({ type: "SET_SHOP", payload: data });
+      }
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getShop();
+  }, [shopId]);
 
   const listOfCollections = collections?.map((collection) => {
     const products = collection?.products;
