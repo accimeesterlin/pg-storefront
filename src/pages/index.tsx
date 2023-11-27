@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import AppLayout from "@component/layout/AppLayout";
 import Section1 from "@sections/market-1/Section1";
 import Section2 from "@sections/market-1/Section2";
@@ -153,7 +153,7 @@ Market1.layout = AppLayout;
 
 // ==============================================================
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
 
   const shop = await getShopById(shopId);
