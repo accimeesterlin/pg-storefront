@@ -9,6 +9,8 @@ const GoogleAnalytics: FC = () => {
     gtag('config', 'G-FLCDXWTVMD');
   `;
 
+  // TODO: Add Google Tag ID
+
   return (
     <Fragment>
       <Script

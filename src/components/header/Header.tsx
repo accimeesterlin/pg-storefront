@@ -82,11 +82,13 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
         height="100%"
       >
         <FlexBox className="logo" alignItems="center" mr="1rem">
-          <Link href="/">
-            <a>
-              <Image src={logoUrl} alt="logo" width="50px" />
-            </a>
-          </Link>
+          {logoUrl && (
+            <Link href="/">
+              <a>
+                <Image src={logoUrl} alt="logo" width="50px" />
+              </a>
+            </Link>
+          )}
 
           {isFixed && (
             <div className="category-holder">
