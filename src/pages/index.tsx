@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import AppLayout from "@component/layout/AppLayout";
 import Section1 from "@sections/market-1/Section1";
 import Section2 from "@sections/market-1/Section2";
+import isEmpty from "lodash.isempty";
 // import Section3 from "@sections/market-1/Section3";
 // import Section4 from "@sections/market-1/Section4";
 // import Section5 from "@sections/market-1/Section5";
@@ -80,10 +81,12 @@ const Market1 = (props: Props) => {
     }
   }, [shop, products, menus, footerMenus, categories, homeMenus]);
 
-  const listOfCollections = collections?.map((collection) => {
-    const products = collection?.products;
-    return <Section2 products={products} title={collection?.name} />;
-  });
+  const listOfCollections = collections
+    ?.filter((collection) => collection?.products?.length > 0)
+    ?.map((collection) => {
+      const products = collection?.products;
+      return <Section2 products={products} title={collection?.name} />;
+    });
 
   // 282 * 105
 
