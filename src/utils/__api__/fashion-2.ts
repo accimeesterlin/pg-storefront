@@ -4,7 +4,7 @@ import Brand from "models/Brand.model";
 import Product from "models/product.model";
 import Service from "models/service.model";
 import Category from "models/category.model";
-import MainCarouselItem from "models/market-1.model";
+// import MainCarouselItem from "models/market-1.model";
 
 import * as db from "../../__server__/__db__/fashion-2/data";
 
@@ -63,7 +63,7 @@ const getCategories = async (): Promise<Category[]> => {
   return db.categories;
 };
 
-const getMainCarouselData = async (): Promise<MainCarouselItem[]> => {
+const getMainCarouselData = async (): Promise<any[]> => {
   // const response = await axios.get("/api/fashion-shop-2/main-carousel");
   return db.mainCarouselData;
 };

@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+// import { GetStaticProps } from "next";
 import AppLayout from "@component/layout/AppLayout";
 import Section1 from "@sections/market-1/Section1";
 import Section2 from "@sections/market-1/Section2";

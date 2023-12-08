@@ -3,7 +3,7 @@ import Brand from "@models/Brand.model";
 import Product from "@models/product.model";
 import Service from "@models/service.model";
 import Category from "@models/category.model";
-import MainCarouselItem from "@models/market-1.model";
+// import MainCarouselItem from "@models/market-1.model";
 import * as db from "../../__server__/__db__/market-1/data";
 import shops from "../../__server__/__db__/shop/data";
 import axios from "axios";
@@ -107,7 +107,7 @@ const getServiceList = async (): Promise<Service[]> => {
 
 
 // Size of the carousel is 251 * 391
-const getMainCarousel = async (shopId: string): Promise<MainCarouselItem[]> => {
+const getMainCarousel = async (shopId: string): Promise<any[]> => {
   try {
     const response = await api.get(`/banner`, { params: { shopId } });
 
