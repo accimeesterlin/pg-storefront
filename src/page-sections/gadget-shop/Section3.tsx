@@ -8,15 +8,22 @@ type Props = { bannerData: any[] };
 // ===================================================
 
 const Section3: FC<Props> = ({ bannerData }) => {
+  let firstBanner;
+  let secondBanner;
+
+  if (bannerData?.length > 0) {
+    [firstBanner, secondBanner] = bannerData;
+  }
+
   return (
     <CategorySectionCreator>
       <Grid container spacing={6}>
         <Grid item md={6} xs={12}>
           <Card2
             productUrl="/"
-            title={bannerData[0].title}
-            mainImageUrl={bannerData[0].mainImageUrl}
-            subtitle={bannerData[0].description}
+            title={firstBanner?.title}
+            mainImageUrl={firstBanner?.mainImageUrl}
+            subtitle={firstBanner?.description}
           />
         </Grid>
 
@@ -26,9 +33,9 @@ const Section3: FC<Props> = ({ bannerData }) => {
             productUrl="/"
             bg="text.muted"
             subtitleColor="gray.400"
-            title={bannerData[1].title}
-            mainImageUrl={bannerData[1].mainImageUrl}
-            subtitle={bannerData[1].description}
+            title={secondBanner?.title}
+            mainImageUrl={secondBanner?.mainImageUrl}
+            subtitle={secondBanner?.description}
           />
         </Grid>
       </Grid>

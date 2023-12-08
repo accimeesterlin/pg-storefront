@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { GetStaticProps } from "next";
+// import { GetStaticProps } from "next";
 import Box from "@component/Box";
 import Navbar from "@component/navbar/Navbar";
 import AppLayout from "@component/layout/AppLayout";
@@ -14,13 +14,16 @@ import Section8 from "@sections/market-2/Section8";
 import Section9 from "@sections/market-2/Section9";
 import Section10 from "@sections/market-2/Section10";
 // api utils
-import api from "@utils/__api__/market-2";
+// import api from "@utils/__api__/market-2";
 // data models
 import Brand from "@models/Brand.model";
 import Service from "@models/service.model";
 import Product from "@models/product.model";
 import Category from "@models/category.model";
-import { CategoryBasedProducts, MainCarouselItem } from "@models/market-2.model";
+import {
+  CategoryBasedProducts,
+  MainCarouselItem,
+} from "@models/market-2.model";
 
 // =======================================================
 type Props = {
@@ -86,28 +89,28 @@ MarketTwo.layout = AppLayout;
 
 // ==============================================================
 
-export const getStaticProps: GetStaticProps = async () => {
-  const brands = await api.getBrands();
-  const products = await api.getProducts();
-  const serviceList = await api.getServices();
-  const categories = await api.getCategories();
-  const mainCarouselData = await api.getMainCarouselData();
-  const menFashionProducts = await api.getMenFashionProducts();
-  const electronicsProducts = await api.getElectronicsProducts();
-  const womenFashionProducts = await api.getWomenFashionProducts();
+// export const getStaticProps: GetStaticProps = async () => {
+//   const brands = await api.getBrands();
+//   const products = await api.getProducts();
+//   const serviceList = await api.getServices();
+//   const categories = await api.getCategories();
+//   const mainCarouselData = await api.getMainCarouselData();
+//   const menFashionProducts = await api.getMenFashionProducts();
+//   const electronicsProducts = await api.getElectronicsProducts();
+//   const womenFashionProducts = await api.getWomenFashionProducts();
 
-  return {
-    props: {
-      brands,
-      products,
-      categories,
-      serviceList,
-      mainCarouselData,
-      menFashionProducts,
-      electronicsProducts,
-      womenFashionProducts,
-    },
-  };
-};
+//   return {
+//     props: {
+//       brands,
+//       products,
+//       categories,
+//       serviceList,
+//       mainCarouselData,
+//       menFashionProducts,
+//       electronicsProducts,
+//       womenFashionProducts,
+//     },
+//   };
+// };
 
 export default MarketTwo;

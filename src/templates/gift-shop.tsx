@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react";
-import { GetStaticProps } from "next";
+// import { GetStaticProps } from "next";
 import styled from "styled-components";
 import Box from "@component/Box";
 import Container from "@component/Container";
@@ -13,7 +13,7 @@ import Section5 from "@sections/gift-shop/Section5";
 import Section6 from "@sections/gift-shop/Section6";
 import AppLayout from "@component/layout/AppLayout";
 import { deviceSize, layoutConstant } from "@utils/constants";
-import api from "@utils/__api__/gift";
+// import api from "@utils/__api__/gift";
 // data models
 import Product from "@models/product.model";
 import Service from "@models/service.model";
@@ -48,12 +48,12 @@ const StyledContainer = styled(Container)({
 // ========================================================
 type GiftShopProps = {
   allProducts: Product[];
-  serviceList: Service[];
-  topCategories: Category[];
+  serviceList?: Service[];
+  topCategories?: Category[];
   popularProducts: Product[];
   topSailedProducts: Product[];
-  carouselData: GiftCarouselItem[];
-  categoryNavigation: CategoryNavList[];
+  carouselData?: GiftCarouselItem[];
+  categoryNavigation?: CategoryNavList[];
 };
 // ========================================================
 
@@ -110,26 +110,26 @@ const GiftShop = (props: GiftShopProps) => {
 
 GiftShop.layout = AppLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const allProducts = await api.getAllProducts();
-  const serviceList = await api.getServiceList();
-  const topCategories = await api.getTopCategories();
-  const carouselData = await api.getMainCarouselData();
-  const popularProducts = await api.getPopularProducts();
-  const topSailedProducts = await api.getTopSailedProducts();
-  const categoryNavigation = await api.getCategoryNavigation();
+// export const getStaticProps: GetStaticProps = async () => {
+//   const allProducts = await api.getAllProducts();
+//   const serviceList = await api.getServiceList();
+//   const topCategories = await api.getTopCategories();
+//   const carouselData = await api.getMainCarouselData();
+//   const popularProducts = await api.getPopularProducts();
+//   const topSailedProducts = await api.getTopSailedProducts();
+//   const categoryNavigation = await api.getCategoryNavigation();
 
-  return {
-    props: {
-      allProducts,
-      serviceList,
-      carouselData,
-      topCategories,
-      popularProducts,
-      topSailedProducts,
-      categoryNavigation,
-    },
-  };
-};
+//   return {
+//     props: {
+//       allProducts,
+//       serviceList,
+//       carouselData,
+//       topCategories,
+//       popularProducts,
+//       topSailedProducts,
+//       categoryNavigation,
+//     },
+//   };
+// };
 
 export default GiftShop;

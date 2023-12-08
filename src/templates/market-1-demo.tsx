@@ -12,7 +12,7 @@ import Section10 from "@sections/market-1/Section10";
 import Section11 from "@sections/market-1/Section11";
 import Section12 from "@sections/market-1/Section12";
 import Section13 from "@sections/market-1/Section13";
-import api from "@utils/__api__/market-1";
+// import api from "@utils/__api__/market-1";
 // data models
 import Shop from "@models/shop.model";
 import Brand from "@models/Brand.model";
@@ -106,50 +106,50 @@ Market1.layout = AppLayout;
 
 // ==============================================================
 
-export const getStaticProps: GetStaticProps = async () => {
-  const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
+// export const getStaticProps: GetStaticProps = async () => {
+//   const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
 
-  const carList = await api.getCarList();
-  const carBrands = await api.getCarBrands();
-  const moreItems = await api.getMoreItems();
-  const mobileList = await api.getMobileList();
-  const opticsList = await api.getOpticsList();
-  const mobileShops = await api.getMobileShops();
-  const opticsShops = await api.getOpticsShops();
-  const serviceList = await api.getServiceList();
-  const mobileBrands = await api.getMobileBrands();
-  const flashDealsData = await api.getFlashDeals();
-  const opticsBrands = await api.getOpticsBrands();
-  const bottomCategories = await api.getCategories();
-  const topCategories = await api.getTopCategories();
-  const topRatedBrands = await api.getTopRatedBrand();
-  const mainCarouselData = await api.getMainCarousel(shopId);
-  const newArrivalsList = await api.getNewArrivalList();
-  const bigDiscountList = await api.getBigDiscountList();
-  const topRatedProducts = await api.getTopRatedProduct();
+//   const carList = await api.getCarList();
+//   const carBrands = await api.getCarBrands();
+//   const moreItems = await api.getMoreItems();
+//   const mobileList = await api.getMobileList();
+//   const opticsList = await api.getOpticsList();
+//   const mobileShops = await api.getMobileShops();
+//   const opticsShops = await api.getOpticsShops();
+//   const serviceList = await api.getServiceList();
+//   const mobileBrands = await api.getMobileBrands();
+//   const flashDealsData = await api.getFlashDeals();
+//   const opticsBrands = await api.getOpticsBrands();
+//   const bottomCategories = await api.getCategories();
+//   const topCategories = await api.getTopCategories();
+//   const topRatedBrands = await api.getTopRatedBrand();
+//   const mainCarouselData = await api.getMainCarousel(shopId);
+//   const newArrivalsList = await api.getNewArrivalList();
+//   const bigDiscountList = await api.getBigDiscountList();
+//   const topRatedProducts = await api.getTopRatedProduct();
 
-  return {
-    props: {
-      carList,
-      carBrands,
-      moreItems,
-      mobileList,
-      opticsList,
-      serviceList,
-      mobileShops,
-      opticsShops,
-      mobileBrands,
-      opticsBrands,
-      topCategories,
-      flashDealsData,
-      topRatedBrands,
-      newArrivalsList,
-      bigDiscountList,
-      mainCarouselData,
-      topRatedProducts,
-      bottomCategories,
-    },
-  };
-};
+//   return {
+//     props: {
+//       carList,
+//       carBrands,
+//       moreItems,
+//       mobileList,
+//       opticsList,
+//       serviceList,
+//       mobileShops,
+//       opticsShops,
+//       mobileBrands,
+//       opticsBrands,
+//       topCategories,
+//       flashDealsData,
+//       topRatedBrands,
+//       newArrivalsList,
+//       bigDiscountList,
+//       mainCarouselData,
+//       topRatedProducts,
+//       bottomCategories,
+//     },
+//   };
+// };
 
 export default Market1;

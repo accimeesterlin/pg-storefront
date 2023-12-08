@@ -42,7 +42,7 @@ type Props = { list: any[] };
 const Section5: FC<Props> = ({ list }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const totalSlides = list.length / 4;
+  const totalSlides = list?.length / 4;
   const firstIndex = currentSlide * 4;
   const lastIndex = firstIndex + 4;
 
@@ -97,7 +97,7 @@ const Section5: FC<Props> = ({ list }) => {
           {Array.from({ length: totalSlides }).map((_item, ind) => (
             <Box py="0.25rem" key={ind}>
               <Grid container spacing={6}>
-                {list.slice(firstIndex, lastIndex).map((item, ind) => (
+                {list?.slice(firstIndex, lastIndex).map((item, ind) => (
                   <Grid item md={6} xs={12} key={ind}>
                     <Link href="/">
                       <a>

@@ -34,7 +34,11 @@ const Footer1: FC = () => {
   const email = shop?.email || "";
   const phone = shop?.phone || "";
 
-  const footerMenus = state?.footerMenus?.slice(0, 1) || [];
+  let footerMenus = [];
+
+  if (state.footerMenus?.length > 0) {
+    footerMenus = state?.footerMenus?.slice(0, 1) || [];
+  }
 
   const footerBg = shop?.footerColorHex || "#0F3460";
 

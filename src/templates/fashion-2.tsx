@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { GetStaticProps } from "next";
+// import { GetStaticProps } from "next";
 import Box from "@component/Box";
 import Navbar from "@component/navbar/Navbar";
 import AppLayout from "@component/layout/AppLayout";
@@ -13,7 +13,7 @@ import Section7 from "@sections/fashion-2/Section7";
 import Section8 from "@sections/fashion-2/Section8";
 import Section9 from "@sections/fashion-2/Section9";
 import Section10 from "@sections/fashion-2/Section10";
-import api from "@utils/__api__/fashion-2";
+// import api from "@utils/__api__/fashion-2";
 // data-models
 import Blog from "@models/blog.model";
 import Brand from "@models/Brand.model";
@@ -86,34 +86,34 @@ const FashionTwo = (props: Props) => {
 
 FashionTwo.layout = AppLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const blogs = await api.getBlogs();
-  const brands = await api.getBrands();
-  const products = await api.getProducts();
-  const serviceList = await api.getServices();
-  const categories = await api.getCategories();
-  const saleProducts = await api.getSaleProducts();
-  const latestProducts = await api.getLatestProducts();
-  const popularProducts = await api.getPopularProducts();
-  const featureProducts = await api.getFeatureProducts();
-  const bestWeekProducts = await api.getBestWeekProducts();
-  const mainCarouselData = await api.getMainCarouselData();
+// export const getStaticProps: GetStaticProps = async () => {
+//   const blogs = await api.getBlogs();
+//   const brands = await api.getBrands();
+//   const products = await api.getProducts();
+//   const serviceList = await api.getServices();
+//   const categories = await api.getCategories();
+//   const saleProducts = await api.getSaleProducts();
+//   const latestProducts = await api.getLatestProducts();
+//   const popularProducts = await api.getPopularProducts();
+//   const featureProducts = await api.getFeatureProducts();
+//   const bestWeekProducts = await api.getBestWeekProducts();
+//   const mainCarouselData = await api.getMainCarouselData();
 
-  return {
-    props: {
-      blogs,
-      brands,
-      products,
-      categories,
-      serviceList,
-      saleProducts,
-      latestProducts,
-      popularProducts,
-      featureProducts,
-      bestWeekProducts,
-      mainCarouselData,
-    },
-  };
-};
+//   return {
+//     props: {
+//       blogs,
+//       brands,
+//       products,
+//       categories,
+//       serviceList,
+//       saleProducts,
+//       latestProducts,
+//       popularProducts,
+//       featureProducts,
+//       bestWeekProducts,
+//       mainCarouselData,
+//     },
+//   };
+// };
 
 export default FashionTwo;

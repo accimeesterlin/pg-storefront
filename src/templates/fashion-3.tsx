@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { GetStaticProps } from "next";
+// import { GetStaticProps } from "next";
 import Box from "@component/Box";
 import Navbar from "@component/navbar/Navbar";
 import AppLayout from "@component/layout/AppLayout";
@@ -11,7 +11,7 @@ import Section5 from "@sections/fashion-3/Section5";
 import Section6 from "@sections/fashion-3/Section6";
 import Section7 from "@sections/fashion-3/Section7";
 import Section8 from "@sections/fashion-3/Section8";
-import api from "@utils/__api__/fashion-3";
+// import api from "@utils/__api__/fashion-3";
 // data models
 import Blog from "@models/blog.model";
 import Service from "@models/service.model";
@@ -65,14 +65,14 @@ const FashionThree = (props: FashionShop3Props) => {
 
 FashionThree.layout = AppLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const blogs = await api.getBlogs();
-  const products = await api.getProducts();
-  const services = await api.getServices();
-  const featureProducts = await api.getFeatureProducts();
-  const mainCarouselData = await api.getMainCarouselData();
+// export const getStaticProps: GetStaticProps = async () => {
+//   const blogs = await api.getBlogs();
+//   const products = await api.getProducts();
+//   const services = await api.getServices();
+//   const featureProducts = await api.getFeatureProducts();
+//   const mainCarouselData = await api.getMainCarouselData();
 
-  return { props: { blogs, products, featureProducts, mainCarouselData, services } };
-};
+//   return { props: { blogs, products, featureProducts, mainCarouselData, services } };
+// };
 
 export default FashionThree;

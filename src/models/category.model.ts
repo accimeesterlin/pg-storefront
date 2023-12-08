@@ -1,11 +1,11 @@
 export interface Category {
-  id: string;
+  id?: string;
   title?: string;
   name?: string; // deparacted
-  slug: string;
+  slug?: string;
   icon?: string;
   image?: string;
-  parent: string[];
+  parent?: string[];
   featured?: boolean;
   description?: string;
   child?: any[];

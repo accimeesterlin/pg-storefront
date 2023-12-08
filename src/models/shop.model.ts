@@ -1,5 +1,16 @@
 import Product from "./product.model";
 
+export enum ShopTheme {
+  DEFAULT = "default",
+  MARKET = "market",
+  FASHION = "fashion",
+  GROCERY = "grocery",
+  FURNITURE = "furniture",
+  GADGET = "gadget",
+  GIFT = "gift",
+  HEALTH_BEAUTY = "health_beauty",
+}
+
 interface Shop {
   id?: string;
   slug?: string;
@@ -8,6 +19,7 @@ interface Shop {
   email?: string;
   name?: string;
   merchantId?: string;
+  theme?: ShopTheme;
   phone?: string;
   headerColorHex?: string;
   footerColorHex?: string;

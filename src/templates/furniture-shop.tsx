@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from "react";
-import { GetStaticProps } from "next";
+// import { GetStaticProps } from "next";
 import styled from "styled-components";
 import Box from "@component/Box";
 import Container from "@component/Container";
@@ -11,7 +11,7 @@ import Section2 from "@sections/furniture-shop/Section2";
 import Section3 from "@sections/furniture-shop/Section3";
 import Section4 from "@sections/furniture-shop/Section4";
 import { deviceSize, layoutConstant } from "@utils/constants";
-import api from "@utils/__api__/furniture";
+// import api from "@utils/__api__/furniture";
 // data models
 import Product from "@models/product.model";
 import CategoryNavList from "@models/categoryNavList.model";
@@ -45,8 +45,8 @@ type FurnitureShopProps = {
   topNewProducts: Product[];
   furnitureProducts: Product[];
   topSellingProducts: Product[];
-  sidebarNavList: CategoryNavList[];
-  mainCarouselData: FurnitureCarouselItem[];
+  sidebarNavList?: CategoryNavList[];
+  mainCarouselData?: FurnitureCarouselItem[];
 };
 // ======================================================================
 
@@ -62,7 +62,7 @@ const FurnitureShop = (props: FurnitureShopProps) => {
       <Navbar />
 
       {/* HERO CAROUSEL AREA */}
-      <Section1 mainCarouselData={props.mainCarouselData} />
+      <Section1 mainCarouselData={props.mainCarouselData || []} />
 
       <Container>
         <StyledContainer>
@@ -71,7 +71,7 @@ const FurnitureShop = (props: FurnitureShopProps) => {
             <SideNavbar
               lineStyle="dash"
               sidebarStyle="style2"
-              navList={props.sidebarNavList}
+              navList={props.sidebarNavList || []}
               sidebarHeight={sidebarHeight || "85vh"}
             />
           </Box>
@@ -83,13 +83,19 @@ const FurnitureShop = (props: FurnitureShopProps) => {
         </StyledContainer>
 
         {/* TOP NEW PRODUCTS AREA */}
-        <Section3 products={props.topNewProducts} title="Top New Product" />
+        <Section3
+          products={props.topNewProducts || []}
+          title="Top New Product"
+        />
 
         {/* TOP SELLING PRODUCTS AREA */}
-        <Section3 products={props.topSellingProducts} title="Top Selling Product" />
+        <Section3
+          products={props.topSellingProducts || []}
+          title="Top Selling Product"
+        />
 
         {/* ALL PRODUCTS AREA  */}
-        <Section4 products={props.furnitureProducts} />
+        <Section4 products={props.furnitureProducts || []} />
       </Container>
     </Fragment>
   );
@@ -97,22 +103,22 @@ const FurnitureShop = (props: FurnitureShopProps) => {
 
 FurnitureShop.layout = AppLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const topNewProducts = await api.getTopNewProducts();
-  const mainCarouselData = await api.getMainCarouselData();
-  const furnitureProducts = await api.getFurnitureProducts();
-  const sidebarNavList = await api.getFurnitureShopNavList();
-  const topSellingProducts = await api.getTopSellingProducts();
+// export const getStaticProps: GetStaticProps = async () => {
+//   const topNewProducts = await api.getTopNewProducts();
+//   const mainCarouselData = await api.getMainCarouselData();
+//   const furnitureProducts = await api.getFurnitureProducts();
+//   const sidebarNavList = await api.getFurnitureShopNavList();
+//   const topSellingProducts = await api.getTopSellingProducts();
 
-  return {
-    props: {
-      sidebarNavList,
-      topNewProducts,
-      mainCarouselData,
-      furnitureProducts,
-      topSellingProducts,
-    },
-  };
-};
+//   return {
+//     props: {
+//       sidebarNavList,
+//       topNewProducts,
+//       mainCarouselData,
+//       furnitureProducts,
+//       topSellingProducts,
+//     },
+//   };
+// };
 
 export default FurnitureShop;

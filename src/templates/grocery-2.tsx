@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+// import { GetStaticProps } from "next";
 import Box from "@component/Box";
 import { Footer2 } from "@component/footer";
 import Wrapper from "@sections/grocery-2/Wrapper";
@@ -11,7 +11,7 @@ import Section9 from "@sections/grocery-2/Section9";
 import SidenavBar from "@sections/grocery-2/SidenavBar";
 import GroceryLayout from "@component/layout/GroceryLayout";
 import useScroll from "@hook/useScroll";
-import api from "@utils/__api__/grocery-2";
+// import api from "@utils/__api__/grocery-2";
 // data models
 import Service from "@models/service.model";
 import Product from "@models/product.model";
@@ -65,7 +65,10 @@ const GroceryTwo = (props: Grocery2Props) => {
 
         {/* BEST SELLER PRODUCTS AREA */}
         <Box mb="3rem">
-          <Section4 title="Best Seller in Your Area" products={props.bestSellProducts} />
+          <Section4
+            title="Best Seller in Your Area"
+            products={props.bestSellProducts}
+          />
         </Box>
 
         {/* DISCOUNT BANNER CAROUSEL AREA */}
@@ -75,12 +78,18 @@ const GroceryTwo = (props: Grocery2Props) => {
 
         {/* BEST HOME PRODUCTS AREA */}
         <Box mb="3rem">
-          <Section4 title="Best of Home Essentials" products={props.bestHomeProducts} />
+          <Section4
+            title="Best of Home Essentials"
+            products={props.bestHomeProducts}
+          />
         </Box>
 
         {/* SNACK AND DRINKS PRODUCTS AREA */}
         <Box mb="3rem">
-          <Section4 title="Snacks, Drinks, Dairy & More" products={props.dairyProducts} />
+          <Section4
+            title="Snacks, Drinks, Dairy & More"
+            products={props.dairyProducts}
+          />
         </Box>
 
         {/* TESTIMONIAL CAROUSEL AREA */}
@@ -97,32 +106,32 @@ const GroceryTwo = (props: Grocery2Props) => {
 
 GroceryTwo.layout = GroceryLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const serviceList = await api.getServices();
-  const categories = await api.getCategories();
-  const testimonials = await api.getTestimonials();
-  const dairyProducts = await api.getDairyProducts();
-  const navigationList = await api.getNavigationList();
-  const mainCarouselData = await api.getMainCarousel();
-  const featuredProducts = await api.getFeaturedProducts();
-  const bestHomeProducts = await api.getBestHomeProducts();
-  const bestSellProducts = await api.getBestSellProducts();
-  const discountBanners = await api.getDiscountBannerList();
+// export const getStaticProps: GetStaticProps = async () => {
+//   const serviceList = await api.getServices();
+//   const categories = await api.getCategories();
+//   const testimonials = await api.getTestimonials();
+//   const dairyProducts = await api.getDairyProducts();
+//   const navigationList = await api.getNavigationList();
+//   const mainCarouselData = await api.getMainCarousel();
+//   const featuredProducts = await api.getFeaturedProducts();
+//   const bestHomeProducts = await api.getBestHomeProducts();
+//   const bestSellProducts = await api.getBestSellProducts();
+//   const discountBanners = await api.getDiscountBannerList();
 
-  return {
-    props: {
-      categories,
-      serviceList,
-      testimonials,
-      dairyProducts,
-      navigationList,
-      discountBanners,
-      featuredProducts,
-      bestSellProducts,
-      bestHomeProducts,
-      mainCarouselData,
-    },
-  };
-};
+//   return {
+//     props: {
+//       categories,
+//       serviceList,
+//       testimonials,
+//       dairyProducts,
+//       navigationList,
+//       discountBanners,
+//       featuredProducts,
+//       bestSellProducts,
+//       bestHomeProducts,
+//       mainCarouselData,
+//     },
+//   };
+// };
 
 export default GroceryTwo;

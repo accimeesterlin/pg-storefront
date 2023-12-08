@@ -13,21 +13,33 @@ type Props = { categories: Category[] };
 // =====================================================
 
 const Section2: FC<Props> = ({ categories }) => {
-  const firstItem = categories[0];
+  let firstItem = categories[0];
 
+  if (categories?.length > 0) {
+    [firstItem] = categories;
+  }
   return (
     <CategorySectionCreator title="Featured Categories">
       <Grid container spacing={6} containerHeight="100%">
         <Grid item md={6} xs={12}>
-          <Link href={`product/search/${firstItem.slug}`}>
+          <Link href={`product/search/${firstItem?.slug}`}>
             <a>
               <Card height="100%" hoverEffect position="relative">
-                <NextImage width={100} height={100} layout="responsive" src={firstItem.image} />
+                <NextImage
+                  width={100}
+                  height={100}
+                  layout="responsive"
+                  src={firstItem?.image}
+                />
                 <H3
                   fontWeight="600"
-                  style={{ position: "absolute", left: "1.5rem", bottom: "1rem" }}
+                  style={{
+                    position: "absolute",
+                    left: "1.5rem",
+                    bottom: "1rem",
+                  }}
                 >
-                  {firstItem.name}
+                  {firstItem?.name}
                 </H3>
               </Card>
             </a>
@@ -39,10 +51,15 @@ const Section2: FC<Props> = ({ categories }) => {
             <Grid container spacing={6} containerHeight="100%">
               {categories.slice(1).map((item) => (
                 <Grid item sm={6} xs={12} key={item.id}>
-                  <Link href={`product/search/${firstItem.slug}`}>
+                  <Link href={`product/search/${firstItem?.slug}`}>
                     <a>
                       <Card height="100%" hoverEffect>
-                        <NextImage src={item.image} width={100} height={100} layout="responsive" />
+                        <NextImage
+                          src={item.image}
+                          width={100}
+                          height={100}
+                          layout="responsive"
+                        />
                         <H5 fontWeight="600" p="1rem" mt="1rem">
                           {item.name}
                         </H5>

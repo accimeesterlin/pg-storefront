@@ -20,6 +20,7 @@
     "target": "esnext",
     "paths": {
       "@data/*": ["data/*"],
+      "@templates/*": ["templates/*"],
       "@hook/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
       "@context/*": ["contexts/*"],

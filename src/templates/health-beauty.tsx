@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { GetStaticProps } from "next";
+// import { GetStaticProps } from "next";
 import Box from "@component/Box";
 import { Footer2 } from "@component/footer";
 import Section1 from "@sections/health-beauty/Section1";
@@ -10,7 +10,7 @@ import Section5 from "@sections/health-beauty/Section5";
 import SideNavbar2 from "@component/sidenav/SideNavbar2";
 import SidenavContainer from "@component/SidenavContainer";
 import GroceryLayout from "@component/layout/GroceryLayout";
-import api from "@utils/__api__/health-beauty";
+// import api from "@utils/__api__/health-beauty";
 // data models
 import Service from "@models/service.model";
 import Product from "@models/product.model";
@@ -19,11 +19,11 @@ import { CategoryItem } from "@models/categoryNavList.model";
 
 // ===========================================================
 type HealthAndBeautyProps = {
-  serviceList: Service[];
+  serviceList?: Service[];
   allProducts: Product[];
   topNewProducts: Product[];
-  navigationList: CategoryItem[];
-  mainCarouselData: HealthCarouselItem[];
+  navigationList?: CategoryItem[];
+  mainCarouselData?: HealthCarouselItem[];
 };
 // ===========================================================
 
@@ -33,12 +33,12 @@ const HealthBeautyShop = (props: HealthAndBeautyProps) => {
   return (
     <Fragment>
       {/* HERO CAROUSEL AREA */}
-      <Section1 id={FIXED_ID} carouselData={props.mainCarouselData} />
+      <Section1 id={FIXED_ID} carouselData={props.mainCarouselData || []} />
 
       {/* SIDEBAR WITH MAIN CONTENT AREA */}
       <SidenavContainer
         navFixedComponentID={FIXED_ID}
-        SideNav={() => <SideNavbar2 navList={props.navigationList} />}
+        SideNav={() => <SideNavbar2 navList={props.navigationList || []} />}
       >
         {/* BANNER AREA */}
         <Box mb="4rem">
@@ -46,13 +46,16 @@ const HealthBeautyShop = (props: HealthAndBeautyProps) => {
         </Box>
 
         {/* TOP NEW PRODUCTS AREA */}
-        <Section3 title="Top New Products" products={props.topNewProducts} />
+        <Section3
+          title="Top New Products"
+          products={props.topNewProducts || []}
+        />
 
         {/* ALL PRODUCTS AREA */}
-        <Section4 products={props.allProducts} />
+        <Section4 products={props.allProducts || []} />
 
         {/* SERVICES AREA */}
-        <Section5 services={props.serviceList} />
+        <Section5 services={props.serviceList || []} />
 
         {/* FOOTER AREA */}
         <Footer2 />
@@ -65,14 +68,14 @@ HealthBeautyShop.layout = ({ children }) => (
   <GroceryLayout showNavbar={false}>{children}</GroceryLayout>
 );
 
-export const getStaticProps: GetStaticProps = async () => {
-  const serviceList = await api.getServices();
-  const allProducts = await api.getProducts();
-  const navigationList = await api.getNavigation();
-  const topNewProducts = await api.getTopNewProducts();
-  const mainCarouselData = await api.getMainCarousel();
+// export const getStaticProps: GetStaticProps = async () => {
+//   const serviceList = await api.getServices();
+//   const allProducts = await api.getProducts();
+//   const navigationList = await api.getNavigation();
+//   const topNewProducts = await api.getTopNewProducts();
+//   const mainCarouselData = await api.getMainCarousel();
 
-  return { props: { serviceList, allProducts, topNewProducts, navigationList, mainCarouselData } };
-};
+//   return { props: { serviceList, allProducts, topNewProducts, navigationList, mainCarouselData } };
+// };
 
 export default HealthBeautyShop;

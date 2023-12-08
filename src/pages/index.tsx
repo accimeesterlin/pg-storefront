@@ -1,18 +1,4 @@
 import { GetServerSideProps } from "next";
-import AppLayout from "@component/layout/AppLayout";
-import Section1 from "@sections/market-1/Section1";
-import Section2 from "@sections/market-1/Section2";
-import isEmpty from "lodash.isempty";
-// import Section3 from "@sections/market-1/Section3";
-// import Section4 from "@sections/market-1/Section4";
-// import Section5 from "@sections/market-1/Section5";
-// import Section6 from "@sections/market-1/Section6";
-// import Section7 from "@sections/market-1/Section7";
-// import Section8 from "@sections/market-1/Section8";
-// import Section10 from "@sections/market-1/Section10";
-// import Section11 from "@sections/market-1/Section11";
-// import Section12 from "@sections/market-1/Section12";
-// import Section13 from "@sections/market-1/Section13";
 import api from "@utils/__api__/market-1";
 import categoryApi from "@utils/__api__/category";
 import {
@@ -23,14 +9,24 @@ import {
 } from "@utils/__api__/shops";
 import productApi from "@utils/__api__/products";
 // data models
-import Shop from "@models/shop.model";
+import Shop, { ShopTheme } from "@models/shop.model";
 import Product from "@models/product.model";
 import Category from "@models/category.model";
 import MainCarouselItem from "@models/market-1.model";
+import Collection from "@models/collection.model";
+import MarketOneTemplate from "templates/market-1";
+import AppLayout from "@component/layout/AppLayout";
+
+// Theme specific components
+import Fashion from "@templates/fashion-1";
+import Furniture from "@templates/furniture-shop";
+import Gadget from "@templates/gadget-shop";
+import Gift from "@templates/gift-shop";
+import Grocery from "@templates/grocery-1";
+import Health from "@templates/health-beauty";
 import { useAppContext } from "@context/AppContext";
 import { useEffect } from "react";
-import Collection from "@models/collection.model";
-import Section3 from "@sections/fashion-3/Section3";
+// import MarketOne from "@templates/market-1";
 
 // =================================================================
 type Props = {
@@ -45,16 +41,16 @@ type Props = {
 };
 // =================================================================
 
-const Market1 = (props: Props) => {
+const HomePage = (props: Props) => {
   const { dispatch } = useAppContext();
   const shop = props?.shop;
   const products = props?.products;
   const menus = props?.menus;
-  const collections = props?.collections;
   const footerMenus = props?.footerMenus;
   const categories = props?.categories;
   const homeMenus = props?.homeMenus;
 
+  // Initializing the global state
   useEffect(() => {
     if (shop) {
       dispatch({ type: "SET_SHOP", payload: shop });
@@ -81,64 +77,91 @@ const Market1 = (props: Props) => {
     }
   }, [shop, products, menus, footerMenus, categories, homeMenus]);
 
-  const listOfCollections = collections
-    ?.filter((collection) => collection?.products?.length > 0)
-    ?.map((collection) => {
-      const products = collection?.products;
-      return <Section2 products={products} title={collection?.name} />;
-    });
+  // Getting the theme from the shop
+  const theme = shop?.theme;
 
-  // 282 * 105
+  // Rendering the default theme
+  if (theme === ShopTheme.DEFAULT) {
+    return <MarketOneTemplate {...props} />;
+  }
 
-  return (
-    <main>
-      {/* HERO CAROUSEL AREA */}
-      <Section1 carouselData={props.mainCarouselData} />
-      {listOfCollections}
-      <Section3 products={products} title="All Products" />
-      {/* FLASH DEAL PRODUCTS AREA */}
-      {/* <Section2 products={props.flashDealsData} /> */}
-      {/* TOP CATEGORIES AREA */}
-      {/* <Section3 categoryList={props.topCategories} /> */}
-      {/* TOP RATING AND BRANDS AREA */}
-      {/* <Section4
-        topRatedList={props.topRatedProducts}
-        topRatedBrands={props.topRatedBrands}
-      /> */}
-      {/* NEW ARRIVALS AREA */}
-      {/* <Section5 newArrivalsList={props.newArrivalsList} /> */}
-      {/* BIG DISCOUNT AREA */}
-      {/* <Section13 bigDiscountList={props.bigDiscountList} /> */}
-      {/* CAR LIST AREA */}
-      {/* <Section6 carBrands={props.carBrands} carList={props.carList} /> */}
-      {/* MOBILE PHONES AREA */}
-      {/* <Section7
-        title="Mobile Phones"
-        shops={props.mobileShops}
-        brands={props.mobileBrands}
-        productList={props.mobileList}
-      /> */}
-      {/* DISCOUNT BANNERS AREA */}
-      {/* <Section8 /> */}
-      {/* OPTICS AND WATCH AREA */}
-      {/* <Section7
-        title="Optics / Watch"
-        shops={props.opticsShops}
-        brands={props.opticsBrands}
-        productList={props.opticsList}
-      /> */}
-      {/* CATEGORIES AREA */}
-      {/* <Section10 categories={props.bottomCategories} /> */}
-      {/* MORE PRODUCTS AREA */}
-      {/* <Section11 moreItems={props.moreItems} /> */}
-      {/* SERVICES AREA */}
-      {/* <Section12 serviceList={props.serviceList} /> */}
-    </main>
-  );
+  // Rendering the fashion theme
+  if (theme === ShopTheme.FASHION) {
+    return (
+      <Fashion
+        trendingItems={props?.products}
+        flashDealsData={props?.products}
+        newArrivalsData={props?.products}
+        {...props}
+      />
+    );
+  }
+
+  // Rendering the furniture theme
+  if (theme === ShopTheme.FURNITURE) {
+    return (
+      <Furniture
+        topNewProducts={props?.products}
+        furnitureProducts={props?.products}
+        topSellingProducts={props?.products}
+        {...props}
+      />
+    );
+  }
+
+  // Rendering the gadget theme
+  if (theme === ShopTheme.GADGET) {
+    return (
+      <Gadget
+        topPickList={props?.products}
+        mostViewedList={props?.products}
+        newArrivalsData={props?.products}
+        mainCarouselData={props?.products}
+        {...props}
+      />
+    );
+  }
+
+  // Rendering the gift theme
+  if (theme === ShopTheme.GIFT) {
+    return (
+      <Gift
+        allProducts={props?.products}
+        popularProducts={props?.products}
+        topSailedProducts={props?.products}
+        {...props}
+      />
+    );
+  }
+
+  // Rendering the grocery theme
+  if (theme === ShopTheme.GROCERY) {
+    return (
+      <Grocery
+        products={props?.products}
+        popularProducts={props?.products}
+        trendingProducts={props?.products}
+        {...props}
+      />
+    );
+  }
+
+  // Rendering the health theme
+  if (theme === ShopTheme.HEALTH_BEAUTY) {
+    return (
+      <Health
+        allProducts={props?.products}
+        topNewProducts={props?.products}
+        {...props}
+      />
+    );
+  }
+
+  // Rendering the default theme
+  return props?.homeMenus?.length && <MarketOneTemplate {...props} />;
 };
 
-Market1.layout = AppLayout;
-
+HomePage.layout = AppLayout;
 // ==============================================================
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -168,4 +191,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
-export default Market1;
+export default HomePage;
