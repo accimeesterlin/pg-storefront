@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FC, useState, useEffect } from "react";
 import Box from "@component/Box";
-import Image from "@component/Image";
+// import Image from "@component/Image";
 import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
 import MiniCart from "@component/mini-cart";
@@ -16,6 +16,7 @@ import { useAppContext } from "@context/AppContext";
 import StyledHeader from "./styles";
 // import UserLoginDialog from "./LoginDialog";
 import { createLocalStorage } from "@utils/utils";
+import CloudinaryResizedImage from "@component/cloudinaryResizeImage";
 
 // ====================================================================
 type HeaderProps = { isFixed?: boolean; className?: string };
@@ -85,7 +86,12 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
           {logoUrl && (
             <Link href="/">
               <a>
-                <Image src={logoUrl} alt="logo" width="50px" />
+                <CloudinaryResizedImage
+                  imageUrl={logoUrl}
+                  height={50}
+                  alt="logo"
+                  width={50}
+                />
               </a>
             </Link>
           )}

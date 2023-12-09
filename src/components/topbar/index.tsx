@@ -10,6 +10,7 @@ import Container from "../Container";
 // import { Small } from "../Typography";
 import StyledTopbar from "./styles";
 import { useAppContext } from "@context/AppContext";
+import CloudinaryResizedImage from "@component/cloudinaryResizeImage";
 
 const Topbar: FC = () => {
   // const [currency, setCurrency] = useState(currencyList[0]);
@@ -43,7 +44,12 @@ const Topbar: FC = () => {
       >
         <FlexBox className="topbar-left">
           <div className="logo">
-            <img src={logoUrl} alt="logo" width="50px" />
+            <CloudinaryResizedImage
+              imageUrl={logoUrl}
+              width={50}
+              height={50}
+              alt="Logo"
+            />
           </div>
 
           <FlexBox alignItems="center">

@@ -22,6 +22,7 @@ import { deviceSize } from "@utils/constants";
 import ProductQuickView from "@component/products/ProductQuickView";
 import Shop from "@models/shop.model";
 import CloudinaryResizedImage from "@component/cloudinaryResizeImage";
+import useIsMobile from "@hook/useIsMobile";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -139,6 +140,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
   const [saveCartState] = createLocalStorage("cartState");
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
+  const isMobile = useIsMobile();
   const cartItem = state.cart.find((item) => item.id === id);
 
   const toggleDialog = useCallback(() => setOpen((open) => !open), []);
@@ -201,8 +203,8 @@ const ProductCard1: FC<ProductCard1Props> = ({
             <a>
               <CloudinaryResizedImage
                 imageUrl={mainImageUrl}
-                width={282}
-                height={105}
+                width={isMobile ? 400 : 282}
+                height={130}
               />
               {/* <img
                 alt={name}

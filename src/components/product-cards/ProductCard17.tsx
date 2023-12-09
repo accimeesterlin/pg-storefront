@@ -15,6 +15,7 @@ import { createLocalStorage, currency } from "@utils/utils";
 import { useAppContext } from "@context/AppContext";
 import Shop from "@models/shop.model";
 import CloudinaryResizedImage from "@component/cloudinaryResizeImage";
+import useIsMobile from "@hook/useIsMobile";
 
 // styled components
 const Wrapper = styled(Box)({
@@ -95,6 +96,7 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
   const { state, dispatch } = useAppContext();
   const [openDialog, setOpenDialog] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const isMobile = useIsMobile();
 
   const cartItem = state.cart.find((item) => item.slug === slug);
 
@@ -123,19 +125,10 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
       <CardMedia>
         <Link href={`/product/${id}`}>
           <a>
-            {/* <Image
-              width={300}
-              height={300}
-              src={mainImageUrl}
-              alt="category"
-              objectFit="cover"
-              layout="responsive"
-              className="product-img"
-            /> */}
-
             <CloudinaryResizedImage
               imageUrl={mainImageUrl}
-              width={300}
+              width={isMobile ? 400 : 300}
+              alt="category"
               height={300}
             />
           </a>

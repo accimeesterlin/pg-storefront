@@ -137,7 +137,7 @@ const DisplayFooterMenuItems = ({ footerMenuItems }) => {
                 fontSize="25px"
                 fontWeight="600"
               >
-                Customer Care
+                {menu?.title}
               </Typography>
 
               <div>

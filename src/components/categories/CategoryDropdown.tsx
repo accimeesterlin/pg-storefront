@@ -31,7 +31,7 @@ const CategoryDropdown: FC<CategoryDropdownProps> = ({ open, position }) => {
             href={item?.href}
             icon={item?.icon}
             title={item?.title}
-            caret={!!item?.menuData}
+            caret={!!item?.menuData?.categories?.length}
           >
             <MegaMenu data={item?.menuData || {}} />
           </CategoryMenuItem>
