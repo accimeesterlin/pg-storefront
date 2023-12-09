@@ -134,6 +134,8 @@ const MiniCart: FC = () => {
   const shop = state.shop;
   const paymentMethod = state?.checkout?.paymentMethod;
 
+  const primaryColor = shop?.primaryColorHex || null;
+
   const totalPrice = getTotalPrice(state.cart);
 
   useEffect(() => {
@@ -282,6 +284,7 @@ const MiniCart: FC = () => {
             loading={isLoading}
             color="primary"
             variant="contained"
+            bg={primaryColor}
             onClick={handleSubmit}
           >
             <Typography fontWeight={600}>

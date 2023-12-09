@@ -29,6 +29,8 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
     }
   }, [state.cart]);
 
+  const primaryColor = state.shop?.primaryColorHex || null;
+
   return (
     <StyledMiniCart>
       <div className="cart-list">
@@ -156,6 +158,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
               color="primary"
               variant="contained"
               m="1rem 1rem 0.75rem"
+              bg={primaryColor}
               onClick={toggleSidenav}
             >
               <Typography fontWeight={600}>

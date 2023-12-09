@@ -1,6 +1,7 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Link from "next/link";
 import Box from "@component/Box";
+import { State } from "country-state-city";
 import Select from "@component/Select";
 import Grid from "@component/grid/Grid";
 import { Card1 } from "@component/Card1";
@@ -17,7 +18,15 @@ import countryList from "@data/countryList";
 import { currency, getTotalPrice } from "@utils/utils";
 
 const Cart = () => {
+  const [countryCode, setCountryCode] = useState("us");
   const { state } = useAppContext();
+
+  const countryStates = State.getStatesOfCountry(countryCode) || [];
+
+  const stateOptions = countryStates?.map(({ name, isoCode }) => ({
+    label: name,
+    value: isoCode,
+  }));
 
   return (
     <Fragment>
@@ -95,12 +104,14 @@ const Cart = () => {
               label="Country"
               options={countryList}
               placeholder="Select Country"
-              onChange={(e) => console.log(e)}
+              onChange={(e: { value: string; label: string }) =>
+                setCountryCode(e.value)
+              }
             />
 
             <Select
               label="State"
-              options={stateList}
+              options={stateOptions}
               placeholder="Select State"
               onChange={(e) => console.log(e)}
             />
@@ -124,11 +135,6 @@ const Cart = () => {
     </Fragment>
   );
 };
-
-const stateList = [
-  { value: "New York", label: "New York" },
-  { value: "Chicago", label: "Chicago" },
-];
 
 Cart.layout = CheckoutNavLayout;
 

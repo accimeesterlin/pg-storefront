@@ -5,7 +5,7 @@ import CheckoutSummary from "@sections/checkout/CheckoutSummary";
 import CheckoutNavLayout from "@component/layout/CheckoutNavLayout";
 import categoryApi from "@utils/__api__/category";
 import { useAppContext } from "@context/AppContext";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import marketApi from "@utils/__api__/market-1";
 import {
   getShopById,
@@ -72,7 +72,7 @@ const Checkout = (props: Props) => {
 
 Checkout.layout = CheckoutNavLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
 
   const shop = await getShopById(shopId);

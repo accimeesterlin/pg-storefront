@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Box from "@component/Box";
 import { Button } from "@component/buttons";
 import Typography from "@component/Typography";
+import { useAppContext } from "@context/AppContext";
 
 // styled component
 const StyledCarouselCard1 = styled.div`
@@ -65,6 +66,9 @@ const CarouselCard1: FC<Props> = ({
   buttonText,
   description,
 }) => {
+  const { state } = useAppContext();
+
+  const primaryColor = state.shop?.primaryColorHex || null;
   return (
     <StyledCarouselCard1>
       <Box>
@@ -77,6 +81,7 @@ const CarouselCard1: FC<Props> = ({
           className="button-link"
           variant="contained"
           color="primary"
+          bg={primaryColor}
           p="1rem 1.5rem"
         >
           {buttonText}

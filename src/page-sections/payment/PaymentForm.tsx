@@ -14,9 +14,11 @@ import { useAppContext } from "@context/AppContext";
 // import CryptoPayment from "./cryptoPayment";
 
 const PaymentForm: FC = () => {
-  const { dispatch } = useAppContext();
+  const { state, dispatch } = useAppContext();
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("moncash");
+
+  const primaryColor = state?.shop?.primaryColorHex || null;
 
   const handleFormSubmit = async () => {
     try {
@@ -62,6 +64,7 @@ const PaymentForm: FC = () => {
             variant="contained"
             color="primary"
             type="submit"
+            bg={primaryColor}
             fullwidth
             onClick={handleFormSubmit}
           >

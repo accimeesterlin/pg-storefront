@@ -27,6 +27,8 @@ const CheckoutForm: FC = () => {
   const user = state?.user;
   const address = state?.checkout?.address;
 
+  const primaryColor = state?.shop?.primaryColorHex || null;
+
   const email = user?.email || "";
 
   useEffect(() => {
@@ -53,6 +55,7 @@ const CheckoutForm: FC = () => {
     shipping_city: address?.city || "",
     shipping_country:
       { label: address?.country, value: address?.country } || defaultCountry,
+    shipping_state: address?.state || "",
     shipping_address1: address?.line1 || "",
     shipping_address2: address?.apartment || "",
 
@@ -63,6 +66,7 @@ const CheckoutForm: FC = () => {
     billing_zip: address?.zip || "",
     billing_city: address?.city || "",
     billing_country: address?.country || "",
+    billing_state: address?.state || "",
     billing_address1: address?.line1 || "",
     billing_address2: address?.apartment || "",
   };
@@ -75,6 +79,7 @@ const CheckoutForm: FC = () => {
     setFieldValue("billing_zip", values.shipping_zip);
     setFieldValue("billing_city", values.shipping_city);
     setFieldValue("billing_country", values.shipping_country?.label);
+    setFieldValue("billing_state", values.shipping_state);
     setFieldValue("billing_address1", values.shipping_address1);
     setFieldValue("billing_address2", values.shipping_address2);
   };
@@ -92,6 +97,7 @@ const CheckoutForm: FC = () => {
         company: values.shipping_company,
         zip: values.shipping_zip,
         country: values.shipping_country?.value,
+        state: values.shipping_state,
         line1: values.shipping_address1,
         city: values.shipping_city,
         apartment: values.shipping_address2,
@@ -106,6 +112,7 @@ const CheckoutForm: FC = () => {
           company: values.billing_company,
           zip: values.billing_zip,
           country: values.billing_country,
+          state: values.billing_state,
           line1: values.billing_address1,
           city: values.billing_city,
           apartment: values.billing_address2,
@@ -177,11 +184,11 @@ const CheckoutForm: FC = () => {
             </Typography>
 
             <CheckoutShippingForm
-              handleBlur={handleBlur}
-              handleChange={handleChange}
               values={values}
               errors={errors}
               touched={touched}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
               setFieldValue={setFieldValue}
             />
           </Card1>
@@ -201,11 +208,12 @@ const CheckoutForm: FC = () => {
 
             {!sameAsShipping && (
               <CheckoutBillingForm
-                handleBlur={handleBlur}
-                handleChange={handleChange}
                 values={values}
                 errors={errors}
                 touched={touched}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                setFieldValue={setFieldValue}
               />
             )}
           </Card1>
@@ -230,6 +238,7 @@ const CheckoutForm: FC = () => {
                 variant="contained"
                 color="primary"
                 type="submit"
+                bg={primaryColor}
                 fullwidth
               >
                 Proceed to Payment
@@ -250,6 +259,7 @@ const checkoutSchema = yup.object().shape({
   shipping_zip: yup.string().required("required"),
   shipping_city: yup.string().required("required"),
   shipping_country: yup.object().required("required"),
+  shipping_state: yup.object().required("required"),
   shipping_address1: yup.string().required("required"),
 
   // Billing Address
@@ -258,7 +268,8 @@ const checkoutSchema = yup.object().shape({
   billing_contact: yup.string().nullable(),
   billing_zip: yup.string().nullable(),
   billing_city: yup.string().nullable(),
-  billing_country: yup.string().nullable(),
+  billing_country: yup.object().nullable(),
+  billing_state: yup.object().nullable(),
   billing_address1: yup.string().nullable(),
 });
 

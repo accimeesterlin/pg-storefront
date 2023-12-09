@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { State } from "country-state-city";
 import Select from "@component/Select";
 import Grid from "@component/grid/Grid";
 import countryList from "@data/countryList";
@@ -21,6 +22,15 @@ const CheckoutShippingForm: FC<Props> = ({
   errors,
   setFieldValue,
 }) => {
+  const countryCode = values.shipping_country?.value || "US";
+
+  const countryStates = State.getStatesOfCountry(countryCode) || [];
+
+  const stateOptions = countryStates?.map(({ name, isoCode }) => ({
+    label: name,
+    value: isoCode,
+  }));
+
   return (
     <Grid container spacing={7}>
       <Grid item sm={6} xs={12}>
@@ -113,6 +123,17 @@ const CheckoutShippingForm: FC<Props> = ({
           value={values.shipping_country || "US"}
           errorText={touched.shipping_country && errors.shipping_country}
           onChange={(country) => setFieldValue("shipping_country", country)}
+        />
+
+        <Select
+          mb="1rem"
+          label="States"
+          options={stateOptions}
+          value={values.shipping_state}
+          errorText={touched.shipping_state && errors.shipping_state}
+          onChange={(shipping_state) =>
+            setFieldValue("shipping_state", shipping_state)
+          }
         />
 
         <TextField

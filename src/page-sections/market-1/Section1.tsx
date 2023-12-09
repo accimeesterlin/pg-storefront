@@ -5,12 +5,17 @@ import Navbar from "@component/navbar/Navbar";
 import { Carousel } from "@component/carousel";
 import { CarouselCard1 } from "@component/carousel-cards";
 import MainCarouselItem from "@models/market-1.model";
+import { useAppContext } from "@context/AppContext";
 
 // ======================================================
 type Props = { carouselData: MainCarouselItem[] };
 // ======================================================
 
 const Section1: FC<Props> = ({ carouselData }) => {
+  const { state } = useAppContext();
+
+  const primaryColor = state.shop?.primaryColorHex || null;
+
   return (
     <Fragment>
       <Navbar navListOpen={true} />
@@ -24,6 +29,7 @@ const Section1: FC<Props> = ({ carouselData }) => {
             showDots={true}
             visibleSlides={1}
             showArrow={false}
+            dotColor={primaryColor}
             totalSlides={carouselData.length}
           >
             {carouselData.map((item, index) => (

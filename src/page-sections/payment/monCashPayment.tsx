@@ -38,6 +38,4 @@ const MonCashPayment: FC<MonCashPaymentProps> = ({
   );
 };
 
-
-
 export default MonCashPayment;

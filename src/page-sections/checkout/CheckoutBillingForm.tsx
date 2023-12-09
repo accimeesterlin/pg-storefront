@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { State } from "country-state-city";
 import Select from "@component/Select";
 import Grid from "@component/grid/Grid";
 import countryList from "@data/countryList";
@@ -10,15 +11,26 @@ type Props = {
   errors: any;
   handleChange: (value: any) => void;
   handleBlur: (value: any) => void;
+  setFieldValue: any;
 };
 
 const CheckoutBillingForm: FC<Props> = ({
   handleBlur,
   handleChange,
+  setFieldValue,
   values,
   touched,
   errors,
 }) => {
+  const countryCode = values.shipping_country?.value || "US";
+
+  const countryStates = State.getStatesOfCountry(countryCode) || [];
+
+  const stateOptions = countryStates?.map(({ name, isoCode }) => ({
+    label: name,
+    value: isoCode,
+  }));
+
   return (
     <Grid container spacing={7}>
       <Grid item sm={6} xs={12}>
@@ -109,6 +121,16 @@ const CheckoutBillingForm: FC<Props> = ({
           label="Country"
           options={countryList}
           errorText={touched.billing_country && errors.billing_country}
+          onChange={(country) => setFieldValue("billing_country", country)}
+        />
+
+        <Select
+          mb="1rem"
+          label="States"
+          options={stateOptions}
+          value={values.billing_state}
+          errorText={touched.billing_state && errors.billing_state}
+          onChange={(state) => setFieldValue("billing_state", state)}
         />
 
         <TextField
