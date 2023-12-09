@@ -121,15 +121,34 @@ interface Props {
 
 const ProductCard13: FC<Props> = (props) => {
   const [saveCartState] = createLocalStorage("cartState");
-  const { off, status, id, name, price, mainImageUrl, rating, productColors, slug, shop } = props;
+  const {
+    off,
+    status,
+    id,
+    name,
+    price,
+    mainImageUrl,
+    rating,
+    productColors,
+    slug,
+    shop,
+  } = props;
 
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.slug === slug);
 
-  const handleCartAmountChange = (qty: number) => () => {
+  const handleCartAmountChange = (quantity: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name, shopId: shop.id },
+      payload: {
+        price,
+        mainImageUrl,
+        id,
+        quantity,
+        slug,
+        name,
+        shopId: shop.id,
+      },
     });
 
     saveCartState(state.cart);
@@ -227,22 +246,25 @@ const ProductCard13: FC<Props> = (props) => {
             alignItems="center"
             className="add-cart"
             flexDirection="column-reverse"
-            justifyContent={cartItem?.qty ? "space-between" : "flex-start"}
+            justifyContent={cartItem?.quantity ? "space-between" : "flex-start"}
           >
             <StyledButton
               variant="outlined"
-              onClick={handleCartAmountChange((cartItem?.qty || 0) + 1)}
+              onClick={handleCartAmountChange((cartItem?.quantity || 0) + 1)}
             >
               <Icon variant="small">plus</Icon>
             </StyledButton>
 
-            {cartItem?.qty && (
+            {cartItem?.quantity && (
               <Fragment>
                 <Box color="text.primary" fontWeight="600">
-                  {cartItem.qty}
+                  {cartItem.quantity}
                 </Box>
 
-                <StyledButton variant="outlined" onClick={handleCartAmountChange(cartItem.qty - 1)}>
+                <StyledButton
+                  variant="outlined"
+                  onClick={handleCartAmountChange(cartItem.quantity - 1)}
+                >
                   <Icon variant="small">minus</Icon>
                 </StyledButton>
               </Fragment>

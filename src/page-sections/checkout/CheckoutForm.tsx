@@ -53,7 +53,7 @@ const CheckoutForm: FC = () => {
     shipping_city: address?.city || "",
     shipping_country:
       { label: address?.country, value: address?.country } || defaultCountry,
-    shipping_address1: address?.street || "",
+    shipping_address1: address?.line1 || "",
     shipping_address2: address?.apartment || "",
 
     billing_name: address?.name || "",
@@ -63,7 +63,7 @@ const CheckoutForm: FC = () => {
     billing_zip: address?.zip || "",
     billing_city: address?.city || "",
     billing_country: address?.country || "",
-    billing_address1: address?.street || "",
+    billing_address1: address?.line1 || "",
     billing_address2: address?.apartment || "",
   };
 
@@ -92,7 +92,7 @@ const CheckoutForm: FC = () => {
         company: values.shipping_company,
         zip: values.shipping_zip,
         country: values.shipping_country?.value,
-        street: values.shipping_address1,
+        line1: values.shipping_address1,
         city: values.shipping_city,
         apartment: values.shipping_address2,
         email: values.shipping_email,
@@ -106,7 +106,7 @@ const CheckoutForm: FC = () => {
           company: values.billing_company,
           zip: values.billing_zip,
           country: values.billing_country,
-          street: values.billing_address1,
+          line1: values.billing_address1,
           city: values.billing_city,
           apartment: values.billing_address2,
           email: values.shipping_email || values?.billing_email,

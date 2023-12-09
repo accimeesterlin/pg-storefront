@@ -31,7 +31,7 @@ type InitialState = {
 };
 
 export type CartItem = {
-  qty: number;
+  quantity: number;
   name: string;
   slug?: string;
   price: number;
@@ -236,7 +236,7 @@ const reducer = (state: InitialState, action: ActionType) => {
       let cartItem = action.payload;
       let exist = cartList.find((item) => item.id === cartItem.id);
 
-      if (cartItem.qty < 1) {
+      if (cartItem.quantity < 1) {
         const filteredCart = cartList.filter((item) => item.id !== cartItem.id);
         return { ...state, cart: filteredCart };
       }
@@ -244,7 +244,9 @@ const reducer = (state: InitialState, action: ActionType) => {
       // IF PRODUCT ALREADY EXITS IN CART
       if (exist) {
         const newCart = cartList.map((item) =>
-          item.id === cartItem.id ? { ...item, qty: cartItem.qty } : item
+          item.id === cartItem.id
+            ? { ...item, quantity: cartItem.quantity }
+            : item
         );
 
         return { ...state, cart: newCart };

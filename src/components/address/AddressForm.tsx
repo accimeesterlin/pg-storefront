@@ -21,7 +21,7 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
     name: address?.name || "",
     phone: address?.phone || "",
     city: address?.city || "",
-    street: address?.street || "",
+    line1: address?.line1 || "",
     country: address?.country || "",
     state: address?.state || "",
     zip: address?.zip || "",
@@ -29,7 +29,7 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
 
   const VALIDATION_SCHEMA = yup.object().shape({
     name: yup.string().required("required"),
-    street: yup.string().required("required"),
+    line1: yup.string().required("required"),
     city: yup.string().required("required"),
     country: yup.string().required("required"),
     phone: yup.string().required("required"),
@@ -99,12 +99,12 @@ const AddressForm: FC<AddressFormProps> = ({ address }) => {
               <Grid item md={6} xs={12}>
                 <TextField
                   fullwidth
-                  name="street"
+                  name="line1"
                   label="Street"
                   onBlur={handleBlur}
-                  value={values.street || address?.street}
+                  value={values.line1 || address?.line1}
                   onChange={handleChange}
-                  errorText={touched.street && errors.street}
+                  errorText={touched.line1 && errors.line1}
                 />
               </Grid>
 

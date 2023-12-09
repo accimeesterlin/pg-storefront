@@ -113,7 +113,8 @@ type ProductCard12Props = {
 
 const ProductCard12: FC<ProductCard12Props> = (props) => {
   const [saveCartState] = createLocalStorage("cartState");
-  const { off, name, price, mainImageUrl, rating, slug, id, images, shop } = props;
+  const { off, name, price, mainImageUrl, rating, slug, id, images, shop } =
+    props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -122,10 +123,18 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
 
   const toggleDialog = useCallback(() => setOpen((open) => !open), []);
 
-  const handleCartAmountChange = (qty: number) => () => {
+  const handleCartAmountChange = (quantity: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop?.id },
+      payload: {
+        price,
+        mainImageUrl,
+        id,
+        quantity,
+        slug,
+        name: name,
+        shopId: shop?.id,
+      },
     });
 
     saveCartState(state.cart);
@@ -186,9 +195,11 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
               variant="outlined"
               borderColor="primary.light"
               className="addCartButton"
-              onClick={handleCartAmountChange(cartItem?.qty ? cartItem?.qty - 1 : 1)}
+              onClick={handleCartAmountChange(
+                cartItem?.quantity ? cartItem?.quantity - 1 : 1
+              )}
             >
-              {cartItem?.qty ? (
+              {cartItem?.quantity ? (
                 <>
                   <Icon variant="small" mr={1}>
                     minus

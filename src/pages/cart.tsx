@@ -31,7 +31,7 @@ const Cart = () => {
                 id: item.shopId,
               }}
               key={item.id}
-              qty={item.qty}
+              quantity={item.quantity}
               slug={item.slug}
               name={item.name}
               price={item.price}

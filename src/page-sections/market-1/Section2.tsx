@@ -21,14 +21,20 @@ const Section2: FC<Props> = ({ products, title }) => {
     else setVisibleSlides(4);
   }, [width]);
 
+  const isProductGreaterThanFive = products?.length > 5;
+
   return (
     <CategorySectionCreator
       iconName="light"
       title={title || "Flash Deals"}
-      seeMoreLink="#"
+      seeMoreLink={isProductGreaterThanFive ? "#" : null}
     >
       <Box mt="-0.25rem" mb="-0.25rem">
-        <Carousel totalSlides={products?.length} visibleSlides={visibleSlides}>
+        <Carousel
+          totalSlides={products?.length}
+          visibleSlides={visibleSlides}
+          showArrow={isProductGreaterThanFive}
+        >
           {products.map((item, ind) => (
             <Box py="0.25rem" key={ind}>
               <ProductCard1

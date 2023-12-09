@@ -248,7 +248,7 @@ const OrderDetails = () => {
             </H5>
 
             <Paragraph fontSize="14px" my="0px" mb="1rem">
-              {order.shippingAddress?.street}
+              {order.shippingAddress?.line1}
             </Paragraph>
             <Paragraph fontSize="14px" my="0px" mb="1rem">
               {order.shippingAddress?.apartment}

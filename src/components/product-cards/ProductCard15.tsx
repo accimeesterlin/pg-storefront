@@ -99,7 +99,8 @@ type Props = {
 
 const ProductCard15: FC<Props> = (props) => {
   const [saveCartState] = createLocalStorage("cartState");
-  const { off, id, name, price, mainImageUrl, rating, slug, images, shop } = props;
+  const { off, id, name, price, mainImageUrl, rating, slug, images, shop } =
+    props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -117,7 +118,7 @@ const ProductCard15: FC<Props> = (props) => {
       mainImageUrl,
       name: name,
       shopId: shop?.id,
-      qty: (cartItem?.qty || 0) + 1,
+      quantity: (cartItem?.quantity || 0) + 1,
     };
 
     dispatch({ type: "CHANGE_CART_AMOUNT", payload });

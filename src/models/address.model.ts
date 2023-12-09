@@ -6,7 +6,7 @@ interface Address {
   city?: string;
   title?: string;
   phone?: string;
-  street?: string;
+  line1?: string;
   email?: string;
   company?: string;
   apartment?: string;

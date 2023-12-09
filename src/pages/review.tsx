@@ -8,17 +8,18 @@ import { toast } from "react-toastify";
 import { Card1 } from "@component/Card1";
 import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
-import api from "@utils/__api__/pgpay";
+// import api from "@utils/__api__/pgpay";
 import { createLocalStorage } from "@utils/utils";
 import { getGlobalSetting } from "@utils/__api__/global-settings";
-import { createMonCashSession } from "@utils/__api__/moncash";
+import { createCheckoutSession } from "@utils/__api__/checkout";
 import Avatar from "@component/avatar";
 import { Button } from "@component/buttons";
 import Typography, { H5, Paragraph, Tiny } from "@component/Typography";
 import { useAppContext } from "@context/AppContext";
-import { clearLocalStorageKeys, currency, getTotalPrice } from "@utils/utils";
+import { currency, getTotalPrice } from "@utils/utils";
+// import { clearLocalStorageKeys } from "@utils/utils";
 import CheckoutNavLayout from "@component/layout/CheckoutNavLayout";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import marketApi from "@utils/__api__/market-1";
 import {
   getShopById,
@@ -118,9 +119,14 @@ const PaymentReview = (props: Props) => {
 };
 
 const MiniCart: FC = () => {
-  const router = useRouter();
+  const [, getCheckout] = createLocalStorage("checkoutData");
+  const [, getCart] = createLocalStorage("cartState");
+  const [, getMerchantId] = createLocalStorage("merchantId");
   const [isLoading, setIsLoading] = useState(false);
-  const { state, dispatch } = useAppContext();
+  const [checkoutData, setCheckoutData] = useState({});
+  const [merchantId, setMerchantId] = useState({});
+  const [cartData, setCartData] = useState([]);
+  const { state } = useAppContext();
 
   const globalSetting = state?.globalSetting;
 
@@ -130,49 +136,58 @@ const MiniCart: FC = () => {
 
   const totalPrice = getTotalPrice(state.cart);
 
+  useEffect(() => {
+    const savedCheckoutData: any = getCheckout("checkoutData");
+    const cartState: any = getCart("cartState");
+    const initialMerchantId: any = getMerchantId("merchantId");
+
+    setCheckoutData(savedCheckoutData);
+    setCartData(cartState);
+    setMerchantId(initialMerchantId);
+  }, []);
+
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
 
       const checkoutPayload = {
-        cart: state?.cart,
-        checkout: state?.checkout,
+        cart: cartData,
+        checkout: checkoutData,
       };
 
-      if (paymentMethod === "pgpay") {
-        const data = await api.createPGPayPayment(checkoutPayload);
+      if (!isEmpty(state?.cart)) {
+        checkoutPayload.cart = state?.cart;
+      }
 
-        if (data?.order?.id) {
-          // Redirect to order page
-          router?.push(`/orders/${data?.order?.id}`);
-        }
-      } else if (paymentMethod === "moncash") {
-        const data = await createMonCashSession({
-          ...checkoutPayload,
-          totalPrice,
-          exchangeAmount,
-          shop,
-        });
+      if (!isEmpty(state?.checkout)) {
+        checkoutPayload.checkout = state?.checkout;
+      }
 
-        setIsLoading(false);
-        const redirectUrl = data?.redirectUrl;
-        if (data?.redirectUrl) {
-          // Redirect to order page
-          window.location.href = redirectUrl;
-          return;
-        }
+      const data = await createCheckoutSession({
+        ...checkoutPayload,
+        totalPrice,
+        merchantId: merchantId || shop?.merchantId,
+        exchangeAmount,
+        shop,
+        paymentMethod,
+      });
 
+      setIsLoading(false);
+      const checkoutUrl = data?.checkoutUrl;
+      if (checkoutUrl) {
+        // Redirect to order page
+        window.location.href = checkoutUrl;
         return;
       }
 
-      toast.success("Order placed successfully");
+      // toast.success("Order placed successfully");
 
       // Reset the cart and checkout state
-      dispatch({
-        type: "PURCHASE_COMPLETE",
-      });
+      // dispatch({
+      //   type: "PURCHASE_COMPLETE",
+      // });
 
-      clearLocalStorageKeys(["cartState", "checkoutState"]);
+      // clearLocalStorageKeys(["cartState", "checkoutState"]);
 
       setIsLoading(false);
     } catch (error) {
@@ -214,7 +229,7 @@ const MiniCart: FC = () => {
             <FlexBox className="cart-item" alignItems="center" p="20px">
               <FlexBox alignItems="center" flexDirection="column">
                 <Typography fontWeight={600} fontSize="15px" my="3px">
-                  {item.qty}
+                  {item.quantity}
                 </Typography>
               </FlexBox>
 
@@ -242,7 +257,7 @@ const MiniCart: FC = () => {
                 </Link>
 
                 <Tiny color="text.muted">
-                  {currency(item.price, 0)} x {item.qty}
+                  {currency(item.price, 0)} x {item.quantity}
                 </Tiny>
 
                 <Typography
@@ -251,7 +266,7 @@ const MiniCart: FC = () => {
                   color="primary.main"
                   mt="4px"
                 >
-                  {currency(item.qty * item.price)}
+                  {currency(item.quantity * item.price)}
                 </Typography>
               </div>
             </FlexBox>
@@ -282,7 +297,7 @@ const MiniCart: FC = () => {
 PaymentReview.layout = CheckoutNavLayout;
 MiniCart.defaultProps = { handleSubmit: () => {} };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
 
   const shop = await getShopById(shopId);

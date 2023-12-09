@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import api from "@utils/__api__/market-1";
 import categoryApi from "@utils/__api__/category";
+import { createLocalStorage } from "@utils/utils";
 import {
   getShopById,
   getShopMenus,
@@ -42,6 +43,7 @@ type Props = {
 // =================================================================
 
 const HomePage = (props: Props) => {
+  const [saveMerchantId] = createLocalStorage("merchantId");
   const { dispatch } = useAppContext();
   const shop = props?.shop;
   const products = props?.products;
@@ -50,10 +52,17 @@ const HomePage = (props: Props) => {
   const categories = props?.categories;
   const homeMenus = props?.homeMenus;
 
+  const merchantId = shop?.merchantId || shop?.user?.id;
+
   // Initializing the global state
   useEffect(() => {
     if (shop) {
       dispatch({ type: "SET_SHOP", payload: shop });
+
+      // Saving the merchant id in the local storage
+      if (merchantId) {
+        saveMerchantId(merchantId);
+      }
     }
 
     if (products) {

@@ -21,11 +21,11 @@ import { useAppContext } from "@context/AppContext";
 const AddressList = () => {
   const { dispatch, state } = useAppContext();
   const handleNavigate = () => Router.push("/address/create");
-  
+
   const addressList = state?.user?.addresses;
 
   useEffect(() => {
-    handleAddressList();  
+    handleAddressList();
   }, []);
 
   const handleAddressList = async () => {
@@ -37,16 +37,24 @@ const AddressList = () => {
     }
   };
 
-
   const HEADER_LINK = (
-    <Button color="primary" bg="primary.light" px="2rem" onClick={handleNavigate}>
+    <Button
+      color="primary"
+      bg="primary.light"
+      px="2rem"
+      onClick={handleNavigate}
+    >
       Add New Address
     </Button>
   );
 
   return (
     <Fragment>
-      <DashboardPageHeader title="My Addresses" iconName="pin_filled" button={HEADER_LINK} />
+      <DashboardPageHeader
+        title="My Addresses"
+        iconName="pin_filled"
+        button={HEADER_LINK}
+      />
 
       {addressList?.map((item) => (
         <TableRow my="1rem" padding="6px 18px" key={item.id}>
@@ -55,7 +63,7 @@ const AddressList = () => {
           </Typography>
 
           <Typography flex="1 1 260px !important" m="6px" textAlign="left">
-            {`${item.street}, ${item.city}, ${item.country}`}
+            {`${item.line1}, ${item.city}, ${item.country}`}
           </Typography>
 
           <Typography className="pre" m="6px" textAlign="left">

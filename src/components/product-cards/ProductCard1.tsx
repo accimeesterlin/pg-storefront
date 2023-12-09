@@ -5,7 +5,7 @@ import { FC, Fragment, useCallback, useState } from "react";
 import styled from "styled-components";
 import { useAppContext } from "@context/AppContext";
 import Box from "@component/Box";
-import Rating from "@component/rating";
+// import Rating from "@component/rating";
 import { Chip } from "@component/Chip";
 import Icon from "@component/icon/Icon";
 import FlexBox from "@component/FlexBox";
@@ -21,6 +21,7 @@ import {
 import { deviceSize } from "@utils/constants";
 import ProductQuickView from "@component/products/ProductQuickView";
 import Shop from "@models/shop.model";
+import CloudinaryResizedImage from "@component/cloudinaryResizeImage";
 
 // styled component
 const Wrapper = styled(Card)`
@@ -152,7 +153,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
         mainImageUrl: mainImageUrl,
         name,
         shopId: shop?.id,
-        qty: amount,
+        quantity: amount,
       },
     });
 
@@ -198,14 +199,19 @@ const ProductCard1: FC<ProductCard1Props> = ({
 
           <Link href={`/product/${id}`}>
             <a>
-              <img
+              <CloudinaryResizedImage
+                imageUrl={mainImageUrl}
+                width={282}
+                height={105}
+              />
+              {/* <img
                 alt={name}
                 width={282}
                 src={mainImageUrl}
                 // height={105}
                 // objectFit="cover"
                 // layout="responsive"
-              />
+              /> */}
             </a>
           </Link>
         </div>
@@ -229,7 +235,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
                 </a>
               </Link>
 
-              <Rating value={rating || 0} outof={5} color="warn" readonly />
+              {/* <Rating value={rating || 0} outof={5} color="warn" readonly /> */}
 
               <FlexBox alignItems="center" mt="10px">
                 <SemiSpan pr="0.5rem" fontWeight="600" color="primary.main">
@@ -248,7 +254,9 @@ const ProductCard1: FC<ProductCard1Props> = ({
               width="30px"
               alignItems="center"
               flexDirection="column-reverse"
-              justifyContent={!!cartItem?.qty ? "space-between" : "flex-start"}
+              justifyContent={
+                !!cartItem?.quantity ? "space-between" : "flex-start"
+              }
             >
               <Button
                 size="none"
@@ -256,15 +264,15 @@ const ProductCard1: FC<ProductCard1Props> = ({
                 color="primary"
                 variant="outlined"
                 borderColor="primary.light"
-                onClick={handleCartAmountChange((cartItem?.qty || 0) + 1)}
+                onClick={handleCartAmountChange((cartItem?.quantity || 0) + 1)}
               >
                 <Icon variant="small">plus</Icon>
               </Button>
 
-              {!!cartItem?.qty && (
+              {!!cartItem?.quantity && (
                 <Fragment>
                   <SemiSpan color="text.primary" fontWeight="600">
-                    {cartItem.qty}
+                    {cartItem.quantity}
                   </SemiSpan>
 
                   <Button
@@ -273,7 +281,7 @@ const ProductCard1: FC<ProductCard1Props> = ({
                     color="primary"
                     variant="outlined"
                     borderColor="primary.light"
-                    onClick={handleCartAmountChange(cartItem.qty - 1)}
+                    onClick={handleCartAmountChange(cartItem.quantity - 1)}
                   >
                     <Icon variant="small">minus</Icon>
                   </Button>

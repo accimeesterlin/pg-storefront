@@ -19,7 +19,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
   const handleCartAmountChange = (amount: number, product: any) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { ...product, qty: amount },
+      payload: { ...product, quantity: amount },
     });
   };
 
@@ -75,13 +75,13 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
                   size="none"
                   borderColor="primary.light"
                   borderRadius="300px"
-                  onClick={handleCartAmountChange(item.qty + 1, item)}
+                  onClick={handleCartAmountChange(item.quantity + 1, item)}
                 >
                   <Icon variant="small">plus</Icon>
                 </Button>
 
                 <Typography fontWeight={600} fontSize="15px" my="3px">
-                  {item.qty}
+                  {item.quantity}
                 </Typography>
 
                 <Button
@@ -91,8 +91,8 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
                   variant="outlined"
                   borderRadius="300px"
                   borderColor="primary.light"
-                  onClick={handleCartAmountChange(item.qty - 1, item)}
-                  disabled={item.qty === 1}
+                  onClick={handleCartAmountChange(item.quantity - 1, item)}
+                  disabled={item.quantity === 1}
                 >
                   <Icon variant="small">minus</Icon>
                 </Button>
@@ -122,7 +122,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
                 </Link>
 
                 <Tiny color="text.muted">
-                  {currency(item.price, 0)} x {item.qty}
+                  {currency(item.price, 0)} x {item.quantity}
                 </Tiny>
 
                 <Typography
@@ -131,7 +131,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
                   color="primary.main"
                   mt="4px"
                 >
-                  {currency(item.qty * item.price)}
+                  {currency(item.quantity * item.price)}
                 </Typography>
               </div>
 

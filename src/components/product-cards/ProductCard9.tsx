@@ -13,7 +13,12 @@ import FlexBox from "../FlexBox";
 import NavLink from "../nav-link";
 import { Button } from "../buttons";
 import { H5, SemiSpan } from "../Typography";
-import { calculateDiscount, createLocalStorage, currency, getTheme } from "@utils/utils";
+import {
+  calculateDiscount,
+  createLocalStorage,
+  currency,
+  getTheme,
+} from "@utils/utils";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { useAppContext } from "@context/AppContext";
 import Shop from "@models/shop.model";
@@ -128,10 +133,18 @@ const ProductCard9: FC<ProductCard9Props> = ({
 
   const toggleDialog = useCallback(() => setOpen((open) => !open), []);
 
-  const handleCartAmountChange = (qty: number) => () => {
+  const handleCartAmountChange = (quantity: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop?.id },
+      payload: {
+        price,
+        mainImageUrl,
+        id,
+        quantity,
+        slug,
+        name: name,
+        shopId: shop?.id,
+      },
     });
 
     saveCartState(state.cart);
@@ -157,20 +170,39 @@ const ProductCard9: FC<ProductCard9Props> = ({
               </Chip>
             )}
 
-            <Icon color="secondary" variant="small" className="quick-view" onClick={toggleDialog}>
+            <Icon
+              color="secondary"
+              variant="small"
+              className="quick-view"
+              onClick={toggleDialog}
+            >
               eye-alt
             </Icon>
 
-            <Image src={mainImageUrl} alt={name} width="100%" borderRadius="0.5rem" />
+            <Image
+              src={mainImageUrl}
+              alt={name}
+              width="100%"
+              borderRadius="0.5rem"
+            />
           </Box>
         </Grid>
 
         <Grid item md={8} sm={8} xs={12}>
-          <FlexBox flexDirection="column" justifyContent="center" height="100%" p="1rem">
+          <FlexBox
+            flexDirection="column"
+            justifyContent="center"
+            height="100%"
+            p="1rem"
+          >
             {!!categories && (
               <div className="categories">
                 {categories.map((item) => (
-                  <NavLink className="link" href={`/product/search/${item}`} key={item}>
+                  <NavLink
+                    className="link"
+                    href={`/product/search/${item}`}
+                    key={item}
+                  >
                     {item}
                   </NavLink>
                 ))}
@@ -217,15 +249,17 @@ const ProductCard9: FC<ProductCard9Props> = ({
                     color="primary"
                     variant="outlined"
                     borderColor="primary.light"
-                    onClick={handleCartAmountChange((cartItem?.qty || 0) + 1)}
+                    onClick={handleCartAmountChange(
+                      (cartItem?.quantity || 0) + 1
+                    )}
                   >
                     <Icon variant="small">plus</Icon>
                   </Button>
 
-                  {cartItem?.qty && (
+                  {cartItem?.quantity && (
                     <Fragment>
                       <H5 fontWeight="600" fontSize="15px" mx="0.75rem">
-                        {cartItem.qty}
+                        {cartItem.quantity}
                       </H5>
 
                       <Button
@@ -234,7 +268,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
                         color="primary"
                         variant="outlined"
                         borderColor="primary.light"
-                        onClick={handleCartAmountChange(cartItem.qty - 1)}
+                        onClick={handleCartAmountChange(cartItem.quantity - 1)}
                       >
                         <Icon variant="small">minus</Icon>
                       </Button>
@@ -263,7 +297,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
             <FlexBox
               alignItems="center"
               className="add-cart"
-              flexDirection={cartItem?.qty ? "column" : "column-reverse"}
+              flexDirection={cartItem?.quantity ? "column" : "column-reverse"}
             >
               <Button
                 size="none"
@@ -271,15 +305,15 @@ const ProductCard9: FC<ProductCard9Props> = ({
                 color="primary"
                 variant="outlined"
                 borderColor="primary.light"
-                onClick={handleCartAmountChange((cartItem?.qty || 0) + 1)}
+                onClick={handleCartAmountChange((cartItem?.quantity || 0) + 1)}
               >
                 <Icon variant="small">plus</Icon>
               </Button>
 
-              {cartItem?.qty && (
+              {cartItem?.quantity && (
                 <Fragment>
                   <H5 fontWeight="600" fontSize="15px" m="0.5rem">
-                    {cartItem.qty}
+                    {cartItem.quantity}
                   </H5>
 
                   <Button
@@ -288,7 +322,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
                     color="primary"
                     variant="outlined"
                     borderColor="primary.light"
-                    onClick={handleCartAmountChange(cartItem.qty - 1)}
+                    onClick={handleCartAmountChange(cartItem.quantity - 1)}
                   >
                     <Icon variant="small">minus</Icon>
                   </Button>

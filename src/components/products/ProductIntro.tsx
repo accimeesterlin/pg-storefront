@@ -53,7 +53,7 @@ const ProductIntro: FC<ProductIntroProps> = ({
       type: "CHANGE_CART_AMOUNT",
       payload: {
         price,
-        qty: amount,
+        quantity: amount,
         name: name,
         mainImageUrl: images[0]?.url,
         shopId: shop?.id,
@@ -158,7 +158,7 @@ const ProductIntro: FC<ProductIntroProps> = ({
             <SemiSpan color="inherit">Stock Available</SemiSpan>
           </Box>
 
-          {!cartItem?.qty ? (
+          {!cartItem?.quantity ? (
             <Button
               mb="36px"
               size="small"
@@ -175,13 +175,13 @@ const ProductIntro: FC<ProductIntroProps> = ({
                 size="small"
                 color="primary"
                 variant="outlined"
-                onClick={handleCartAmountChange(cartItem?.qty - 1)}
+                onClick={handleCartAmountChange(cartItem?.quantity - 1)}
               >
                 <Icon variant="small">minus</Icon>
               </Button>
 
               <H3 fontWeight="600" mx="20px">
-                {cartItem?.qty.toString().padStart(2, "0")}
+                {cartItem?.quantity.toString().padStart(2, "0")}
               </H3>
 
               <Button
@@ -189,7 +189,7 @@ const ProductIntro: FC<ProductIntroProps> = ({
                 size="small"
                 color="primary"
                 variant="outlined"
-                onClick={handleCartAmountChange(cartItem?.qty + 1)}
+                onClick={handleCartAmountChange(cartItem?.quantity + 1)}
               >
                 <Icon variant="small">plus</Icon>
               </Button>

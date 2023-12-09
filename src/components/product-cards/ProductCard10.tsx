@@ -12,7 +12,12 @@ import { H3, SemiSpan } from "../Typography";
 import ProductQuickView from "@component/products/ProductQuickView";
 import { deviceSize } from "@utils/constants";
 import { useAppContext } from "@context/AppContext";
-import { calculateDiscount, createLocalStorage, currency, getTheme } from "@utils/utils";
+import {
+  calculateDiscount,
+  createLocalStorage,
+  currency,
+  getTheme,
+} from "@utils/utils";
 import Shop from "@models/shop.model";
 
 // styled component
@@ -116,7 +121,8 @@ type ProductCard10Props = {
 
 const ProductCard10: FC<ProductCard10Props> = (props) => {
   const [saveCartState] = createLocalStorage("cartState");
-  const { id, off, unit, slug, name, price, mainImageUrl, images, shop } = props;
+  const { id, off, unit, slug, name, price, mainImageUrl, images, shop } =
+    props;
 
   const [open, setOpen] = useState(false);
   const { state, dispatch } = useAppContext();
@@ -124,10 +130,18 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
 
   const toggleDialog = useCallback(() => setOpen((open) => !open), []);
 
-  const handleCartAmountChange = (qty: number) => () => {
+  const handleCartAmountChange = (quantity: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop?.id },
+      payload: {
+        price,
+        mainImageUrl,
+        id,
+        quantity,
+        slug,
+        name: name,
+        shopId: shop?.id,
+      },
     });
 
     saveCartState(state.cart);
@@ -152,7 +166,12 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
         )}
 
         <FlexBox className="extra-icons">
-          <Icon color="secondary" variant="small" mb="0.5rem" onClick={toggleDialog}>
+          <Icon
+            color="secondary"
+            variant="small"
+            mb="0.5rem"
+            onClick={toggleDialog}
+          >
             eye-alt
           </Icon>
 
@@ -163,7 +182,13 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
 
         <Link href={`/product/${slug}`}>
           <a>
-            <NextImage src={mainImageUrl} width={100} height={100} layout="responsive" alt={name} />
+            <NextImage
+              src={mainImageUrl}
+              width={100}
+              height={100}
+              layout="responsive"
+              alt={name}
+            />
           </a>
         </Link>
       </div>
@@ -214,15 +239,15 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
               color="primary"
               variant="outlined"
               borderColor="primary.light"
-              onClick={handleCartAmountChange((cartItem?.qty || 0) + 1)}
+              onClick={handleCartAmountChange((cartItem?.quantity || 0) + 1)}
             >
               <Icon variant="small">plus</Icon>
             </Button>
 
-            {cartItem?.qty && (
+            {cartItem?.quantity && (
               <Fragment>
                 <SemiSpan color="text.primary" fontWeight="600">
-                  {cartItem.qty}
+                  {cartItem.quantity}
                 </SemiSpan>
 
                 <Button
@@ -231,7 +256,7 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
                   color="primary"
                   variant="outlined"
                   borderColor="primary.light"
-                  onClick={handleCartAmountChange(cartItem.qty - 1)}
+                  onClick={handleCartAmountChange(cartItem.quantity - 1)}
                 >
                   <Icon variant="small">minus</Icon>
                 </Button>

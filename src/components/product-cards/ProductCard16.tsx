@@ -131,7 +131,18 @@ type ProductCardProps = {
 
 const ProductCard16: FC<ProductCardProps> = (props) => {
   const [saveCartState] = createLocalStorage("cartState");
-  const { off, id, name, price, mainImageUrl, rating, hoverEffect, slug, images, shop } = props;
+  const {
+    off,
+    id,
+    name,
+    price,
+    mainImageUrl,
+    rating,
+    hoverEffect,
+    slug,
+    images,
+    shop,
+  } = props;
 
   const { state, dispatch } = useAppContext();
   const [openModal, setOpenModal] = useState(false);
@@ -140,10 +151,18 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
 
   const toggleDialog = useCallback(() => setOpenModal((open) => !open), []);
 
-  const handleCartAmountChange = (qty: number) => () => {
+  const handleCartAmountChange = (quantity: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { price, mainImageUrl, id, qty, slug, name: name, shopId: shop.id },
+      payload: {
+        price,
+        mainImageUrl,
+        id,
+        quantity,
+        slug,
+        name: name,
+        shopId: shop.id,
+      },
     });
 
     saveCartState(state.cart);
@@ -213,7 +232,8 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
 
           {rating && (
             <FlexBox alignItems="center">
-              <Rating value={rating || 0} color="warn" /> <Span ml={1}>{`(${rating}.0)`}</Span>
+              <Rating value={rating || 0} color="warn" />{" "}
+              <Span ml={1}>{`(${rating}.0)`}</Span>
             </FlexBox>
           )}
 
@@ -233,10 +253,17 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
         <ButtonBox>
           <Button
             variant="contained"
-            onClick={handleCartAmountChange(cartItem?.qty ? cartItem.qty - 1 : 1)}
-            style={{ paddingTop: "3px", paddingBottom: "3px", width: "100%", fontSize: "13px" }}
+            onClick={handleCartAmountChange(
+              cartItem?.quantity ? cartItem.quantity - 1 : 1
+            )}
+            style={{
+              paddingTop: "3px",
+              paddingBottom: "3px",
+              width: "100%",
+              fontSize: "13px",
+            }}
           >
-            {cartItem?.qty ? (
+            {cartItem?.quantity ? (
               <Fragment>
                 <Icon size="16px">minus</Icon> Remove from Cart
               </Fragment>

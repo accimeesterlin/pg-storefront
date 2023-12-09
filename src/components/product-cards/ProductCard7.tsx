@@ -46,7 +46,7 @@ const Wrapper = styled.div`
 
 // =====================================================================
 interface ProductCard7Props extends SpaceProps {
-  qty: number;
+  quantity: number;
   name: string;
   slug: string;
   price: number;
@@ -58,13 +58,21 @@ interface ProductCard7Props extends SpaceProps {
 
 const ProductCard7: FC<ProductCard7Props> = (props) => {
   const [saveCartState] = createLocalStorage("cartState");
-  const { id, name, qty, price, mainImageUrl, slug, shop, ...others } = props;
+  const { id, name, quantity, price, mainImageUrl, slug, shop, ...others } =
+    props;
 
   const { dispatch, state } = useAppContext();
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: "CHANGE_CART_AMOUNT",
-      payload: { qty: amount, name, price, mainImageUrl, id, shopId: shop.id },
+      payload: {
+        quantity: amount,
+        name,
+        price,
+        mainImageUrl,
+        id,
+        shopId: shop.id,
+      },
     });
 
     saveCartState(state.cart);
@@ -88,14 +96,24 @@ const ProductCard7: FC<ProductCard7Props> = (props) => {
       >
         <Link href={`/product/${slug}`}>
           <a>
-            <Typography className="title" fontWeight="600" fontSize="18px" mb="0.5rem">
+            <Typography
+              className="title"
+              fontWeight="600"
+              fontSize="18px"
+              mb="0.5rem"
+            >
               {name}
             </Typography>
           </a>
         </Link>
 
         <Box position="absolute" right="1rem" top="1rem">
-          <IconButton padding="4px" ml="12px" size="small" onClick={handleCartAmountChange(0)}>
+          <IconButton
+            padding="4px"
+            ml="12px"
+            size="small"
+            onClick={handleCartAmountChange(0)}
+          >
             <Icon size="1.25rem">close</Icon>
           </IconButton>
         </Box>
@@ -103,11 +121,11 @@ const ProductCard7: FC<ProductCard7Props> = (props) => {
         <FlexBox justifyContent="space-between" alignItems="flex-end">
           <FlexBox flexWrap="wrap" alignItems="center">
             <Typography color="gray.600" mr="0.5rem">
-              {currency(price)} x {qty}
+              {currency(price)} x {quantity}
             </Typography>
 
             <Typography fontWeight={600} color="primary.main" mr="1rem">
-              {currency(price * qty)}
+              {currency(price * quantity)}
             </Typography>
           </FlexBox>
 
@@ -117,15 +135,15 @@ const ProductCard7: FC<ProductCard7Props> = (props) => {
               padding="5px"
               color="primary"
               variant="outlined"
-              disabled={qty === 1}
+              disabled={quantity === 1}
               borderColor="primary.light"
-              onClick={handleCartAmountChange(qty - 1)}
+              onClick={handleCartAmountChange(quantity - 1)}
             >
               <Icon variant="small">minus</Icon>
             </Button>
 
             <Typography mx="0.5rem" fontWeight="600" fontSize="15px">
-              {qty}
+              {quantity}
             </Typography>
 
             <Button
@@ -134,7 +152,7 @@ const ProductCard7: FC<ProductCard7Props> = (props) => {
               color="primary"
               variant="outlined"
               borderColor="primary.light"
-              onClick={handleCartAmountChange(qty + 1)}
+              onClick={handleCartAmountChange(quantity + 1)}
             >
               <Icon variant="small">plus</Icon>
             </Button>

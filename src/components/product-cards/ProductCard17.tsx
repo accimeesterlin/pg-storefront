@@ -1,11 +1,11 @@
 import { FC, useCallback, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import styled from "styled-components";
 import Box from "@component/Box";
-import Rating from "@component/rating";
+// import Rating from "@component/rating";
 import Icon from "@component/icon/Icon";
-import FlexBox from "@component/FlexBox";
+// import FlexBox from "@component/FlexBox";
 import { Button } from "@component/buttons";
 import { IconButton } from "@component/buttons";
 import { H4, Paragraph, Small } from "@component/Typography";
@@ -14,6 +14,7 @@ import { theme } from "@utils/theme";
 import { createLocalStorage, currency } from "@utils/utils";
 import { useAppContext } from "@context/AppContext";
 import Shop from "@models/shop.model";
+import CloudinaryResizedImage from "@component/cloudinaryResizeImage";
 
 // styled components
 const Wrapper = styled(Box)({
@@ -85,7 +86,7 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
     price,
     mainImageUrl,
     category,
-    reviews,
+    // reviews,
     slug,
     images,
     shop,
@@ -109,7 +110,7 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
       mainImageUrl,
       name: name,
       shopId: shop?.id,
-      qty: (cartItem?.qty || 0) + 1,
+      quantity: (cartItem?.quantity || 0) + 1,
     };
 
     dispatch({ type: "CHANGE_CART_AMOUNT", payload });
@@ -122,7 +123,7 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
       <CardMedia>
         <Link href={`/product/${id}`}>
           <a>
-            <Image
+            {/* <Image
               width={300}
               height={300}
               src={mainImageUrl}
@@ -130,6 +131,12 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
               objectFit="cover"
               layout="responsive"
               className="product-img"
+            /> */}
+
+            <CloudinaryResizedImage
+              imageUrl={mainImageUrl}
+              width={300}
+              height={300}
             />
           </a>
         </Link>
@@ -165,12 +172,12 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
           {currency(price)}
         </H4>
 
-        <FlexBox alignItems="center" justifyContent="center">
+        {/* <FlexBox alignItems="center" justifyContent="center">
           <Rating value={4} color="warn" />
           <Small fontWeight={600} color="gray.500" ml=".5rem">
             ({reviews} Reviews)
           </Small>
-        </FlexBox>
+        </FlexBox> */}
       </Box>
     </Wrapper>
   );
