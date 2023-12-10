@@ -30,9 +30,18 @@ interface Shop {
   rating?: number;
   verified?: boolean;
   products?: Product[];
+  paymentMethods?: PaymentMethods[];
   coverPicture?: string;
   profilePicture?: string;
   socialMedialLinks?: { facebook?: string; youtube?: string; twitter?: string; instagram?: string };
+}
+
+export enum PaymentMethods {
+  MONCASH = "moncash",
+  PAYPAL = "paypal",
+  STRIPE = "stripe",
+  CASH = "cash",
+  CREDIT_CARD = "credit_card",
 }
 
 export default Shop;

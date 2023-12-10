@@ -47,7 +47,7 @@ export const createCheckoutSession = async (payload): Promise<any> => {
     },
 
     products: cart?.map((item) => ({
-      name: item?.title,
+      name: item?.name || item?.title,
       id: item?.id,
       shopId: shop?.id,
       description: item?.description,

@@ -11,6 +11,9 @@ import MonCashPayment from "./monCashPayment";
 // import PaypalPayment from "./paypalPayment";
 // import CashOnDeliveryPayment from "./CashOnDeliveryForm";
 import { useAppContext } from "@context/AppContext";
+import PGPayPayment from "./PGPayForm";
+import CreditCardForm from "./creditcardform";
+import { PaymentMethods } from "@models/shop.model";
 // import CryptoPayment from "./cryptoPayment";
 
 const PaymentForm: FC = () => {
@@ -19,6 +22,10 @@ const PaymentForm: FC = () => {
   const [paymentMethod, setPaymentMethod] = useState("moncash");
 
   const primaryColor = state?.shop?.primaryColorHex || null;
+
+  const shop = state?.shop;
+
+  const paymentMethods = shop?.paymentMethods || [];
 
   const handleFormSubmit = async () => {
     try {
@@ -40,12 +47,23 @@ const PaymentForm: FC = () => {
   return (
     <Fragment>
       <Card1 mb="2rem">
-        {/* <CreditCardForm paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
-        {/* <PGPayPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
         <MonCashPayment
           paymentMethod={paymentMethod}
           setPaymentMethod={setPaymentMethod}
         />
+
+        {paymentMethods?.includes(PaymentMethods.STRIPE) && (
+          <CreditCardForm
+            paymentMethod={paymentMethod}
+            setPaymentMethod={setPaymentMethod}
+          />
+        )}
+
+        <PGPayPayment
+          paymentMethod={paymentMethod}
+          setPaymentMethod={setPaymentMethod}
+        />
+
         {/* <PaypalPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
         {/* <CashOnDeliveryPayment paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod}/> */}
       </Card1>
