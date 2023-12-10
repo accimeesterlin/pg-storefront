@@ -161,7 +161,7 @@ const MiniCart: FC = () => {
         checkoutPayload.cart = state?.cart;
       }
 
-      if (!isEmpty(state?.checkout)) {
+      if (!isEmpty(state?.checkout?.address)) {
         checkoutPayload.checkout = state?.checkout;
       }
 
