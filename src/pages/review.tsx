@@ -46,7 +46,7 @@ const PaymentReview = (props: Props) => {
   const router = useRouter();
   const [, getCheckout] = createLocalStorage("checkoutData");
   const { state, dispatch } = useAppContext();
-  const paymentMethod = state?.checkout?.paymentMethod;
+  const paymentMethod = state?.checkout?.paymentMethod || "moncash";
 
   const shop = props?.shop;
   const menus = props?.menus;
