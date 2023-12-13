@@ -12,9 +12,9 @@ phases:
     commands:
       - netlify deploy --prod --build
 
-# post_build:
-#   commands:
-#     - netlify deploy --prod --build
+post_build:
+  commands:
+    - netlify deploy --prod --build
 
 artifacts:
   base-directory: out
