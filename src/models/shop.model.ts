@@ -34,6 +34,7 @@ interface Shop {
   coverPicture?: string;
   profilePicture?: string;
   socialMedialLinks?: { facebook?: string; youtube?: string; twitter?: string; instagram?: string };
+  crispWebsiteId?: string;
 }
 
 export enum PaymentMethods {

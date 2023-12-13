@@ -4,10 +4,15 @@ import Topbar from "@component/topbar";
 import Sticky from "@component/sticky";
 import { Header } from "@component/header";
 import { Footer1 } from "@component/footer";
+import dynamic from "next/dynamic";
 import MobileNavigationBar from "@component/mobile-navigation";
 import StyledAppLayout from "./AppLayoutStyle";
 import { useAppContext } from "@context/AppContext";
 import { capitalize } from "lodash";
+
+const CrispWithNoSSR = dynamic(() => import("@component/chat/crispInbox"), {
+  ssr: false,
+});
 
 // ===============================================================================
 type Props = { title?: string; navbar?: ReactElement; children: ReactNode };
@@ -23,6 +28,8 @@ const AppLayout: FC<Props> = (props) => {
   const shopName = capitalize(shop?.name);
   const description = shop?.description;
   const logo = shop?.profilePicture;
+
+  const crispWebsiteId = shop?.crispWebsiteId;
 
   useEffect(() => {
     const domain = window.location.hostname;
@@ -80,6 +87,8 @@ const AppLayout: FC<Props> = (props) => {
 
       <MobileNavigationBar />
       <Footer1 />
+
+      {crispWebsiteId && <CrispWithNoSSR websiteId={crispWebsiteId} />}
     </StyledAppLayout>
   );
 };
