@@ -88,9 +88,11 @@ const CarouselCard1: FC<Props> = ({
         </Button>
       </Box>
 
-      <div className="image-holder">
-        <img src={image} width={257} alt={title} />
-      </div>
+      {image && (
+        <div className="image-holder">
+          <img src={image} width={257} alt={title} />
+        </div>
+      )}
     </StyledCarouselCard1>
   );
 };
