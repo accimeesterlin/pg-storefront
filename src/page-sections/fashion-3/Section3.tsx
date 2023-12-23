@@ -14,6 +14,8 @@ const Section3: FC<Section3Props> = ({ products, title }) => {
   const { state } = useAppContext();
   const shop = state?.shop;
 
+  const reviews = [];
+
   return (
     <Container mt="4rem">
       <H2 textAlign="center" mb={4}>
@@ -32,7 +34,7 @@ const Section3: FC<Section3Props> = ({ products, title }) => {
               shop={shop}
               mainImageUrl={product.mainImageUrl}
               category={product.categories[0]}
-              reviews={product.reviews.length || 5}
+              reviews={reviews.length || 5}
             />
           </Grid>
         ))}

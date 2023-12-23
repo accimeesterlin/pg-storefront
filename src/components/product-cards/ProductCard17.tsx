@@ -110,7 +110,7 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
       slug,
       price,
       mainImageUrl,
-      name: name,
+      name,
       shopId: shop?.id,
       quantity: (cartItem?.quantity || 0) + 1,
     };

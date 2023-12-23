@@ -16,6 +16,8 @@ type Section4Props = { products: Product[] };
 const Section4: FC<Section4Props> = ({ products }) => {
   const { visibleSlides } = useVisibleSlide();
 
+  const reviews = [];
+
   return (
     <Container pt="4rem">
       <FlexBox alignItems="center" justifyContent="space-between" mb="1.5rem">
@@ -34,7 +36,7 @@ const Section4: FC<Section4Props> = ({ products }) => {
               price={product.price}
               images={product.images}
               img={product.mainImageUrl}
-              reviews={product.reviews.length || 11}
+              reviews={reviews.length || 11}
             />
           ))}
         </Carousel>

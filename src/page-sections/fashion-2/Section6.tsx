@@ -22,6 +22,8 @@ const Section6: FC<Section6Props> = ({ products }) => {
     else setVisibleSlides(5);
   }, [width]);
 
+  const reviews = [];
+
   return (
     <Container mt="4rem">
       <H2 textAlign="center" mb={4}>
@@ -40,7 +42,7 @@ const Section6: FC<Section6Props> = ({ products }) => {
               images={product.images}
               mainImageUrl={product.mainImageUrl}
               category={product.categories[0]}
-              reviews={product.reviews.length || 21}
+              reviews={reviews.length || 21}
             />
           ))}
         </Carousel>

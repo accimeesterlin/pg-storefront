@@ -10,6 +10,7 @@ type Section6Props = { products: Product[] };
 // =========================================
 
 const Section6: FC<Section6Props> = ({ products }) => {
+  const reviews = [];
   return (
     <Container mt="4rem">
       <H2 textAlign="center" mb={4}>
@@ -27,7 +28,7 @@ const Section6: FC<Section6Props> = ({ products }) => {
               images={product.images}
               mainImageUrl={product.mainImageUrl}
               category={product.categories[0]}
-              reviews={product.reviews.length || 5}
+              reviews={reviews.length || 5}
             />
           </Grid>
         ))}

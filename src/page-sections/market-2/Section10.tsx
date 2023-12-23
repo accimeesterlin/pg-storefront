@@ -41,12 +41,21 @@ const Section10: FC = () => {
     { id: 4, title: "View All", type: "view" },
   ];
 
+  const reviews = [];
+
   return (
     <Container mb="4rem">
-      <FlexBox alignItems="center" justifyContent="space-between" flexWrap="wrap" mb="1.5rem">
+      <FlexBox
+        alignItems="center"
+        justifyContent="space-between"
+        flexWrap="wrap"
+        mb="1.5rem"
+      >
         <Box>
           <H2 fontSize={20}>Selected Products</H2>
-          <Paragraph>All our new arrivals in a exclusive brand selection</Paragraph>
+          <Paragraph>
+            All our new arrivals in a exclusive brand selection
+          </Paragraph>
         </Box>
 
         <ButtonsWrapper>
@@ -74,7 +83,7 @@ const Section10: FC = () => {
               price={product.price}
               images={product.images}
               img={product.mainImageUrl}
-              reviews={product.reviews.length || 15}
+              reviews={reviews.length || 15}
             />
           ))}
         </Carousel>

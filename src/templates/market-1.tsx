@@ -51,7 +51,11 @@ const MarketOneTemplate = (props: Props) => {
       {/* HERO CAROUSEL AREA */}
       <Section1 carouselData={props.mainCarouselData} />
       {listOfCollections}
-      <Section3 products={products} title="All Products" />
+
+      {products?.length && (
+        <Section3 products={products} title="All Products" />
+      )}
+
       {/* FLASH DEAL PRODUCTS AREA */}
       {/* <Section2 products={props.flashDealsData} /> */}
       {/* TOP CATEGORIES AREA */}

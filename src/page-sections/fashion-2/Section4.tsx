@@ -10,7 +10,7 @@ import Product from "@models/product.model";
 type Section4Props = { products: Product[] };
 // ======================================================================
 
-const Section4: FC<Section4Props> = ({ products }) => {
+const Section4: FC<Section4Props> = ({ products }: any) => {
   const width = useWindowSize();
   const [visibleSlides, setVisibleSlides] = useState(4);
 
@@ -21,6 +21,12 @@ const Section4: FC<Section4Props> = ({ products }) => {
     else setVisibleSlides(4);
   }, [width]);
 
+  let category: any = {};
+  let reviews: any = [];
+
+  if (products?.categories?.length > 0) {
+    [category] = products?.categories;
+  }
   return (
     <Container mt="4rem">
       <H2 textAlign="center" mb={4}>
@@ -38,8 +44,8 @@ const Section4: FC<Section4Props> = ({ products }) => {
               price={product.price}
               images={product.images}
               mainImageUrl={product.mainImageUrl}
-              category={product.categories[0]}
-              reviews={product.reviews.length || 4}
+              category={category}
+              reviews={reviews.length || 4}
             />
           ))}
         </Carousel>

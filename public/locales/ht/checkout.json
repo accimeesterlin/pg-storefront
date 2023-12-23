@@ -1,0 +1,6 @@
+{
+  "pending": "Pending",
+  "pending_desc": "This is a pending transaction. It has not been confirmed yet.",
+  "approved": "Apwouve",
+  "payment_method": "Tip de Payman"
+}

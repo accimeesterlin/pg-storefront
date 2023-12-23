@@ -29,7 +29,14 @@ type Props = { data: CategoryBasedProducts };
 // ======================================================================
 
 const Section6: FC<Props> = ({ data }) => {
-  const { visibleSlides } = useVisibleSlide({ initialSlide: 4, xs: 1, sm: 2, lg: 3 });
+  const { visibleSlides } = useVisibleSlide({
+    initialSlide: 4,
+    xs: 1,
+    sm: 2,
+    lg: 3,
+  });
+
+  const reviews = [];
 
   return (
     <Container pt="4rem">
@@ -37,7 +44,12 @@ const Section6: FC<Props> = ({ data }) => {
         <Grid item md={3} xs={12}>
           <Card
             elevation={0}
-            style={{ padding: "1rem 2rem", height: "100%", borderRadius: "3px", border: 0 }}
+            style={{
+              padding: "1rem 2rem",
+              height: "100%",
+              borderRadius: "3px",
+              border: 0,
+            }}
           >
             {/* MAIN CATEGORY NAME/TITLE */}
             <H3>{data.category.title}</H3>
@@ -56,7 +68,10 @@ const Section6: FC<Props> = ({ data }) => {
         {/* CATEGORY BASED PRODUCTS CAROUSEL */}
         <Grid item md={9} xs={12}>
           <CarouselWrapper color="dark">
-            <Carousel totalSlides={data.products?.length} visibleSlides={visibleSlides}>
+            <Carousel
+              totalSlides={data.products?.length}
+              visibleSlides={visibleSlides}
+            >
               {data.products.map((product) => (
                 <ProductCard19
                   id={product.id}
@@ -66,7 +81,7 @@ const Section6: FC<Props> = ({ data }) => {
                   price={product.price}
                   images={product.images}
                   img={product.mainImageUrl}
-                  reviews={product.reviews.length || 14}
+                  reviews={reviews.length || 14}
                 />
               ))}
             </Carousel>
