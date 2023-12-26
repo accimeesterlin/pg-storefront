@@ -2600,7 +2600,7 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.5.tgz#a6ce3e556e00fd9895dd872dd172ad0d4bd687f4"
   integrity sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==
 
-"@types/hoist-non-react-statics@*", "@types/hoist-non-react-statics@^3.3.1", "@types/hoist-non-react-statics@^3.3.4":
+"@types/hoist-non-react-statics@*", "@types/hoist-non-react-statics@^3.3.1":
   version "3.3.5"
   resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.5.tgz#dab7867ef789d87e2b4b0003c9d65c49cc44a494"
   integrity sha512-SbcrWzkKBw2cdwRTwQAswfpB9g9LJWfjtUeW/jvNwbhC8cpmmNYVePa+ncbUe0rGTQ7G3Ff6mYUN2VMfLVr+Sg==
@@ -4128,11 +4128,6 @@ copy-template-dir@1.4.0:
     pump "^1.0.0"
     readdirp "^2.0.0"
     run-parallel "^1.1.4"
-
-core-js@^3:
-  version "3.34.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.34.0.tgz#5705e6ad5982678612e96987d05b27c6c7c274a5"
-  integrity sha512-aDdvlDder8QmY91H88GzNi9EtQi2TjvQhpCX6B1v/dAZHU1AuLgHvRh54RiOerpEhEW46Tkf+vgAViB/CWC0ag==
 
 core-js@^3.0.1:
   version "3.33.3"
@@ -5946,11 +5941,6 @@ human-signals@^3.0.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-3.0.1.tgz#c740920859dafa50e5a3222da9d3bf4bb0e5eef5"
   integrity sha512-rQLskxnM/5OCldHo+wNXbpVgDn5A17CUoKX+7Sokwaknlq7CdSnphy0W39GU8dw59XiCXmFXDg4fRuckQRKewQ==
 
-i18next-fs-backend@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/i18next-fs-backend/-/i18next-fs-backend-2.3.1.tgz#0c7d2459ff4a039e2b3228131809fbc0e74ff1a8"
-  integrity sha512-tvfXskmG/9o+TJ5Fxu54sSO5OkY6d+uMn+K6JiUGLJrwxAVfer+8V3nU8jq3ts9Pe5lXJv4b1N7foIjJ8Iy2Gg==
-
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -7325,7 +7315,7 @@ nested-error-stacks@^2.0.0, nested-error-stacks@^2.1.0, nested-error-stacks@^2.1
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.1.tgz#26c8a3cee6cc05fbcf1e333cd2fc3e003326c0b5"
   integrity sha512-9iN1ka/9zmX1ZvLV9ewJYEk9h7RyRRtqdK0woXcqohu8EWIerfPUjYJPg0ULy0UqP7cslmdGc8xKDJcojlKiaw==
 
-netlify-cli@^17.10.1:
+netlify-cli@^17.2.2:
   version "17.10.1"
   resolved "https://registry.yarnpkg.com/netlify-cli/-/netlify-cli-17.10.1.tgz#a05ff26899a1b471f125d45fec51a59d01756d16"
   integrity sha512-y9UBZQ+Zx85MJVAjXnuWrVwdymBnXxKXzXMTObs2ONaTm/cqYPo9HB1vChQSUrEajB6H36zwNdWaNnoCRLs3SA==
@@ -7489,17 +7479,6 @@ next-connect@^0.13.0:
   integrity sha512-f2G4edY01XomjCECSrgOpb/zzQinJO6Whd8Zds0+rLUYhj5cLwkh6FVvZsQCSSbxSc4k9nCwNuk5NLIhvO1gUA==
   dependencies:
     trouter "^3.2.0"
-
-next-i18next@^15.1.1:
-  version "15.1.1"
-  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-15.1.1.tgz#9fa04bb0260b55cb315dbc437912a991b1b914fa"
-  integrity sha512-IueFofP7Z9G41VjSPX/LdKhjYDDXq/iLAUFap7Rcz/MlsjLQMC7aktzBslhKH6GBYLOXsuhAO98goBFQBdhelg==
-  dependencies:
-    "@babel/runtime" "^7.23.2"
-    "@types/hoist-non-react-statics" "^3.3.4"
-    core-js "^3"
-    hoist-non-react-statics "^3.3.2"
-    i18next-fs-backend "^2.3.1"
 
 next@^12.2.4:
   version "12.3.4"
