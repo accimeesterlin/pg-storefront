@@ -6,7 +6,7 @@ phases:
       nodejs: 20
     commands:
       - yarn install
-      - yarn global add netlify-cli@17.18.1
+      - yarn global add netlify-cli@17.2.2
 
   build:
     commands:
