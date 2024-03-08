@@ -1218,7 +1218,7 @@
   dependencies:
     "@opentelemetry/api" "~1.7.0"
 
-"@netlify/plugin-nextjs@^4.41.2":
+"@netlify/plugin-nextjs@^4.41.3":
   version "4.41.3"
   resolved "https://registry.yarnpkg.com/@netlify/plugin-nextjs/-/plugin-nextjs-4.41.3.tgz#f8274526147f652438cc6790b6819ca15d441dd3"
   integrity sha512-l8TB61u7A1ZF22QpoyZtresSUsHOJGP9DatECnqlNab3lG8id1kz9Pso+nZVOznWOm98o7w51k2+TIf52x+DBQ==
