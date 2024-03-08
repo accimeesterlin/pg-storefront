@@ -26,7 +26,8 @@ const TextArea: FC<TextAreaProps> = ({
   let otherProps = {};
 
   for (const key in props) {
-    if (key.startsWith("m") || key.startsWith("p")) spacingProps[key] = props[key];
+    if (key?.startsWith("m") || key?.startsWith("p"))
+      spacingProps[key] = props[key];
     else otherProps[key] = props[key];
   }
 
