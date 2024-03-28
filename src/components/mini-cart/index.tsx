@@ -1,6 +1,6 @@
 import { FC, Fragment, useEffect } from "react";
 import Link from "next/link";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import Icon from "@component/icon/Icon";
 import Divider from "@component/Divider";
 import FlexBox from "@component/FlexBox";
@@ -52,8 +52,8 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
           >
             <NextImage
               src="/assets/images/logos/shopping-bag.svg"
-              width="90px"
-              height="100%"
+              width={90}
+              height={100}
             />
             <Paragraph
               mt="1rem"
@@ -101,26 +101,21 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
               </FlexBox>
 
               <Link href={`/product/${item.slug}`}>
-                <a>
-                  <Avatar
-                    size={76}
-                    mx="1rem"
-                    alt={item.name}
-                    src={
-                      item.mainImageUrl ||
-                      "/assets/images/products/iphone-x.png"
-                    }
-                  />
-                </a>
+                <Avatar
+                  size={76}
+                  mx="1rem"
+                  alt={item.name}
+                  src={
+                    item.mainImageUrl || "/assets/images/products/iphone-x.png"
+                  }
+                />
               </Link>
 
               <div className="product-details">
                 <Link href={`/product/${item.id}`}>
-                  <a>
-                    <H5 className="title" fontSize="14px">
-                      {item.name}
-                    </H5>
-                  </a>
+                  <H5 className="title" fontSize="14px">
+                    {item.name}
+                  </H5>
                 </Link>
 
                 <Tiny color="text.muted">

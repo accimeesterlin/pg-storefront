@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import { useRouter } from "next/router";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -51,11 +51,23 @@ const CheckoutForm2: FC = () => {
       initialValues={initialValues}
       validationSchema={checkoutSchema}
     >
-      {({ values, errors, touched, handleChange, handleSubmit, setFieldValue }) => (
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleSubmit,
+        setFieldValue,
+      }) => (
         <form onSubmit={handleSubmit}>
           <Card1 mb="1.5rem">
             <FlexBox alignItems="center" mb="1.75rem">
-              <Avatar bg="primary.main" size={32} color="primary.text" mr="0.875rem">
+              <Avatar
+                bg="primary.main"
+                size={32}
+                color="primary.text"
+                mr="0.875rem"
+              >
                 1
               </Avatar>
               <Typography fontSize="20px">Delivery Details</Typography>
@@ -98,8 +110,16 @@ const CheckoutForm2: FC = () => {
                     boxShadow="none"
                     border="1px solid"
                     cursor="pointer"
-                    borderColor={item.address === values.address ? "primary.main" : "transparent"}
-                    onClick={handleFieldValueChange(item.address, "address", setFieldValue)}
+                    borderColor={
+                      item.address === values.address
+                        ? "primary.main"
+                        : "transparent"
+                    }
+                    onClick={handleFieldValueChange(
+                      item.address,
+                      "address",
+                      setFieldValue
+                    )}
                   >
                     <H6 mb="0.25rem">{item.addressType}</H6>
                     <Paragraph color="gray.700">{item.address}</Paragraph>
@@ -111,7 +131,12 @@ const CheckoutForm2: FC = () => {
 
           <Card1 mb="1.5rem">
             <FlexBox alignItems="center" mb="1.75rem">
-              <Avatar bg="primary.main" size={32} color="primary.text" mr="0.875rem">
+              <Avatar
+                bg="primary.main"
+                size={32}
+                color="primary.text"
+                mr="0.875rem"
+              >
                 3
               </Avatar>
               <Typography fontSize="20px">Personal Details</Typography>
@@ -128,8 +153,16 @@ const CheckoutForm2: FC = () => {
                     boxShadow="none"
                     border="1px solid"
                     cursor="pointer"
-                    borderColor={item.contact === values.contact ? "primary.main" : "transparent"}
-                    onClick={handleFieldValueChange(item.contact, "contact", setFieldValue)}
+                    borderColor={
+                      item.contact === values.contact
+                        ? "primary.main"
+                        : "transparent"
+                    }
+                    onClick={handleFieldValueChange(
+                      item.contact,
+                      "contact",
+                      setFieldValue
+                    )}
                   >
                     <H6 mb="0.25rem">{item.contactType}</H6>
                     <Paragraph color="gray.700">{item.contact}</Paragraph>
@@ -141,7 +174,12 @@ const CheckoutForm2: FC = () => {
 
           <Card1 mb="1.5rem">
             <FlexBox alignItems="center" mb="1.75rem">
-              <Avatar bg="primary.main" size={32} color="primary.text" mr="0.875rem">
+              <Avatar
+                bg="primary.main"
+                size={32}
+                color="primary.text"
+                mr="0.875rem"
+              >
                 3
               </Avatar>
               <Typography fontSize="20px">Payment Details</Typography>
@@ -157,10 +195,23 @@ const CheckoutForm2: FC = () => {
                     boxShadow="none"
                     border="1px solid"
                     cursor="pointer"
-                    borderColor={item.last4Digits === values.card ? "primary.main" : "transparent"}
-                    onClick={handleFieldValueChange(item.last4Digits, "card", setFieldValue)}
+                    borderColor={
+                      item.last4Digits === values.card
+                        ? "primary.main"
+                        : "transparent"
+                    }
+                    onClick={handleFieldValueChange(
+                      item.last4Digits,
+                      "card",
+                      setFieldValue
+                    )}
                   >
-                    <Box height="24px" width="36px" position="relative" mb="0.5rem">
+                    <Box
+                      height="24px"
+                      width="36px"
+                      position="relative"
+                      mb="0.5rem"
+                    >
                       <NextImage
                         src={`/assets/images/payment-methods/${item.cardType}.svg`}
                         layout="fill"
@@ -168,7 +219,9 @@ const CheckoutForm2: FC = () => {
                       />
                     </Box>
 
-                    <Paragraph color="gray.700">**** **** **** {item.last4Digits}</Paragraph>
+                    <Paragraph color="gray.700">
+                      **** **** **** {item.last4Digits}
+                    </Paragraph>
                     <Paragraph color="gray.700">{item.name}</Paragraph>
                   </Card>
                 </Grid>
@@ -194,13 +247,24 @@ const CheckoutForm2: FC = () => {
                   value={values.voucher || ""}
                   onChange={handleChange}
                 />
-                <Button variant="contained" color="primary" type="button" ml="1rem">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="button"
+                  ml="1rem"
+                >
                   Apply
                 </Button>
               </FlexBox>
             )}
 
-            <Button variant="contained" color="primary" mt="1.5rem" type="submit" fullwidth>
+            <Button
+              variant="contained"
+              color="primary"
+              mt="1.5rem"
+              type="submit"
+              fullwidth
+            >
               Place Order
             </Button>
           </Card1>

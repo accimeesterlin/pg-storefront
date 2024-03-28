@@ -173,11 +173,9 @@ const Login: FC = () => {
         <FlexBox justifyContent="center" mb="1.25rem">
           <SemiSpan>Don’t have account?</SemiSpan>
           <Link href="/signup">
-            <a>
-              <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
-                Sign Up
-              </H6>
-            </a>
+            <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
+              Sign Up
+            </H6>
           </Link>
         </FlexBox>
       </form>
@@ -185,11 +183,9 @@ const Login: FC = () => {
       <FlexBox justifyContent="center" bg="gray.200" py="19px">
         <SemiSpan>Forgot your password?</SemiSpan>
         <Link href="/">
-          <a>
-            <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
-              Reset It
-            </H6>
-          </a>
+          <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
+            Reset It
+          </H6>
         </Link>
       </FlexBox>
     </StyledSessionCard>

@@ -29,19 +29,17 @@ const Card1: FC<Props> = ({ title, price, comparePrice, mainImageUrl }) => {
         </SemiSpan>
 
         <Link href="/">
-          <a>
-            <Button mx="auto">
-              <H6
-                pb="2px"
-                fontSize="12px"
-                textAlign="center"
-                borderBottom="2px solid"
-                borderColor="primary.main"
-              >
-                SHOP NOW
-              </H6>
-            </Button>
-          </a>
+          <Button mx="auto">
+            <H6
+              pb="2px"
+              fontSize="12px"
+              textAlign="center"
+              borderBottom="2px solid"
+              borderColor="primary.main"
+            >
+              SHOP NOW
+            </H6>
+          </Button>
         </Link>
       </Box>
 

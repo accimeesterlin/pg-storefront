@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import Box from "@component/Box";
 import Card from "@component/Card";
 import Grid from "@component/grid/Grid";
@@ -10,7 +10,10 @@ import Typography, { H3, SemiSpan, Small } from "@component/Typography";
 import { StyledMegaMenu1 } from "./styles";
 import { MegaMenu3Props } from "./type";
 
-const MegaMenu3: FC<MegaMenu3Props> = ({ data: { categories, rightImage }, minWidth }) => {
+const MegaMenu3: FC<MegaMenu3Props> = ({
+  data: { categories, rightImage },
+  minWidth,
+}) => {
   return categories ? (
     <StyledMegaMenu1 className="mega-menu">
       <Card ml="1rem" minWidth={minWidth} boxShadow="regular">
@@ -38,54 +41,58 @@ const MegaMenu3: FC<MegaMenu3Props> = ({ data: { categories, rightImage }, minWi
 
           {rightImage && (
             <Link href={rightImage.href}>
-              <a>
-                <Box position="relative" width="153px" height="100%">
-                  <NextImage src={rightImage.mainImageUrl} layout="fill" objectFit="contain" />
-                </Box>
-              </a>
+              <Box position="relative" width="153px" height="100%">
+                <NextImage
+                  src={rightImage.mainImageUrl}
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </Box>
             </Link>
           )}
         </FlexBox>
 
         <Link href="/sale-page-2">
-          <a>
-            <Grid
-              container
-              spacing={0}
-              flexWrap="wrap-reverse"
-              containerHeight="100%"
-              alignItems="center"
-            >
-              <Grid item sm={6} xs={12}>
-                <Box px="1.25rem">
-                  <H3 mb="0.5rem">Big Sale Upto 60% Off</H3>
+          <Grid
+            container
+            spacing={0}
+            flexWrap="wrap-reverse"
+            containerHeight="100%"
+            alignItems="center"
+          >
+            <Grid item sm={6} xs={12}>
+              <Box px="1.25rem">
+                <H3 mb="0.5rem">Big Sale Upto 60% Off</H3>
 
-                  <Typography color="text.muted" mb="0.5rem">
-                    Handcrafted from genuine Italian Leather
-                  </Typography>
+                <Typography color="text.muted" mb="0.5rem">
+                  Handcrafted from genuine Italian Leather
+                </Typography>
 
-                  <Small fontWeight="700" borderBottom="2px solid" borderColor="primary.main">
-                    SHOP NOW
-                  </Small>
-                </Box>
-              </Grid>
-              <Grid item sm={6} xs={12}>
-                <FlexBox
-                  flexDirection="column"
-                  justifyContent="flex-end"
-                  height="160px"
-                  position="relative"
+                <Small
+                  fontWeight="700"
+                  borderBottom="2px solid"
+                  borderColor="primary.main"
                 >
-                  <NextImage
-                    layout="fill"
-                    objectFit="contain"
-                    src="/assets/images/products/paper-bag.png"
-                    alt="model"
-                  />
-                </FlexBox>
-              </Grid>
+                  SHOP NOW
+                </Small>
+              </Box>
             </Grid>
-          </a>
+            <Grid item sm={6} xs={12}>
+              <FlexBox
+                flexDirection="column"
+                justifyContent="flex-end"
+                height="160px"
+                position="relative"
+              >
+                <NextImage
+                  layout="fill"
+                  objectFit="contain"
+                  src="/assets/images/products/paper-bag.png"
+                  alt="model"
+                />
+              </FlexBox>
+            </Grid>
+          </Grid>
         </Link>
       </Card>
     </StyledMegaMenu1>

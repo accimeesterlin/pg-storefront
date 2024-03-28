@@ -22,15 +22,21 @@ const Section3: FC<Props> = ({ categoryList }) => {
   }, [width]);
 
   return (
-    <CategorySectionCreator iconName="categories" title="Top Categories" seeMoreLink="#">
+    <CategorySectionCreator
+      iconName="categories"
+      title="Top Categories"
+      seeMoreLink="#"
+    >
       <Carousel totalSlides={categoryList.length} visibleSlides={visibleSlides}>
         {categoryList.map((item, ind) => (
           <Link href={`/product/search/${item.slug}`} key={ind}>
-            <a>
-              <Card p="1rem">
-                <ProductCard6 name={item.name} subtitle={item.description} mainImageUrl={item.image} />
-              </Card>
-            </a>
+            <Card p="1rem">
+              <ProductCard6
+                name={item.name}
+                subtitle={item.description}
+                mainImageUrl={item.image}
+              />
+            </Card>
           </Link>
         ))}
       </Carousel>

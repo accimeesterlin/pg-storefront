@@ -1,5 +1,5 @@
 import { FC } from "react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import styled from "styled-components";
 import Box from "@component/Box";
 import Card from "@component/Card";
@@ -45,7 +45,13 @@ const StyledContent = styled.div`
 const Section4: FC = () => {
   return (
     <Container mb="7rem" id="technologies">
-      <H3 fontSize="40px" textAlign="center" fontWeight="900" color="secondary.main" mb="3.75rem">
+      <H3
+        fontSize="40px"
+        textAlign="center"
+        fontWeight="900"
+        color="secondary.main"
+        mb="3.75rem"
+      >
         Technologies Used
       </H3>
 
@@ -71,7 +77,13 @@ const Section4: FC = () => {
                   />
                 </Box>
 
-                <H4 mx="auto" fontSize="18px" fontWeight="700" maxWidth="200px" textAlign="center">
+                <H4
+                  mx="auto"
+                  fontSize="18px"
+                  fontWeight="700"
+                  maxWidth="200px"
+                  textAlign="center"
+                >
                   {item.title}
                 </H4>
               </Card>

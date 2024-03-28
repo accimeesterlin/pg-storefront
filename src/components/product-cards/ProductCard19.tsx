@@ -1,6 +1,6 @@
 import { FC, useState, Fragment } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styled from "styled-components";
 import Box from "@component/Box";
 import Rating from "@component/rating";
@@ -104,17 +104,15 @@ const ProductCard19: FC<ProductCard19Props> = (props) => {
       <CardBox height="100%">
         <CardMedia>
           <Link href={`/product/${slug}`}>
-            <a>
-              <Image
-                src={img}
-                width={300}
-                height={300}
-                alt="category"
-                objectFit="cover"
-                layout="responsive"
-                className="product-img"
-              />
-            </a>
+            <Image
+              src={img}
+              width={300}
+              height={300}
+              alt="category"
+              objectFit="cover"
+              layout="responsive"
+              className="product-img"
+            />
           </Link>
 
           <AddToCartButton

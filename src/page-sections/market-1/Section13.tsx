@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import Box from "@component/Box";
 import Card from "@component/Card";
 import FlexBox from "@component/FlexBox";
@@ -28,38 +28,48 @@ const Section13: FC<Props> = ({ bigDiscountList }) => {
   }, [width]);
 
   return (
-    <CategorySectionCreator iconName="gift" title="Big Discounts" seeMoreLink="#">
+    <CategorySectionCreator
+      iconName="gift"
+      title="Big Discounts"
+      seeMoreLink="#"
+    >
       <Box my="-0.25rem">
-        <Carousel totalSlides={bigDiscountList.length} visibleSlides={visibleSlides}>
+        <Carousel
+          totalSlides={bigDiscountList.length}
+          visibleSlides={visibleSlides}
+        >
           {bigDiscountList.map((item) => (
             <Box py="0.25rem" key={item.id}>
               <Card p="1rem">
                 <Link href={`/product/${item.slug}`} passHref>
-                  <a>
-                    <HoverBox borderRadius={8} mb="0.5rem">
-                      <NextImage
-                        width={100}
-                        height={100}
-                        alt={item.name}
-                        src={item.mainImageUrl}
-                        layout="responsive"
-                      />
-                    </HoverBox>
+                  <HoverBox borderRadius={8} mb="0.5rem">
+                    <NextImage
+                      width={100}
+                      height={100}
+                      alt={item.name}
+                      src={item.mainImageUrl}
+                      layout="responsive"
+                    />
+                  </HoverBox>
 
-                    <H4 fontWeight="600" fontSize="14px" mb="0.25rem">
-                      {item.name}
+                  <H4 fontWeight="600" fontSize="14px" mb="0.25rem">
+                    {item.name}
+                  </H4>
+
+                  <FlexBox>
+                    <H4
+                      fontWeight="600"
+                      fontSize="14px"
+                      color="primary.main"
+                      mr="0.5rem"
+                    >
+                      {calculateDiscount(item.price, item.comparePrice)}
                     </H4>
 
-                    <FlexBox>
-                      <H4 fontWeight="600" fontSize="14px" color="primary.main" mr="0.5rem">
-                        {calculateDiscount(item.price, item.comparePrice)}
-                      </H4>
-
-                      <H4 fontWeight="600" fontSize="14px" color="text.muted">
-                        <del>{currency(item.price)}</del>
-                      </H4>
-                    </FlexBox>
-                  </a>
+                    <H4 fontWeight="600" fontSize="14px" color="text.muted">
+                      <del>{currency(item.price)}</del>
+                    </H4>
+                  </FlexBox>
                 </Link>
               </Card>
             </Box>

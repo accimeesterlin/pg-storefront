@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from "react";
 import Link from "next/link";
-// import Image from "next/image";
+// import Image from "next/legacy/image";
 import styled from "styled-components";
 import Box from "@component/Box";
 // import Rating from "@component/rating";
@@ -124,14 +124,12 @@ const ProductCard17: FC<ProductCard17Props> = (props) => {
     <Wrapper>
       <CardMedia>
         <Link href={`/product/${id}`}>
-          <a>
-            <CloudinaryResizedImage
-              imageUrl={mainImageUrl}
-              width={isMobile ? 400 : 300}
-              alt="category"
-              height={300}
-            />
-          </a>
+          <CloudinaryResizedImage
+            imageUrl={mainImageUrl}
+            width={isMobile ? 400 : 300}
+            alt="category"
+            height={300}
+          />
         </Link>
 
         <AddToCartButton className="product-actions" onClick={handleAddToCart}>

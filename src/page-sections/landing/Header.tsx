@@ -180,7 +180,7 @@ const Header: FC = () => {
               <Button variant="outlined" color="primary">
                 Purchase Now
               </Button>
-            </a>
+             
           </FlexBox>
 
           {/* mobile menu */}

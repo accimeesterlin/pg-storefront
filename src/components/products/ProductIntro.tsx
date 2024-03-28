@@ -199,11 +199,9 @@ const ProductIntro: FC<ProductIntroProps> = ({
           <FlexBox alignItems="center" mb="1rem">
             <SemiSpan>Sold By:</SemiSpan>
             <Link href="/shops/scarlett-beauty">
-              <a>
-                <H6 lineHeight="1" ml="8px">
-                  {shop?.name}
-                </H6>
-              </a>
+              <H6 lineHeight="1" ml="8px">
+                {shop?.name}
+              </H6>
             </Link>
           </FlexBox>
           <FlexBox alignItems="center">

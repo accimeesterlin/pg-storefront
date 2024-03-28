@@ -32,12 +32,18 @@ const Section4: FC<Props> = ({ categoryList }) => {
     <Wrapper my={4} className="categories">
       <H1 mb={3}>Top Categories</H1>
 
-      <Carousel infinite={true} visibleSlides={visibleSlides} totalSlides={categoryList.length}>
+      <Carousel
+        infinite={true}
+        visibleSlides={visibleSlides}
+        totalSlides={categoryList.length}
+      >
         {categoryList.map((item) => (
           <Link href="#" key={item.id}>
-            <a>
-              <ProductCard14 name={item.name} mainImageUrl={item.image} available={item.description} />
-            </a>
+            <ProductCard14
+              name={item.name}
+              mainImageUrl={item.image}
+              available={item.description}
+            />
           </Link>
         ))}
       </Carousel>

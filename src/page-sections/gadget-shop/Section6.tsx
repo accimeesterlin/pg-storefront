@@ -28,7 +28,11 @@ const StyledCard = styled(Card)<CardProps>`
 const Section6: FC = () => {
   return (
     <Container>
-      <StyledCard mainImageUrl="/assets/images/products/bg-gradient.png" mb="3.75rem" hoverEffect>
+      <StyledCard
+        mainImageUrl="/assets/images/products/bg-gradient.png"
+        mb="3.75rem"
+        hoverEffect
+      >
         <Box maxWidth="390px">
           <H2 mb="0.5rem">Build Your Own Youtube Studio Save Upto 70%</H2>
           <SemiSpan color="text.muted" display="block" mb="1.5rem">
@@ -36,11 +40,13 @@ const Section6: FC = () => {
           </SemiSpan>
 
           <Link href="/">
-            <a>
-              <Small fontWeight="700" borderBottom="2px solid" borderColor="primary.main">
-                DISCOVER EQUIPMENTS
-              </Small>
-            </a>
+            <Small
+              fontWeight="700"
+              borderBottom="2px solid"
+              borderColor="primary.main"
+            >
+              DISCOVER EQUIPMENTS
+            </Small>
           </Link>
         </Box>
       </StyledCard>

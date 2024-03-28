@@ -100,35 +100,33 @@ const Section5: FC<Props> = ({ list }) => {
                 {list?.slice(firstIndex, lastIndex).map((item, ind) => (
                   <Grid item md={6} xs={12} key={ind}>
                     <Link href="/">
-                      <a>
-                        <Card position="relative">
-                          <Image src={item.mainImageUrl} width="100%" />
+                      <Card position="relative">
+                        <Image src={item.mainImageUrl} width="100%" />
 
-                          <Box
-                            p="6px 12px"
-                            bg="gray.200"
-                            top="1.25rem"
-                            left="1.25rem"
-                            fontWeight="600"
-                            borderRadius={5}
-                            position="absolute"
-                          >
-                            {item.brand}
-                          </Box>
-                          <Box
-                            p="6px 12px"
-                            color="white"
-                            top="1.25rem"
-                            right="1.25rem"
-                            fontWeight="600"
-                            borderRadius={5}
-                            bg="primary.main"
-                            position="absolute"
-                          >
-                            {item.off}% OFF
-                          </Box>
-                        </Card>
-                      </a>
+                        <Box
+                          p="6px 12px"
+                          bg="gray.200"
+                          top="1.25rem"
+                          left="1.25rem"
+                          fontWeight="600"
+                          borderRadius={5}
+                          position="absolute"
+                        >
+                          {item.brand}
+                        </Box>
+                        <Box
+                          p="6px 12px"
+                          color="white"
+                          top="1.25rem"
+                          right="1.25rem"
+                          fontWeight="600"
+                          borderRadius={5}
+                          bg="primary.main"
+                          position="absolute"
+                        >
+                          {item.off}% OFF
+                        </Box>
+                      </Card>
                     </Link>
                   </Grid>
                 ))}

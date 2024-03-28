@@ -39,7 +39,13 @@ type BannerCard2Props = {
 };
 // ========================================================
 
-const BannerCard2: FC<BannerCard2Props> = ({ img, url, text1, text2, text3 }) => {
+const BannerCard2: FC<BannerCard2Props> = ({
+  img,
+  url,
+  text1,
+  text2,
+  text3,
+}) => {
   return (
     <CardWrapper>
       <Image alt="category" height="100%" width="100%" src={img} />
@@ -54,11 +60,9 @@ const BannerCard2: FC<BannerCard2Props> = ({ img, url, text1, text2, text3 }) =>
         </Box>
 
         <Link href={url}>
-          <a>
-            <Button variant="outlined" color="primary">
-              Shop Now
-            </Button>
-          </a>
+          <Button variant="outlined" color="primary">
+            Shop Now
+          </Button>
         </Link>
       </CardContent>
     </CardWrapper>

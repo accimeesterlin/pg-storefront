@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import Box from "@component/Box";
 import Hidden from "@component/hidden";
 import Grid from "@component/grid/Grid";

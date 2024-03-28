@@ -1,5 +1,5 @@
 import { FC } from "react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import Box from "@component/Box";
 import Rating from "@component/rating";
 import FlexBox from "@component/FlexBox";
@@ -23,7 +23,13 @@ const ProductCard4: FC<ProductCard4Props> = (props) => {
   return (
     <Box>
       <HoverBox mb="1rem" mx="auto" borderRadius={8}>
-        <NextImage src={mainImageUrl} width={100} height={100} layout="responsive" alt={name} />
+        <NextImage
+          src={mainImageUrl}
+          width={100}
+          height={100}
+          layout="responsive"
+          alt={name}
+        />
       </HoverBox>
 
       <FlexBox justifyContent="center" alignItems="center" mb="0.25rem">
@@ -34,11 +40,23 @@ const ProductCard4: FC<ProductCard4Props> = (props) => {
         </Small>
       </FlexBox>
 
-      <H4 fontWeight="600" fontSize="14px" textAlign="center" mb="0.25rem" title={name} ellipsis>
+      <H4
+        fontWeight="600"
+        fontSize="14px"
+        textAlign="center"
+        mb="0.25rem"
+        title={name}
+        ellipsis
+      >
         {name}
       </H4>
 
-      <H4 fontWeight="600" fontSize="14px" textAlign="center" color="primary.main">
+      <H4
+        fontWeight="600"
+        fontSize="14px"
+        textAlign="center"
+        color="primary.main"
+      >
         {currency(price)}
       </H4>
     </Box>

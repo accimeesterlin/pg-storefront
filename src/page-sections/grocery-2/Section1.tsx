@@ -1,5 +1,5 @@
 import { FC } from "react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import styled from "styled-components";
 import Box from "@component/Box";
 import Card from "@component/Card";
@@ -70,14 +70,25 @@ const Section1: FC<Props> = ({ carouselData }) => {
         totalSlides={carouselData.length}
       >
         {carouselData.map((item) => (
-          <Card key={item.id} bg="primary.main" color="white" borderRadius={0} position="relative">
+          <Card
+            key={item.id}
+            bg="primary.main"
+            color="white"
+            borderRadius={0}
+            position="relative"
+          >
             <ContentWrapper>
               <Box className="card__inner-box">
                 <H1 maxWidth="280px" mb="0.5rem" lineHeight="1.27">
                   {item.title}
                 </H1>
 
-                <H6 maxWidth="470px" color="inherit" fontWeight="400" mb="2.5rem">
+                <H6
+                  maxWidth="470px"
+                  color="inherit"
+                  fontWeight="400"
+                  mb="2.5rem"
+                >
                   {item.description}
                 </H6>
 
@@ -88,8 +99,17 @@ const Section1: FC<Props> = ({ carouselData }) => {
                 <AppStore />
               </Box>
 
-              <Box className="card__img" minWidth="285px" height="180px" position="relative">
-                <NextImage layout="fill" objectFit="contain" src={item.mainImageUrl} />
+              <Box
+                className="card__img"
+                minWidth="285px"
+                height="180px"
+                position="relative"
+              >
+                <NextImage
+                  layout="fill"
+                  objectFit="contain"
+                  src={item.mainImageUrl}
+                />
               </Box>
             </ContentWrapper>
           </Card>

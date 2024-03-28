@@ -16,17 +16,21 @@ const CardWrapper = styled(Box)({
   ":hover": { img: { transform: "scale(1.1)" } },
 });
 
-const CardContent = styled(Box)<{ contentAlign: "right" | "left" }>(({ contentAlign }) => ({
-  top: 0,
-  zIndex: 1,
-  color: "#fff",
-  height: "100%",
-  display: "flex",
-  position: "absolute",
-  flexDirection: "column",
-  justifyContent: "center",
-  ...(contentAlign === "left" ? { left: 32 } : { right: 32, alignItems: "flex-end" }),
-}));
+const CardContent = styled(Box)<{ contentAlign: "right" | "left" }>(
+  ({ contentAlign }) => ({
+    top: 0,
+    zIndex: 1,
+    color: "#fff",
+    height: "100%",
+    display: "flex",
+    position: "absolute",
+    flexDirection: "column",
+    justifyContent: "center",
+    ...(contentAlign === "left"
+      ? { left: 32 }
+      : { right: 32, alignItems: "flex-end" }),
+  })
+);
 
 const CardLink = styled(Span)({
   fontSize: 14,
@@ -76,9 +80,7 @@ const BannerCard1: FC<BannerCard1Props> = ({
         <Divider height={2} my="1rem" width={50} />
 
         <Link href={url}>
-          <a>
-            <CardLink>Shop Now</CardLink>
-          </a>
+          <CardLink>Shop Now</CardLink>
         </Link>
       </CardContent>
     </CardWrapper>

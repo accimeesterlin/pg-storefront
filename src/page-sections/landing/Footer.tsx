@@ -32,7 +32,7 @@ const Footer: FC = () => {
               <Icon size="1.25rem" defaultcolor="auto" mx="0.5rem">
                 {item.iconName}
               </Icon>
-            </a>
+             
           ))}
         </FlexBox>
       </FlexBox>

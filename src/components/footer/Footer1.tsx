@@ -50,9 +50,7 @@ const Footer1: FC = () => {
             <Grid container spacing={6}>
               <Grid item lg={4} md={6} sm={6} xs={12}>
                 <Link href="/">
-                  <a>
-                    <Image alt="logo" mb="1.25rem" src={logoUrl} width="50px" />
-                  </a>
+                  <Image alt="logo" mb="1.25rem" src={logoUrl} width="50px" />
                 </Link>
 
                 {description && (
@@ -107,7 +105,7 @@ const Footer1: FC = () => {
                           {item.iconName}
                         </Icon>
                       </Box>
-                    </a>
+                     
                   ))}
                 </FlexBox> */}
               </Grid>

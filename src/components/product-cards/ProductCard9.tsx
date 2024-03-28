@@ -210,11 +210,9 @@ const ProductCard9: FC<ProductCard9Props> = ({
             )}
 
             <Link href={`/product/${slug}`}>
-              <a>
-                <H5 fontWeight="600" my="0.5rem">
-                  {name}
-                </H5>
-              </a>
+              <H5 fontWeight="600" my="0.5rem">
+                {name}
+              </H5>
             </Link>
 
             <Rating value={rating || 0} outof={5} color="warn" />

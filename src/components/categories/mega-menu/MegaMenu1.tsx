@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import Box from "@component/Box";
 import Card from "@component/Card";
 import Grid from "@component/grid/Grid";
@@ -41,22 +41,26 @@ const MegaMenu1: FC<MegaMenu1Props> = ({
 
           {rightImage && (
             <Link href={rightImage.href}>
-              <a>
-                <Box position="relative" width="153px" height="100%">
-                  <NextImage src={rightImage.mainImageUrl} layout="fill" objectFit="contain" />
-                </Box>
-              </a>
+              <Box position="relative" width="153px" height="100%">
+                <NextImage
+                  src={rightImage.mainImageUrl}
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </Box>
             </Link>
           )}
         </FlexBox>
 
         {bottomImage && (
           <Link href={bottomImage.href}>
-            <a>
-              <Box position="relative" height="170px">
-                <NextImage src={bottomImage.mainImageUrl} layout="fill" objectFit="cover" />
-              </Box>
-            </a>
+            <Box position="relative" height="170px">
+              <NextImage
+                src={bottomImage.mainImageUrl}
+                layout="fill"
+                objectFit="cover"
+              />
+            </Box>
           </Link>
         )}
       </Card>

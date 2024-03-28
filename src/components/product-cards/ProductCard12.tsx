@@ -161,16 +161,14 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
 
         <ImageBox className="hoverImgBox">
           <Link href={`/product/${slug}`}>
-            <a>
-              <LazyImage
-                alt={name}
-                width={190}
-                height={190}
-                src={mainImageUrl}
-                layout="responsive"
-                objectFit="contain"
-              />
-            </a>
+            <LazyImage
+              alt={name}
+              width={190}
+              height={190}
+              src={mainImageUrl}
+              layout="responsive"
+              objectFit="contain"
+            />
           </Link>
         </ImageBox>
 
@@ -221,18 +219,16 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
 
       <ContentWrapper>
         <Link href={`#`}>
-          <a>
-            <H3
-              mb={1}
-              name={name}
-              fontSize="14px"
-              fontWeight="600"
-              className="name"
-              color="text.secondary"
-            >
-              {name}
-            </H3>
-          </a>
+          <H3
+            mb={1}
+            name={name}
+            fontSize="14px"
+            fontWeight="600"
+            className="name"
+            color="text.secondary"
+          >
+            {name}
+          </H3>
         </Link>
 
         {rating && (

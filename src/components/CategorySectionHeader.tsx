@@ -30,14 +30,12 @@ const CategorySectionHeader: FC<CategorySectionHeaderProps> = ({
 
       {seeMoreLink && (
         <Link href={seeMoreLink}>
-          <a>
-            <FlexBox alignItems="center" ml="0.5rem" color="text.muted">
-              <SemiSpan mr="0.5rem">View all</SemiSpan>
-              <Icon size="12px" defaultcolor="currentColor">
-                right-arrow
-              </Icon>
-            </FlexBox>
-          </a>
+          <FlexBox alignItems="center" ml="0.5rem" color="text.muted">
+            <SemiSpan mr="0.5rem">View all</SemiSpan>
+            <Icon size="12px" defaultcolor="currentColor">
+              right-arrow
+            </Icon>
+          </FlexBox>
         </Link>
       )}
     </FlexBox>

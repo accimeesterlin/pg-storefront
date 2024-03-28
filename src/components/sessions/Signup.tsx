@@ -183,7 +183,7 @@ const Signup: FC = () => {
                 <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
                   Terms & Condtion
                 </H6>
-              </a>
+               
             </FlexBox>
           }
         />
@@ -244,11 +244,11 @@ const Signup: FC = () => {
       <FlexBox justifyContent="center" bg="gray.200" py="19px">
         <SemiSpan>Already have account?</SemiSpan>
         <Link href="/login">
-          <a>
+          
             <H6 ml="0.5rem" borderBottom="1px solid" borderColor="gray.900">
               Log in
             </H6>
-          </a>
+           
         </Link>
       </FlexBox>
     </StyledSessionCard>

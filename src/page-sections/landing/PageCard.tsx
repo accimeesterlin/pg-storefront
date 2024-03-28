@@ -1,6 +1,6 @@
 import { FC, Fragment } from "react";
 import Link from "next/link";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import styled from "styled-components";
 import Box from "@component/Box";
 import Card from "@component/Card";
@@ -48,7 +48,12 @@ type PageCardProps = {
 };
 // ============================================
 
-const PageCard: FC<PageCardProps> = ({ mainImageUrl, previewUrl, title, badge }) => {
+const PageCard: FC<PageCardProps> = ({
+  mainImageUrl,
+  previewUrl,
+  title,
+  badge,
+}) => {
   return (
     <Fragment>
       <Wrapper
@@ -92,7 +97,7 @@ const PageCard: FC<PageCardProps> = ({ mainImageUrl, previewUrl, title, badge })
                 <Icon>eye</Icon>
               </IconButton>
             </FlexBox>
-          </a>
+           
         </Link>
       </Wrapper>
 

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import styled from "styled-components";
 import Icon from "../icon/Icon";
 import FlexBox from "../FlexBox";
@@ -15,11 +15,20 @@ type MobileCategoryImageBoxProps = {
   mainImageUrl?: string;
 };
 
-const MobileCategoryImageBox: FC<MobileCategoryImageBoxProps> = ({ title, mainImageUrl, icon }) => {
+const MobileCategoryImageBox: FC<MobileCategoryImageBoxProps> = ({
+  title,
+  mainImageUrl,
+  icon,
+}) => {
   return (
     <FlexBox flexDirection="column" alignItems="center" justifyContent="center">
       {mainImageUrl ? (
-        <StyledImage src={mainImageUrl} width={100} height={100} objectFit="cover" />
+        <StyledImage
+          src={mainImageUrl}
+          width={100}
+          height={100}
+          objectFit="cover"
+        />
       ) : (
         icon && <Icon size="48px">{icon}</Icon>
       )}

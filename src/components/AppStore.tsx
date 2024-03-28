@@ -40,8 +40,18 @@ const AppStore: FC = () => {
 };
 
 const appList = [
-  { iconName: "play-store", title: "Google Play", subtitle: "Get it on", url: "/" },
-  { iconName: "app-store", title: "App Store", subtitle: "Download on the", url: "/" },
+  {
+    iconName: "play-store",
+    title: "Google Play",
+    subtitle: "Get it on",
+    url: "/",
+  },
+  {
+    iconName: "app-store",
+    title: "App Store",
+    subtitle: "Download on the",
+    url: "/",
+  },
 ];
 
 export default AppStore;

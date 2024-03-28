@@ -95,16 +95,14 @@ const ProductCard7: FC<ProductCard7Props> = (props) => {
         justifyContent="space-between"
       >
         <Link href={`/product/${slug}`}>
-          <a>
-            <Typography
-              className="title"
-              fontWeight="600"
-              fontSize="18px"
-              mb="0.5rem"
-            >
-              {name}
-            </Typography>
-          </a>
+          <Typography
+            className="title"
+            fontWeight="600"
+            fontSize="18px"
+            mb="0.5rem"
+          >
+            {name}
+          </Typography>
         </Link>
 
         <Box position="absolute" right="1rem" top="1rem">

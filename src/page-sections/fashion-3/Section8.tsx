@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styled from "styled-components";
 import Box from "@component/Box";
 import Grid from "@component/grid/Grid";
@@ -62,7 +62,13 @@ const Section8: FC<Props> = ({ blogs }) => {
         {blogs.map((item) => (
           <Grid item md={2} sm={4} xs={6} key={item.id}>
             <ImageWrapper>
-              <Image alt="post" width={100} height={100} layout="responsive" src={item.mainImageUrl} />
+              <Image
+                alt="post"
+                width={100}
+                height={100}
+                layout="responsive"
+                src={item.mainImageUrl}
+              />
               <StyledIcon>instagram</StyledIcon>
             </ImageWrapper>
           </Grid>

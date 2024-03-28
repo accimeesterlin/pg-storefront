@@ -35,30 +35,28 @@ const Section2: FC<Props> = ({ offerProducts }) => {
       {offerProducts.map((item, ind) => (
         <Grid key={ind} item md={6} sm={12} xs={12}>
           <Link href="#">
-            <a>
-              <StyledCard>
-                <Box width="60%">
-                  <Paragraph fontWeight={600}>{item.title}</Paragraph>
-                  <H3 mb={3} fontSize={25} lineHeight={1.35}>
-                    {item.discountOffer}
-                  </H3>
+            <StyledCard>
+              <Box width="60%">
+                <Paragraph fontWeight={600}>{item.title}</Paragraph>
+                <H3 mb={3} fontSize={25} lineHeight={1.35}>
+                  {item.discountOffer}
+                </H3>
 
-                  <Button color="primary" variant="outlined">
-                    {item.buttonText}
-                  </Button>
-                </Box>
+                <Button color="primary" variant="outlined">
+                  {item.buttonText}
+                </Button>
+              </Box>
 
-                <Box width="40%">
-                  <LazyImage
-                    width={100}
-                    height={100}
-                    src={item.mainImageUrl}
-                    layout="responsive"
-                    objectFit="contain"
-                  />
-                </Box>
-              </StyledCard>
-            </a>
+              <Box width="40%">
+                <LazyImage
+                  width={100}
+                  height={100}
+                  src={item.mainImageUrl}
+                  layout="responsive"
+                  objectFit="contain"
+                />
+              </Box>
+            </StyledCard>
           </Link>
         </Grid>
       ))}

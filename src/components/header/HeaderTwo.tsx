@@ -79,9 +79,7 @@ const HeaderTwo: FC<HeaderProps> = ({ className }) => {
       >
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
-            <a>
-              <img src={logoUrl} alt="logo" width="50px" />
-            </a>
+            <img src={logoUrl} alt="logo" width="50px" />
           </Link>
         </FlexBox>
 

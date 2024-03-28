@@ -1,5 +1,5 @@
 import Link from "next/link";
-// import Image from "next/image";
+// import Image from "next/legacy/image";
 import isEmpty from "lodash.isempty";
 import { FC, Fragment, useCallback, useState } from "react";
 import styled from "styled-components";
@@ -200,13 +200,12 @@ const ProductCard1: FC<ProductCard1Props> = ({
           </FlexBox>
 
           <Link href={`/product/${id}`}>
-            <a>
-              <CloudinaryResizedImage
-                imageUrl={mainImageUrl}
-                width={isMobile ? 400 : 282}
-                height={130}
-              />
-              {/* <img
+            <CloudinaryResizedImage
+              imageUrl={mainImageUrl}
+              width={isMobile ? 400 : 282}
+              height={130}
+            />
+            {/* <img
                 alt={name}
                 width={282}
                 src={mainImageUrl}
@@ -214,7 +213,6 @@ const ProductCard1: FC<ProductCard1Props> = ({
                 // objectFit="cover"
                 // layout="responsive"
               /> */}
-            </a>
           </Link>
         </div>
 
@@ -222,19 +220,17 @@ const ProductCard1: FC<ProductCard1Props> = ({
           <FlexBox>
             <Box flex="1 1 0" minWidth="0px" mr="0.5rem">
               <Link href={`/product/${id}`}>
-                <a>
-                  <H3
-                    mb="10px"
-                    title={name}
-                    fontSize="14px"
-                    textAlign="left"
-                    fontWeight="600"
-                    className="title"
-                    color="text.secondary"
-                  >
-                    {name}
-                  </H3>
-                </a>
+                <H3
+                  mb="10px"
+                  title={name}
+                  fontSize="14px"
+                  textAlign="left"
+                  fontWeight="600"
+                  className="title"
+                  color="text.secondary"
+                >
+                  {name}
+                </H3>
               </Link>
 
               {/* <Rating value={rating || 0} outof={5} color="warn" readonly /> */}

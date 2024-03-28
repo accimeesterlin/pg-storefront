@@ -19,22 +19,24 @@ const Section4: FC<Props> = ({ topRatedBrands, topRatedList }) => {
       <Container>
         <Grid container spacing={6}>
           <Grid item lg={6} xs={12}>
-            <CategorySectionHeader iconName="ranking-1" title="Top Ratings" seeMoreLink="#" />
+            <CategorySectionHeader
+              iconName="ranking-1"
+              title="Top Ratings"
+              seeMoreLink="#"
+            />
 
             <Card p="1rem">
               <Grid container spacing={4}>
                 {topRatedList.map((item) => (
                   <Grid item md={3} sm={6} xs={6} key={item.name}>
                     <Link href={`/product/search/${item.slug}`} passHref>
-                      <a>
-                        <ProductCard4
-                          name={item.name}
-                          price={item.price}
-                          mainImageUrl={item.mainImageUrl}
-                          rating={item.rating || 4}
-                          reviewCount={item.reviews.length || 12}
-                        />
-                      </a>
+                      <ProductCard4
+                        name={item.name}
+                        price={item.price}
+                        mainImageUrl={item.mainImageUrl}
+                        rating={item.rating || 4}
+                        reviewCount={item.reviews.length || 12}
+                      />
                     </Link>
                   </Grid>
                 ))}
@@ -43,16 +45,21 @@ const Section4: FC<Props> = ({ topRatedBrands, topRatedList }) => {
           </Grid>
 
           <Grid item md={6} xs={12}>
-            <CategorySectionHeader iconName="Group" title="Featured Brands" seeMoreLink="#" />
+            <CategorySectionHeader
+              iconName="Group"
+              title="Featured Brands"
+              seeMoreLink="#"
+            />
 
             <Card p="1rem">
               <Grid container spacing={4}>
                 {topRatedBrands.map((item) => (
                   <Grid item sm={6} xs={12} key={item.id}>
                     <Link href={`/product/search/${item.slug}`} passHref>
-                      <a>
-                        <ProductCard5 name={item.name} mainImageUrl={item.image} />
-                      </a>
+                      <ProductCard5
+                        name={item.name}
+                        mainImageUrl={item.image}
+                      />
                     </Link>
                   </Grid>
                 ))}

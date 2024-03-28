@@ -59,7 +59,7 @@ const Section5: FC = () => {
               <Button variant="outlined" color="secondary" mx="auto">
                 Purchase Now
               </Button>
-            </a>
+             
           </Card>
 
           <Card
@@ -90,7 +90,7 @@ const Section5: FC = () => {
               <Button variant="outlined" color="dark" mx="auto">
                 Purchase Now
               </Button>
-            </a>
+             
           </Card>
         </FlexBox>
       </Container>

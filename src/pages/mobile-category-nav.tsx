@@ -8,7 +8,10 @@ import { Header } from "@component/header";
 import Typography from "@component/Typography";
 import MobileNavigationBar from "@component/mobile-navigation";
 import { Accordion, AccordionHeader } from "@component/accordion";
-import { MobileCategoryImageBox, MobileCategoryNavStyle } from "@component/mobile-category-nav";
+import {
+  MobileCategoryImageBox,
+  MobileCategoryNavStyle,
+} from "@component/mobile-category-nav";
 import navigations from "@data/navigations";
 
 const MobileCategoryNav = () => {
@@ -41,7 +44,12 @@ const MobileCategoryNav = () => {
               {item.icon}
             </Icon>
 
-            <Typography className="ellipsis" textAlign="center" fontSize="11px" lineHeight="1">
+            <Typography
+              className="ellipsis"
+              textAlign="center"
+              fontSize="11px"
+              lineHeight="1"
+            >
               {item.title}
             </Typography>
           </Box>
@@ -58,9 +66,7 @@ const MobileCategoryNav = () => {
             {suggestedList.map((item, ind) => (
               <Grid item lg={1} md={2} sm={3} xs={4} key={ind}>
                 <Link href="/product/search/423423">
-                  <a>
-                    <MobileCategoryImageBox {...item} />
-                  </a>
+                  <MobileCategoryImageBox {...item} />
                 </Link>
               </Grid>
             ))}
@@ -83,9 +89,7 @@ const MobileCategoryNav = () => {
                     {item.subCategories?.map((item, ind) => (
                       <Grid item lg={1} md={2} sm={3} xs={4} key={ind}>
                         <Link href="/product/search/423423">
-                          <a>
-                            <MobileCategoryImageBox {...item} />
-                          </a>
+                          <MobileCategoryImageBox {...item} />
                         </Link>
                       </Grid>
                     ))}
@@ -100,9 +104,7 @@ const MobileCategoryNav = () => {
               {subCategoryList.map((item, ind) => (
                 <Grid item lg={1} md={2} sm={3} xs={4} key={ind}>
                   <Link href="/product/search/423423">
-                    <a>
-                      <MobileCategoryImageBox {...item} />
-                    </a>
+                    <MobileCategoryImageBox {...item} />
                   </Link>
                 </Grid>
               ))}

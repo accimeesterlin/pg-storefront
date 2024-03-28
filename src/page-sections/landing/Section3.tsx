@@ -63,7 +63,7 @@ const Section3: FC = () => {
           <Button variant="contained" color="primary" minWidth="125px" mx="auto" mt="2.25rem">
             Purchase Now
           </Button>
-        </a>
+         
       </Container>
     </SectionWrapper>
   );

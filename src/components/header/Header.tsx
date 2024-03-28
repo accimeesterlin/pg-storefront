@@ -85,14 +85,12 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
         <FlexBox className="logo" alignItems="center" mr="1rem">
           {logoUrl && (
             <Link href="/">
-              <a>
-                <CloudinaryResizedImage
-                  imageUrl={logoUrl}
-                  height={50}
-                  alt="logo"
-                  width={50}
-                />
-              </a>
+              <CloudinaryResizedImage
+                imageUrl={logoUrl}
+                height={50}
+                alt="logo"
+                width={50}
+              />
             </Link>
           )}
 

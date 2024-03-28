@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import styled from "styled-components";
 import Card from "@component/Card";
 import Grid from "@component/grid/Grid";
@@ -20,34 +20,36 @@ type Props = { categories: Category[] };
 const Section10: FC<Props> = ({ categories }) => {
   return (
     <Container mb="70px">
-      <CategorySectionHeader title="Categories" iconName="categories" seeMoreLink="#" />
+      <CategorySectionHeader
+        title="Categories"
+        iconName="categories"
+        seeMoreLink="#"
+      />
 
       <Grid container spacing={6}>
         {categories.map((item) => (
           <Grid item lg={2} md={3} sm={4} xs={12} key={item.id}>
             <Link href="/">
-              <a>
-                <Card
-                  hoverEffect
-                  p="0.75rem"
-                  display="flex"
-                  borderRadius={8}
-                  boxShadow="small"
-                  alignItems="center"
-                >
-                  <StyledImage
-                    width="52px"
-                    alt="fashion"
-                    height="52px"
-                    src={item.image}
-                    objectFit="contain"
-                  />
+              <Card
+                hoverEffect
+                p="0.75rem"
+                display="flex"
+                borderRadius={8}
+                boxShadow="small"
+                alignItems="center"
+              >
+                <StyledImage
+                  width="52px"
+                  alt="fashion"
+                  height="52px"
+                  src={item.image}
+                  objectFit="contain"
+                />
 
-                  <Typography fontWeight="600" fontSize="14px" ml="10px">
-                    {item.name}
-                  </Typography>
-                </Card>
-              </a>
+                <Typography fontWeight="600" fontSize="14px" ml="10px">
+                  {item.name}
+                </Typography>
+              </Card>
             </Link>
           </Grid>
         ))}

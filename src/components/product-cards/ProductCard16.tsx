@@ -175,16 +175,14 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
 
         <ImageBox>
           <Link href={`/product/${slug}`}>
-            <a>
-              <LazyImage
-                alt={name}
-                src={mainImageUrl}
-                width={190}
-                height={190}
-                layout="responsive"
-                objectFit="contain"
-              />
-            </a>
+            <LazyImage
+              alt={name}
+              src={mainImageUrl}
+              width={190}
+              height={190}
+              layout="responsive"
+              objectFit="contain"
+            />
           </Link>
 
           <HoverWrapper className="controller">
@@ -216,18 +214,16 @@ const ProductCard16: FC<ProductCardProps> = (props) => {
       <ContentWrapper>
         <Box flex="1 1 0" minWidth="0px" mr={1}>
           <Link href={`/product/${slug}`}>
-            <a>
-              <H3
-                mb={1}
-                name={name}
-                fontSize="14px"
-                fontWeight="600"
-                className="name"
-                color="text.secondary"
-              >
-                {name}
-              </H3>
-            </a>
+            <H3
+              mb={1}
+              name={name}
+              fontSize="14px"
+              fontWeight="600"
+              className="name"
+              color="text.secondary"
+            >
+              {name}
+            </H3>
           </Link>
 
           {rating && (

@@ -86,7 +86,7 @@ const Section1: FC<Props> = ({ data }) => {
                     >
                       {item.buttonText}
                     </Button>
-                  </a>
+                   
                 </Grid>
 
                 <Grid item md={5} xs={12}>

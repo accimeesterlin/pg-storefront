@@ -1,5 +1,5 @@
 import { FC } from "react";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import Card from "@component/Card";
 import { Chip } from "@component/Chip";
 import HoverBox from "@component/HoverBox";
@@ -12,7 +12,11 @@ type ProductCard6Props = {
 };
 // ===========================================================================
 
-const ProductCard6: FC<ProductCard6Props> = ({ name, subtitle, mainImageUrl }) => {
+const ProductCard6: FC<ProductCard6Props> = ({
+  name,
+  subtitle,
+  mainImageUrl,
+}) => {
   return (
     <Card position="relative">
       <Chip

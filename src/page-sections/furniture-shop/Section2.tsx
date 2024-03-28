@@ -8,18 +8,20 @@ import { H1, H3, H6, Paragraph } from "components/Typography";
 import { theme } from "@utils/theme";
 
 // styled components
-const ContentBox = styled(Box)<{ mainImageUrl: string }>(({ mainImageUrl }) => ({
-  height: 230,
-  display: "flex",
-  borderRadius: 0,
-  boxShadow: "none",
-  alignItems: "center",
-  background: theme.colors.paste[50],
-  backgroundImage: `url('${mainImageUrl}')`,
-  backgroundOrigin: "content-box",
-  backgroundRepeat: "no-repeat",
-  backgroundSize: "contain",
-}));
+const ContentBox = styled(Box)<{ mainImageUrl: string }>(
+  ({ mainImageUrl }) => ({
+    height: 230,
+    display: "flex",
+    borderRadius: 0,
+    boxShadow: "none",
+    alignItems: "center",
+    background: theme.colors.paste[50],
+    backgroundImage: `url('${mainImageUrl}')`,
+    backgroundOrigin: "content-box",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
+  })
+);
 
 const LeftContentBox = styled(ContentBox)({
   backgroundPosition: "right bottom",
@@ -59,34 +61,30 @@ const Section2: FC = () => {
       <Grid container spacing={6}>
         <Grid item xs={12} md={7}>
           <Link href="/sale-page-1">
-            <a>
-              <LeftContentBox mainImageUrl={product1}>
-                <RightContent>
-                  <H6>Modern Furniture.</H6>
-                  <H1 fontSize={35} color="primary.main">
-                    Big Sale
-                  </H1>
-                  <H3 fontSize={23}>UP TO 50% OFF</H3>
-                  <StyledButton>Shop Now</StyledButton>
-                </RightContent>
-              </LeftContentBox>
-            </a>
+            <LeftContentBox mainImageUrl={product1}>
+              <RightContent>
+                <H6>Modern Furniture.</H6>
+                <H1 fontSize={35} color="primary.main">
+                  Big Sale
+                </H1>
+                <H3 fontSize={23}>UP TO 50% OFF</H3>
+                <StyledButton>Shop Now</StyledButton>
+              </RightContent>
+            </LeftContentBox>
           </Link>
         </Grid>
 
         <Grid item xs={12} md={5}>
           <Link href="/sale-page-1">
-            <a>
-              <RightContentBox mainImageUrl={product2} mb={2}>
-                <Box textAlign="center" pt={3}>
-                  <H6>Sofa Collection</H6>
-                  <H3 fontSize={23} color="primary.main">
-                    UP TO 60% OFF
-                  </H3>
-                  <StyledButton>Shop Now</StyledButton>
-                </Box>
-              </RightContentBox>
-            </a>
+            <RightContentBox mainImageUrl={product2} mb={2}>
+              <Box textAlign="center" pt={3}>
+                <H6>Sofa Collection</H6>
+                <H3 fontSize={23} color="primary.main">
+                  UP TO 60% OFF
+                </H3>
+                <StyledButton>Shop Now</StyledButton>
+              </Box>
+            </RightContentBox>
           </Link>
         </Grid>
       </Grid>
@@ -94,62 +92,61 @@ const Section2: FC = () => {
       <Grid container spacing={6}>
         <Grid item xs={12} md={7}>
           <Link href="/sale-page-1">
-            <a>
-              <RightContentBox
-                mainImageUrl={product4}
-                style={{
-                  height: 484,
-                  paddingTop: "20px",
-                  paddingLeft: "80px",
-                  paddingRight: "80px",
-                }}
-              >
-                <Box textAlign="center">
-                  <H3>Winter Offer!</H3>
-                  <H1 fontSize={50} color="primary.main">
-                    50% OFF
-                  </H1>
-                  <H6>All Kind of Furniture Items</H6>
-                  <StyledButton onClick={() => router.push("/sale-page-1")}>Shop Now</StyledButton>
-                </Box>
-                <Box className="content" />
-              </RightContentBox>
-            </a>
+            <RightContentBox
+              mainImageUrl={product4}
+              style={{
+                height: 484,
+                paddingTop: "20px",
+                paddingLeft: "80px",
+                paddingRight: "80px",
+              }}
+            >
+              <Box textAlign="center">
+                <H3>Winter Offer!</H3>
+                <H1 fontSize={50} color="primary.main">
+                  50% OFF
+                </H1>
+                <H6>All Kind of Furniture Items</H6>
+                <StyledButton onClick={() => router.push("/sale-page-1")}>
+                  Shop Now
+                </StyledButton>
+              </Box>
+              <Box className="content" />
+            </RightContentBox>
           </Link>
         </Grid>
 
         <Grid item xs={12} md={5}>
           <Link href="/sale-page-1">
-            <a>
-              <LeftContentBox mainImageUrl={product5} style={{ padding: "20px auto 20px 20px" }}>
-                <RightContent>
-                  <Paragraph>Modern & Comfortable</Paragraph>
-                  <H3 fontSize={20} color="primary.main">
-                    Chair Collection
-                  </H3>
+            <LeftContentBox
+              mainImageUrl={product5}
+              style={{ padding: "20px auto 20px 20px" }}
+            >
+              <RightContent>
+                <Paragraph>Modern & Comfortable</Paragraph>
+                <H3 fontSize={20} color="primary.main">
+                  Chair Collection
+                </H3>
 
-                  <StyledButton>Shop Now</StyledButton>
-                </RightContent>
-              </LeftContentBox>
-            </a>
+                <StyledButton>Shop Now</StyledButton>
+              </RightContent>
+            </LeftContentBox>
           </Link>
 
           <Link href="/sale-page-1">
-            <a>
-              <LeftContentBox
-                mainImageUrl={product3}
-                style={{ marginTop: 24, padding: "20px auto 20px 20px" }}
-              >
-                <RightContent>
-                  <Paragraph>December New!</Paragraph>
-                  <H3 fontSize={20} color="primary.main">
-                    Sofa Chair
-                  </H3>
+            <LeftContentBox
+              mainImageUrl={product3}
+              style={{ marginTop: 24, padding: "20px auto 20px 20px" }}
+            >
+              <RightContent>
+                <Paragraph>December New!</Paragraph>
+                <H3 fontSize={20} color="primary.main">
+                  Sofa Chair
+                </H3>
 
-                  <StyledButton>Shop Now</StyledButton>
-                </RightContent>
-              </LeftContentBox>
-            </a>
+                <StyledButton>Shop Now</StyledButton>
+              </RightContent>
+            </LeftContentBox>
           </Link>
         </Grid>
       </Grid>

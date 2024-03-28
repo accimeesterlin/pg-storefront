@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styled from "styled-components";
 import Box from "@component/Box";
 import Card from "@component/Card";
@@ -67,7 +67,13 @@ const Section8: FC<Section8Props> = ({ blogs }) => {
       <Grid container spacing={5}>
         {blogs.map((item) => (
           <Grid item md={4} xs={12} key={item.id}>
-            <Card style={{ borderRadius: 0, boxShadow: theme.shadows[3], padding: ".8rem" }}>
+            <Card
+              style={{
+                borderRadius: 0,
+                boxShadow: theme.shadows[3],
+                padding: ".8rem",
+              }}
+            >
               <ImageBox p={2} maxHeight={220}>
                 <Image
                   width={580}
@@ -79,7 +85,11 @@ const Section8: FC<Section8Props> = ({ blogs }) => {
                 />
 
                 <DateBox>
-                  <Paragraph width="min-content" lineHeight={1} fontWeight={600}>
+                  <Paragraph
+                    width="min-content"
+                    lineHeight={1}
+                    fontWeight={600}
+                  >
                     {item.createdAt}
                   </Paragraph>
                 </DateBox>
@@ -87,9 +97,7 @@ const Section8: FC<Section8Props> = ({ blogs }) => {
 
               <Box p={0} pt={3}>
                 <Link href="#">
-                  <a>
-                    <H4 fontWeight={700}>{item.title}</H4>
-                  </a>
+                  <H4 fontWeight={700}>{item.title}</H4>
                 </Link>
 
                 <Paragraph mt={0.5} mb={3}>

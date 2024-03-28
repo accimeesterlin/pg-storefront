@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Link from "next/link";
 import { format } from "date-fns";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import styled from "styled-components";
 import Box from "@component/Box";
 import Icon from "@component/icon/Icon";
@@ -23,11 +23,22 @@ type CardProps = {
 };
 // ===============================================================
 
-const Card6: FC<CardProps> = ({ date, title, mainImageUrl, description, commentCount }) => {
+const Card6: FC<CardProps> = ({
+  date,
+  title,
+  mainImageUrl,
+  description,
+  commentCount,
+}) => {
   return (
     <Box>
       <Box mb="1.5rem">
-        <StyledImage src={mainImageUrl} width={588} height={272} layout="responsive" />
+        <StyledImage
+          src={mainImageUrl}
+          width={588}
+          height={272}
+          layout="responsive"
+        />
       </Box>
 
       <H3 fontWeight="600" mb="0.25rem">
@@ -39,7 +50,9 @@ const Card6: FC<CardProps> = ({ date, title, mainImageUrl, description, commentC
           <Icon size="14px" mr="0.5rem" defaultcolor="auto">
             clock-circular-outline
           </Icon>
-          <SemiSpan color="text.muted">{format(new Date(date), "dd MMMM, yyyy")}</SemiSpan>
+          <SemiSpan color="text.muted">
+            {format(new Date(date), "dd MMMM, yyyy")}
+          </SemiSpan>
         </FlexBox>
 
         <FlexBox alignItems="center">
@@ -58,11 +71,13 @@ const Card6: FC<CardProps> = ({ date, title, mainImageUrl, description, commentC
       </Paragraph>
 
       <Link href="#">
-        <a>
-          <Small fontWeight="700" borderBottom="2px solid" borderColor="primary.main">
-            CONTINUE READING
-          </Small>
-        </a>
+        <Small
+          fontWeight="700"
+          borderBottom="2px solid"
+          borderColor="primary.main"
+        >
+          CONTINUE READING
+        </Small>
       </Link>
     </Box>
   );

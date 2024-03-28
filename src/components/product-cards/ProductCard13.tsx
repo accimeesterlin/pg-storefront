@@ -157,62 +157,58 @@ const ProductCard13: FC<Props> = (props) => {
   return (
     <StyledCard>
       <Link href={`/product/${slug}`}>
-        <a>
-          <ImgBox id="imgBox">
-            {status && (
-              <StatusChipBox>
-                <StatusChip>{status}</StatusChip>
-                <Box width="100%" display="flex">
-                  <Box className="triangle-left" />
-                  <Box className="triangle-right" />
-                </Box>
-              </StatusChipBox>
-            )}
+        <ImgBox id="imgBox">
+          {status && (
+            <StatusChipBox>
+              <StatusChip>{status}</StatusChip>
+              <Box width="100%" display="flex">
+                <Box className="triangle-left" />
+                <Box className="triangle-right" />
+              </Box>
+            </StatusChipBox>
+          )}
 
-            {!!off && (
-              <Chip
-                top="10px"
-                zIndex={1}
-                left="10px"
-                p="5px 10px"
-                fontSize="10px"
-                fontWeight="600"
-                bg="primary.main"
-                position="absolute"
-                color="primary.text"
-              >
-                {off}% off
-              </Chip>
-            )}
+          {!!off && (
+            <Chip
+              top="10px"
+              zIndex={1}
+              left="10px"
+              p="5px 10px"
+              fontSize="10px"
+              fontWeight="600"
+              bg="primary.main"
+              position="absolute"
+              color="primary.text"
+            >
+              {off}% off
+            </Chip>
+          )}
 
-            <LazyImage
-              width={100}
-              height={100}
-              src={mainImageUrl}
-              id="productImg"
-              layout="responsive"
-              objectFit="contain"
-            />
-          </ImgBox>
-        </a>
+          <LazyImage
+            width={100}
+            height={100}
+            src={mainImageUrl}
+            id="productImg"
+            layout="responsive"
+            objectFit="contain"
+          />
+        </ImgBox>
       </Link>
 
       <ContentWrapper>
         <FlexBox>
           <Box flex="1 1 0" minWidth="0px" mr={1}>
             <Link href={`/product/${slug}`}>
-              <a>
-                <H3
-                  mb={1}
-                  title={name}
-                  fontSize="24px"
-                  fontWeight="700"
-                  className="title"
-                  color="text.secondary"
-                >
-                  {name}
-                </H3>
-              </a>
+              <H3
+                mb={1}
+                title={name}
+                fontSize="24px"
+                fontWeight="700"
+                className="title"
+                color="text.secondary"
+              >
+                {name}
+              </H3>
             </Link>
 
             {rating && (

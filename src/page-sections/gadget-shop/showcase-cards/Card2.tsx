@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import Box from "@component/Box";
 import Card from "@component/Card";
 import Grid from "@component/grid/Grid";
@@ -38,20 +38,18 @@ const Card5: FC<CardProps> = ({
             </SemiSpan>
 
             <Link href={productUrl}>
-              <a>
-                <H6
-                  pb="2px"
-                  mt="1.5rem"
-                  fontSize="12px"
-                  textAlign="center"
-                  display="inline-block"
-                  borderBottom="2px solid"
-                  borderColor="primary.main"
-                  color={color || "inherit"}
-                >
-                  SHOP NOW
-                </H6>
-              </a>
+              <H6
+                pb="2px"
+                mt="1.5rem"
+                fontSize="12px"
+                textAlign="center"
+                display="inline-block"
+                borderBottom="2px solid"
+                borderColor="primary.main"
+                color={color || "inherit"}
+              >
+                SHOP NOW
+              </H6>
             </Link>
           </Box>
         </Grid>

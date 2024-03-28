@@ -76,7 +76,7 @@ export default function Page() {
           For more information, see{" "}
           <a href="https://docs.sentry.io/platforms/javascript/guides/nextjs/">
             https://docs.sentry.io/platforms/javascript/guides/nextjs/
-          </a>
+           
         </p>
       </main>
     </div>

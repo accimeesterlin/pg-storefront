@@ -78,7 +78,7 @@ const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
                     defaultcolor="auto"
                     mr={ind < socialLinks.length - 1 && "10px"}
                   >{`${item.name}_filled`}</Icon>
-                </a>
+                 
               ))}
             </FlexBox>
           </FlexBox>
@@ -118,7 +118,7 @@ const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
               <Button variant="outlined" color="primary" my="12px">
                 Contact Vendor
               </Button>
-            </a>
+             
           </FlexBox>
         </Box>
       </FlexBox>

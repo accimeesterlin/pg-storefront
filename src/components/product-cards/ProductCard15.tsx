@@ -132,15 +132,13 @@ const ProductCard15: FC<Props> = (props) => {
         {off !== 0 && <StyledChip color="primary">{off}% off</StyledChip>}
 
         <Link href={`/product/${slug}`}>
-          <a>
-            <LazyImage
-              src={mainImageUrl}
-              width={100}
-              height={100}
-              layout="responsive"
-              objectFit="contain"
-            />
-          </a>
+          <LazyImage
+            src={mainImageUrl}
+            width={100}
+            height={100}
+            layout="responsive"
+            objectFit="contain"
+          />
         </Link>
 
         <ItemController className="controlBox">
@@ -178,19 +176,17 @@ const ProductCard15: FC<Props> = (props) => {
         </FlexBox>
 
         <Link href={`/product/${slug}`}>
-          <a>
-            <H3
-              my="6px"
-              name={name}
-              fontSize="15px"
-              fontWeight="600"
-              className="name"
-              textAlign="center"
-              color="text.secondary"
-            >
-              {name}
-            </H3>
-          </a>
+          <H3
+            my="6px"
+            name={name}
+            fontSize="15px"
+            fontWeight="600"
+            className="name"
+            textAlign="center"
+            color="text.secondary"
+          >
+            {name}
+          </H3>
         </Link>
 
         {rating && (

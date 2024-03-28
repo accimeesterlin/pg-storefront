@@ -1,6 +1,6 @@
 import { FC, Fragment, useCallback, useState } from "react";
 import Link from "next/link";
-import NextImage from "next/image";
+import NextImage from "next/legacy/image";
 import styled from "styled-components";
 import Box from "../Box";
 import Card from "../Card";
@@ -181,15 +181,13 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
         </FlexBox>
 
         <Link href={`/product/${slug}`}>
-          <a>
-            <NextImage
-              src={mainImageUrl}
-              width={100}
-              height={100}
-              layout="responsive"
-              alt={name}
-            />
-          </a>
+          <NextImage
+            src={mainImageUrl}
+            width={100}
+            height={100}
+            layout="responsive"
+            alt={name}
+          />
         </Link>
       </div>
 
@@ -197,19 +195,17 @@ const ProductCard10: FC<ProductCard10Props> = (props) => {
         <FlexBox>
           <Box flex="1 1 0" minWidth="0px" mr="0.5rem">
             <Link href={`/product/${slug}`}>
-              <a>
-                <H3
-                  mb="6px"
-                  name={name}
-                  fontSize="14px"
-                  textAlign="left"
-                  fontWeight="600"
-                  className="name"
-                  color="text.secondary"
-                >
-                  {name}
-                </H3>
-              </a>
+              <H3
+                mb="6px"
+                name={name}
+                fontSize="14px"
+                textAlign="left"
+                fontWeight="600"
+                className="name"
+                color="text.secondary"
+              >
+                {name}
+              </H3>
             </Link>
 
             <SemiSpan>{unit || "300ml"}</SemiSpan>

@@ -1,6 +1,13 @@
-import NextImage, { ImageProps } from "next/image";
+import NextImage, { ImageProps } from "next/legacy/image";
 import styled from "styled-components";
-import { border, BorderProps, color, ColorProps, space, SpaceProps } from "styled-system";
+import {
+  border,
+  BorderProps,
+  color,
+  ColorProps,
+  space,
+  SpaceProps,
+} from "styled-system";
 
 type LazyImageProps = ImageProps & BorderProps & SpaceProps & ColorProps;
 
