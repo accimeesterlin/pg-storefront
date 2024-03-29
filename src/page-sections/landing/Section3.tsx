@@ -9,7 +9,8 @@ import { H2, H4, Paragraph } from "@component/Typography";
 import PageCard from "./PageCard";
 
 const SectionWrapper = styled(Box)`
-  background: url(/assets/images/landing/landing-bg-2.svg) center/contain no-repeat;
+  background: url(/assets/images/landing/landing-bg-2.svg) center/contain
+    no-repeat;
 `;
 
 const Section3: FC = () => {
@@ -37,17 +38,19 @@ const Section3: FC = () => {
           </H2>
 
           <FlexBox justifyContent="center" flexWrap="wrap" m="-0.5rem">
-            {["Demos", "Shop Pages", "User Account", "Vendor Account"].map((item, ind) => (
-              <Button
-                key={item}
-                m="0.5rem"
-                color="primary"
-                onClick={handleTabChange(ind)}
-                variant={selectedTab === ind ? "contained" : "outlined"}
-              >
-                {item}
-              </Button>
-            ))}
+            {["Demos", "Shop Pages", "User Account", "Vendor Account"].map(
+              (item, ind) => (
+                <Button
+                  key={item}
+                  m="0.5rem"
+                  color="primary"
+                  onClick={handleTabChange(ind)}
+                  variant={selectedTab === ind ? "contained" : "outlined"}
+                >
+                  {item}
+                </Button>
+              )
+            )}
           </FlexBox>
         </Box>
 
@@ -60,10 +63,16 @@ const Section3: FC = () => {
         </Grid>
 
         <a href="/">
-          <Button variant="contained" color="primary" minWidth="125px" mx="auto" mt="2.25rem">
+          <Button
+            variant="contained"
+            color="primary"
+            minWidth="125px"
+            mx="auto"
+            mt="2.25rem"
+          >
             Purchase Now
           </Button>
-         
+        </a>
       </Container>
     </SectionWrapper>
   );

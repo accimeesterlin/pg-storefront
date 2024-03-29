@@ -212,8 +212,8 @@ const MiniCart: FC = () => {
           >
             <NextImage
               src="/assets/images/logos/shopping-bag.svg"
-              width="90px"
-              height="100%"
+              width={90}
+              height={100}
             />
             <Paragraph
               mt="1rem"

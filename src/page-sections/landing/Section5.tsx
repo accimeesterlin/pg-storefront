@@ -10,8 +10,8 @@ import { H2, H3, Paragraph } from "@component/Typography";
 import { getTheme } from "@utils/utils";
 
 const SectionWrapper = styled(Box)`
-  background: ${getTheme("colors.gray.100")} url(/assets/images/landing/bonik.svg) center/contain
-    no-repeat;
+  background: ${getTheme("colors.gray.100")}
+    url(/assets/images/landing/bonik.svg) center/contain no-repeat;
 `;
 
 const Section5: FC = () => {
@@ -46,20 +46,27 @@ const Section5: FC = () => {
               <H3 fontSize="72px" color="secondary.main">
                 28
               </H3>
-              <Chip position="absolute" top="1rem" left="-1rem" fontWeight="600" fontSize="16px">
+              <Chip
+                position="absolute"
+                top="1rem"
+                left="-1rem"
+                fontWeight="600"
+                fontSize="16px"
+              >
                 $
               </Chip>
             </Box>
 
             <Paragraph maxWidth="216px" mx="auto" mb="130px">
-              Can be used in a single end product which end users <b>are not charged</b> for.
+              Can be used in a single end product which end users{" "}
+              <b>are not charged</b> for.
             </Paragraph>
 
             <a href="/">
               <Button variant="outlined" color="secondary" mx="auto">
                 Purchase Now
               </Button>
-             
+            </a>
           </Card>
 
           <Card
@@ -77,20 +84,27 @@ const Section5: FC = () => {
             <H3>Extended License</H3>
             <Box position="relative" display="inline-block" mb="1.5rem">
               <H3 fontSize="72px">700</H3>
-              <Chip position="absolute" top="1rem" left="-1rem" fontWeight="600" fontSize="16px">
+              <Chip
+                position="absolute"
+                top="1rem"
+                left="-1rem"
+                fontWeight="600"
+                fontSize="16px"
+              >
                 $
               </Chip>
             </Box>
 
             <Paragraph maxWidth="216px" mx="auto" mb="130px">
-              Can be used in a single end product which end users <b>are not charged</b> for.
+              Can be used in a single end product which end users{" "}
+              <b>are not charged</b> for.
             </Paragraph>
 
             <a href="/">
               <Button variant="outlined" color="dark" mx="auto">
                 Purchase Now
               </Button>
-             
+            </a>
           </Card>
         </FlexBox>
       </Container>

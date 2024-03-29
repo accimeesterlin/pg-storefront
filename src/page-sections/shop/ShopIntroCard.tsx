@@ -9,15 +9,13 @@ import { H3, SemiSpan, Small } from "@component/Typography";
 import Shop from "models/shop.model";
 import { ShopIntroWrapper } from "./styles";
 
-
 type ShopIntroCardProps = {
   shop: Shop;
 };
 
 const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
-
   const links = shop?.socialMedialLinks;
-  
+
   const socialLinks = [
     {
       name: "facebook",
@@ -38,7 +36,12 @@ const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
   ];
 
   return (
-    <ShopIntroWrapper mb="32px" pb="20px" overflow="hidden" covermainImageUrl={shop?.coverPicture}>
+    <ShopIntroWrapper
+      mb="32px"
+      pb="20px"
+      overflow="hidden"
+      covermainImageUrl={shop?.coverPicture}
+    >
       <Box className="cover-image" height="202px" />
 
       <FlexBox mt="-64px" px="30px" flexWrap="wrap">
@@ -72,18 +75,27 @@ const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
 
             <FlexBox my="8px">
               {socialLinks.map((item, ind) => (
-                <a key={ind} href={item.url} target="_blank" rel="noreferrer noopener">
+                <a
+                  key={ind}
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
                   <Icon
                     size="30px"
                     defaultcolor="auto"
                     mr={ind < socialLinks.length - 1 && "10px"}
                   >{`${item.name}_filled`}</Icon>
-                 
+                </a>
               ))}
             </FlexBox>
           </FlexBox>
 
-          <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center">
+          <FlexBox
+            flexWrap="wrap"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Box>
               <FlexBox alignItems="center" mb="14px">
                 <Rating color="warn" value={5} outof={5} readonly />
@@ -118,14 +130,12 @@ const ShopIntroCard = ({ shop }: ShopIntroCardProps) => {
               <Button variant="outlined" color="primary" my="12px">
                 Contact Vendor
               </Button>
-             
+            </a>
           </FlexBox>
         </Box>
       </FlexBox>
     </ShopIntroWrapper>
   );
 };
-
-
 
 export default ShopIntroCard;

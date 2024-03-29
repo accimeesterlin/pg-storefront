@@ -49,7 +49,7 @@ const Section1: FC = () => {
               <Button variant="contained" color="primary" m="0.5rem">
                 Purchase Now
               </Button>
-             
+            </a>
 
             <Scroll to="demos" duration={400} offset={-72 - 16} smooth={true}>
               <Button variant="outlined" color="primary" m="0.5rem">
@@ -66,7 +66,7 @@ const Section1: FC = () => {
               >
                 I need a Server & Database
               </Paragraph>
-             
+            </a>
           </Box>
         </Box>
 
