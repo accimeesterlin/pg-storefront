@@ -14,7 +14,7 @@ const nextConfig = {
     theme: "DEFAULT",
   },
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: ["res.cloudinary.com", "bonik-react.vercel.app", "*"],
   },
 };
 

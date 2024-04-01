@@ -2,10 +2,10 @@ import { FC } from "react";
 import Link from "next/link";
 import NextImage from "next/legacy/image";
 import styled from "styled-components";
-// import Card from "@component/Card";
+import Card from "@component/Card";
 import Grid from "@component/grid/Grid";
 import Container from "@component/Container";
-// import Typography from "@component/Typography";
+import Typography from "@component/Typography";
 import CategorySectionHeader from "@component/CategorySectionHeader";
 import Category from "@models/category.model";
 
@@ -18,6 +18,9 @@ type Props = { categories: Category[] };
 // ============================================================
 
 const Section10: FC<Props> = ({ categories }) => {
+  if (!categories?.length) {
+    return null;
+  }
   return (
     <Container mb="70px">
       <CategorySectionHeader
@@ -30,13 +33,30 @@ const Section10: FC<Props> = ({ categories }) => {
         {categories.map((item) => (
           <Grid item lg={2} md={3} sm={4} xs={12} key={item.id}>
             <Link href="/">
-              <StyledImage
-                width={52}
-                alt="fashion"
-                height={52}
-                src={item.image}
-                objectFit="contain"
-              />
+              <Card
+                hoverEffect
+                p="0.75rem"
+                display="flex"
+                borderRadius={8}
+                boxShadow="small"
+                alignItems="center"
+              >
+                {item?.image ? (
+                  <StyledImage
+                    width={52}
+                    alt="fashion"
+                    height={52}
+                    src={item?.image}
+                    objectFit="contain"
+                  />
+                ) : (
+                  <> {item?.title}</>
+                )}
+
+                <Typography fontWeight="600" fontSize="14px" ml="10px">
+                  {item.name}
+                </Typography>
+              </Card>
             </Link>
           </Grid>
         ))}

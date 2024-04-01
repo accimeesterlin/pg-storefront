@@ -28,6 +28,7 @@ const Navbar: FC<NavbarProps> = ({ navListOpen }) => {
   const { state } = useAppContext();
 
   const navbarNavigations = state?.homeMenus;
+  // const navbarNavigations = [];
 
   const renderNestedNav = (list: any[], isRoot = false) => {
     return list?.map((nav: Nav) => {

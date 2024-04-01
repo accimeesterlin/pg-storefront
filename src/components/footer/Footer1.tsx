@@ -4,8 +4,8 @@ import styled from "styled-components";
 import Box from "@component/Box";
 import Image from "@component/Image";
 import Grid from "@component/grid/Grid";
-// import Icon from "@component/icon/Icon";
-// import FlexBox from "@component/FlexBox";
+import Icon from "@component/icon/Icon";
+import FlexBox from "@component/FlexBox";
 // import AppStore from "@component/AppStore";
 import Container from "@component/Container";
 import Typography, { Paragraph } from "@component/Typography";
@@ -34,10 +34,29 @@ const Footer1: FC = () => {
   const email = shop?.email || "";
   const phone = shop?.phone || "";
 
-  let footerMenus = [];
+  let footerMenus = footerLinks || [];
 
-  if (state.footerMenus?.length > 0) {
-    footerMenus = state?.footerMenus?.slice(0, 1) || [];
+  const menuQuantity = state.footerMenus?.length;
+
+  if (menuQuantity > 0) {
+    footerMenus = state?.footerMenus?.map((menu, index) => {
+      //
+      if (menu?.footerMenuItems?.length > 0) {
+        return {
+          id: menu?.id,
+          title: menu?.title,
+          href: menu?.href,
+          footerMenuItems: menu?.footerMenuItems,
+        };
+      }
+
+      // Only return the first 3 menus
+      if (index === 3) {
+        return menu;
+      }
+
+      return footerLinks[index];
+    });
   }
 
   const footerBg = shop?.footerColorHex || "#0F3460";
@@ -48,23 +67,30 @@ const Footer1: FC = () => {
         <Container p="1rem" color="white">
           <Box py="5rem" overflow="hidden">
             <Grid container spacing={6}>
-              <Grid item lg={4} md={6} sm={6} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <Link href="/">
                   <Image alt="logo" mb="1.25rem" src={logoUrl} width="50px" />
                 </Link>
 
                 {description && (
                   <Paragraph mb="1.25rem" color="gray.500">
-                    {description}
+                    {description?.slice(0, 120)}
                   </Paragraph>
                 )}
 
                 {/* <AppStore /> */}
               </Grid>
 
-              <DisplayFooterMenuItems footerMenuItems={footerMenus} />
+              {footerMenus.map((menu) => (
+                <DisplayFooterMenuItems
+                  key={menu?.id}
+                  title={menu?.title}
+                  id={menu?.id}
+                  {...menu}
+                />
+              ))}
 
-              <Grid item lg={3} md={6} sm={6} xs={12}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
                 <Typography
                   mb="1.25rem"
                   lineHeight="1"
@@ -86,28 +112,30 @@ const Footer1: FC = () => {
                   Phone: {phone}
                 </Typography>
 
-                {/* <FlexBox className="flex" mx="-5px">
-                  {iconList.map((item) => (
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      key={item.iconName}
-                      rel="noreferrer noopenner"
-                    >
-                      <Box
-                        m="5px"
-                        p="10px"
-                        size="small"
-                        borderRadius="50%"
-                        bg="rgba(0,0,0,0.2)"
+                <FlexBox className="flex" mx="-5px">
+                  {iconList(state?.shop?.socialMedialLinks || {}).map(
+                    (item) => (
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        key={item.iconName}
+                        rel="noreferrer noopenner"
                       >
-                        <Icon size="12px" color="gray">
-                          {item.iconName}
-                        </Icon>
-                      </Box>
-                     
-                  ))}
-                </FlexBox> */}
+                        <Box
+                          m="5px"
+                          p="10px"
+                          size="small"
+                          borderRadius="50%"
+                          bg="rgba(0,0,0,0.2)"
+                        >
+                          <Icon size="12px" color="gray">
+                            {item.iconName}
+                          </Icon>
+                        </Box>
+                      </a>
+                    )
+                  )}
+                </FlexBox>
               </Grid>
             </Grid>
           </Box>
@@ -117,66 +145,119 @@ const Footer1: FC = () => {
   );
 };
 
-const DisplayFooterMenuItems = ({ footerMenuItems }) => {
+type FooterMenuItemProps = {
+  title: string;
+  href: string;
+};
+
+type FooterMenuItem = {
+  id: string;
+  title: string;
+  href: string;
+
+  footerMenuItems: FooterMenuItemProps[];
+};
+
+const DisplayFooterMenuItems = (props: FooterMenuItem) => {
+  const { footerMenuItems, id, title } = props;
+
   if (!footerMenuItems || footerMenuItems.length === 0) {
     return null;
   }
 
   return (
-    <Grid item lg={3} md={6} sm={6} xs={12}>
-      {footerMenuItems.map(
-        (menu) =>
-          menu?.footerMenuItems &&
-          menu.footerMenuItems.length > 0 && (
-            <div key={menu.id}>
-              <Typography
-                mb="1.25rem"
-                lineHeight="1"
-                fontSize="25px"
-                fontWeight="600"
-              >
-                {menu?.title}
-              </Typography>
+    <Grid item lg={3} md={4} sm={6} xs={12}>
+      <div key={id}>
+        <Typography
+          mb="1.25rem"
+          lineHeight="1"
+          fontSize="25px"
+          fontWeight="600"
+        >
+          {title}
+        </Typography>
 
-              <div>
-                {menu.footerMenuItems.map((item, ind) => (
-                  <Link href={item?.href || "/"} key={ind}>
-                    <StyledLink>{item?.title}</StyledLink>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )
-      )}
+        <div>
+          {footerMenuItems?.map((item, ind) => (
+            <Link href={item?.href || "/"} key={ind}>
+              <StyledLink>{item?.title}</StyledLink>
+            </Link>
+          ))}
+        </div>
+      </div>
     </Grid>
   );
 };
 
-// const aboutLinks = [
-//   "Careers",
-//   "Our Stores",
-//   "Our Cares",
-//   "Terms & Conditions",
-//   "Privacy Policy",
-// ];
+const footerLinks = [
+  {
+    title: "About Us",
+    href: "/about-us",
+    id: "about-us",
+    footerMenuItems: [
+      { title: "Our Stores", href: "/our-stores", id: "our-stores" },
+      { title: "Our Cares", href: "/our-cares", id: "our-cares" },
+      {
+        title: "Terms & Conditions",
+        href: "/terms-conditions",
+        id: "terms-conditions",
+      },
+      {
+        title: "Privacy Policy",
+        href: "/privacy-policy",
+        id: "privacy-policy",
+      },
+    ],
+  },
 
-// const customerCareLinks = [
-//   "Help Center",
-//   "How to Buy",
-//   "Track Your Order",
-//   "Corporate & Bulk Purchasing",
-//   "Returns & Refunds",
-// ];
+  {
+    title: "Customer Care",
+    href: "/customer-care",
+    id: "customer-care",
+    footerMenuItems: [
+      { title: "Help Center", href: "/help-center", id: "help-center" },
+      { title: "How to Buy", href: "/how-to-buy", id: "how-to-buy" },
+      {
+        title: "Track Your Order",
+        href: "/track-your-order",
+        id: "track-your-order",
+      },
+      {
+        title: "Corporate & Bulk Purchasing",
+        href: "/corporate-bulk-purchasing",
+        id: "corporate-bulk-purchasing",
+      },
+      {
+        title: "Returns & Refunds",
+        href: "/returns-refunds",
+        id: "returns-refunds",
+      },
+    ],
+  },
+];
 
-// const iconList = [
-//   { iconName: "facebook", url: "https://www.facebook.com/UILibOfficial" },
-//   { iconName: "twitter", url: "/" },
-//   {
-//     iconName: "youtube",
-//     url: "https://www.youtube.com/channel/UCsIyD-TSO1wQFz-n2Y4i3Rg",
-//   },
-//   { iconName: "google", url: "/" },
-//   { iconName: "instagram", url: "/" },
-// ];
+const iconList = (links) => {
+  const facebook = {
+    iconName: "facebook",
+    url: links?.facebook || "/",
+  };
+  const twitter = { iconName: "twitter", url: "/" };
+  const youtube = {
+    iconName: links?.youtube || "youtube",
+    url: "/",
+  };
+  const instagram = { iconName: "instagram", url: links?.instagram || "/" };
+  const google = { iconName: "google", url: links?.google || "/" };
+
+  const telegram = { iconName: "telegram", url: links?.telegram || "/" };
+  // const discord = { iconName: "discord", url: "/" };
+  // const linkedin = { iconName: "linkedin", url: "/" };
+  // const pinterest = { iconName: "pinterest", url: "/" };
+  // const whatsapp = { iconName: "whatsapp", url: "/" };
+  // const snapchat = { iconName: "snapchat", url: "/" };
+  // const tiktok = { iconName: "tiktok", url: "/" };
+
+  return [facebook, twitter, youtube, instagram, google, telegram];
+};
 
 export default Footer1;

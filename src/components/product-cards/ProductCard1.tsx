@@ -203,16 +203,16 @@ const ProductCard1: FC<ProductCard1Props> = ({
             <CloudinaryResizedImage
               imageUrl={mainImageUrl}
               width={isMobile ? 400 : 282}
-              height={130}
+              height={274}
             />
             {/* <img
-                alt={name}
-                width={282}
-                src={mainImageUrl}
-                // height={105}
-                // objectFit="cover"
-                // layout="responsive"
-              /> */}
+              alt={name}
+              width={282}
+              src={mainImageUrl}
+              // height={105}
+              // objectFit="cover"
+              // layout="responsive"
+            /> */}
           </Link>
         </div>
 

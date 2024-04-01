@@ -23,6 +23,9 @@ const StyledNavLink = styled.a<StyledNavLinkProps & SpaceProps & ColorProps>(
       "& svg polyline, svg polygon": {
         color: isCurrentRoute ? theme.colors.primary.main : "auto",
       },
+      // marginLeft: "10px",
+      // fontSize: "35px",
+      // marginRight: "10px",
     }),
   compose(space, color)
 );

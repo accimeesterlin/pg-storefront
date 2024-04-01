@@ -10,6 +10,7 @@ const StyledNavbar = styled.div`
   .nav-link {
     font-size: 14px;
     margin-right: 32px;
+    margin-left: 12px;
     cursor: pointer;
     :hover {
       color: ${getTheme("colors.primary.main")};

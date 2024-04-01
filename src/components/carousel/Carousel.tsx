@@ -109,7 +109,7 @@ const Carousel: FC<CarouselProps> = ({
         <Fragment>
           <IconButton
             as={ButtonBack}
-            variant="contained"
+            // variant="contained"
             color={arrowButtonColor}
             style={leftButtonStyle || {}}
             className={`arrow-button left-arrow-class ${arrowButtonClass} ${leftButtonClass}`}
@@ -121,7 +121,7 @@ const Carousel: FC<CarouselProps> = ({
 
           <IconButton
             as={ButtonNext}
-            variant="contained"
+            // variant="contained"
             color={arrowButtonColor}
             style={rightButtonStyle || {}}
             className={`arrow-button right-arrow-class ${arrowButtonClass} ${rightButtonClass}`}

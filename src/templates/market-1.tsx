@@ -4,13 +4,13 @@ import Section2 from "@sections/market-1/Section2";
 // import isEmpty from "lodash.isempty";
 // import Section3 from "@sections/market-1/Section3";
 // import Section4 from "@sections/market-1/Section4";
-// import Section5 from "@sections/market-1/Section5";
+import Section5 from "@sections/market-1/Section5";
 // import Section6 from "@sections/market-1/Section6";
 // import Section7 from "@sections/market-1/Section7";
 // import Section8 from "@sections/market-1/Section8";
-// import Section10 from "@sections/market-1/Section10";
+import Section10 from "@sections/market-1/Section10";
 // import Section11 from "@sections/market-1/Section11";
-// import Section12 from "@sections/market-1/Section12";
+import Section12 from "@sections/market-1/Section12";
 // import Section13 from "@sections/market-1/Section13";
 // data models
 import Shop from "@models/shop.model";
@@ -36,6 +36,7 @@ type Props = {
 const MarketOneTemplate = (props: Props) => {
   const products = props?.products;
   const collections = props?.collections;
+  const categories = props?.categories;
 
   const listOfCollections = collections
     ?.filter((collection) => collection?.products?.length > 0)
@@ -44,7 +45,33 @@ const MarketOneTemplate = (props: Props) => {
       return <Section2 products={products} title={collection?.name} />;
     });
 
+  console.log("collections", collections);
+  console.log("Length: ", collections?.length);
+
   // 282 * 105
+
+  const serviceList = [
+    {
+      title: "Local Shipping",
+      description: "Local Shipping System",
+      icon: "truck",
+    },
+    {
+      title: "Safe Payment",
+      description: "Safe Payment System",
+      icon: "credit-card",
+    },
+    {
+      title: "Support 24/7",
+      description: "Contact us 24 hours a day",
+      icon: "customer-service",
+    },
+    {
+      title: "100% Money Back",
+      description: "You have 30 days to Return",
+      icon: "shield",
+    },
+  ];
 
   return (
     <main>
@@ -52,12 +79,12 @@ const MarketOneTemplate = (props: Props) => {
       <Section1 carouselData={props.mainCarouselData} />
       {listOfCollections}
 
-      {products?.length && (
+      {/* {products?.length && (
         <Section3 products={products} title="All Products" />
-      )}
+      )} */}
 
       {/* FLASH DEAL PRODUCTS AREA */}
-      {/* <Section2 products={props.flashDealsData} /> */}
+      <Section2 products={products} title="All Products" />
       {/* TOP CATEGORIES AREA */}
       {/* <Section3 categoryList={props.topCategories} /> */}
       {/* TOP RATING AND BRANDS AREA */}
@@ -66,7 +93,12 @@ const MarketOneTemplate = (props: Props) => {
         topRatedBrands={props.topRatedBrands}
       /> */}
       {/* NEW ARRIVALS AREA */}
-      {/* <Section5 newArrivalsList={props.newArrivalsList} /> */}
+      <Section5
+        newArrivalsList={products?.slice(
+          products?.length - 7,
+          products?.length - 1
+        )}
+      />
       {/* BIG DISCOUNT AREA */}
       {/* <Section13 bigDiscountList={props.bigDiscountList} /> */}
       {/* CAR LIST AREA */}
@@ -88,11 +120,11 @@ const MarketOneTemplate = (props: Props) => {
         productList={props.opticsList}
       /> */}
       {/* CATEGORIES AREA */}
-      {/* <Section10 categories={props.bottomCategories} /> */}
+      <Section10 categories={categories} />
       {/* MORE PRODUCTS AREA */}
-      {/* <Section11 moreItems={props.moreItems} /> */}
+      {/* <Section11 moreItems={products} /> */}
       {/* SERVICES AREA */}
-      {/* <Section12 serviceList={props.serviceList} /> */}
+      <Section12 serviceList={serviceList} />
     </main>
   );
 };
