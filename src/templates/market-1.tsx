@@ -18,7 +18,7 @@ import Product from "@models/product.model";
 import Category from "@models/category.model";
 import MainCarouselItem from "@models/market-1.model";
 import Collection from "@models/collection.model";
-import Section3 from "@sections/fashion-3/Section3";
+// import Section3 from "@sections/fashion-3/Section3";
 
 // =================================================================
 type Props = {
